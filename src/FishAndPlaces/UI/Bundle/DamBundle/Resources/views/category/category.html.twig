@@ -1,0 +1,14 @@
+{% extends '@Shop/base.html.twig' %}
+{% use "form_div_layout.html.twig" %}
+{% block body %}
+    {{ parent() }}
+<div>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="form-group">
+        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

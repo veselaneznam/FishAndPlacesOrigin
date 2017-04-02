@@ -1,0 +1,11 @@
+FishAndPlaces\User\Domain\Model\User:
+    repositoryClass: FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    OneToMany:
+        products:
+            targetEntity: FishAndPlaces\Dam\Domain\Model\Dam
+            mappedBy: dam

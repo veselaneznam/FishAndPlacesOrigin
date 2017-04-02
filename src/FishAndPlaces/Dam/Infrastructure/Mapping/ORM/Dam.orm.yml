@@ -1,0 +1,44 @@
+FishAndPlaces\Dam\Domain\Model\Dam:
+    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository
+    type: entity
+    table: dam
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        name:
+            type: string
+            length: '255'
+        location:
+            type: string
+            length: '255'
+        rating:
+            type: float
+        isActive:
+            type: smallint
+        priceProPerson:
+            type: float
+
+    OneToMany:
+        damImages:
+            targetEntity: DamImage
+            mappedBy: image
+
+    manyToMany:
+          fishCollection:
+            targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
+            joinTable:
+                name: dam_fish
+                joinColumns:
+                    dam_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    fish_id:
+                        referencedColumnName: id

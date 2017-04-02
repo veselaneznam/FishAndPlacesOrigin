@@ -1,0 +1,26 @@
+FishAndPlaces\Dam\Domain\Model\Fish:
+    repositoryClass: FishAndPlaces\Infrastructure\Fish\Repository\Doctrine\ORM\DoctrineFishRepository
+    type: entity
+    table: fish
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        name:
+            type: string
+            length: '255'
+        location:
+            type: string
+            length: '255'
+
+    OneToMany:
+        fishImages:
+            targetEntity: FishImage
+            mappedBy: image

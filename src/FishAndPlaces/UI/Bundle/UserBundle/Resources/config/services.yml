@@ -1,0 +1,61 @@
+services:
+    credissimo.product_repository:
+        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ Credissimo\Shop\Domain\Model\Product ]
+
+    credissimo.manufacture_repository:
+        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineManufactureRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ Credissimo\Shop\Domain\Model\Manufacture ]
+
+    credissimo.category_repository:
+        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineCategoryRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ Credissimo\Shop\Domain\Model\Category ]
+
+    credissimo.attribute_repository:
+        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineAttributeRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ Credissimo\Shop\Domain\Model\Attribute ]
+
+    credissimo.product_query_service:
+        class: Credissimo\Shop\Application\Product\ProductQueryService
+        arguments:
+            - "@credissimo.product_repository"
+
+    credissimo.manufacture_query_service:
+        class: Credissimo\Shop\Application\Manufacture\ManufactureQueryService
+        arguments:
+            - "@credissimo.manufacture_repository"
+
+    credissimo.category_query_service:
+        class: Credissimo\Shop\Application\Category\CategoryQueryService
+        arguments:
+            - "@credissimo.category_repository"
+
+    credissimo.attribute_query_service:
+        class: Credissimo\Shop\Application\Attribute\AttributeQueryService
+        arguments:
+            - "@credissimo.attribute_repository"
+
+    credissimo.product_service:
+        class: Credissimo\Shop\Application\Product\ProductService
+        arguments:
+            - "@credissimo.product_repository"
+
+    credissimo.manufacture_service:
+        class: Credissimo\Shop\Application\Manufacture\ManufactureService
+        arguments:
+            - "@credissimo.manufacture_repository"
+
+    credissimo.attribute_service:
+        class: Credissimo\Shop\Application\Attribute\AttributeService
+        arguments:
+            - "@credissimo.attribute_repository"
+
+
+    credissimo.category_service:
+        class: Credissimo\Shop\Application\Category\CategoryService
+        arguments:
+            - "@credissimo.category_repository"
