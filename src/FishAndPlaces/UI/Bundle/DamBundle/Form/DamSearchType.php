@@ -17,7 +17,7 @@ class DamSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('search', TextType::class, array('required' => false))
+            ->add('search', TextType::class, array('required' => false, 'label' => null));
         ;
     }
 

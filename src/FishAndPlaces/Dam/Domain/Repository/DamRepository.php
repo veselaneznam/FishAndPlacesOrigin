@@ -2,6 +2,7 @@
 namespace FishAndPlaces\Dam\Domain\Repository;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\Dam\Domain\Value\Location;
 
 interface DamRepository
 {
@@ -37,5 +38,19 @@ interface DamRepository
      * @return Dam[]
      */
     public function findByLocation($data);
+
+    /**
+     * @param Location $location
+     *
+     * @return Dam[]
+     */
+    public function findByNearByLocation(Location $location);
+
+    /**
+     * @param array $ids
+     *
+     * @return Dam[]
+     */
+    public function findByIds(array $ids);
 
 }

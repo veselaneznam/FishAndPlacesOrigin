@@ -1,38 +1,23 @@
-{% extends '@Dam/base.html.twig' %}
-{% block body %}
-    {{ parent() }}
-    {{ ivory_google_map(map) }}
-    {{ ivory_google_api([map]) }}
-    <div class="container">
-        <h2>{{ title }}</h2>
-        <br/>
-        <div class="row">
-            {% include '@Dam/dam/search.html.twig' %}
-        </div>
-        <br/>
-        <table class="table table-striped">
-            <thead>
+<div class="row">
+    {% include '@Dam/dam/search.html.twig' %}
+</div>
+<br/>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{% trans %}Name{% endtrans %}</th>
+        <th>{% trans %}Price{% endtrans %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if damCollection is not null %}
+        {% for dam in dams %}
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Manufacture</th>
-                <th>Model</th>
-                <th>Year of Manufacture</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <td>{{ dam.name }}</td>
+                <td>{{ dam.price }}</td>
             </tr>
-            </thead>
-            <tbody>
-            {% if damCollection is not null %}
-                {% for dam in dams %}
-                    <tr>
-                        <td>{{ dam.id }}</td>
-                        <td>{{ dam.name }}</td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-            </tbody>
-        </table>
-    </div>
-{% endblock %}
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

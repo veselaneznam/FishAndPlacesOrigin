@@ -6,9 +6,16 @@ use FishAndPlaces\Dam\Application\Dam\DamQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\UI\Bundle\DamBundle\Form\DamSearchType;
 use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
+use GuzzleHttp\Client;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Animation;
+use Ivory\GoogleMap\Overlay\Icon;
 use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Overlay\MarkerShape;
+use Ivory\GoogleMap\Overlay\MarkerShapeType;
+use Ivory\GoogleMap\Overlay\Symbol;
+use Ivory\GoogleMap\Overlay\SymbolPath;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,23 +49,23 @@ class DamController extends Controller
         if ($request->getMethod() == 'POST') {
             $searchForm->handleRequest($request);
             $damCollection = $damQueryService->search($searchForm->getData());
-            $locations = array_map(function (DamRepresentation $dam) {
-                return $dam->getLocation();
-            }, $damCollection);
+            $locations = $this->extractLocations($damCollection);
 
             $map = $this->buildMap($locations);
 
-            return $this->render('@Dam/dam/list.html.twig', array(
+            return $this->render('@Dam/dam/index.html.twig', array(
                 'damCollection' => $damCollection,
-                'title' => "Product List",
+                'title' => $this->get('translator')->trans("Dam List"),
                 'searchForm' => $searchForm->createView(),
                 'map' => $map
             ));
         }
-        $map = $this->buildMap();
-        return $this->render('@Dam/dam/list.html.twig', array(
+        $location = $this->getUserLocatin();
+        $nearbyDamCollection = $damQueryService->searchNearBy(new Location($location['latitude'], $location['longitude']));
+        $map = $this->buildMap($this->extractLocations($nearbyDamCollection));
+        return $this->render('@Dam/dam/index.html.twig', array(
             'damCollection' => null,
-            'title' => "Product List",
+            'title' => $this->get('translator')->trans("Dam List"),
             'searchForm' => $searchForm->createView(),
             'map' => $map
         ));
@@ -84,20 +91,63 @@ class DamController extends Controller
     {
         $map = new Map();
         $map->setStaticOptions(['width' => 5000, 'height' => 5000]);
+        $map->setMapOption('zoom', 13);
+
         /** @var Location $location */
-        if(null !== $locations) {
+        if (!empty($locations)) {
             $map->setAutoZoom(true);
             foreach ($locations as $location) {
-                $map->getOverlayManager()->addMarker(new Marker(new Coordinate(
-                    $location->getLat(),
-                    $location->getLon()
-                )));
+                $map->getOverlayManager()->addMarker(
+                    $this->createMarker($location)
+                );
             }
         } else {
+            $location = $this->getUserLocatin();
             $map->setAutoZoom(false);
-            $map->setCenter(new Coordinate(42.81, 23.29));
+            $map->setCenter(new Coordinate($location['latitude'], $location['longitude']));
         }
-        $map->setMapOption('zoom', 13);
         return $map;
+    }
+
+    private function getUserLocatin()
+    {
+        $PublicIP = getenv('REMOTE_ADDR');
+        $client = new Client(['base_uri' => 'https://freegeoip.net/']);
+        $response = $client->request('GET', "json/$PublicIP");
+        $json = json_decode($response->getBody()->getContents(), true);
+        $location['latitude'] = $json['latitude'];
+        $location['longitude'] = $json['longitude'];
+        return $location;
+    }
+
+    /**
+     * @param $damCollection
+     *
+     * @return array
+     */
+    private function extractLocations($damCollection)
+    {
+        $locations = array_map(function (DamRepresentation $dam) {
+            return new Location($dam->getLocation()->getLat(), $dam->getLocation()->getLon());
+        }, $damCollection
+        );
+        return $locations;
+    }
+
+    /**
+     * @param $location
+     *
+     * @return Marker
+     */
+    private function createMarker(Location $location)
+    {
+        return new Marker(
+            new Coordinate($location->getLat(), $location->getLon()),
+            Animation::BOUNCE,
+            new Icon(),
+            new Symbol(SymbolPath::CIRCLE),
+            new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
+            ['clickable' => false]
+        );
     }
 }

@@ -1,0 +1,24 @@
+{% extends '@Dam/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>{% trans %} %title% {% endtrans %}</h2>
+        <br/>
+        <div id="tabs">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a href="#tabs-1">{% trans %} List {% endtrans %}</a>
+            </li>
+            <li>
+                <a href="#tabs-2">{% trans %} Map {% endtrans %}</a>
+            </li>
+        </ul>
+            <div id="tabs-1">
+                {% include '@Dam/dam/list.html.twig' %}
+            </div>
+            <div id="tabs-2">
+                {% include '@Dam/dam/map.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

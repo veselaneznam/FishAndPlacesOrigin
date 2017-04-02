@@ -11,16 +11,13 @@ class Location
     private $lon;
 
     /**
-     * @param string $address
+     * @param float $lat
+     * @param float $long
      */
-    public function __construct($address)
+    public function __construct($lat, $long)
     {
-        $adapter  = new \Http\Adapter\Guzzle6\Client();
-        $geocoder = new \Geocoder\Provider\GoogleMaps($adapter);
-        $coordinate = $geocoder->geocode($address)->first();
-
-        $this->lat = $coordinate->getLatitude();
-        $this->lon = $coordinate->getLongitude();
+        $this->lat = $lat;
+        $this->lon = $long;
     }
 
     /**

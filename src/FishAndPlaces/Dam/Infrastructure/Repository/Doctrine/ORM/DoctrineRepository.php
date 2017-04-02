@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class DoctrineRepository extends EntityRepository
 {
+
     /**
      * @param mixed $entity
      */

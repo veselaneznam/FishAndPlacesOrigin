@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new Ivory\SerializerBundle\IvorySerializerBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FishAndPlaces\UI\Bundle\DamBundle\DamBundle(),
             new FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle(),
             new FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle(),

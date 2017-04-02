@@ -25,6 +25,10 @@ FishAndPlaces\Dam\Domain\Model\Dam:
             type: smallint
         priceProPerson:
             type: float
+        latitude:
+            type: float
+        longitude:
+            type: float
 
     OneToMany:
         damImages:
@@ -33,12 +37,12 @@ FishAndPlaces\Dam\Domain\Model\Dam:
 
     manyToMany:
           fishCollection:
-            targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
-            joinTable:
-                name: dam_fish
-                joinColumns:
-                    dam_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    fish_id:
-                        referencedColumnName: id
+              targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
+              joinTable:
+                  name: dam_fish
+                  joinColumns:
+                      dam_id:
+                          referencedColumnName: id
+                  inverseJoinColumns:
+                      fish_id:
+                          referencedColumnName: id

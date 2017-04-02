@@ -56,6 +56,12 @@ class Dam
     /** @var Contact */
     private $contact;
 
+    /** @var float */
+    private $longitude;
+
+    /** @var float*/
+    private $latitude;
+
     /**
      * @return string
      */
@@ -250,4 +256,43 @@ class Dam
         $this->contact = $contact;
         return $this;
     }
+
+    /**
+     * @param mixed $longitude
+     *
+     * @return Dam
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+        return $this;
+    }
+
+    /**
+     * @param mixed $latitude
+     *
+     * @return Dam
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
 }

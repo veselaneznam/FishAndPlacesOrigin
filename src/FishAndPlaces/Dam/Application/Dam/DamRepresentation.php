@@ -61,6 +61,12 @@ class DamRepresentation
     /** @var Dam */
     private $dam;
 
+    /** @var float */
+    private $long;
+
+    /** @var float */
+    private $lat;
+
     /**
      * @param Dam|null $dam
      */
@@ -78,6 +84,9 @@ class DamRepresentation
             $this->isActive = $dam->isActive();
             $this->contact = $dam->getContact();
             $this->fishCollection = $dam->getFishCollection();
+            $this->location = new Location($dam->getLatitude(), $dam->getLongitude());
+            $this->lat = $dam->getLatitude();
+            $this->long = $dam->getLongitude();
         }
     }
 
@@ -102,7 +111,7 @@ class DamRepresentation
      */
     public function getLocation()
     {
-        return $this->location;
+        return new Location($this->lat, $this->long);
     }
 
     /**
