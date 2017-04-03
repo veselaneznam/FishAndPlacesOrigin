@@ -42,6 +42,7 @@
     <parameter key="mailer_password">null</parameter>
     <parameter key="secret">fb65f46debe44b34ac4f286bc5628b30bfbaf2dd</parameter>
     <parameter key="images_upload_file_path">/tmp</parameter>
+    <parameter key="google_maps_api_key">AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
@@ -1976,7 +1977,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58e14f3e34f582.56005019</argument>
+            <argument>58e28f448f1af8.11858819</argument>
           </service>
         </argument>
       </argument>
@@ -2309,7 +2310,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58e14f3e34f582.56005019</argument>
+            <argument>58e28f448f1af8.11858819</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3688,6 +3689,7 @@
       <argument type="service" id="ivory.google_map.helper.formatter"/>
       <argument type="service" id="ivory.google_map.helper.json_builder"/>
       <argument>en</argument>
+      <argument>AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE</argument>
     </service>
     <service id="ivory.google_map.helper.renderer.map" class="Ivory\GoogleMap\Helper\Renderer\MapRenderer">
       <argument type="service" id="ivory.google_map.helper.formatter"/>
