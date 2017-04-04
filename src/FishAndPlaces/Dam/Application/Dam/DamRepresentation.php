@@ -157,7 +157,7 @@ class DamRepresentation
     /**
      * @return bool
      */
-    public function isIsActive()
+    public function isActive()
     {
         return $this->isActive;
     }

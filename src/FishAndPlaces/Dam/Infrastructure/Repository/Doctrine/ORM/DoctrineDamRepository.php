@@ -33,17 +33,14 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
     }
 
     /**
-     * @param $data
+     * @param Location $location
      *
      * @return Dam[]
+     *
      */
-    public function findByLocation($data)
+    public function findByLocation(Location $location)
     {
-        $curl     = new \Ivory\HttpAdapter\CurlHttpAdapter();
-        $geocoder = new \Geocoder\Provider\GoogleMaps($curl);
-
-        $address = $geocoder->geocode($data)->first();
-        $location = new Location($address->getLatitude(), $address->getLongitude());
+        $location = new Location($location->getLat(), $location->getLon());
         $ids = $this->getDamIdByNearByLocation($location);
         return $this->findByIds($ids);
     }

@@ -33,11 +33,11 @@ interface DamRepository
     public function add(Dam $dam);
 
     /**
-     * @param $data
+     * @param Location $location
      *
      * @return Dam[]
      */
-    public function findByLocation($data);
+    public function findByLocation(Location $location);
 
     /**
      * @param Location $location

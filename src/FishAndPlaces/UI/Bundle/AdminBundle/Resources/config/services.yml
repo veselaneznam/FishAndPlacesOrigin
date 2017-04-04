@@ -1,61 +1,44 @@
 services:
-    credissimo.product_repository:
-        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductRepository
+    fish_and_places.dam_repository:
+        class: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ Credissimo\Shop\Domain\Model\Product ]
+        arguments: [ FishAndPlaces\Dam\Domain\Model\Dam ]
 
-    credissimo.manufacture_repository:
-        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineManufactureRepository
+    fish_and_places.fish_repository:
+        class: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ Credissimo\Shop\Domain\Model\Manufacture ]
+        arguments: [ FishAndPlaces\Dam\Domain\Model\Fish ]
 
-    credissimo.category_repository:
-        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineCategoryRepository
+    fish_and_places.dam_image_repository:
+        class: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamImageRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ Credissimo\Shop\Domain\Model\Category ]
+        arguments: [ FishAndPlaces\Dam\Domain\Model\DamImage ]
 
-    credissimo.attribute_repository:
-        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineAttributeRepository
+    fish_and_places.fish_image_repository:
+        class: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishImageRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ Credissimo\Shop\Domain\Model\Attribute ]
+        arguments: [ FishAndPlaces\Dam\Domain\Model\FishImage ]
 
-    credissimo.product_query_service:
-        class: Credissimo\Shop\Application\Product\ProductQueryService
+    fish_and_places.geocoder_proxy:
+        class: FishAndPlaces\Geocoder\GeocoderProxy
+
+    fish_and_places.dam_query_service:
+        class: FishAndPlaces\Dam\Application\Dam\DamQueryService
         arguments:
-            - "@credissimo.product_repository"
+            - "@fish_and_places.dam_repository"
+            - "@fish_and_places.geocoder_proxy"
 
-    credissimo.manufacture_query_service:
-        class: Credissimo\Shop\Application\Manufacture\ManufactureQueryService
+    fish_and_places.fish_query_service:
+        class: FishAndPlaces\Dam\Application\Fish\FishQueryService
         arguments:
-            - "@credissimo.manufacture_repository"
+            - "@fish_and_places.fish_repository"
 
-    credissimo.category_query_service:
-        class: Credissimo\Shop\Application\Category\CategoryQueryService
+    fish_and_places.dam_service:
+        class: FishAndPlaces\Dam\Application\Dam\DamService
         arguments:
-            - "@credissimo.category_repository"
+            - "@fish_and_places.dam_repository"
 
-    credissimo.attribute_query_service:
-        class: Credissimo\Shop\Application\Attribute\AttributeQueryService
+    fish_and_places.fish_service:
+        class: FishAndPlaces\Dam\Application\Fish\FishService
         arguments:
-            - "@credissimo.attribute_repository"
-
-    credissimo.product_service:
-        class: Credissimo\Shop\Application\Product\ProductService
-        arguments:
-            - "@credissimo.product_repository"
-
-    credissimo.manufacture_service:
-        class: Credissimo\Shop\Application\Manufacture\ManufactureService
-        arguments:
-            - "@credissimo.manufacture_repository"
-
-    credissimo.attribute_service:
-        class: Credissimo\Shop\Application\Attribute\AttributeService
-        arguments:
-            - "@credissimo.attribute_repository"
-
-
-    credissimo.category_service:
-        class: Credissimo\Shop\Application\Category\CategoryService
-        arguments:
-            - "@credissimo.category_repository"
+            - "@fish_and_places.fish_repository"

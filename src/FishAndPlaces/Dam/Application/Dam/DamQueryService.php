@@ -3,21 +3,26 @@
 namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
-use FishAndPlaces\Dam\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
-use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
+use FishAndPlaces\Dam\Domain\Value\Location;
+use FishAndPlaces\Geocoder\GeocoderProxyInterface;
 
 class DamQueryService
 {
     /** @var DamRepository */
     private $damRepository;
 
+    /** @var GeocoderProxyInterface */
+    private $geocoderProxy;
+
     /**
-     * @param DamRepository $damRepository
+     * @param DamRepository          $damRepository
+     * @param GeocoderProxyInterface $geocoderProxy
      */
-    public function __construct(DamRepository $damRepository)
+    public function __construct(DamRepository $damRepository, GeocoderProxyInterface $geocoderProxy)
     {
         $this->damRepository = $damRepository;
+        $this->geocoderProxy = $geocoderProxy;
     }
 
     /**
@@ -41,7 +46,11 @@ class DamQueryService
      */
     public function search($data)
     {
-        $searchResultByLocation = $this->damRepository->findByLocation($data);
+        $address = $this->geocoderProxy->geocode($data)->first();
+        $searchResultByLocation = $this->damRepository->findByLocation(
+            new Location($address->getLatitude(), $address->getLongitude()
+            )
+        );
         return $this->convertToRepresentation($searchResultByLocation);
     }
 
@@ -53,7 +62,7 @@ class DamQueryService
     public function searchNearBy(Location $location)
     {
         $searchResultByLocation = $this->damRepository->findByNearByLocation(
-            new DomainLocation($location->getLat(), $location->getLon())
+            new Location($location->getLat(), $location->getLon())
         );
         return $this->convertToRepresentation($searchResultByLocation);
     }
