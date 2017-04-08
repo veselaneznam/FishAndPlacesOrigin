@@ -2,8 +2,10 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Form;
 
+use FishAndPlaces\Dam\Applicaiton\Fish\FishQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -15,13 +17,17 @@ class DamType extends AbstractType
 {
     /** @var DamRepresentation */
     private $damRepresentation;
+    /** @var FishQueryService */
+    private $fishQueryService;
 
     /**
      * @param DamRepresentation $param
+     * @param FishQueryService  $fishQueryService
      */
-    public function __construct(DamRepresentation $param)
+    public function __construct(DamRepresentation $param, FishQueryService $fishQueryService)
     {
         $this->damRepresentation = $param;
+        $this->fishQueryService = $fishQueryService;
     }
 
     /**
@@ -57,6 +63,7 @@ class DamType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $fishSelect = $this->fishQueryService->getFishSelect();
         $builder
             ->add('is_active', ChoiceType::class, array(
                 'required' => true,
@@ -66,6 +73,15 @@ class DamType extends AbstractType
             ->add('price_pro_person', NumberType::class, array('required' => true, 'data' => $this->damRepresentation->getPriceProPerson()))
             ->add('location', TextType::class, array('required' => true))
             ->add('contact_information', TextareaType::class, array('required' => false))
+            ->add('fishCollection', ChoiceType::class, array(
+                'choice_loader' => new CallbackChoiceLoader(function() use ($fishSelect){
+                    return $fishSelect;
+                }
+            ),
+                'multiple' => true,
+                'expanded' => true,
+                'data' => $this->damRepresentation->getFishCollection()
+            ))
 
         ;
     }

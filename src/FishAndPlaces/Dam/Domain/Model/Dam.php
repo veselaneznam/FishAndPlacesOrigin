@@ -5,6 +5,7 @@ namespace FishAndPlaces\Dam\Domain\Model;
 use FishAndPlaces\Dam\Domain\Value\Contact;
 use FishAndPlaces\Dam\Domain\Value\Location;
 use FishAndPlaces\Dam\Domain\Value\Rating;
+use Symfony\Component\Intl\Exception\MissingResourceException;
 
 class Dam
 {
@@ -31,7 +32,7 @@ class Dam
     /**
      * @var Fish[]
      */
-    private $fishCollection;
+    private $fishCollection = [];
 
     /**
      * @var Rating
@@ -61,6 +62,15 @@ class Dam
 
     /** @var float*/
     private $latitude;
+
+
+    /** @var bool */
+    private $showOnFirstPage;
+
+    /**
+     * @var DamImage[]
+     */
+    private $imageCollection = [];
 
     /**
      * @return string
@@ -295,4 +305,54 @@ class Dam
         return $this->latitude;
     }
 
+    /**
+     * @return bool
+     */
+    public function isShowOnFirstPage()
+    {
+        return $this->showOnFirstPage;
+    }
+
+    /**
+     * @param bool $showOnFirstPage
+     *
+     * @return Dam
+     */
+    public function setShowOnFirstPage($showOnFirstPage)
+    {
+        $this->showOnFirstPage = $showOnFirstPage;
+        return $this;
+    }
+
+    /**
+     * @return DamImage[]
+     */
+    public function getImageCollection()
+    {
+        return $this->imageCollection;
+    }
+
+    /**
+     * @param DamImage[] $imageCollection
+     *
+     * @return Dam
+     */
+    public function setImageCollection($imageCollection)
+    {
+        $this->imageCollection = $imageCollection;
+        return $this;
+    }
+
+    /**
+     * @return DamImage
+     */
+    public function getMainImage()
+    {
+        foreach ($this->imageCollection as $image) {
+            if ($image->isMain()) {
+                return $image;
+            }
+        }
+       // throw new MissingResourceException('Main image is mandatory');
+    }
 }

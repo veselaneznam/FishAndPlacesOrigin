@@ -4,70 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "88913a4a68b28a5b5b69b5782f5782b0",
+    "content-hash": "38db6f1602c77e6950a70f206f48ac0b",
     "packages": [
-        {
-            "name": "beberlei/DoctrineExtensions",
-            "version": "v1.0.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "47f6683377740ce69546726cfb55cadc1dfb69a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/47f6683377740ce69546726cfb55cadc1dfb69a0",
-                "reference": "47f6683377740ce69546726cfb55cadc1dfb69a0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "doctrine/orm": "~2.1",
-                "nesbot/carbon": "*",
-                "phpunit/phpunit": "~4.5",
-                "symfony/yaml": "~2.6",
-                "zf1/zend-date": "~1.12",
-                "zf1/zend-registry": "~1.12"
-            },
-            "suggest": {
-                "nesbot/carbon": "Alternative to DateTime",
-                "zf1/zend-date": "Alternative to DateTime"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DoctrineExtensions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Steve Lacey",
-                    "email": "steve@stevelacey.net"
-                }
-            ],
-            "description": "A set of extensions to Doctrine 2 that add support for additional query functions available in MySQL and Oracle.",
-            "keywords": [
-                "database",
-                "doctrine",
-                "orm"
-            ],
-            "time": "2017-03-27T05:57:42+00:00"
-        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.7",
@@ -2037,6 +1975,46 @@
             "time": "2015-08-09T04:28:19+00:00"
         },
         {
+            "name": "ohvitorino/openlayers3",
+            "version": "3.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ohvitorino/openlayers3.git",
+                "reference": "07a561994b06daa6369f34279e6cc132e8260508"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ohvitorino/openlayers3/zipball/07a561994b06daa6369f34279e6cc132e8260508",
+                "reference": "07a561994b06daa6369f34279e6cc132e8260508",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "ol.js"
+                    ],
+                    "files": [
+                        "ol-debug.js",
+                        "ol.css"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Copyright 2005-2016 OpenLayers Contributors"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Vitorino",
+                    "email": "bruno.vitorino@gmail.com"
+                }
+            ],
+            "description": "Openlayers 3 - A high-performance, feature-packed library for all your mapping needs",
+            "homepage": "http://openlayers.org",
+            "time": "2016-04-15T10:33:08+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.10",
             "source": {
@@ -2519,73 +2497,6 @@
             "time": "2016-11-22T11:42:57+00:00"
         },
         {
-            "name": "symfony/cache",
-            "version": "v3.2.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/cache.git",
-                "reference": "38ead350d7c27b08b8da9401cbdbea8121f929a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/38ead350d7c27b08b8da9401cbdbea8121f929a4",
-                "reference": "38ead350d7c27b08b8da9401cbdbea8121f929a4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "psr/cache": "~1.0",
-                "psr/log": "~1.0"
-            },
-            "provide": {
-                "psr/cache-implementation": "1.0"
-            },
-            "require-dev": {
-                "cache/integration-tests": "dev-master",
-                "doctrine/cache": "~1.6",
-                "doctrine/dbal": "~2.4",
-                "predis/predis": "~1.0"
-            },
-            "suggest": {
-                "symfony/polyfill-apcu": "For using ApcuAdapter on HHVM"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Cache\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony implementation of PSR-6",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "caching",
-                "psr6"
-            ],
-            "time": "2017-03-08T12:16:26+00:00"
-        },
-        {
             "name": "symfony/monolog-bundle",
             "version": "v3.1.0",
             "source": {
@@ -3043,35 +2954,41 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.0.0",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "eb2a4f5f7a09fc4ce7a74ae883a8cf8a279614f5"
+                "reference": "b96a144bc875684f3338f697687147a2696d73eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/eb2a4f5f7a09fc4ce7a74ae883a8cf8a279614f5",
-                "reference": "eb2a4f5f7a09fc4ce7a74ae883a8cf8a279614f5",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/b96a144bc875684f3338f697687147a2696d73eb",
+                "reference": "b96a144bc875684f3338f697687147a2696d73eb",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "php": ">=5.5.9",
+                "psr/cache": "~1.0",
                 "psr/log": "~1.0",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php56": "~1.0",
                 "symfony/polyfill-php70": "~1.0",
                 "symfony/polyfill-util": "~1.0",
-                "twig/twig": "~1.23|~2.0"
+                "twig/twig": "~1.28|~2.0"
             },
             "conflict": {
-                "phpdocumentor/reflection": "<1.0.7"
+                "phpdocumentor/reflection-docblock": "<3.0",
+                "phpdocumentor/type-resolver": "<0.2.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0"
             },
             "replace": {
                 "symfony/asset": "self.version",
                 "symfony/browser-kit": "self.version",
+                "symfony/cache": "self.version",
                 "symfony/class-loader": "self.version",
                 "symfony/config": "self.version",
                 "symfony/console": "self.version",
@@ -3089,6 +3006,7 @@
                 "symfony/framework-bundle": "self.version",
                 "symfony/http-foundation": "self.version",
                 "symfony/http-kernel": "self.version",
+                "symfony/inflector": "self.version",
                 "symfony/intl": "self.version",
                 "symfony/ldap": "self.version",
                 "symfony/monolog-bridge": "self.version",
@@ -3113,23 +3031,29 @@
                 "symfony/validator": "self.version",
                 "symfony/var-dumper": "self.version",
                 "symfony/web-profiler-bundle": "self.version",
+                "symfony/workflow": "self.version",
                 "symfony/yaml": "self.version"
             },
             "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/cache": "~1.6",
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.4",
                 "doctrine/orm": "~2.4,>=2.4.5",
-                "egulias/email-validator": "~1.2",
+                "egulias/email-validator": "~1.2,>=1.2.8|~2.0",
                 "monolog/monolog": "~1.11",
-                "ocramius/proxy-manager": "~0.4|~1.0",
-                "phpdocumentor/reflection": "^1.0.7",
+                "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
+                "phpdocumentor/reflection-docblock": "^3.0",
+                "predis/predis": "~1.0",
+                "symfony/phpunit-bridge": "~3.2",
+                "symfony/polyfill-apcu": "~1.1",
                 "symfony/security-acl": "~2.8|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -3168,7 +3092,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-11-30T20:59:43+00:00"
+            "time": "2016-11-30T08:46:24+00:00"
         },
         {
             "name": "twig/twig",
@@ -3575,7 +3499,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=5.6.30"
     },
     "platform-dev": []
 }

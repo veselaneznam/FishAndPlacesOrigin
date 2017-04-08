@@ -53,4 +53,10 @@ interface DamRepository
      */
     public function findByIds(array $ids);
 
+
+    /**
+     * @return Dam[]
+     */
+    public function findByFirstPage();
+
 }

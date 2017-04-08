@@ -69,7 +69,7 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
         $SQL = "SELECT d.id,
  ( 6380 * acos( cos( radians($fLat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($fLon) ) + sin( radians($fLat) ) * sin( radians( latitude ) ) ) ) AS distance 
  FROM dam as d
- HAVING distance < 10 LIMIT 10;";
+ HAVING distance < 100 LIMIT 25;";
         $em = $this->getEntityManager();
         $stmt = $em->getConnection()->prepare($SQL);
         $stmt->execute();
@@ -86,8 +86,26 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.id IN (:ids)')
+            ->andWhere('d.isActive = :isActive')
             ->setParameter('ids', $ids)
+            ->setParameter('isActive', 1)
             ->getQuery()
             ->execute();
+    }
+
+    /**
+     * @return Dam[]
+     */
+    public function findByFirstPage()
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.showOnFirstPage = :showOnFirstPage')
+            ->andWhere('d.isActive = :isActive')
+            ->setParameters([
+                'showOnFirstPage' => 1, 'isActive' => 1
+            ])
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult();
     }
 }

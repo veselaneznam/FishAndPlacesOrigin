@@ -12,7 +12,7 @@ class IndexController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/", name="home")
+     * @Route("/", name="admin")
      * @return Response
      */
     public function indexAction()

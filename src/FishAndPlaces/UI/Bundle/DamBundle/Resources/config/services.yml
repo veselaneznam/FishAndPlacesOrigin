@@ -19,10 +19,20 @@ services:
         factory: ["@doctrine", getRepository]
         arguments: [ FishAndPlaces\Dam\Domain\Model\FishImage ]
 
+    fish_and_places.local_geocoder_repository:
+        class: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\Dam\Domain\Model\Geocoder ]
+
+    fish_and_places.geocoder_proxy:
+        class:  FishAndPlaces\Dam\Infrastructure\Geocoder\GeocoderProxy
+
     fish_and_places.dam_query_service:
         class: FishAndPlaces\Dam\Application\Dam\DamQueryService
         arguments:
             - "@fish_and_places.dam_repository"
+            - "@fish_and_places.geocoder_proxy"
+            - "@fish_and_places.local_geocoder_repository"
 
     fish_and_places.fish_query_service:
         class: FishAndPlaces\Dam\Application\Fish\FishQueryService

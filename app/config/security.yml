@@ -12,25 +12,24 @@ security:
 
     firewalls:
         main:
-            pattern: ^/
             form_login:
                 provider: fos_userbundle
                 login_path: login
                 check_path: login
-                default_target_path: homepage
+                default_target_path: dam_list
 #                csrf_provider: form.csrf_provider # Use form.csrf_provider instead for Symfony <2.4
             logout:       true
             anonymous:    true
             logout:
                  path:   logout
-                 default_target_path: homepage
+                 default_target_path: dam_list
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin$, role: ROLE_ADMIN }
         - { path: ^/user, role: ROLE_USER }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -23,13 +23,13 @@ class SecurityController extends Controller
         $router = $this->get('router');
 
         if (($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
-            return new RedirectResponse($router->generate('homepage'), 307);
+            return new RedirectResponse($router->generate('dam_lit'), 307);
         }
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('@Shop/security/login.html.twig', array(
+        return $this->render('@Admin/security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
@@ -43,6 +43,6 @@ class SecurityController extends Controller
     {
         $request->getSession()->invalidate(1);
         $router = $this->get('router');
-        return new RedirectResponse($router->generate('homepage'), 307);
+        return new RedirectResponse($router->generate('dam_list'), 307);
     }
 }

@@ -30,10 +30,16 @@ class DamImage
     private $updatedAt;
 
     /**
-     * @param Dam $dam
-     * @param string $imageSrc
+     * @var bool
      */
-    public function __construct(Dam $dam, $imageSrc)
+    private $isMain;
+
+    /**
+     * @param Dam    $dam
+     * @param string $imageSrc
+     * @param bool   $isMain
+     */
+    public function __construct(Dam $dam, $imageSrc, $isMain)
     {
         $this->dam = $dam;
 
@@ -42,6 +48,8 @@ class DamImage
         $this->createdAt = new \DateTime();
 
         $this->updatedAt = new \DateTime();
+
+        $this->isMain = $isMain;
     }
 
     /**
@@ -82,5 +90,24 @@ class DamImage
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMain()
+    {
+        return $this->isMain;
+    }
+
+    /**
+     * @param bool $isMain
+     *
+     * @return DamImage
+     */
+    public function setIsMain($isMain)
+    {
+        $this->isMain = $isMain;
+        return $this;
     }
 }

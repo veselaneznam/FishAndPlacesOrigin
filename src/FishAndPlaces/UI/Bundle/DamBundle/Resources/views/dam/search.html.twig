@@ -1,12 +1,13 @@
+
 <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <div id="imaginary_container">
-            <div class="input-group stylish-input-group">
-                <input type="text" class="form-control"  placeholder="{% trans %} Search by location{% endtrans %}" >
-                <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
+    <div class="col-md-6">
+        <div id="custom-search-input">
+            <div class="input-group col-md-12">
+                <input type="text" class="form-control input-lg" name="search" id="search" placeholder="{% trans %}Search by Location{% endtrans %}" />
+                <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" id="search_button" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
                     </span>
             </div>
         </div>

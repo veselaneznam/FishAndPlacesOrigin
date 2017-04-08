@@ -132,7 +132,7 @@ $this->set($key, $values);
 }
 public function get($key, $default = null, $first = true)
 {
-$key = strtr(strtolower($key),'_','-');
+$key = str_replace('_','-', strtolower($key));
 if (!array_key_exists($key, $this->headers)) {
 if (null === $default) {
 return $first ? null : array();
@@ -146,7 +146,7 @@ return $this->headers[$key];
 }
 public function set($key, $values, $replace = true)
 {
-$key = strtr(strtolower($key),'_','-');
+$key = str_replace('_','-', strtolower($key));
 $values = array_values((array) $values);
 if (true === $replace || !isset($this->headers[$key])) {
 $this->headers[$key] = $values;
@@ -159,7 +159,7 @@ $this->cacheControl = $this->parseCacheControl($values[0]);
 }
 public function has($key)
 {
-return array_key_exists(strtr(strtolower($key),'_','-'), $this->headers);
+return array_key_exists(str_replace('_','-', strtolower($key)), $this->headers);
 }
 public function contains($key, $value)
 {
@@ -167,7 +167,7 @@ return in_array($value, $this->get($key, null, false));
 }
 public function remove($key)
 {
-$key = strtr(strtolower($key),'_','-');
+$key = str_replace('_','-', strtolower($key));
 unset($this->headers[$key]);
 if ('cache-control'=== $key) {
 $this->cacheControl = array();
@@ -347,6 +347,9 @@ $headers['AUTHORIZATION'] = $authorizationHeader;
 }
 }
 }
+if (isset($headers['AUTHORIZATION'])) {
+return $headers;
+}
 if (isset($headers['PHP_AUTH_USER'])) {
 $headers['AUTHORIZATION'] ='Basic '.base64_encode($headers['PHP_AUTH_USER'].':'.$headers['PHP_AUTH_PW']);
 } elseif (isset($headers['PHP_AUTH_DIGEST'])) {
@@ -358,6 +361,7 @@ return $headers;
 }
 namespace Symfony\Component\HttpFoundation
 {
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Request
 {
@@ -438,7 +442,7 @@ $this->format = null;
 public static function createFromGlobals()
 {
 $server = $_SERVER;
-if ('cli-server'=== php_sapi_name()) {
+if ('cli-server'=== PHP_SAPI) {
 if (array_key_exists('HTTP_CONTENT_LENGTH', $_SERVER)) {
 $server['CONTENT_LENGTH'] = $_SERVER['HTTP_CONTENT_LENGTH'];
 }
@@ -457,7 +461,7 @@ return $request;
 }
 public static function create($uri, $method ='GET', $parameters = array(), $cookies = array(), $files = array(), $server = array(), $content = null)
 {
-$server = array_replace(array('SERVER_NAME'=>'localhost','SERVER_PORT'=> 80,'HTTP_HOST'=>'localhost','HTTP_USER_AGENT'=>'Symfony/2.X','HTTP_ACCEPT'=>'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','HTTP_ACCEPT_LANGUAGE'=>'en-us,en;q=0.5','HTTP_ACCEPT_CHARSET'=>'ISO-8859-1,utf-8;q=0.7,*;q=0.7','REMOTE_ADDR'=>'127.0.0.1','SCRIPT_NAME'=>'','SCRIPT_FILENAME'=>'','SERVER_PROTOCOL'=>'HTTP/1.1','REQUEST_TIME'=> time(),
+$server = array_replace(array('SERVER_NAME'=>'localhost','SERVER_PORT'=> 80,'HTTP_HOST'=>'localhost','HTTP_USER_AGENT'=>'Symfony/3.X','HTTP_ACCEPT'=>'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','HTTP_ACCEPT_LANGUAGE'=>'en-us,en;q=0.5','HTTP_ACCEPT_CHARSET'=>'ISO-8859-1,utf-8;q=0.7,*;q=0.7','REMOTE_ADDR'=>'127.0.0.1','SCRIPT_NAME'=>'','SCRIPT_FILENAME'=>'','SERVER_PROTOCOL'=>'HTTP/1.1','REQUEST_TIME'=> time(),
 ), $server);
 $server['PATH_INFO'] ='';
 $server['REQUEST_METHOD'] = strtoupper($method);
@@ -707,23 +711,27 @@ $ip = $this->server->get('REMOTE_ADDR');
 if (!$this->isFromTrustedProxy()) {
 return array($ip);
 }
-if (self::$trustedHeaders[self::HEADER_FORWARDED] && $this->headers->has(self::$trustedHeaders[self::HEADER_FORWARDED])) {
+$hasTrustedForwardedHeader = self::$trustedHeaders[self::HEADER_FORWARDED] && $this->headers->has(self::$trustedHeaders[self::HEADER_FORWARDED]);
+$hasTrustedClientIpHeader = self::$trustedHeaders[self::HEADER_CLIENT_IP] && $this->headers->has(self::$trustedHeaders[self::HEADER_CLIENT_IP]);
+if ($hasTrustedForwardedHeader) {
 $forwardedHeader = $this->headers->get(self::$trustedHeaders[self::HEADER_FORWARDED]);
 preg_match_all('{(for)=("?\[?)([a-z0-9\.:_\-/]*)}', $forwardedHeader, $matches);
-$clientIps = $matches[3];
-} elseif (self::$trustedHeaders[self::HEADER_CLIENT_IP] && $this->headers->has(self::$trustedHeaders[self::HEADER_CLIENT_IP])) {
-$clientIps = array_map('trim', explode(',', $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_IP])));
+$forwardedClientIps = $matches[3];
+$forwardedClientIps = $this->normalizeAndFilterClientIps($forwardedClientIps, $ip);
+$clientIps = $forwardedClientIps;
 }
-$clientIps[] = $ip; $ip = $clientIps[0];
-foreach ($clientIps as $key => $clientIp) {
-if (preg_match('{((?:\d+\.){3}\d+)\:\d+}', $clientIp, $match)) {
-$clientIps[$key] = $clientIp = $match[1];
+if ($hasTrustedClientIpHeader) {
+$xForwardedForClientIps = array_map('trim', explode(',', $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_IP])));
+$xForwardedForClientIps = $this->normalizeAndFilterClientIps($xForwardedForClientIps, $ip);
+$clientIps = $xForwardedForClientIps;
 }
-if (IpUtils::checkIp($clientIp, self::$trustedProxies)) {
-unset($clientIps[$key]);
+if ($hasTrustedForwardedHeader && $hasTrustedClientIpHeader && $forwardedClientIps !== $xForwardedForClientIps) {
+throw new ConflictingHeadersException('The request has both a trusted Forwarded header and a trusted Client IP header, conflicting with each other with regards to the originating IP addresses of the request. This is the result of a misconfiguration. You should either configure your proxy only to send one of these headers, or configure Symfony to distrust one of them.');
 }
+if (!$hasTrustedForwardedHeader && !$hasTrustedClientIpHeader) {
+return $this->normalizeAndFilterClientIps(array(), $ip);
 }
-return $clientIps ? array_reverse($clientIps) : array($ip);
+return $clientIps;
 }
 public function getClientIp()
 {
@@ -926,16 +934,27 @@ static::initializeFormats();
 }
 return isset(static::$formats[$format]) ? static::$formats[$format][0] : null;
 }
+public static function getMimeTypes($format)
+{
+if (null === static::$formats) {
+static::initializeFormats();
+}
+return isset(static::$formats[$format]) ? static::$formats[$format] : array();
+}
 public function getFormat($mimeType)
 {
+$canonicalMimeType = null;
 if (false !== $pos = strpos($mimeType,';')) {
-$mimeType = substr($mimeType, 0, $pos);
+$canonicalMimeType = substr($mimeType, 0, $pos);
 }
 if (null === static::$formats) {
 static::initializeFormats();
 }
 foreach (static::$formats as $format => $mimeTypes) {
 if (in_array($mimeType, (array) $mimeTypes)) {
+return $format;
+}
+if (null !== $canonicalMimeType && in_array($canonicalMimeType, (array) $mimeTypes)) {
 return $format;
 }
 }
@@ -987,6 +1006,18 @@ return $this->getMethod() === strtoupper($method);
 }
 public function isMethodSafe()
 {
+if (!func_num_args() || func_get_arg(0)) {
+@trigger_error('Checking only for cacheable HTTP methods with Symfony\Component\HttpFoundation\Request::isMethodSafe() is deprecated since version 3.2 and will throw an exception in 4.0. Disable checking only for cacheable methods by calling the method with `false` as first argument or use the Request::isMethodCacheable() instead.', E_USER_DEPRECATED);
+return in_array($this->getMethod(), array('GET','HEAD'));
+}
+return in_array($this->getMethod(), array('GET','HEAD','OPTIONS','TRACE'));
+}
+public function isMethodIdempotent()
+{
+return in_array($this->getMethod(), array('HEAD','GET','PUT','DELETE','TRACE','OPTIONS','PURGE'));
+}
+public function isMethodCacheable()
+{
 return in_array($this->getMethod(), array('GET','HEAD'));
 }
 public function getContent($asResource = false)
@@ -1013,7 +1044,7 @@ if ($currentContentIsResource) {
 rewind($this->content);
 return stream_get_contents($this->content);
 }
-if (null === $this->content) {
+if (null === $this->content || false === $this->content) {
 $this->content = file_get_contents('php://input');
 }
 return $this->content;
@@ -1198,7 +1229,6 @@ $baseUrl = $this->getBaseUrl();
 if (null === ($requestUri = $this->getRequestUri())) {
 return'/';
 }
-$pathInfo ='/';
 if ($pos = strpos($requestUri,'?')) {
 $requestUri = substr($requestUri, 0, $pos);
 }
@@ -1246,9 +1276,30 @@ return $request;
 }
 return new static($query, $request, $attributes, $cookies, $files, $server, $content);
 }
-private function isFromTrustedProxy()
+public function isFromTrustedProxy()
 {
 return self::$trustedProxies && IpUtils::checkIp($this->server->get('REMOTE_ADDR'), self::$trustedProxies);
 }
+private function normalizeAndFilterClientIps(array $clientIps, $ip)
+{
+$clientIps[] = $ip; $firstTrustedIp = null;
+foreach ($clientIps as $key => $clientIp) {
+if (preg_match('{((?:\d+\.){3}\d+)\:\d+}', $clientIp, $match)) {
+$clientIps[$key] = $clientIp = $match[1];
+}
+if (!filter_var($clientIp, FILTER_VALIDATE_IP)) {
+unset($clientIps[$key]);
+continue;
+}
+if (IpUtils::checkIp($clientIp, self::$trustedProxies)) {
+unset($clientIps[$key]);
+if (null === $firstTrustedIp) {
+$firstTrustedIp = $clientIp;
 }
 }
+}
+return $clientIps ? array_reverse($clientIps) : array($firstTrustedIp);
+}
+}
+}
+namespace {require __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ClassCollectionLoader.php';}

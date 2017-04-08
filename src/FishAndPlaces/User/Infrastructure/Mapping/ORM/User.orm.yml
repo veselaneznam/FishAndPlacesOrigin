@@ -5,7 +5,3 @@ FishAndPlaces\User\Domain\Model\User:
         id:
             type: integer
             generator: { strategy: AUTO }
-    OneToMany:
-        products:
-            targetEntity: FishAndPlaces\Dam\Domain\Model\Dam
-            mappedBy: dam

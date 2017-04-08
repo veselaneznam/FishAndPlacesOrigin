@@ -3,6 +3,7 @@
 namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Value\Contact;
 use FishAndPlaces\Dam\Domain\Value\Location;
@@ -66,13 +67,22 @@ class DamRepresentation
 
     /** @var float */
     private $lat;
+    /**
+     * @var DamImage[]
+     */
+    private $imageCollection;
+
+    /**
+     * @var DamImage
+     */
+    private $mainImage;
 
     /**
      * @param Dam|null $dam
      */
     public function __construct(Dam $dam = null)
     {
-        if (null === $dam) {
+        if (null !== $dam) {
             $this->dam = $dam;
             $this->id = $dam->getId();
             $this->name = $dam->getName();
@@ -87,6 +97,8 @@ class DamRepresentation
             $this->location = new Location($dam->getLatitude(), $dam->getLongitude());
             $this->lat = $dam->getLatitude();
             $this->long = $dam->getLongitude();
+            $this->imageCollection = $dam->getImageCollection();
+            $this->mainImage = $dam->getMainImage();
         }
     }
 
@@ -176,5 +188,45 @@ class DamRepresentation
     public function getDam()
     {
         return $this->dam;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @return DamImage[]
+     */
+    public function getImageCollection()
+    {
+        return $this->imageCollection;
+    }
+
+    /**
+     * @return DamImage
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    public function toArray()
+    {
+        return [
+            'name' => $this->getName(),
+            'contactInformation' => $this->getContact(),
+        ];
     }
 }

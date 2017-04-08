@@ -22,16 +22,18 @@ FishAndPlaces\Dam\Domain\Model\Dam:
         rating:
             type: float
         isActive:
-            type: smallint
+            type: boolean
         priceProPerson:
             type: float
         latitude:
             type: float
         longitude:
             type: float
+        showOnFirstPage:
+            type: boolean
 
     OneToMany:
-        damImages:
+        imageCollection:
             targetEntity: DamImage
             mappedBy: image
 
