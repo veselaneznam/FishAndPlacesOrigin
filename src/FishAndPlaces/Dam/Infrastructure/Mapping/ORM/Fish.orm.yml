@@ -1,5 +1,5 @@
 FishAndPlaces\Dam\Domain\Model\Fish:
-    repositoryClass: FishAndPlaces\Infrastructure\Fish\Repository\Doctrine\ORM\DoctrineFishRepository
+    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository
     type: entity
     table: fish
     id:
@@ -19,7 +19,10 @@ FishAndPlaces\Dam\Domain\Model\Fish:
         location:
             type: string
             length: '255'
-
+        lat:
+           type: float
+        long:
+           type: float
     OneToMany:
         fishImages:
             targetEntity: FishImage

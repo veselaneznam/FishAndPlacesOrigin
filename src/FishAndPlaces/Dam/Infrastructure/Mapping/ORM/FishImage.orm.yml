@@ -1,5 +1,5 @@
 FishAndPlaces\Dam\Domain\Model\FishImage:
-    repositoryClass: FishAndPlaces\Infrastructure\Fish\Repository\Doctrine\ORM\DoctrineFishImageRepository
+    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishImageRepository
     type: entity
     table: fish_image
     id:

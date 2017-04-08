@@ -1,6 +1,6 @@
 <?php
 
-namespace FishAndPlaces\Dam\Applicaiton\Fish;
+namespace FishAndPlaces\Dam\Application\Fish;
 
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Fish;
@@ -26,6 +26,11 @@ class FishRepresentation
     private $id;
 
     /**
+     * @var string
+     */
+    private $address;
+
+    /**
      * @param Fish|null $fish
      */
     public function __construct(Fish $fish = null)
@@ -34,7 +39,8 @@ class FishRepresentation
             $this->fish = $fish;
             $this->id = $this->fish->getId();
             $this->name = $this->fish->getName();
-            $this->location = new Location($this->fish->getLocation()->getLat(), $this->fish->getLocation()->getLon());
+            $this->location = new Location($this->fish->getLat(), $this->fish->getLong());
+            $this->address = $this->fish->getLocation();
             $this->dam = new DamRepresentation($this->fish->getDam());
         }
     }
@@ -78,4 +84,13 @@ class FishRepresentation
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
 }

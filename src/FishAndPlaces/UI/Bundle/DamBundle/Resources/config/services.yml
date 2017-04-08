@@ -27,12 +27,17 @@ services:
     fish_and_places.geocoder_proxy:
         class:  FishAndPlaces\Dam\Infrastructure\Geocoder\GeocoderProxy
 
+    fish_and_places.geolocator:
+        class: FishAndPlaces\Dam\Application\Dam\GeoLocatorService
+        arguments:
+            - "@fish_and_places.geocoder_proxy"
+            - "@fish_and_places.local_geocoder_repository"
+
     fish_and_places.dam_query_service:
         class: FishAndPlaces\Dam\Application\Dam\DamQueryService
         arguments:
             - "@fish_and_places.dam_repository"
-            - "@fish_and_places.geocoder_proxy"
-            - "@fish_and_places.local_geocoder_repository"
+            - "@fish_and_places.geolocator"
 
     fish_and_places.fish_query_service:
         class: FishAndPlaces\Dam\Application\Fish\FishQueryService
@@ -43,8 +48,9 @@ services:
         class: FishAndPlaces\Dam\Application\Dam\DamService
         arguments:
             - "@fish_and_places.dam_repository"
+            - "@fish_and_places.geolocator"
 
     fish_and_places.fish_service:
-        class: FishAndPlaces\Dam\Application\Fish\FishService
+        class: FishAndPlaces\Dam\Applicaiton\Fish\FishService
         arguments:
             - "@fish_and_places.fish_repository"

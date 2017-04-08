@@ -27,10 +27,7 @@
             {% endfor %}
             {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="btn-group btn-group-justified">
-                <a href="{{ path('homepage') }}" class="btn btn-primary">Product List</a>
-                <a href="{{ path('attribute_list') }}" class="btn btn-primary">Attributes List</a>
-                <a href="{{ path('manufacture_list') }}" class="btn btn-primary">Manufacture List</a>
-                <a href="{{ path('category_list') }}" class="btn btn-primary">Category List</a>
+                <a href="{{ path('dam_list') }}" class="btn btn-primary">Dam List</a>
                 <a href="{{ path('logout') }}" class="btn btn-primary">LogOut</a>
             </div>
             {% endif %}

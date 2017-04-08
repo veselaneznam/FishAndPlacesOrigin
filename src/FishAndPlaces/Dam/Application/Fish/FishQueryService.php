@@ -1,7 +1,8 @@
 <?php
 
-namespace FishAndPlaces\Dam\Applicaiton\Fish;
+namespace FishAndPlaces\Dam\Application\Fish;
 
+use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\FishRepository;
 
 class FishQueryService
@@ -18,14 +19,11 @@ class FishQueryService
     }
 
     /**
-     * @return \Generator
+     * @return Fish[]
      */
     public function getFishCollection()
     {
-        $fishCollection = $this->fishRepository->findAll();
-        foreach ($fishCollection as $fish) {
-            yield new FishRepresentation($fish);
-        }
+        return $fishCollection = $this->fishRepository->findAll();
     }
 
     /**
@@ -38,7 +36,7 @@ class FishQueryService
          * @var FishRepresentation $fish
          */
         foreach ($this->getFishCollection() as $fish) {
-            $list[$fish->getId()] = $fish->getName();
+            $list[$fish->getName()] = $fish;
         }
         return $list;
     }

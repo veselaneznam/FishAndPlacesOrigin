@@ -23,7 +23,7 @@ class SecurityController extends Controller
         $router = $this->get('router');
 
         if (($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
-            return new RedirectResponse($router->generate('dam_lit'), 307);
+            return new RedirectResponse($router->generate('dam_list'), 307);
         }
 
         // last username entered by the user

@@ -2,6 +2,8 @@
 
 namespace FishAndPlaces\Dam\Domain\Repository;
 
+use FishAndPlaces\Dam\Domain\Model\Fish;
+
 interface FishRepository
 {
     /**

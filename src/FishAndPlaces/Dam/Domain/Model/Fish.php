@@ -14,9 +14,15 @@ class Fish
     private $name;
 
     /**
-     * @var Location
+     * @var string
      */
     private $location;
+
+    /** @var float */
+    private $lat;
+
+    /** @var float */
+    private $long;
 
     /**
      * @var \DateTime
@@ -89,7 +95,7 @@ class Fish
     }
 
     /**
-     * @return Location
+     * @return string
      */
     public function getLocation()
     {
@@ -142,6 +148,44 @@ class Fish
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param mixed $lat
+     *
+     * @return Fish
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * @param mixed $long
+     *
+     * @return Fish
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
         return $this;
     }
 }

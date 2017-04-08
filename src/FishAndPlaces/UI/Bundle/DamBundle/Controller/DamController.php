@@ -4,25 +4,17 @@ namespace FishAndPlaces\UI\Bundle\DamBundle\Controller;
 
 use FishAndPlaces\Dam\Application\Dam\DamQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
-use FishAndPlaces\UI\Bundle\DamBundle\Form\DamSearchType;
-use FishAndPlaces\UI\Bundle\DamBundle\Map\MarkerHelper;
+use FishAndPlaces\UI\Bundle\DamBundle\Map\MapHelper;
 use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
 use GuzzleHttp\Client;
-use Ivory\GoogleMap\Base\Coordinate;
-use Ivory\GoogleMap\Control\ControlPosition;
-use Ivory\GoogleMap\Control\FullscreenControl;
 use Ivory\GoogleMap\Map;
-use Ivory\GoogleMap\Overlay\Marker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class DamController extends Controller
 {
@@ -57,7 +49,7 @@ class DamController extends Controller
     public function mapAction(Request $request, $location)
     {
         $damCollection = $this->getDamQueryService()->search($location);
-        $map = $this->getMap($request, $damCollection);
+        $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
 
         return $this->render('@Dam/dam/google_map.html.twig', array(
             'map' => $map,
@@ -93,39 +85,6 @@ class DamController extends Controller
     }
 
     /**
-     *
-     * @param Location                 $userLocation
-     * @param DamRepresentation[]|null $damRepresentations
-     *
-     * @return Map
-     */
-    private function buildMap(Location $userLocation, $damRepresentations = null)
-    {
-        $map = new Map();
-        $map->addStylesheetOptions(['width' => '100%', 'height' => '500px']);
-        $map->setMapOption('zoom', 10);
-        $fullscreenControl = new FullscreenControl(ControlPosition::TOP_LEFT);
-        $map->getControlManager()->setFullscreenControl($fullscreenControl);
-
-        /** @var Location $location */
-        if (!empty($damRepresentations)) {
-            $map->setAutoZoom(true);
-            $map->setCenter(new Coordinate($userLocation->getLat(), $userLocation->getLon()));
-            try {
-                foreach ($damRepresentations as $damRepresentation) {
-                    $map->getOverlayManager()->addMarker(
-                        $this->createMarker($damRepresentation)
-                    );
-                }
-            } catch (Exception $e) {
-                $map->setAutoZoom(false);
-                $map->setCenter(new Coordinate($userLocation->getLat(), $userLocation->getLon()));
-            }
-        }
-        return $map;
-    }
-
-    /**
      * @param Request $request
      *
      * @return Location
@@ -139,34 +98,21 @@ class DamController extends Controller
     }
 
     /**
-     * @param DamRepresentation $damRepresentation
-     *
-     * @return Marker
-     */
-    private function createMarker(DamRepresentation $damRepresentation)
-    {
-        $twig = $this->container->get('twig');
-
-        return MarkerHelper::build($damRepresentation, $twig);
-    }
-
-    /**
-     * @param Request $request
+     * @param Request             $request
      * @param DamRepresentation[] $damCollection
+     *
+     * @param                     $twig
      *
      * @return Map
      */
-    private function getMap(Request $request, $damCollection)
+    private function getMap(Request $request, $damCollection, $twig)
     {
         $userLocation = $this->getUserLocatiоn($request);
-        if (!empty($damCollection)) {
-            $map = $this->buildMap($userLocation, $damCollection);
-        } else {
-
-            $nearbyDamCollection = $this->getDamQueryService()->searchNearBy($userLocation);
-            $map = $this->buildMap($userLocation, $nearbyDamCollection);
+        if (empty($damCollection)) {
+            $damCollection = $this->getDamQueryService()->searchNearBy($userLocation);
         }
-        return $map;
+
+        return MapHelper::build($userLocation, $damCollection, $twig);
     }
 
     /**

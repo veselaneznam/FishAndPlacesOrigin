@@ -13,7 +13,8 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
      */
     public function update(Dam $dam)
     {
-        // TODO: Implement update() method.
+        $this->getEntityManager()->merge($dam);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -21,7 +22,9 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
      */
     public function remove(Dam $dam)
     {
-        // TODO: Implement remove() method.
+        $dam->setIsActive(0);
+        $this->getEntityManager()->persist($dam);
+        $this->getEntityManager()->flush($dam);
     }
 
     /**
@@ -29,7 +32,7 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
      */
     public function add(Dam $dam)
     {
-        // TODO: Implement add() method.
+        $this->saveEntity($dam);
     }
 
     /**

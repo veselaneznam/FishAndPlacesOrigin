@@ -2,7 +2,13 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
+use FishAndPlaces\Dam\Application\Dam\UpdateDamCommand;
+use FishAndPlaces\Dam\Application\Fish\FishQueryService;
+use FishAndPlaces\Dam\Application\Dam\CreateNewDamCommand;
 use FishAndPlaces\Dam\Application\Dam\DamQueryService;
+use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
+use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamType;
 use FishAndPlaces\UI\Bundle\DamBundle\Form\DamSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,12 +34,7 @@ class DamController extends Controller
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
         $damCollection = $damQueryService->getDamCollection();
-
         $searchForm = $this->createSearchForm();
-        if ($request->getMethod() == 'POST') {
-            $searchForm->handleRequest($request);
-            $damCollection = $damQueryService->searchDam($searchForm->getData());
-        }
 
         return $this->render('@Admin/dam/list.html.twig', array(
             'damCollection' => $damCollection,
@@ -69,70 +70,72 @@ class DamController extends Controller
 //            'searchForm' => $searchForm->createView()
 //        ));
 //    }
-//
-//    /**
-//     * @param Request $request
-//     *
-//     * @Route("/add", name="create_dam")
-//     * @return Response
-//     */
-//    public function addAction(Request $request)
-//    {
-//
-//        $damForm = $this->createForm(new DamType( new DamRepresentation()));
-//
-//        $damForm->handleRequest($request);
-//
-//        if ($damForm->isSubmitted() && $damForm->isValid()) {
-//
-//            $this->createDam($damForm);
-//
-//            return $this->redirectToRoute('dam_list');
-//        }
-//
-//        return $this->render('@Shop/entity.html.twig', array(
-//            'form' => $damForm->createView(),
-//            'title' => 'New Product',
-//            'backUrl' => '/product'
-//        ));
-//    }
-//
-//    /**
-//     * @param Request $request
-//     *
-//     * @Route("/edit/{id}", name="edit_product")
-//     * @return Response
-//     */
-//    public function editAction(Request $request, $id)
-//    {
-//        $productQueryService = $this->get('fish_and_places.dam_query_sevice');
-//
-//        $product = $productQueryService->getProduct($id);
-//        $productRepresentation = new ProductRepresentation($product);
-//
-//        $productForm = $this->createForm(
-//            new ProductType(
-//                $manufactureList,
-//                $productRepresentation,
-//                $attributeQueryService->getAttributesByCategory($product->getManufacture()->getCategory())
-//            )
-//        );
-//
-//        $productForm->handleRequest($request);
-//
-//        if ($productForm->isSubmitted() && $productForm->isValid()) {
-//
-//            $this->updateProduct($productRepresentation, $productForm, $manufactureService, $product->getId());
-//
-//            return $this->redirectToRoute('homepage');
-//        }
-//
-//        return $this->render('@Shop/entity.html.twig', array(
-//            'form' => $productForm->createView(),
-//            'title' => 'Edit Product',
-//            'backUrl' => '/product'
-//        ));
-//    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/dam/add", name="create_dam")
+     * @return Response
+     */
+    public function addAction(Request $request)
+    {
+        $damForm = $this->createForm(DamType::class,
+            new DamRepresentation(),
+            [
+                'fishQueryService' => $this->get('fish_and_places.fish_query_service'),
+            ]
+        );
+        $damForm->handleRequest($request);
+
+        if ($damForm->isSubmitted() && $damForm->isValid()) {
+
+            $this->createDam($damForm->getData());
+
+            return $this->redirectToRoute('dam_list');
+        }
+
+        return $this->render('@Admin/entity.html.twig', array(
+            'form' => $damForm->createView(),
+            'title' => 'New Dam',
+            'backUrl' => '/dam'
+        ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/dam/edit/{id}", name="edit_dam")
+     * @return Response
+     */
+    public function editAction(Request $request, $id)
+    {
+        $damQueryService = $this->get('fish_and_places.dam_query_service');
+
+        $damRepresentation = $damQueryService->getDam($id);
+
+        $damForm = $this->createForm(DamType::class,
+            $damRepresentation,
+            [
+                'fishQueryService' => $this->get('fish_and_places.fish_query_service'),
+                'damRepresentation' => $damRepresentation,
+            ]
+        );
+
+        $damForm->handleRequest($request);
+
+        if ($damForm->isSubmitted() && $damForm->isValid()) {
+
+            $this->updateDam($damForm->getData());
+
+            return $this->redirectToRoute('dam_list');
+        }
+
+        return $this->render('@Admin/entity.html.twig', array(
+            'form' => $damForm->createView(),
+            'title' => 'Edit Dam',
+            'backUrl' => '/dam'
+        ));
+    }
 //
 //    /**
 //     * @param Request $request
@@ -210,20 +213,35 @@ class DamController extends Controller
 //        ));
 //    }
 //
-//    /**
-//     * @param Form $productForm
-//     */
-//    private function createDam(Form $productForm)
-//    {
-//        $damQueryService = $this->get('credissimo.product_service');
-//
-//        $productCreate = new CreateNewProductCommand(
-//            $productForm->getData(),
-//            $this->getUser()
-//        );
-//
-//        $damQueryService->create($productCreate);
-//    }
+    /**
+     * @param DamRepresentation $damRepresentation
+     */
+    private function createDam(DamRepresentation $damRepresentation)
+    {
+        $damQueryService = $this->get('fish_and_places.dam_service');
+
+        $productCreate = new CreateNewDamCommand(
+            $damRepresentation,
+            $this->getUser()
+        );
+
+        $damQueryService->create($productCreate);
+    }
+
+    /**
+     * @param DamRepresentation $damRepresentation
+     */
+    private function updateDam(DamRepresentation $damRepresentation)
+    {
+        $damQueryService = $this->get('fish_and_places.dam_service');
+
+        $productCreate = new UpdateDamCommand(
+            $damRepresentation,
+            $this->getUser()
+        );
+
+        $damQueryService->update($productCreate);
+    }
 //
 //    /**
 //     * @param $productId

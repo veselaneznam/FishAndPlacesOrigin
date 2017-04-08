@@ -20,7 +20,7 @@ class Dam
     private $name;
 
     /**
-     * @var Location
+     * @var string
      */
     private $location;
 
@@ -81,7 +81,7 @@ class Dam
     }
 
     /**
-     * @return Location
+     * @return string
      */
     public function getLocation()
     {
@@ -191,7 +191,7 @@ class Dam
     }
 
     /**
-     * @param Location $location
+     * @param string $location
      *
      * @return Dam
      */

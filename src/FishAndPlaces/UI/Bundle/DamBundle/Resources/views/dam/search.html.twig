@@ -13,3 +13,13 @@
         </div>
     </div>
 </div>
+{% block javascripts %}
+<script>
+    document.getElementById("search_button").addEventListener("click", FindCity);
+
+    function FindCity() {
+        var param = document.getElementById('search').value;
+        window.location.replace('/map/'+ param);
+    }
+</script>
+{% endblock %}

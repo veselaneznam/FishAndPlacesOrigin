@@ -2,9 +2,9 @@
 
 namespace FishAndPlaces\Dam\Application\Dam;
 
+use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
-use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Value\Contact;
 use FishAndPlaces\Dam\Domain\Value\Location;
 use FishAndPlaces\Dam\Domain\Value\Rating;
@@ -32,9 +32,9 @@ class DamRepresentation
     private $priceProPerson;
 
     /**
-     * @var Fish[]
+     * @var FishRepresentation[]
      */
-    private $fishCollection;
+    private $fishCollection = [];
 
     /**
      * @var Rating
@@ -57,7 +57,7 @@ class DamRepresentation
     private $isActive;
 
     /** @var Contact */
-    private $contact;
+    private $contactInformation;
 
     /** @var Dam */
     private $dam;
@@ -70,12 +70,22 @@ class DamRepresentation
     /**
      * @var DamImage[]
      */
-    private $imageCollection;
+    private $imageCollection = [];
 
     /**
      * @var DamImage
      */
     private $mainImage;
+
+    /**
+     * @var string
+     */
+    private $address;
+
+    /**
+     * @var bool
+     */
+    private $showOnFirstPage;
 
     /**
      * @param Dam|null $dam
@@ -92,13 +102,17 @@ class DamRepresentation
             $this->createdAt = $dam->getCreatedAt();
             $this->updatedAt = $dam->getUpdatedAt();
             $this->isActive = $dam->isActive();
-            $this->contact = $dam->getContact();
-            $this->fishCollection = $dam->getFishCollection();
+            $this->contactInformation = $dam->getContact();
+            foreach ($dam->getFishCollection() as $fish) {
+                $this->fishCollection[] = new FishRepresentation($fish);
+            }
             $this->location = new Location($dam->getLatitude(), $dam->getLongitude());
+            $this->address = $dam->getLocation();
             $this->lat = $dam->getLatitude();
             $this->long = $dam->getLongitude();
             $this->imageCollection = $dam->getImageCollection();
             $this->mainImage = $dam->getMainImage();
+            $this->showOnFirstPage = $dam->isShowOnFirstPage();
         }
     }
 
@@ -135,7 +149,7 @@ class DamRepresentation
     }
 
     /**
-     * @return Fish[]
+     * @return FishRepresentation[]
      */
     public function getFishCollection()
     {
@@ -177,9 +191,9 @@ class DamRepresentation
     /**
      * @return Contact
      */
-    public function getContact()
+    public function getContactInformation()
     {
-        return $this->contact;
+        return $this->contactInformation;
     }
 
     /**
@@ -226,7 +240,222 @@ class DamRepresentation
     {
         return [
             'name' => $this->getName(),
-            'contactInformation' => $this->getContact(),
+            'contactInformation' => $this->getContactInformation(),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return DamRepresentation
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return DamRepresentation
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param Location $location
+     *
+     * @return DamRepresentation
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * @param float $priceProPerson
+     *
+     * @return DamRepresentation
+     */
+    public function setPriceProPerson($priceProPerson)
+    {
+        $this->priceProPerson = $priceProPerson;
+        return $this;
+    }
+
+    /**
+     * @param FishRepresentation[] $fishCollection
+     *
+     * @return DamRepresentation
+     */
+    public function setFishCollection($fishCollection)
+    {
+        $this->fishCollection = $fishCollection;
+        return $this;
+    }
+
+    /**
+     * @param Rating $rating
+     *
+     * @return DamRepresentation
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     *
+     * @return DamRepresentation
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return DamRepresentation
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return DamRepresentation
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
+
+    /**
+     * @param Contact $contactInformation
+     *
+     * @return DamRepresentation
+     */
+    public function setContactInformation($contactInformation)
+    {
+        $this->contactInformation = $contactInformation;
+        return $this;
+    }
+
+    /**
+     * @param Dam $dam
+     *
+     * @return DamRepresentation
+     */
+    public function setDam($dam)
+    {
+        $this->dam = $dam;
+        return $this;
+    }
+
+    /**
+     * @param float $long
+     *
+     * @return DamRepresentation
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
+        return $this;
+    }
+
+    /**
+     * @param float $lat
+     *
+     * @return DamRepresentation
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+        return $this;
+    }
+
+    /**
+     * @param DamImage[] $imageCollection
+     *
+     * @return DamRepresentation
+     */
+    public function setImageCollection($imageCollection)
+    {
+        $this->imageCollection = $imageCollection;
+        return $this;
+    }
+
+    /**
+     * @param DamImage $mainImage
+     *
+     * @return DamRepresentation
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
+        return $this;
+    }
+
+    /**
+     * @param string $address
+     *
+     * @return DamRepresentation
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShowOnFirstPage()
+    {
+        return $this->showOnFirstPage;
+    }
+
+    /**
+     * @param bool $showOnFirstPage
+     *
+     * @return DamRepresentation
+     */
+    public function setShowOnFirstPage($showOnFirstPage)
+    {
+        $this->showOnFirstPage = $showOnFirstPage;
+        return $this;
+    }
+
+    public function getFishSelect()
+    {
+        $list = [];
+        /**
+         * @var FishRepresentation $fish
+         */
+        foreach ($this->fishCollection as $fish) {
+            $list[$fish->getName()] = $fish;
+        }
+        return $list;
     }
 }

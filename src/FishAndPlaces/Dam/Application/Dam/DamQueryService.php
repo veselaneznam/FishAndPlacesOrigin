@@ -2,50 +2,30 @@
 
 namespace FishAndPlaces\Dam\Application\Dam;
 
-use Doctrine\Common\Cache\SQLite3Cache;
 use FishAndPlaces\Dam\Domain\Model\Dam;
-use FishAndPlaces\Dam\Domain\Model\Geocoder;
-use FishAndPlaces\Dam\Domain\Model\Geocoder\GeocoderProxyInterface;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
-use FishAndPlaces\Dam\Domain\Repository\GeocoderLocalRepository;
 use FishAndPlaces\Dam\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
-use Symfony\Component\Cache\Adapter\DoctrineAdapter;
 
 class DamQueryService
 {
     /** @var DamRepository */
     private $damRepository;
 
-    /** @var GeocoderProxyInterface */
-    private $geocoderProxy;
-
-    /** @var GeocoderLocalRepository */
-    private $geocoderLocalRepository;
-    /**
-     * @var DoctrineAdapter
-     */
-    private $symfonyCache;
+    /** @var GeoLocatorService */
+    private $geoLocatorService;
 
     /**
-     * @param DamRepository           $damRepository
-     * @param GeocoderProxyInterface  $geocoderProxy
-     * @param GeocoderLocalRepository $geocoderLocalRepository
+     * @param DamRepository     $damRepository
+     * @param GeoLocatorService $geoLocatorService
      */
     public function __construct(
         DamRepository $damRepository,
-        GeocoderProxyInterface $geocoderProxy,
-        GeocoderLocalRepository $geocoderLocalRepository
+        GeoLocatorService $geoLocatorService
     )
     {
         $this->damRepository = $damRepository;
-        $this->geocoderProxy = $geocoderProxy;
-        $this->geocoderLocalRepository = $geocoderLocalRepository;
-        if(null === $this->symfonyCache) {
-            $sqliteDatabase = new \SQLite3(__DIR__.'/cache/data.sqlite');
-            $doctrineCache = new SQLite3Cache($sqliteDatabase, 'locations');
-            $this->symfonyCache = new DoctrineAdapter($doctrineCache);
-        }
+        $this->geoLocatorService = $geoLocatorService;
     }
 
     /**
@@ -69,30 +49,15 @@ class DamQueryService
      */
     public function search($data)
     {
+        $searchResultByLocation = [];
         if (null !== $data) {
-
-            if (!$this->symfonyCache->hasItem("$data")) {
-                $address = $this->geocoderLocalRepository->findOneByAddress($data);
-                $this->saveToCasche($data, $address);
-                if (null === $address) {
-                    $address = $this->geocoderProxy->geocode($data)->first();
-                    $newLocalGeocoder = new Geocoder(
-                        $data,
-                        $address->getLatitude(),
-                        $address->getLongitude()
-                    );
-                    $this->geocoderLocalRepository->save($newLocalGeocoder);
-                    $this->saveToCasche($data, $address);
-                }
-            } else {
-                $address = $this->symfonyCache->getItem("$data")->get();
+            $address = $this->geoLocatorService->getLocation($data);
+            if (null !== $address) {
+                $searchResultByLocation = $this->damRepository->findByLocation(
+                    new DomainLocation($address->getLatitude(), $address->getLongitude()
+                    )
+                );
             }
-
-
-            $searchResultByLocation = $this->damRepository->findByLocation(
-                new DomainLocation($address->getLatitude(), $address->getLongitude()
-                )
-            );
         } else {
             $searchResultByLocation = $this->damRepository->findAll();
         }
@@ -147,13 +112,12 @@ class DamQueryService
     }
 
     /**
-     * @param $data
-     * @param $address
+     * @param $id
+     *
+     * @return DamRepresentation
      */
-    private function saveToCasche($data, $address)
+    public function getDam($id)
     {
-        $cascheLocation = $this->symfonyCache->getItem("$data");
-        $cascheLocation->set($address);
-        $this->symfonyCache->save($cascheLocation);
+        return new DamRepresentation($this->damRepository->find($id));
     }
 }

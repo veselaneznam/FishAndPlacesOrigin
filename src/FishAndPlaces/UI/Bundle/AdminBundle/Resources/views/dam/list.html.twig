@@ -1,0 +1,45 @@
+{% extends '@Admin/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>Dam List</h2>
+        <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Dam</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Is Active</th>
+                <th>Show on first page</th>
+                <th>Price pro person</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if damCollection is not null %}
+                {% for dam in damCollection %}
+                    <tr>
+                        <td>{{ dam.id }}</td>
+                        <td>{{ dam.name }}</td>
+                        <td>{{ dam.isActive }}</td>
+                        <td>{{ dam.showOnFirstPage }}</td>
+                        <td>{{ dam.priceProPerson }}</td>
+                        <td>{{ dam.priceProPerson }}</td>
+                        <td>
+                            <a href="{{ path('edit_dam', { 'id': dam.id }) }}" class="btn btn-success"
+                               role="button">Edit</a>
+                            {#{% if product.status == 1 %}#}
+                                {#<a href="{{ path('delete_dam', { 'id': dam.id }) }}"#}
+                                   {#class="btn delete btn-danger" role="button">Delete</a>#}
+                            {#{% else %}#}
+                                {#<a href="{{ path('activate_product', { 'id': dam.id }) }}"#}
+                                   {#class="btn delete btn-danger" role="button">Activate</a>#}
+                            {#{% endif %}#}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

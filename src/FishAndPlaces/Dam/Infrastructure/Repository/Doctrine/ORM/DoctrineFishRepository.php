@@ -7,9 +7,8 @@ use FishAndPlaces\Dam\Domain\Repository\FishRepository;
 
 class DoctrineFishRepository extends DoctrineRepository implements FishRepository
 {
-
     /**
-     * @param Fish $fishImage
+     * @inheritdoc
      */
     public function update(Fish $fishImage)
     {
@@ -17,7 +16,7 @@ class DoctrineFishRepository extends DoctrineRepository implements FishRepositor
     }
 
     /**
-     * @param Fish $fishImage
+     * @inheritdoc
      */
     public function remove(Fish $fishImage)
     {
@@ -25,7 +24,7 @@ class DoctrineFishRepository extends DoctrineRepository implements FishRepositor
     }
 
     /**
-     * @param Fish $fishImage
+     * @inheritdoc
      */
     public function add(Fish $fishImage)
     {
