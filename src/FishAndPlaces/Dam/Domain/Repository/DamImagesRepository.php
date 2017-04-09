@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\Dam\Domain\Repository;
 
-use FishAndPlaces\Domain\Dam\Model\DamImage;
+use FishAndPlaces\Dam\Domain\Model\DamImage;
 
 interface DamImagesRepository
 {
@@ -18,19 +18,19 @@ interface DamImagesRepository
     public function find($id);
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImage
      */
-    public function update(DamImage $dam);
+    public function update(DamImage $damImage);
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImage
      */
-    public function remove(DamImage $dam);
+    public function remove(DamImage $damImage);
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImage
      */
-    public function add(DamImage $dam);
+    public function add(DamImage $damImage);
 
     /**
      * @param int $damId
@@ -38,4 +38,11 @@ interface DamImagesRepository
      * @return mixed
      */
     public function findByDam($damId);
+
+    /**
+     * @param $dam
+     *
+     * @return void
+     */
+    public function resetMain($dam);
 }

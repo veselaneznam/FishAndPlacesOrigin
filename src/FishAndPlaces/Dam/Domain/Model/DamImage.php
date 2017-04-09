@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\Dam\Domain\Model;
 
-class DamImage
+class DamImage extends Image
 {
     /**
      * @var int
@@ -17,7 +17,7 @@ class DamImage
     /**
      * @var string
      */
-    private $imageSrc;
+    protected $imageSrc;
 
     /**
      * @var \DateTime
@@ -39,7 +39,7 @@ class DamImage
      * @param string $imageSrc
      * @param bool   $isMain
      */
-    public function __construct(Dam $dam, $imageSrc, $isMain)
+    public function __construct(Dam $dam = null, $imageSrc, $isMain)
     {
         $this->dam = $dam;
 
@@ -108,6 +108,17 @@ class DamImage
     public function setIsMain($isMain)
     {
         $this->isMain = $isMain;
+        return $this;
+    }
+
+    /**
+     * @param Dam $dam
+     *
+     * @return DamImage
+     */
+    public function setDam(Dam $dam)
+    {
+        $this->dam = $dam;
         return $this;
     }
 }

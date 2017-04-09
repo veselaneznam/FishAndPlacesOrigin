@@ -4,27 +4,30 @@ namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\User\Domain\Model\User;
 
 class CreateNewDamCommand
 {
     /** @var Dam */
     private $dam;
+    /**
+     * @var DamImage
+     */
+    private $damImage;
 
     /**
      * @param DamRepresentation $damRepresentation
      * @param User              $user
+     * @param string            $fileName
      */
-    public function __construct(DamRepresentation $damRepresentation, User $user)
+    public function __construct(DamRepresentation $damRepresentation, User $user, $fileName)
     {
         $dam = new Dam();
         $currentDate = new \DateTime();
         $dam->setCreatedAt($currentDate);
         $dam->setUpdatedAt($currentDate);
-        $fishCollection = array_map(function (FishRepresentation $fish) {
-            return $fish->getFish();
-        }, $damRepresentation->getFishCollection()
-        );
+        $fishCollection = $damRepresentation->getFishCollection();
         $dam->setFishCollection($fishCollection);
         $dam->setContact($damRepresentation->getContactInformation());
         $dam->setIsActive($damRepresentation->isActive());
@@ -34,6 +37,7 @@ class CreateNewDamCommand
         $dam->setLocation($damRepresentation->getAddress());
         $dam->setShowOnFirstPage($damRepresentation->isShowOnFirstPage());
         $dam->setPriceProPerson($damRepresentation->getPriceProPerson());
+        $this->damImage = new DamImage($dam, $fileName, 1);
         $this->dam = $dam;
     }
 
@@ -43,5 +47,13 @@ class CreateNewDamCommand
     public function getDam()
     {
         return $this->dam;
+    }
+
+    /**
+     * @return DamImage
+     */
+    public function getDamImage()
+    {
+        return $this->damImage;
     }
 }

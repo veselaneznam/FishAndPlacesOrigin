@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -39,7 +40,8 @@ class DamController extends Controller
         return $this->render('@Admin/dam/list.html.twig', array(
             'damCollection' => $damCollection,
             'title' => "Dam List",
-            'searchForm' => $searchForm->createView()
+            'path' => $this->getParameter('images_upload'),
+            'searchForm' => $searchForm->createView(),
         ));
     }
 
@@ -88,8 +90,14 @@ class DamController extends Controller
         $damForm->handleRequest($request);
 
         if ($damForm->isSubmitted() && $damForm->isValid()) {
+            /**
+             * @var DamRepresentation $damRepresentation
+             */
+            $damRepresentation = $damForm->getData();
+            $file = $damForm->get('mainImage')->getData();
+            $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
 
-            $this->createDam($damForm->getData());
+            $this->createDam($damForm->getData(), $fileName);
 
             return $this->redirectToRoute('dam_list');
         }
@@ -113,11 +121,15 @@ class DamController extends Controller
 
         $damRepresentation = $damQueryService->getDam($id);
 
+        if(null !==$damRepresentation->getMainImage()) {
+            $damRepresentation->setMainImage(
+                new File($this->getParameter('images_upload').'/'.$damRepresentation->getMainImage()->getImageSrc()));
+        }
+
         $damForm = $this->createForm(DamType::class,
             $damRepresentation,
             [
                 'fishQueryService' => $this->get('fish_and_places.fish_query_service'),
-                'damRepresentation' => $damRepresentation,
             ]
         );
 
@@ -125,13 +137,16 @@ class DamController extends Controller
 
         if ($damForm->isSubmitted() && $damForm->isValid()) {
 
-            $this->updateDam($damForm->getData());
+            $file = $damForm->get('mainImage')->getData();
+            $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
+            $this->updateDam($damForm->getData(), $fileName);
 
             return $this->redirectToRoute('dam_list');
         }
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
+            'currentFishCollection' => $damRepresentation->getFishCollection(),
             'title' => 'Edit Dam',
             'backUrl' => '/dam'
         ));
@@ -215,14 +230,16 @@ class DamController extends Controller
 //
     /**
      * @param DamRepresentation $damRepresentation
+     * @param string            $fileName
      */
-    private function createDam(DamRepresentation $damRepresentation)
+    private function createDam(DamRepresentation $damRepresentation, $fileName)
     {
         $damQueryService = $this->get('fish_and_places.dam_service');
 
         $productCreate = new CreateNewDamCommand(
             $damRepresentation,
-            $this->getUser()
+            $this->getUser(),
+            $fileName
         );
 
         $damQueryService->create($productCreate);
@@ -230,14 +247,16 @@ class DamController extends Controller
 
     /**
      * @param DamRepresentation $damRepresentation
+     * @param string  $fileName
      */
-    private function updateDam(DamRepresentation $damRepresentation)
+    private function updateDam(DamRepresentation $damRepresentation, $fileName)
     {
         $damQueryService = $this->get('fish_and_places.dam_service');
 
         $productCreate = new UpdateDamCommand(
             $damRepresentation,
-            $this->getUser()
+            $this->getUser(),
+            $fileName
         );
 
         $damQueryService->update($productCreate);

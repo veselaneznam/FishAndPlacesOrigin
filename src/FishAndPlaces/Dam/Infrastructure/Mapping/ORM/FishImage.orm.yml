@@ -16,9 +16,9 @@ FishAndPlaces\Dam\Domain\Model\FishImage:
         imageSrc:
             type: string
 
-    ManyToOne:
+    manyToOne:
         image:
-            targetEntity: Fish
+            targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
             inversedBy: fishImages
             joinColumn:
                 name: fish_id

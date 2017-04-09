@@ -1,43 +1,63 @@
 <?php
 namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
-use FishAndPlaces\Dam\Domain\Repository\DamImageRepository;
+use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
-use FishAndPlaces\Infrastructure\Core\Repository\Doctrine\ORM\DoctrineRepository;
+use FishAndPlaces\Dam\Domain\Repository\DamImagesRepository;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 
-class DoctrineDamImageRepository extends DoctrineRepository implements DamImageRepository
+class DoctrineDamImageRepository extends DoctrineRepository implements DamImagesRepository
 {
     /**
-     * @param int $damId
+     * @param Dam $dam
      *
      * @return DamImage[]
      */
-    public function findByDam($damId)
+    public function findByDam($dam)
     {
-        // TODO: Implement findByDam() method.
+        return parent::findBy(['dam' => $dam]);
     }
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImageImage
+     *
+     * @internal param DamImage $dam
      */
-    public function update(DamImage $dam)
+    public function update(DamImage $damImageImage)
     {
-        // TODO: Implement update() method.
+        $this->getEntityManager()->merge($damImageImage);
+        $this->getEntityManager()->flush();
     }
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImage
      */
-    public function remove(DamImage $dam)
+    public function remove(DamImage $damImage)
     {
         // TODO: Implement remove() method.
     }
 
     /**
-     * @param DamImage $dam
+     * @param DamImage $damImage
      */
-    public function add(DamImage $dam)
+    public function add(DamImage $damImage)
     {
-        // TODO: Implement add() method.
+        $this->getEntityManager()->persist($damImage);
+        $this->getEntityManager()->flush($damImage);
+    }
+
+    /**
+     * @param $dam
+     *
+     * @return void
+     */
+    public function resetMain($dam)
+    {
+       foreach ($this->findByDam($dam) as $damImage) {
+           if ($damImage->isMain()) {
+               $damImage->setIsMain(0);
+               $this->update($damImage);
+           }
+       }
     }
 }

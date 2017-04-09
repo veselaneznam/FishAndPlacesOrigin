@@ -39,6 +39,16 @@ class DamImageRepresentation
     private $isMain;
 
     /**
+     * @var DamImage|null
+     */
+    private $damImage;
+
+    /**
+     * @var null|string
+     */
+    private $webPath;
+
+    /**
      * @param DamImage|null $damImage
      */
     public function __construct(DamImage $damImage = null)
@@ -50,7 +60,17 @@ class DamImageRepresentation
             $this->imageSrc = $damImage->getImageSrc();
             $this->createdAt = $damImage->getCreatedAt();
             $this->updatedAt = $damImage->getUpdatedAt();
+            $this->damImage = $damImage;
+            $this->webPath = $damImage->getWebPath();
         }
+    }
+
+    /**
+     * @return DamImage|null
+     */
+    public function getDamImage()
+    {
+        return $this->damImage;
     }
 
     /**
@@ -99,5 +119,13 @@ class DamImageRepresentation
     public function isMain()
     {
         return $this->isMain;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getWebPath()
+    {
+        return $this->webPath;
     }
 }

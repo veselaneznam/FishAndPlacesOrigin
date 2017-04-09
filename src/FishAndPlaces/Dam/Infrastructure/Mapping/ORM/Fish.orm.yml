@@ -23,7 +23,3 @@ FishAndPlaces\Dam\Domain\Model\Fish:
            type: float
         long:
            type: float
-    OneToMany:
-        fishImages:
-            targetEntity: FishImage
-            mappedBy: image

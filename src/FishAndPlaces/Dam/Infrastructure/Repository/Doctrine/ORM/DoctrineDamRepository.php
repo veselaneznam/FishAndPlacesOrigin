@@ -32,7 +32,8 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
      */
     public function add(Dam $dam)
     {
-        $this->saveEntity($dam);
+        $this->getEntityManager()->persist($dam);
+        $this->getEntityManager()->flush($dam);
     }
 
     /**

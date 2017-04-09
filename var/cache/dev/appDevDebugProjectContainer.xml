@@ -41,9 +41,9 @@
     <parameter key="mailer_user">null</parameter>
     <parameter key="mailer_password">null</parameter>
     <parameter key="secret">fb65f46debe44b34ac4f286bc5628b30bfbaf2dd</parameter>
-    <parameter key="images_upload_file_path">/tmp</parameter>
     <parameter key="google_maps_api_key">AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE</parameter>
     <parameter key="locale">en</parameter>
+    <parameter key="images_upload">/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/uploads/images</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">fb65f46debe44b34ac4f286bc5628b30bfbaf2dd</parameter>
@@ -462,9 +462,12 @@
     </parameter>
   </parameters>
   <services>
-    <service id="credissimo.user_repository" class="FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository">
+    <service id="fish_and_places.user_repository" class="FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository">
       <argument>FishAndPlaces\User\Domain\Model\User</argument>
       <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.images_uploader" class="FishAndPlaces\Dam\Application\Core\FileUploader">
+      <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/uploads/images</argument>
     </service>
     <service id="fish_and_places.dam_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository">
       <argument>FishAndPlaces\Dam\Domain\Model\Dam</argument>
@@ -501,6 +504,7 @@
     <service id="fish_and_places.dam_service" class="FishAndPlaces\Dam\Application\Dam\DamService">
       <argument type="service" id="fish_and_places.dam_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
+      <argument type="service" id="fish_and_places.dam_image_repository"/>
     </service>
     <service id="fish_and_places.fish_service" class="FishAndPlaces\Dam\Applicaiton\Fish\FishService">
       <argument type="service" id="fish_and_places.fish_repository"/>
@@ -611,7 +615,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>RKX9QnaC2sX5ZUX1k2IOuI</argument>
+                <argument>OFsFoyPD5TBS2poQ+CqqlO</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -739,7 +743,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>RKX9QnaC2sX5ZUX1k2IOuI</argument>
+          <argument>OFsFoyPD5TBS2poQ+CqqlO</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -760,7 +764,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>RKX9QnaC2sX5ZUX1k2IOuI</argument>
+      <argument>OFsFoyPD5TBS2poQ+CqqlO</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -770,7 +774,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>RKX9QnaC2sX5ZUX1k2IOuI</argument>
+      <argument>OFsFoyPD5TBS2poQ+CqqlO</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2153,7 +2157,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58e918ef4bad68.18722934</argument>
+            <argument>58e9fca4791805.51469792</argument>
           </service>
         </argument>
       </argument>
@@ -2486,7 +2490,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58e918ef4bad68.18722934</argument>
+            <argument>58e9fca4791805.51469792</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

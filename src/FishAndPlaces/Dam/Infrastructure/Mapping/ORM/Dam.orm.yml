@@ -10,9 +10,11 @@ FishAndPlaces\Dam\Domain\Model\Dam:
     fields:
         createdAt:
             type: datetime
+            column: created_at
         updatedAt:
             type: datetime
             nullable: true
+            column: updated_at
         name:
             type: string
             length: '255'
@@ -23,8 +25,10 @@ FishAndPlaces\Dam\Domain\Model\Dam:
             type: float
         isActive:
             type: boolean
+            column: is_active
         priceProPerson:
             type: float
+            column: price_pro_person
         latitude:
             type: float
         longitude:
@@ -32,19 +36,27 @@ FishAndPlaces\Dam\Domain\Model\Dam:
         showOnFirstPage:
             type: boolean
 
-    OneToMany:
+    oneToMany:
         imageCollection:
-            targetEntity: DamImage
-            mappedBy: image
+            targetEntity: FishAndPlaces\Dam\Domain\Model\DamImage
+            mappedBy: dam
 
     manyToMany:
-          fishCollection:
-              targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
-              joinTable:
-                  name: dam_fish
-                  joinColumns:
-                      dam_id:
-                          referencedColumnName: id
-                  inverseJoinColumns:
-                      fish_id:
-                          referencedColumnName: id
+        fishCollection:
+            targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinTable:
+                name: dam_fish
+                joinColumns:
+                    -
+                        referencedColumnName: id
+                        name: dam_id
+                inverseJoinColumns:
+                    -
+                        referencedColumnName: id
+                        name: fish_id
+            orderBy: null
+    lifecycleCallbacks: {  }

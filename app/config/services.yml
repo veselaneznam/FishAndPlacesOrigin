@@ -1,7 +1,11 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 services:
-    credissimo.user_repository:
+    fish_and_places.user_repository:
         class: FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository
         factory: ["@doctrine", getRepository]
         arguments: [ FishAndPlaces\User\Domain\Model\User ]
+
+    fish_and_places.images_uploader:
+        class: FishAndPlaces\Dam\Application\Core\FileUploader
+        arguments: ['%images_upload%']

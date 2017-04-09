@@ -8,6 +8,7 @@ use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\Dam\Domain\Value\Contact;
 use FishAndPlaces\Dam\Domain\Value\Location;
 use FishAndPlaces\Dam\Domain\Value\Rating;
+use Symfony\Component\HttpFoundation\File\File;
 
 class DamRepresentation
 {
@@ -67,10 +68,6 @@ class DamRepresentation
 
     /** @var float */
     private $lat;
-    /**
-     * @var DamImage[]
-     */
-    private $imageCollection = [];
 
     /**
      * @var DamImage
@@ -86,6 +83,11 @@ class DamRepresentation
      * @var bool
      */
     private $showOnFirstPage;
+
+    /**
+     * @var DamImageRepresentation[]
+     */
+    private $imageCollection = [];
 
     /**
      * @param Dam|null $dam
@@ -110,8 +112,11 @@ class DamRepresentation
             $this->address = $dam->getLocation();
             $this->lat = $dam->getLatitude();
             $this->long = $dam->getLongitude();
-            $this->imageCollection = $dam->getImageCollection();
-            $this->mainImage = $dam->getMainImage();
+            foreach ($dam->getImageCollection() as $damImage) {
+                $this->imageCollection[] = new DamImageRepresentation($damImage);
+
+            }
+            $this->mainImage = new DamImageRepresentation($dam->getMainImage());
             $this->showOnFirstPage = $dam->isShowOnFirstPage();
         }
     }
@@ -221,7 +226,7 @@ class DamRepresentation
     }
 
     /**
-     * @return DamImage[]
+     * @return DamImageRepresentation[]
      */
     public function getImageCollection()
     {
@@ -229,7 +234,7 @@ class DamRepresentation
     }
 
     /**
-     * @return DamImage
+     * @return DamImageRepresentation
      */
     public function getMainImage()
     {
@@ -396,7 +401,7 @@ class DamRepresentation
     }
 
     /**
-     * @param DamImage[] $imageCollection
+     * @param DamImageRepresentation[] $imageCollection
      *
      * @return DamRepresentation
      */
@@ -407,13 +412,15 @@ class DamRepresentation
     }
 
     /**
-     * @param DamImage $mainImage
+     * @param File $mainImage
      *
      * @return DamRepresentation
      */
-    public function setMainImage($mainImage)
+    public function setMainImage(File $mainImage)
     {
-        $this->mainImage = $mainImage;
+        $damImage = new DamImage($this->dam, $mainImage->getPath(),1);
+        $this->mainImage = new DamImageRepresentation($damImage);
+
         return $this;
     }
 

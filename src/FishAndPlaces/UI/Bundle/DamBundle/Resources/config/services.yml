@@ -49,6 +49,7 @@ services:
         arguments:
             - "@fish_and_places.dam_repository"
             - "@fish_and_places.geolocator"
+            - "@fish_and_places.dam_image_repository"
 
     fish_and_places.fish_service:
         class: FishAndPlaces\Dam\Applicaiton\Fish\FishService

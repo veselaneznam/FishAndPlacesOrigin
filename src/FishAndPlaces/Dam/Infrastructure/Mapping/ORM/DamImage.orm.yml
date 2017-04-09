@@ -1,5 +1,5 @@
 FishAndPlaces\Dam\Domain\Model\DamImage:
-    repositoryClass: FishAndPlaces\Infrastructure\Dam\Repository\Doctrine\ORM\DoctrineDamImageRepository
+    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamImageRepository
     type: entity
     table: dam_image
     id:
@@ -10,18 +10,26 @@ FishAndPlaces\Dam\Domain\Model\DamImage:
     fields:
         createdAt:
             type: datetime
+            column: created_at
         updatedAt:
             type: datetime
             nullable: true
+            column: updated_at
         imageSrc:
             type: string
+            column: image_src
         isMain:
             type: boolean
-
-    ManyToOne:
-        image:
-            targetEntity: Dam
-            inversedBy: damImages
-            joinColumn:
-                name: dam_id
-                referencedColumnName: id
+            column: is_main
+    manyToOne:
+        dam:
+            targetEntity: FishAndPlaces\Dam\Domain\Model\Dam
+            cascade: ["persist"]
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: imageCollection
+            joinColumns:
+                dam_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

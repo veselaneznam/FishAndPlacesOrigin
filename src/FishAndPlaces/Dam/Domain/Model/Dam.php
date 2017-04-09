@@ -339,7 +339,10 @@ class Dam
      */
     public function setImageCollection($imageCollection)
     {
-        $this->imageCollection = $imageCollection;
+        foreach ($imageCollection as $image) {
+            $this->imageCollection[] = $image;
+            $image->setDam($this);
+        }
         return $this;
     }
 

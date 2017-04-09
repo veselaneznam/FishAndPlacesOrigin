@@ -2,11 +2,14 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Form;
 
+use FishAndPlaces\Dam\Application\Dam\DamImageRepresentation;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\Dam\Application\Fish\FishQueryService;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,11 +22,6 @@ class DamType extends AbstractType
     private $fishQueryService;
 
     /**
-     * @var DamRepresentation
-     */
-    private $dam;
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -31,9 +29,11 @@ class DamType extends AbstractType
     {
 
         $this->fishQueryService = $options['fishQueryService'];
-
         $fishSelect = $this->fishQueryService->getFishSelect();
-        $this->dam = $options['damRepresentation'];
+
+        if ($options['data']->getFishCollection() === null) {
+            $options['data']->getFishCollection(true);
+        }
         $builder
             ->add('is_active', ChoiceType::class, array(
                 'required' => true,
@@ -45,6 +45,7 @@ class DamType extends AbstractType
             ->add('price_pro_person', NumberType::class, array('required' => true))
             ->add('address', TextType::class, array('required' => true))
             ->add('contact_information', TextareaType::class, array('required' => false))
+            ->add('mainImage', FileType::class, array('required' => true, 'data_class' => null))
             ->add('fishCollection', ChoiceType::class, array(
                 'choice_loader' => new CallbackChoiceLoader(function() use ($fishSelect){
                     return $fishSelect;
@@ -64,8 +65,7 @@ class DamType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'FishAndPlaces\Dam\Application\Dam\DamRepresentation',
-            'fishQueryService' => null,
-            'damRepresentation' => null
+            'fishQueryService' => null
         ));
     }
 }
