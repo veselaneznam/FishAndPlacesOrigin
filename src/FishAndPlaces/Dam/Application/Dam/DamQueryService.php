@@ -120,4 +120,16 @@ class DamQueryService
     {
         return new DamRepresentation($this->damRepository->find($id));
     }
+
+    /**
+     * @param string $name
+     *
+     * @return DamRepresentation[]
+     */
+    public function getDamByName($name)
+    {
+        $damCollection = $this->damRepository->findByName($name);
+
+        return $this->convertToRepresentation($damCollection);
+    }
 }

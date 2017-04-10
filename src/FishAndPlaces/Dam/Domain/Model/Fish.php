@@ -38,6 +38,11 @@ class Fish
     private $dam;
 
     /**
+     * @var string
+     */
+    private $description;
+
+    /**
      * @return Dam
      */
     public function getDam()
@@ -186,6 +191,25 @@ class Fish
     public function setLong($long)
     {
         $this->long = $long;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return Fish
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 }

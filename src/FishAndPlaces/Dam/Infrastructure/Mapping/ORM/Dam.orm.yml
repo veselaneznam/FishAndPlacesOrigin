@@ -35,6 +35,8 @@ FishAndPlaces\Dam\Domain\Model\Dam:
             type: float
         showOnFirstPage:
             type: boolean
+        description:
+            type: text
 
     oneToMany:
         imageCollection:

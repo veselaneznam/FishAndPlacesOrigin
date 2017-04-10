@@ -3,6 +3,7 @@
 namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\User\Domain\Model\User;
 
 class ActivateDamCommand
 {
@@ -11,9 +12,18 @@ class ActivateDamCommand
      */
     private $dam;
 
-    public function __construct(DamRepresentation $damRepresentation)
+    public function __construct(DamRepresentation $damRepresentation, User $user)
     {
-        $this->dam = new Dam();
-        $this->dam->setId($damRepresentation->getId());
+        $updateDamCommand = new UpdateDamCommand($damRepresentation, $user);
+        $this->dam = $updateDamCommand->getDam();
+        $this->dam->setIsActive(1);
+    }
+
+    /**
+     * @return Dam
+     */
+    public function getDam()
+    {
+        return $this->dam;
     }
 }

@@ -4,6 +4,8 @@ namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
 use Doctrine\DBAL\Cache\QueryCacheProfile;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class DoctrineRepository extends EntityRepository
 {
@@ -43,5 +45,22 @@ class DoctrineRepository extends EntityRepository
     public function refresh($entity)
     {
         $this->getEntityManager()->refresh($entity);
+    }
+
+    /**
+     * @param Query $query
+     * @param int $page
+     * @param int $limit
+     *
+     * @return Paginator
+     */
+    public function paginate($query, $page = 1, $limit = 5)
+    {
+        $paginator = new Paginator($query);
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit);// Limit
+
+        return $paginator;
     }
 }

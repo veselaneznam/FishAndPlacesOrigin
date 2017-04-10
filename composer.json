@@ -43,7 +43,9 @@
         "egeloen/serializer-bundle": "^1.0",
         "guzzlehttp/guzzle": "^6.2",
         "symfony/assetic-bundle": "^2.8",
-        "willdurand/geocoder": "^3.3"
+        "willdurand/geocoder": "^3.3",
+        "egeloen/ckeditor-bundle": "^5.0",
+        "kms/froala-editor-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

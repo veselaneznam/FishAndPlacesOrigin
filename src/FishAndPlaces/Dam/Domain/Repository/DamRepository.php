@@ -59,4 +59,11 @@ interface DamRepository
      */
     public function findByFirstPage();
 
+    /**
+     * @param $name
+     *
+     * @return Dam[]
+     */
+    public function findByName($name);
+
 }

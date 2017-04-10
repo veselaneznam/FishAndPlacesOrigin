@@ -3,9 +3,7 @@
 namespace FishAndPlaces\Dam\Domain\Model;
 
 use FishAndPlaces\Dam\Domain\Value\Contact;
-use FishAndPlaces\Dam\Domain\Value\Location;
 use FishAndPlaces\Dam\Domain\Value\Rating;
-use Symfony\Component\Intl\Exception\MissingResourceException;
 
 class Dam
 {
@@ -71,6 +69,11 @@ class Dam
      * @var DamImage[]
      */
     private $imageCollection = [];
+
+    /**
+     * @var string
+     */
+    private $description;
 
     /**
      * @return string
@@ -357,5 +360,24 @@ class Dam
             }
         }
        // throw new MissingResourceException('Main image is mandatory');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return Dam
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
     }
 }

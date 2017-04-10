@@ -42,8 +42,10 @@ class DamService
         $dam->setLatitude($location->getLatitude());
         $this->damRepository->add($dam);
         $damImage = $command->getDamImage();
-        $damImage->setDam($dam);
-        $this->damImagesRepository->add($damImage);
+        if(null !== $damImage) {
+            $damImage->setDam($dam);
+            $this->damImagesRepository->add($damImage);
+        }
     }
 
     /**
@@ -54,11 +56,26 @@ class DamService
         $location = $this->geoLocatorService->getLocation($command->getDam()->getLocation());
         $dam = $command->getDam();
         $dam->setLongitude($location->getLongitude());
-        $dam->setLatitude($location->getLatitude());
+        $dam->setLatitude($location->getLatitude());;
         $this->damRepository->update($dam);
         $damImage = $command->getDamImage();
-        $damImage->setDam($dam);
-        $this->damImagesRepository->resetMain($dam);
-        $this->damImagesRepository->update($damImage);
+        if (null !== $damImage) {
+            $damImage->setDam($dam);
+            $this->damImagesRepository->resetMain($dam);
+            $this->damImagesRepository->update($damImage);
+        }
+    }
+
+    /**
+     * @param ActivateDamCommand $command
+     */
+    public function activate(ActivateDamCommand $command)
+    {
+        $this->damRepository->update($command->getDam());
+    }
+
+    public function deactivate(DeactivateDamCommand $command)
+    {
+        $this->damRepository->update($command->getDam());
     }
 }

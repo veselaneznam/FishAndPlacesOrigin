@@ -29,6 +29,10 @@ class FishRepresentation
      * @var string
      */
     private $address;
+    /**
+     * @var string
+     */
+    private $description;
 
     /**
      * @param Fish|null $fish
@@ -42,6 +46,7 @@ class FishRepresentation
             $this->location = new Location($this->fish->getLat(), $this->fish->getLong());
             $this->address = $this->fish->getLocation();
             $this->dam = new DamRepresentation($this->fish->getDam());
+            $this->description = $fish->getDescription();
         }
     }
 
@@ -93,4 +98,11 @@ class FishRepresentation
         return $this->address;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

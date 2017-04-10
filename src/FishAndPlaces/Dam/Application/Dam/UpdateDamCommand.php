@@ -22,7 +22,7 @@ class UpdateDamCommand
      * @param User              $user
      * @param string            $fileName
      */
-    public function __construct(DamRepresentation $damRepresentation, User $user, $fileName)
+    public function __construct(DamRepresentation $damRepresentation, User $user, $fileName = null)
     {
         $dam = new Dam();
         $currentDate = new \DateTime();
@@ -39,7 +39,10 @@ class UpdateDamCommand
         $dam->setShowOnFirstPage($damRepresentation->isShowOnFirstPage());
         $dam->setPriceProPerson($damRepresentation->getPriceProPerson());
         $dam->setId($damRepresentation->getId());
-        $this->damImage = new DamImage($dam, $fileName, 1);
+        $dam->setDescription($damRepresentation->getDescription());
+        if(null !== $fileName) {
+            $this->damImage = new DamImage($dam, $fileName, 1);
+        }
         $this->dam = $dam;
     }
 

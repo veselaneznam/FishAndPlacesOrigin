@@ -112,4 +112,18 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param string $name
+     *
+     * @return Dam[]
+     */
+    public function findByName($name)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.name LIKE :name')
+            ->setParameter('name', $name . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

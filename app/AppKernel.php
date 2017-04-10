@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new Ivory\SerializerBundle\IvorySerializerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+//            new KMS\FroalaEditorBundle\KMSFroalaEditorBundle(),
             new FishAndPlaces\UI\Bundle\DamBundle\DamBundle(),
             new FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle(),
             new FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle(),

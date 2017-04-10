@@ -2,19 +2,21 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
+use FishAndPlaces\Dam\Application\Dam\ActivateDamCommand;
+use FishAndPlaces\Dam\Application\Dam\DeactivateDamCommand;
 use FishAndPlaces\Dam\Application\Dam\UpdateDamCommand;
-use FishAndPlaces\Dam\Application\Fish\FishQueryService;
 use FishAndPlaces\Dam\Application\Dam\CreateNewDamCommand;
 use FishAndPlaces\Dam\Application\Dam\DamQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
-use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamType;
-use FishAndPlaces\UI\Bundle\DamBundle\Form\DamSearchType;
+use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,7 +37,12 @@ class DamController extends Controller
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
         $damCollection = $damQueryService->getDamCollection();
-        $searchForm = $this->createSearchForm();
+        $searchForm = $this->createForm(DamSearchType::class);
+        $searchForm->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $damCollection = $damQueryService->getDamByName($searchForm->get('search')->getData());
+        }
 
         return $this->render('@Admin/dam/list.html.twig', array(
             'damCollection' => $damCollection,
@@ -44,34 +51,6 @@ class DamController extends Controller
             'searchForm' => $searchForm->createView(),
         ));
     }
-
-//    /**
-//     * @param Request $request
-//     *
-//     * @Route("/delete/list", name="deleted_dam_list")
-//     * @return Response
-//     */
-//    public function deletedDamListAction(Request $request)
-//    {
-//        /**
-//         * @var DamQueryService $damQueryService
-//         */
-//        $damQueryService = $this->get('fish_and_places.dam_query_sevice');
-//
-//        $damCollection = $damQueryService->getDeletedProducts();
-//
-//        $searchForm = $this->createSearchForm();
-//        if ($request->getMethod() == 'POST') {
-//            $searchForm->handleRequest($request);
-//            $damCollection = $damQueryService->search($searchForm->getData());
-//        }
-//
-//        return $this->render('@Shop/product/list.html.twig', array(
-//            'damCollection' => $damCollection,
-//            'title' => "Deleted Dam List",
-//            'searchForm' => $searchForm->createView()
-//        ));
-//    }
 
     /**
      * @param Request $request
@@ -93,11 +72,13 @@ class DamController extends Controller
             /**
              * @var DamRepresentation $damRepresentation
              */
-            $damRepresentation = $damForm->getData();
             $file = $damForm->get('mainImage')->getData();
-            $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
-
-            $this->createDam($damForm->getData(), $fileName);
+            $fileName = null;
+            if(null !== $file) {
+                $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
+            }
+            $damRepresentation = $damForm->getData();
+            $this->createDam($damRepresentation, $fileName);
 
             return $this->redirectToRoute('dam_list');
         }
@@ -105,7 +86,7 @@ class DamController extends Controller
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
             'title' => 'New Dam',
-            'backUrl' => '/dam'
+            'backUrl' => '/admin/dam'
         ));
     }
 
@@ -138,8 +119,12 @@ class DamController extends Controller
         if ($damForm->isSubmitted() && $damForm->isValid()) {
 
             $file = $damForm->get('mainImage')->getData();
-            $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
-            $this->updateDam($damForm->getData(), $fileName);
+            $fileName = null;
+            if (null !== $file) {
+                $fileName = $this->get('fish_and_places.images_uploader')->upload($file);
+            }
+            $damRepresentation = $damForm->getData();
+            $this->updateDam($damRepresentation, $fileName);
 
             return $this->redirectToRoute('dam_list');
         }
@@ -148,91 +133,91 @@ class DamController extends Controller
             'form' => $damForm->createView(),
             'currentFishCollection' => $damRepresentation->getFishCollection(),
             'title' => 'Edit Dam',
-            'backUrl' => '/dam'
+            'backUrl' => '/admin/dam'
         ));
     }
-//
-//    /**
-//     * @param Request $request
-//     *
-//     * @Route("/delete/{id}", name="delete_product")
-//     * @Method({"GET", "DELETE"})
-//     *
-//     * @return JsonResponse|RedirectResponse
-//     */
-//    public function deleteAction(Request $request, $id)
-//    {
-//        $productQueryService = $this->get('fish_and_places.dam_query_sevice');
-//        $product = $productQueryService->getProduct($id);
-//
-//        $form = $this->createDeleteForm($product->getId());
-//        if ($request->getMethod() == 'DELETE') {
-//            $form->handleRequest($request);
-//            if ($form->isSubmitted() && $form->isValid()) {
-//                $damQueryService = $this->get('fish_and_places.dam_servoce');
-//
-//                $damQueryService->delete(new DeleteProductCommand($product));
-//
-//                $response['success'] = true;
-//                $response['message'] = 'Deleted Successfully!';
-//            } else {
-//                $response['success'] = false;
-//                $response['message'] = 'Sorry category could not be deleted!';
-//            }
-//
-//            $this->addFlash('notice', 'Deleted Successfully!');
-//            return $this->redirectToRoute('homepage');
-//        }
-//
-//        return $this->render('@Shop/product/delete.html.twig', array(
-//            'delete_form' => $form->createView(),
-//            'product' => $product
-//        ));
-//    }
-//
-//    /**
-//     * @param Request $request
-//     *
-//     * @Route("/activate/{id}", name="activate_product")
-//     * @Method({"GET", "POST"})
-//     *
-//     * @return JsonResponse|RedirectResponse
-//     */
-//    public function activateAction(Request $request, $id)
-//    {
-//        $productQueryService = $this->get('fish_and_places.dam_query_sevice');
-//        $product = $productQueryService->getProduct($id);
-//
-//        $form = $this->createActivateForm($product->getId());
-//        if ($request->getMethod() == 'POST') {
-//            $form->handleRequest($request);
-//            if ($form->isSubmitted() && $form->isValid()) {
-//                $damQueryService = $this->get('credissimo.product_service');
-//
-//                $damQueryService->activate(new ActivateProductCommand($product));
-//
-//                $response['success'] = true;
-//                $response['message'] = 'Activated Successfully!';
-//            } else {
-//                $response['success'] = false;
-//                $response['message'] = 'Sorry category could not be activated!';
-//            }
-//
-//            $this->addFlash('notice', 'Activate Successfully!');
-//            return $this->redirectToRoute('deleted_product_list');
-//        }
-//
-//        return $this->render('@Shop/product/activate.html.twig', array(
-//            'activate_form' => $form->createView(),
-//            'product' => $product
-//        ));
-//    }
-//
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/deactivate/{id}", name="deactivate_dam")
+     * @Method({"GET", "DELETE"})
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function deactivateAction(Request $request, $id)
+    {
+        $damQueryService = $this->get('fish_and_places.dam_query_service');
+        $dam = $damQueryService->getDam($id);
+
+        $form = $this->createDeactivateForm($dam->getId());
+        if ($request->getMethod() == 'DELETE') {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $damService = $this->get('fish_and_places.dam_service');
+
+                $damService->deactivate(new DeactivateDamCommand($dam, $this->getUser()));
+
+                $response['success'] = true;
+                $response['message'] = 'Deactivated Successfully!';
+            } else {
+                $response['success'] = false;
+                $response['message'] = 'Sorry dam could not be deactivated!';
+            }
+
+            $this->addFlash('notice', 'Deactivated Successfully!');
+            return $this->redirectToRoute('dam_list');
+        }
+
+        return $this->render('@Admin/dam/deactivate.html.twig', array(
+            'deactivate_form' => $form->createView(),
+            'dam' => $dam
+        ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/activate/{id}", name="activate_dam")
+     * @Method({"GET", "POST"})
+     *
+     * @return JsonResponse|RedirectResponse
+     */
+    public function activateAction(Request $request, $id)
+    {
+        $productQueryService = $this->get('fish_and_places.dam_query_service');
+        $dam = $productQueryService->getDam($id);
+
+        $form = $this->createActivateForm($dam->getId());
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $damService = $this->get('fish_and_places.dam_service');
+
+                $damService->activate(new ActivateDamCommand($dam, $this->getUser()));
+
+                $response['success'] = true;
+                $response['message'] = 'Activated Successfully!';
+            } else {
+                $response['success'] = false;
+                $response['message'] = 'Sorry Dam could not be activated!';
+            }
+
+            $this->addFlash('notice', 'Activate Successfully!');
+            return $this->redirectToRoute('dam_list');
+        }
+
+        return $this->render('@Admin/dam/activate.html.twig', array(
+            'activate_form' => $form->createView(),
+            'dam' => $dam
+        ));
+    }
+
     /**
      * @param DamRepresentation $damRepresentation
-     * @param string            $fileName
+     * @param string |null           $fileName
      */
-    private function createDam(DamRepresentation $damRepresentation, $fileName)
+    private function createDam(DamRepresentation $damRepresentation, $fileName = null)
     {
         $damQueryService = $this->get('fish_and_places.dam_service');
 
@@ -247,9 +232,9 @@ class DamController extends Controller
 
     /**
      * @param DamRepresentation $damRepresentation
-     * @param string  $fileName
+     * @param string|null  $fileName
      */
-    private function updateDam(DamRepresentation $damRepresentation, $fileName)
+    private function updateDam(DamRepresentation $damRepresentation, $fileName = null)
     {
         $damQueryService = $this->get('fish_and_places.dam_service');
 
@@ -261,20 +246,20 @@ class DamController extends Controller
 
         $damQueryService->update($productCreate);
     }
-//
-//    /**
-//     * @param $productId
-//     *
-//     * @return Form
-//     */
-//    private function createDeleteForm($productId)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('delete_product', array('id' => $productId)))
-//            ->setMethod('DELETE')
-//            ->getForm();
-//    }
-//
+
+    /**
+     * @param $productId
+     *
+     * @return Form
+     */
+    private function createDeactivateForm($productId)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('deactivate_dam', array('id' => $productId)))
+            ->setMethod('DELETE')
+            ->getForm();
+    }
+
     /**
      * @return Form
      */
@@ -282,49 +267,13 @@ class DamController extends Controller
     {
         return $this->createForm(DamSearchType::class);
     }
-//
-//    /**
-//     * @param ProductRepresentation   $productRepresentation
-//     * @param Form                    $productForm
-//     * @param ManufactureQueryService $manufactureService
-//     * @param                         $productId
-//     */
-//    private function updateProduct(
-//        ProductRepresentation $productRepresentation,
-//        Form $productForm,
-//        ManufactureQueryService $manufactureService,
-//        $productId
-//    ) {
-//        $attributeQueryService = $this->get('credissimo.attribute_query_service');
-//        $manufacture = $manufactureService->getManufacture($productForm->get('manufacture')->getData());
-//
-//        $attributes = $attributeQueryService->getAttributesByCategory($manufacture->getCategory());
-//        $damQueryService = $this->get('credissimo.product_service');
-//
-//        $description = $damQueryService->transformToDescription($attributes, $productForm->getData());
-//        $productRepresentation
-//            ->setId($productId)
-//            ->setManufacture($manufacture)
-//            ->setCategory($manufacture->getCategory())
-//            ->setName($productForm->get('name')->getData())
-//            ->setModel($productForm->get('model')->getData())
-//            ->setDescription($description)
-//            ->setPrice($productForm->get('price')->getData())
-//            ->setSlug($productForm->get('slug')->getData())
-//            ->setYearOfManufacture($productForm->get('yearOfManufacture')->getData())
-//            ->setStatus($productForm->get('status')->getData())
-//            ->setProductImages([]);
-//
-//        $updateProductCommand = new UpdateProductCommand($productRepresentation);
-//
-//        $damQueryService->update($updateProductCommand);
-//    }
-//
-//    private function createActivateForm($getId)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('activate_product', array('id' => $getId)))
-//            ->setMethod('POST')
-//            ->getForm();
-//    }
+
+
+    private function createActivateForm($getId)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('activate_dam', array('id' => $getId)))
+            ->setMethod('POST')
+            ->getForm();
+    }
 }

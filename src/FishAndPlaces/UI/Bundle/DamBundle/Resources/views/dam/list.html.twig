@@ -8,7 +8,7 @@
     {% for dam in damCollection %}
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="{{ path('dam_view', {'id': dam.id}) }}">
-            <img class="img-responsive" src="http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg" alt="">
+            <img class="img-responsive" src="{{  dam.mainImage.webPath }}" alt="{{ dam.name }}">
             <span>{{ dam.name }}</span>
         </a>
     </div>

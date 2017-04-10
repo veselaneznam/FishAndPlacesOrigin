@@ -37,6 +37,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.asset_manager' => 'getAssetic_AssetManagerService',
             'assetic.controller' => 'getAssetic_ControllerService',
             'assetic.filter_manager' => 'getAssetic_FilterManagerService',
+            'assetic.helper.dynamic' => 'getAssetic_Helper_DynamicService',
             'assetic.request_listener' => 'getAssetic_RequestListenerService',
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
@@ -63,6 +64,7 @@ class appDevDebugProjectContainer extends Container
             'debug.log_processor' => 'getDebug_LogProcessorService',
             'debug.security.access.decision_manager' => 'getDebug_Security_Access_DecisionManagerService',
             'debug.stopwatch' => 'getDebug_StopwatchService',
+            'debug.templating.engine.php' => 'getDebug_Templating_Engine_PhpService',
             'doctrine' => 'getDoctrineService',
             'doctrine.dbal.connection_factory' => 'getDoctrine_Dbal_ConnectionFactoryService',
             'doctrine.dbal.default_connection' => 'getDoctrine_Dbal_DefaultConnectionService',
@@ -366,6 +368,10 @@ class appDevDebugProjectContainer extends Container
             'ivory.google_map.helper.subscriber.static.type' => 'getIvory_GoogleMap_Helper_Subscriber_Static_TypeService',
             'ivory.google_map.helper.subscriber.static.zoom' => 'getIvory_GoogleMap_Helper_Subscriber_Static_ZoomService',
             'ivory.google_map.helper.subscriber.utility.object_to_array' => 'getIvory_GoogleMap_Helper_Subscriber_Utility_ObjectToArrayService',
+            'ivory.google_map.templating.api' => 'getIvory_GoogleMap_Templating_ApiService',
+            'ivory.google_map.templating.map' => 'getIvory_GoogleMap_Templating_MapService',
+            'ivory.google_map.templating.map.static' => 'getIvory_GoogleMap_Templating_Map_StaticService',
+            'ivory.google_map.templating.place_autocomplete' => 'getIvory_GoogleMap_Templating_PlaceAutocompleteService',
             'ivory.google_map.twig.extension.api' => 'getIvory_GoogleMap_Twig_Extension_ApiService',
             'ivory.google_map.twig.extension.map' => 'getIvory_GoogleMap_Twig_Extension_MapService',
             'ivory.google_map.twig.extension.map.static' => 'getIvory_GoogleMap_Twig_Extension_Map_StaticService',
@@ -409,6 +415,16 @@ class appDevDebugProjectContainer extends Container
             'ivory.serializer.visitor.xml.serialization' => 'getIvory_Serializer_Visitor_Xml_SerializationService',
             'ivory.serializer.visitor.yaml.deserialization' => 'getIvory_Serializer_Visitor_Yaml_DeserializationService',
             'ivory.serializer.visitor.yaml.serialization' => 'getIvory_Serializer_Visitor_Yaml_SerializationService',
+            'ivory_ck_editor.config_manager' => 'getIvoryCkEditor_ConfigManagerService',
+            'ivory_ck_editor.form.type' => 'getIvoryCkEditor_Form_TypeService',
+            'ivory_ck_editor.plugin_manager' => 'getIvoryCkEditor_PluginManagerService',
+            'ivory_ck_editor.renderer' => 'getIvoryCkEditor_RendererService',
+            'ivory_ck_editor.renderer.json_builder' => 'getIvoryCkEditor_Renderer_JsonBuilderService',
+            'ivory_ck_editor.styles_set_manager' => 'getIvoryCkEditor_StylesSetManagerService',
+            'ivory_ck_editor.template_manager' => 'getIvoryCkEditor_TemplateManagerService',
+            'ivory_ck_editor.templating.helper' => 'getIvoryCkEditor_Templating_HelperService',
+            'ivory_ck_editor.toolbar_manager' => 'getIvoryCkEditor_ToolbarManagerService',
+            'ivory_ck_editor.twig_extension' => 'getIvoryCkEditor_TwigExtensionService',
             'kernel' => 'getKernelService',
             'kernel.class_cache.cache_warmer' => 'getKernel_ClassCache_CacheWarmerService',
             'locale_listener' => 'getLocaleListenerService',
@@ -484,8 +500,19 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport' => 'getSwiftmailer_Mailer_Default_TransportService',
             'templating' => 'getTemplatingService',
             'templating.filename_parser' => 'getTemplating_FilenameParserService',
+            'templating.globals' => 'getTemplating_GlobalsService',
+            'templating.helper.actions' => 'getTemplating_Helper_ActionsService',
+            'templating.helper.assets' => 'getTemplating_Helper_AssetsService',
+            'templating.helper.code' => 'getTemplating_Helper_CodeService',
+            'templating.helper.form' => 'getTemplating_Helper_FormService',
             'templating.helper.logout_url' => 'getTemplating_Helper_LogoutUrlService',
+            'templating.helper.request' => 'getTemplating_Helper_RequestService',
+            'templating.helper.router' => 'getTemplating_Helper_RouterService',
             'templating.helper.security' => 'getTemplating_Helper_SecurityService',
+            'templating.helper.session' => 'getTemplating_Helper_SessionService',
+            'templating.helper.slots' => 'getTemplating_Helper_SlotsService',
+            'templating.helper.stopwatch' => 'getTemplating_Helper_StopwatchService',
+            'templating.helper.translator' => 'getTemplating_Helper_TranslatorService',
             'templating.loader' => 'getTemplating_LoaderService',
             'templating.locator' => 'getTemplating_LocatorService',
             'templating.name_parser' => 'getTemplating_NameParserService',
@@ -600,31 +627,57 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetManagerService()
     {
-        $a = $this->get('templating.loader');
+        $a = ${($_ = isset($this->services['assetic.asset_factory']) ? $this->services['assetic.asset_factory'] : $this->getAssetic_AssetFactoryService()) && false ?: '_'};
+        $b = $this->get('templating.loader');
 
-        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager(${($_ = isset($this->services['assetic.asset_factory']) ? $this->services['assetic.asset_factory'] : $this->getAssetic_AssetFactoryService()) && false ?: '_'}, array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig'), $this->get('monolog.logger.assetic', ContainerInterface::NULL_ON_INVALID_REFERENCE)), new \Assetic\Cache\ConfigCache((__DIR__.'/assetic/config')), true)));
+        $c = new \Assetic\Cache\ConfigCache((__DIR__.'/assetic/config'));
 
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FrameworkBundle', ($this->targetDirs[3].'/app/Resources/FrameworkBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FrameworkBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SecurityBundle', ($this->targetDirs[3].'/app/Resources/SecurityBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SecurityBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'TwigBundle', ($this->targetDirs[3].'/app/Resources/TwigBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'TwigBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MonologBundle', ($this->targetDirs[3].'/app/Resources/MonologBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MonologBundle', ($this->targetDirs[3].'/vendor/symfony/monolog-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SwiftmailerBundle', ($this->targetDirs[3].'/app/Resources/SwiftmailerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SwiftmailerBundle', ($this->targetDirs[3].'/vendor/symfony/swiftmailer-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineBundle', ($this->targetDirs[3].'/app/Resources/DoctrineBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/app/Resources/SensioFrameworkExtraBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FOSUserBundle', ($this->targetDirs[3].'/app/Resources/FOSUserBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'FOSUserBundle', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/app/Resources/DoctrineMigrationsBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-migrations-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/app/Resources/IvoryGoogleMapBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/vendor/egeloen/google-map-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'IvorySerializerBundle', ($this->targetDirs[3].'/app/Resources/IvorySerializerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'IvorySerializerBundle', ($this->targetDirs[3].'/vendor/egeloen/serializer-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AsseticBundle', ($this->targetDirs[3].'/app/Resources/AsseticBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AsseticBundle', ($this->targetDirs[3].'/vendor/symfony/assetic-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DamBundle', ($this->targetDirs[3].'/app/Resources/DamBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DamBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'ShopBundle', ($this->targetDirs[3].'/app/Resources/ShopBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'ShopBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/ShopBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AdminBundle', ($this->targetDirs[3].'/app/Resources/AdminBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'AdminBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'UserBundle', ($this->targetDirs[3].'/app/Resources/UserBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'UserBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/UserBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DebugBundle', ($this->targetDirs[3].'/app/Resources/DebugBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DebugBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', ($this->targetDirs[3].'/app/Resources/WebProfilerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioDistributionBundle', ($this->targetDirs[3].'/app/Resources/SensioDistributionBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioDistributionBundle', ($this->targetDirs[3].'/vendor/sensio/distribution-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioGeneratorBundle', ($this->targetDirs[3].'/app/Resources/SensioGeneratorBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SensioGeneratorBundle', ($this->targetDirs[3].'/vendor/sensio/generator-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, '', ($this->targetDirs[3].'/app/Resources/views'), '/\\.[^.]+\\.twig$/'), 'twig');
+        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($a, array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig'), $this->get('monolog.logger.assetic', ContainerInterface::NULL_ON_INVALID_REFERENCE)), $c, true), 'php' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Symfony\Bundle\AsseticBundle\Factory\Loader\AsseticHelperFormulaLoader($a), $c, true)));
+
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FrameworkBundle', ($this->targetDirs[3].'/app/Resources/FrameworkBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FrameworkBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FrameworkBundle', ($this->targetDirs[3].'/app/Resources/FrameworkBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FrameworkBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SecurityBundle', ($this->targetDirs[3].'/app/Resources/SecurityBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SecurityBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SecurityBundle', ($this->targetDirs[3].'/app/Resources/SecurityBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SecurityBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'TwigBundle', ($this->targetDirs[3].'/app/Resources/TwigBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'TwigBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'TwigBundle', ($this->targetDirs[3].'/app/Resources/TwigBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'TwigBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'MonologBundle', ($this->targetDirs[3].'/app/Resources/MonologBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'MonologBundle', ($this->targetDirs[3].'/vendor/symfony/monolog-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'MonologBundle', ($this->targetDirs[3].'/app/Resources/MonologBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'MonologBundle', ($this->targetDirs[3].'/vendor/symfony/monolog-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SwiftmailerBundle', ($this->targetDirs[3].'/app/Resources/SwiftmailerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SwiftmailerBundle', ($this->targetDirs[3].'/vendor/symfony/swiftmailer-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SwiftmailerBundle', ($this->targetDirs[3].'/app/Resources/SwiftmailerBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SwiftmailerBundle', ($this->targetDirs[3].'/vendor/symfony/swiftmailer-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineBundle', ($this->targetDirs[3].'/app/Resources/DoctrineBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineBundle', ($this->targetDirs[3].'/app/Resources/DoctrineBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/app/Resources/SensioFrameworkExtraBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/app/Resources/SensioFrameworkExtraBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioFrameworkExtraBundle', ($this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FOSUserBundle', ($this->targetDirs[3].'/app/Resources/FOSUserBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FOSUserBundle', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FOSUserBundle', ($this->targetDirs[3].'/app/Resources/FOSUserBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'FOSUserBundle', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/app/Resources/DoctrineMigrationsBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-migrations-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/app/Resources/DoctrineMigrationsBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DoctrineMigrationsBundle', ($this->targetDirs[3].'/vendor/doctrine/doctrine-migrations-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/app/Resources/IvoryGoogleMapBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/vendor/egeloen/google-map-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/app/Resources/IvoryGoogleMapBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryGoogleMapBundle', ($this->targetDirs[3].'/vendor/egeloen/google-map-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvorySerializerBundle', ($this->targetDirs[3].'/app/Resources/IvorySerializerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvorySerializerBundle', ($this->targetDirs[3].'/vendor/egeloen/serializer-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvorySerializerBundle', ($this->targetDirs[3].'/app/Resources/IvorySerializerBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvorySerializerBundle', ($this->targetDirs[3].'/vendor/egeloen/serializer-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AsseticBundle', ($this->targetDirs[3].'/app/Resources/AsseticBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AsseticBundle', ($this->targetDirs[3].'/vendor/symfony/assetic-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AsseticBundle', ($this->targetDirs[3].'/app/Resources/AsseticBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AsseticBundle', ($this->targetDirs[3].'/vendor/symfony/assetic-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryCKEditorBundle', ($this->targetDirs[3].'/app/Resources/IvoryCKEditorBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryCKEditorBundle', ($this->targetDirs[3].'/vendor/egeloen/ckeditor-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryCKEditorBundle', ($this->targetDirs[3].'/app/Resources/IvoryCKEditorBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'IvoryCKEditorBundle', ($this->targetDirs[3].'/vendor/egeloen/ckeditor-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DamBundle', ($this->targetDirs[3].'/app/Resources/DamBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DamBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DamBundle', ($this->targetDirs[3].'/app/Resources/DamBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DamBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'ShopBundle', ($this->targetDirs[3].'/app/Resources/ShopBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'ShopBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/ShopBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'ShopBundle', ($this->targetDirs[3].'/app/Resources/ShopBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'ShopBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/ShopBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AdminBundle', ($this->targetDirs[3].'/app/Resources/AdminBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AdminBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AdminBundle', ($this->targetDirs[3].'/app/Resources/AdminBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'AdminBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'UserBundle', ($this->targetDirs[3].'/app/Resources/UserBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'UserBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/UserBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'UserBundle', ($this->targetDirs[3].'/app/Resources/UserBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'UserBundle', ($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/UserBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DebugBundle', ($this->targetDirs[3].'/app/Resources/DebugBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DebugBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DebugBundle', ($this->targetDirs[3].'/app/Resources/DebugBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'DebugBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'WebProfilerBundle', ($this->targetDirs[3].'/app/Resources/WebProfilerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'WebProfilerBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'WebProfilerBundle', ($this->targetDirs[3].'/app/Resources/WebProfilerBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'WebProfilerBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioDistributionBundle', ($this->targetDirs[3].'/app/Resources/SensioDistributionBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioDistributionBundle', ($this->targetDirs[3].'/vendor/sensio/distribution-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioDistributionBundle', ($this->targetDirs[3].'/app/Resources/SensioDistributionBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioDistributionBundle', ($this->targetDirs[3].'/vendor/sensio/distribution-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioGeneratorBundle', ($this->targetDirs[3].'/app/Resources/SensioGeneratorBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioGeneratorBundle', ($this->targetDirs[3].'/vendor/sensio/generator-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioGeneratorBundle', ($this->targetDirs[3].'/app/Resources/SensioGeneratorBundle/views'), '/\\.[^.]+\\.php$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, 'SensioGeneratorBundle', ($this->targetDirs[3].'/vendor/sensio/generator-bundle/Resources/views'), '/\\.[^.]+\\.php$/'))), 'php');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, '', ($this->targetDirs[3].'/app/Resources/views'), '/\\.[^.]+\\.twig$/'), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($b, '', ($this->targetDirs[3].'/app/Resources/views'), '/\\.[^.]+\\.php$/'), 'php');
 
         return $instance;
     }
@@ -653,6 +706,19 @@ class appDevDebugProjectContainer extends Container
     protected function getAssetic_FilterManagerService()
     {
         return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array());
+    }
+
+    /**
+     * Gets the 'assetic.helper.dynamic' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper A Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper instance
+     */
+    protected function getAssetic_Helper_DynamicService()
+    {
+        return $this->services['assetic.helper.dynamic'] = new \Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper($this->get('templating.helper.router'), ${($_ = isset($this->services['assetic.asset_factory']) ? $this->services['assetic.asset_factory'] : $this->getAssetic_AssetFactoryService()) && false ?: '_'});
     }
 
     /**
@@ -742,7 +808,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('1YnklBjlH6', 0, 'OFsFoyPD5TBS2poQ+CqqlO', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('1YnklBjlH6', 0, 'TO1kHt+87+53++YCvaIvPA', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -773,7 +839,7 @@ class appDevDebugProjectContainer extends Container
 
         $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, ($this->targetDirs[3].'/app/Resources'));
 
-        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 4 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c, array()), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 6 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator.default')), 7 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('zTXZy1d-5a', 0, 'OFsFoyPD5TBS2poQ+CqqlO', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 8 => $this->get('kernel.class_cache.cache_warmer'), 9 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router'))));
+        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 4 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c, array()), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 6 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator.default')), 7 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('zTXZy1d-5a', 0, 'TO1kHt+87+53++YCvaIvPA', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 8 => $this->get('kernel.class_cache.cache_warmer'), 9 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router'))));
     }
 
     /**
@@ -979,6 +1045,24 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'debug.templating.engine.php' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\TimedPhpEngine A Symfony\Bundle\FrameworkBundle\Templating\TimedPhpEngine instance
+     */
+    protected function getDebug_Templating_Engine_PhpService()
+    {
+        $this->services['debug.templating.engine.php'] = $instance = new \Symfony\Bundle\FrameworkBundle\Templating\TimedPhpEngine($this->get('templating.name_parser'), $this, $this->get('templating.loader'), $this->get('debug.stopwatch'), $this->get('templating.globals'));
+
+        $instance->setCharset('UTF-8');
+        $instance->setHelpers(array('slots' => 'templating.helper.slots', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'assets' => 'templating.helper.assets', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'stopwatch' => 'templating.helper.stopwatch', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.dynamic', 'ivory_ckeditor' => 'ivory_ck_editor.templating.helper'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'doctrine' service.
      *
      * This service is shared.
@@ -1055,7 +1139,7 @@ class appDevDebugProjectContainer extends Container
     {
         if ($lazyLoad) {
 
-            return $this->services['doctrine.orm.default_entity_manager'] = new DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e7812dc5df0e431df4(
+            return $this->services['doctrine.orm.default_entity_manager'] = new DoctrineORMEntityManager_000000004e3f405d000000014539e713e3a62e4351ef78e7812dc5df0e431df4(
                 function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
                     $wrappedInstance = $this->getDoctrine_Orm_DefaultEntityManagerService(false);
 
@@ -1431,7 +1515,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_RegistryService()
     {
-        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => 'form.type.form', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType' => 'form.type.choice', 'Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType' => 'form.type.entity', 'FOS\\UserBundle\\Form\\Type\\UsernameFormType' => 'fos_user.username_form_type', 'FOS\\UserBundle\\Form\\Type\\ProfileFormType' => 'fos_user.profile.form.type', 'FOS\\UserBundle\\Form\\Type\\RegistrationFormType' => 'fos_user.registration.form.type', 'FOS\\UserBundle\\Form\\Type\\ChangePasswordFormType' => 'fos_user.change_password.form.type', 'FOS\\UserBundle\\Form\\Type\\ResettingFormType' => 'fos_user.resetting.form.type', 'Ivory\\GoogleMapBundle\\Form\\Type\\PlaceAutocompleteType' => 'ivory.google_map.form.type.place_autocomplete'), array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.data_collector', 2 => 'form.type_extension.csrf', 3 => 'form.type_extension.upload.validator', 4 => 'form.type_extension.form.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType' => array(0 => 'form.type_extension.submit.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType' => array(0 => 'form.type_extension.repeated.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
+        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => 'form.type.form', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType' => 'form.type.choice', 'Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType' => 'form.type.entity', 'FOS\\UserBundle\\Form\\Type\\UsernameFormType' => 'fos_user.username_form_type', 'FOS\\UserBundle\\Form\\Type\\ProfileFormType' => 'fos_user.profile.form.type', 'FOS\\UserBundle\\Form\\Type\\RegistrationFormType' => 'fos_user.registration.form.type', 'FOS\\UserBundle\\Form\\Type\\ChangePasswordFormType' => 'fos_user.change_password.form.type', 'FOS\\UserBundle\\Form\\Type\\ResettingFormType' => 'fos_user.resetting.form.type', 'Ivory\\GoogleMapBundle\\Form\\Type\\PlaceAutocompleteType' => 'ivory.google_map.form.type.place_autocomplete', 'Ivory\\CKEditorBundle\\Form\\Type\\CKEditorType' => 'ivory_ck_editor.form.type'), array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.data_collector', 2 => 'form.type_extension.csrf', 3 => 'form.type_extension.upload.validator', 4 => 'form.type_extension.form.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType' => array(0 => 'form.type_extension.submit.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType' => array(0 => 'form.type_extension.repeated.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
     }
 
     /**
@@ -2357,7 +2441,6 @@ class appDevDebugProjectContainer extends Container
 
         $instance->addRendererService('inline', 'fragment.renderer.inline');
         $instance->addRendererService('hinclude', 'fragment.renderer.hinclude');
-        $instance->addRendererService('hinclude', 'fragment.renderer.hinclude');
         $instance->addRendererService('esi', 'fragment.renderer.esi');
         $instance->addRendererService('ssi', 'fragment.renderer.ssi');
 
@@ -2404,7 +2487,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getFragment_Renderer_HincludeService()
     {
-        $this->services['fragment.renderer.hinclude'] = $instance = new \Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer($this->get('twig'), $this->get('uri_signer'), NULL);
+        $this->services['fragment.renderer.hinclude'] = $instance = new \Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer($this->get('templating'), $this->get('uri_signer'), NULL);
 
         $instance->setFragmentPath('/_fragment');
 
@@ -5173,6 +5256,58 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'ivory.google_map.templating.api' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\GoogleMapBundle\Templating\ApiHelper A Ivory\GoogleMapBundle\Templating\ApiHelper instance
+     */
+    protected function getIvory_GoogleMap_Templating_ApiService()
+    {
+        return $this->services['ivory.google_map.templating.api'] = new \Ivory\GoogleMapBundle\Templating\ApiHelper($this->get('ivory.google_map.helper.api'));
+    }
+
+    /**
+     * Gets the 'ivory.google_map.templating.map' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\GoogleMapBundle\Templating\MapHelper A Ivory\GoogleMapBundle\Templating\MapHelper instance
+     */
+    protected function getIvory_GoogleMap_Templating_MapService()
+    {
+        return $this->services['ivory.google_map.templating.map'] = new \Ivory\GoogleMapBundle\Templating\MapHelper($this->get('ivory.google_map.helper.map'));
+    }
+
+    /**
+     * Gets the 'ivory.google_map.templating.map.static' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\GoogleMapBundle\Templating\StaticMapHelper A Ivory\GoogleMapBundle\Templating\StaticMapHelper instance
+     */
+    protected function getIvory_GoogleMap_Templating_Map_StaticService()
+    {
+        return $this->services['ivory.google_map.templating.map.static'] = new \Ivory\GoogleMapBundle\Templating\StaticMapHelper($this->get('ivory.google_map.helper.map.static'));
+    }
+
+    /**
+     * Gets the 'ivory.google_map.templating.place_autocomplete' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\GoogleMapBundle\Templating\PlaceAutocompleteHelper A Ivory\GoogleMapBundle\Templating\PlaceAutocompleteHelper instance
+     */
+    protected function getIvory_GoogleMap_Templating_PlaceAutocompleteService()
+    {
+        return $this->services['ivory.google_map.templating.place_autocomplete'] = new \Ivory\GoogleMapBundle\Templating\PlaceAutocompleteHelper($this->get('ivory.google_map.helper.place_autocomplete'));
+    }
+
+    /**
      * Gets the 'ivory.google_map.twig.extension.api' service.
      *
      * This service is shared.
@@ -5797,6 +5932,151 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'ivory_ck_editor.config_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Model\ConfigManager A Ivory\CKEditorBundle\Model\ConfigManager instance
+     */
+    protected function getIvoryCkEditor_ConfigManagerService()
+    {
+        $this->services['ivory_ck_editor.config_manager'] = $instance = new \Ivory\CKEditorBundle\Model\ConfigManager();
+
+        $instance->setConfigs(array('my_config' => array('toolbar' => 'full', 'extraPlugins' => 'uploadimage', 'imageUploadUrl' => 'uploader/upload.php?type=Images')));
+        $instance->setDefaultConfig('my_config');
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Form\Type\CKEditorType A Ivory\CKEditorBundle\Form\Type\CKEditorType instance
+     */
+    protected function getIvoryCkEditor_Form_TypeService()
+    {
+        $this->services['ivory_ck_editor.form.type'] = $instance = new \Ivory\CKEditorBundle\Form\Type\CKEditorType($this->get('ivory_ck_editor.config_manager'), $this->get('ivory_ck_editor.plugin_manager'), $this->get('ivory_ck_editor.styles_set_manager'), $this->get('ivory_ck_editor.template_manager'), $this->get('ivory_ck_editor.toolbar_manager'));
+
+        $instance->isEnable(true);
+        $instance->useJquery(false);
+        $instance->isInputSync(true);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.plugin_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Model\PluginManager A Ivory\CKEditorBundle\Model\PluginManager instance
+     */
+    protected function getIvoryCkEditor_PluginManagerService()
+    {
+        return $this->services['ivory_ck_editor.plugin_manager'] = new \Ivory\CKEditorBundle\Model\PluginManager();
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.renderer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Renderer\CKEditorRenderer A Ivory\CKEditorBundle\Renderer\CKEditorRenderer instance
+     */
+    protected function getIvoryCkEditor_RendererService()
+    {
+        return $this->services['ivory_ck_editor.renderer'] = new \Ivory\CKEditorBundle\Renderer\CKEditorRenderer($this);
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.renderer.json_builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\JsonBuilder\JsonBuilder A Ivory\JsonBuilder\JsonBuilder instance
+     */
+    protected function getIvoryCkEditor_Renderer_JsonBuilderService()
+    {
+        return $this->services['ivory_ck_editor.renderer.json_builder'] = new \Ivory\JsonBuilder\JsonBuilder($this->get('property_accessor', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.styles_set_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Model\StylesSetManager A Ivory\CKEditorBundle\Model\StylesSetManager instance
+     */
+    protected function getIvoryCkEditor_StylesSetManagerService()
+    {
+        return $this->services['ivory_ck_editor.styles_set_manager'] = new \Ivory\CKEditorBundle\Model\StylesSetManager();
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.template_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Model\TemplateManager A Ivory\CKEditorBundle\Model\TemplateManager instance
+     */
+    protected function getIvoryCkEditor_TemplateManagerService()
+    {
+        return $this->services['ivory_ck_editor.template_manager'] = new \Ivory\CKEditorBundle\Model\TemplateManager();
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.templating.helper' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Templating\CKEditorHelper A Ivory\CKEditorBundle\Templating\CKEditorHelper instance
+     */
+    protected function getIvoryCkEditor_Templating_HelperService()
+    {
+        return $this->services['ivory_ck_editor.templating.helper'] = new \Ivory\CKEditorBundle\Templating\CKEditorHelper($this->get('ivory_ck_editor.renderer'));
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.toolbar_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Model\ToolbarManager A Ivory\CKEditorBundle\Model\ToolbarManager instance
+     */
+    protected function getIvoryCkEditor_ToolbarManagerService()
+    {
+        $this->services['ivory_ck_editor.toolbar_manager'] = $instance = new \Ivory\CKEditorBundle\Model\ToolbarManager();
+
+        $instance->setItems(array('full.colors' => array(0 => 'TextColor', 1 => 'BGColor'), 'full.document' => array(0 => 'Source', 1 => '-', 2 => 'Preview', 3 => 'Print')));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'ivory_ck_editor.twig_extension' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Ivory\CKEditorBundle\Twig\CKEditorExtension A Ivory\CKEditorBundle\Twig\CKEditorExtension instance
+     */
+    protected function getIvoryCkEditor_TwigExtensionService()
+    {
+        return $this->services['ivory_ck_editor.twig_extension'] = new \Ivory\CKEditorBundle\Twig\CKEditorExtension($this->get('ivory_ck_editor.renderer'));
+    }
+
+    /**
      * Gets the 'kernel' service.
      *
      * This service is shared.
@@ -6201,7 +6481,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getPropertyAccessorService()
     {
-        return $this->services['property_accessor'] = new \Symfony\Component\PropertyAccess\PropertyAccessor(false, false, \Symfony\Component\PropertyAccess\PropertyAccessor::createCache('xX8EXZxB0j', NULL, 'OFsFoyPD5TBS2poQ+CqqlO', $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
+        return $this->services['property_accessor'] = new \Symfony\Component\PropertyAccess\PropertyAccessor(false, false, \Symfony\Component\PropertyAccess\PropertyAccessor::createCache('xX8EXZxB0j', NULL, 'TO1kHt+87+53++YCvaIvPA', $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
     }
 
     /**
@@ -6421,7 +6701,7 @@ class appDevDebugProjectContainer extends Container
         $s = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($f, $p, array(), $a);
         $s->setOptions(array('login_path' => 'login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($o, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => ${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}), 'main', $a, $c, $d), 2 => $q, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $g, ${($_ = isset($this->services['security.authentication.session_strategy']) ? $this->services['security.authentication.session_strategy'] : $this->getSecurity_Authentication_SessionStrategyService()) && false ?: '_'}, $p, 'main', $r, $s, array('check_path' => 'login', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '58e9fca4791805.51469792', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $o, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $d, $p, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $p, 'login', false), NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', NULL, true, false, 'fos_user.user_provider.username', 'main', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'anonymous')));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($o, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => ${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}), 'main', $a, $c, $d), 2 => $q, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $g, ${($_ = isset($this->services['security.authentication.session_strategy']) ? $this->services['security.authentication.session_strategy'] : $this->getSecurity_Authentication_SessionStrategyService()) && false ?: '_'}, $p, 'main', $r, $s, array('check_path' => 'login', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '58eb391b994d32.84136674', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $o, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $d, $p, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $p, 'login', false), NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', NULL, true, false, 'fos_user.user_provider.username', 'main', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'anonymous')));
     }
 
     /**
@@ -6827,11 +7107,16 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Symfony\Bundle\TwigBundle\TwigEngine A Symfony\Bundle\TwigBundle\TwigEngine instance
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine A Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine instance
      */
     protected function getTemplatingService()
     {
-        return $this->services['templating'] = new \Symfony\Bundle\TwigBundle\TwigEngine($this->get('twig'), $this->get('templating.name_parser'), ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'});
+        $this->services['templating'] = $instance = new \Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine($this, array());
+
+        $instance->addEngine(new \Symfony\Bundle\TwigBundle\TwigEngine($this->get('twig'), $this->get('templating.name_parser'), ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}));
+        $instance->addEngine($this->get('debug.templating.engine.php'));
+
+        return $instance;
     }
 
     /**
@@ -6848,6 +7133,71 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'templating.globals' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables A Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables instance
+     */
+    protected function getTemplating_GlobalsService()
+    {
+        return $this->services['templating.globals'] = new \Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables($this);
+    }
+
+    /**
+     * Gets the 'templating.helper.actions' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\ActionsHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\ActionsHelper instance
+     */
+    protected function getTemplating_Helper_ActionsService()
+    {
+        return $this->services['templating.helper.actions'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\ActionsHelper($this->get('fragment.handler'));
+    }
+
+    /**
+     * Gets the 'templating.helper.assets' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\AssetsHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\AssetsHelper instance
+     */
+    protected function getTemplating_Helper_AssetsService()
+    {
+        return $this->services['templating.helper.assets'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\AssetsHelper($this->get('assets.packages'));
+    }
+
+    /**
+     * Gets the 'templating.helper.code' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper instance
+     */
+    protected function getTemplating_Helper_CodeService()
+    {
+        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(${($_ = isset($this->services['debug.file_link_formatter']) ? $this->services['debug.file_link_formatter'] : $this->getDebug_FileLinkFormatterService()) && false ?: '_'}, ($this->targetDirs[3].'/app'), 'UTF-8');
+    }
+
+    /**
+     * Gets the 'templating.helper.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper instance
+     */
+    protected function getTemplating_Helper_FormService()
+    {
+        return $this->services['templating.helper.form'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper(new \Symfony\Component\Form\FormRenderer(new \Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine($this->get('debug.templating.engine.php'), array(0 => 'IvoryCKEditorBundle:Form', 1 => 'IvoryGoogleMapBundle:Form', 2 => 'FrameworkBundle:Form')), $this->get('security.csrf.token_manager', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
+    }
+
+    /**
      * Gets the 'templating.helper.logout_url' service.
      *
      * This service is shared.
@@ -6861,6 +7211,32 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'templating.helper.request' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper instance
+     */
+    protected function getTemplating_Helper_RequestService()
+    {
+        return $this->services['templating.helper.request'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\RequestHelper($this->get('request_stack'));
+    }
+
+    /**
+     * Gets the 'templating.helper.router' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\RouterHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\RouterHelper instance
+     */
+    protected function getTemplating_Helper_RouterService()
+    {
+        return $this->services['templating.helper.router'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\RouterHelper($this->get('router'));
+    }
+
+    /**
      * Gets the 'templating.helper.security' service.
      *
      * This service is shared.
@@ -6871,6 +7247,58 @@ class appDevDebugProjectContainer extends Container
     protected function getTemplating_Helper_SecurityService()
     {
         return $this->services['templating.helper.security'] = new \Symfony\Bundle\SecurityBundle\Templating\Helper\SecurityHelper($this->get('security.authorization_checker', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'templating.helper.session' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\SessionHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\SessionHelper instance
+     */
+    protected function getTemplating_Helper_SessionService()
+    {
+        return $this->services['templating.helper.session'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\SessionHelper($this->get('request_stack'));
+    }
+
+    /**
+     * Gets the 'templating.helper.slots' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Component\Templating\Helper\SlotsHelper A Symfony\Component\Templating\Helper\SlotsHelper instance
+     */
+    protected function getTemplating_Helper_SlotsService()
+    {
+        return $this->services['templating.helper.slots'] = new \Symfony\Component\Templating\Helper\SlotsHelper();
+    }
+
+    /**
+     * Gets the 'templating.helper.stopwatch' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\StopwatchHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\StopwatchHelper instance
+     */
+    protected function getTemplating_Helper_StopwatchService()
+    {
+        return $this->services['templating.helper.stopwatch'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\StopwatchHelper($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'templating.helper.translator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper A Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper instance
+     */
+    protected function getTemplating_Helper_TranslatorService()
+    {
+        return $this->services['templating.helper.translator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\TranslatorHelper($this->get('translator'));
     }
 
     /**
@@ -7354,7 +7782,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('ivory.google_map.twig.extension.map'));
         $instance->addExtension($this->get('ivory.google_map.twig.extension.map.static'));
         $instance->addExtension($this->get('ivory.google_map.twig.extension.place_autocomplete'));
-        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension(${($_ = isset($this->services['assetic.asset_factory']) ? $this->services['assetic.asset_factory'] : $this->getAssetic_AssetFactoryService()) && false ?: '_'}, $this->get('templating.name_parser'), true, array(), array(0 => 'FrameworkBundle', 1 => 'SecurityBundle', 2 => 'TwigBundle', 3 => 'MonologBundle', 4 => 'SwiftmailerBundle', 5 => 'DoctrineBundle', 6 => 'SensioFrameworkExtraBundle', 7 => 'FOSUserBundle', 8 => 'DoctrineMigrationsBundle', 9 => 'IvoryGoogleMapBundle', 10 => 'IvorySerializerBundle', 11 => 'AsseticBundle', 12 => 'DamBundle', 13 => 'ShopBundle', 14 => 'AdminBundle', 15 => 'UserBundle', 16 => 'DebugBundle', 17 => 'WebProfilerBundle', 18 => 'SensioDistributionBundle', 19 => 'SensioGeneratorBundle'), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
+        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension(${($_ = isset($this->services['assetic.asset_factory']) ? $this->services['assetic.asset_factory'] : $this->getAssetic_AssetFactoryService()) && false ?: '_'}, $this->get('templating.name_parser'), true, array(), array(0 => 'FrameworkBundle', 1 => 'SecurityBundle', 2 => 'TwigBundle', 3 => 'MonologBundle', 4 => 'SwiftmailerBundle', 5 => 'DoctrineBundle', 6 => 'SensioFrameworkExtraBundle', 7 => 'FOSUserBundle', 8 => 'DoctrineMigrationsBundle', 9 => 'IvoryGoogleMapBundle', 10 => 'IvorySerializerBundle', 11 => 'AsseticBundle', 12 => 'IvoryCKEditorBundle', 13 => 'DamBundle', 14 => 'ShopBundle', 15 => 'AdminBundle', 16 => 'UserBundle', 17 => 'DebugBundle', 18 => 'WebProfilerBundle', 19 => 'SensioDistributionBundle', 20 => 'SensioGeneratorBundle'), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
+        $instance->addExtension($this->get('ivory_ck_editor.twig_extension'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner'), $d));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension($e));
         $instance->addGlobal('app', $f);
@@ -7413,7 +7842,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTwig_Form_RendererService()
     {
-        return $this->services['twig.form.renderer'] = new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig', 1 => 'form_div_layout.html.twig', 2 => 'bootstrap_3_layout.html.twig'), $this->get('twig')), $this->get('security.csrf.token_manager', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['twig.form.renderer'] = new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'IvoryCKEditorBundle:Form:ckeditor_widget.html.twig', 1 => 'IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig', 2 => 'form_div_layout.html.twig', 3 => 'bootstrap_3_layout.html.twig'), $this->get('twig')), $this->get('security.csrf.token_manager', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -7435,6 +7864,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
         $instance->addPath(($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), 'FOSUser');
         $instance->addPath(($this->targetDirs[3].'/vendor/egeloen/google-map-bundle/Resources/views'), 'IvoryGoogleMap');
+        $instance->addPath(($this->targetDirs[3].'/vendor/egeloen/ckeditor-bundle/Resources/views'), 'IvoryCKEditor');
         $instance->addPath(($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views'), 'Dam');
         $instance->addPath(($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/ShopBundle/Resources/views'), 'Shop');
         $instance->addPath(($this->targetDirs[3].'/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views'), 'Admin');
@@ -7709,7 +8139,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_AnnotationsService()
     {
-        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('34cg6AMXrB', 0, 'OFsFoyPD5TBS2poQ+CqqlO', (__DIR__.'/pools'), $this->get('monolog.logger.cache'));
+        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('34cg6AMXrB', 0, 'TO1kHt+87+53++YCvaIvPA', (__DIR__.'/pools'), $this->get('monolog.logger.cache'));
     }
 
     /**
@@ -7922,7 +8352,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider(${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}, $this->get('security.user_checker.main'), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58e9fca4791805.51469792')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider(${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}, $this->get('security.user_checker.main'), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('58eb391b994d32.84136674')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -8182,6 +8612,7 @@ class appDevDebugProjectContainer extends Container
                 'IvoryGoogleMapBundle' => 'Ivory\\GoogleMapBundle\\IvoryGoogleMapBundle',
                 'IvorySerializerBundle' => 'Ivory\\SerializerBundle\\IvorySerializerBundle',
                 'AsseticBundle' => 'Symfony\\Bundle\\AsseticBundle\\AsseticBundle',
+                'IvoryCKEditorBundle' => 'Ivory\\CKEditorBundle\\IvoryCKEditorBundle',
                 'DamBundle' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\DamBundle',
                 'ShopBundle' => 'FishAndPlaces\\UI\\Bundle\\ShopBundle\\ShopBundle',
                 'AdminBundle' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\AdminBundle',
@@ -8229,6 +8660,12 @@ class appDevDebugProjectContainer extends Container
             'templating.loader.cache.path' => NULL,
             'templating.engines' => array(
                 0 => 'twig',
+                1 => 'php',
+            ),
+            'templating.helper.form.resources' => array(
+                0 => 'IvoryCKEditorBundle:Form',
+                1 => 'IvoryGoogleMapBundle:Form',
+                2 => 'FrameworkBundle:Form',
             ),
             'validator.mapping.cache.prefix' => '',
             'validator.mapping.cache.file' => (__DIR__.'/validation.php'),
@@ -8271,9 +8708,10 @@ class appDevDebugProjectContainer extends Container
             'security.authentication.hide_user_not_found' => true,
             'twig.exception_listener.controller' => 'twig.controller.exception:showAction',
             'twig.form.resources' => array(
-                0 => 'IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig',
-                1 => 'form_div_layout.html.twig',
-                2 => 'bootstrap_3_layout.html.twig',
+                0 => 'IvoryCKEditorBundle:Form:ckeditor_widget.html.twig',
+                1 => 'IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig',
+                2 => 'form_div_layout.html.twig',
+                3 => 'bootstrap_3_layout.html.twig',
             ),
             'monolog.use_microseconds' => true,
             'monolog.swift_mailer.handlers' => array(
@@ -8526,14 +8964,15 @@ class appDevDebugProjectContainer extends Container
                 9 => 'IvoryGoogleMapBundle',
                 10 => 'IvorySerializerBundle',
                 11 => 'AsseticBundle',
-                12 => 'DamBundle',
-                13 => 'ShopBundle',
-                14 => 'AdminBundle',
-                15 => 'UserBundle',
-                16 => 'DebugBundle',
-                17 => 'WebProfilerBundle',
-                18 => 'SensioDistributionBundle',
-                19 => 'SensioGeneratorBundle',
+                12 => 'IvoryCKEditorBundle',
+                13 => 'DamBundle',
+                14 => 'ShopBundle',
+                15 => 'AdminBundle',
+                16 => 'UserBundle',
+                17 => 'DebugBundle',
+                18 => 'WebProfilerBundle',
+                19 => 'SensioDistributionBundle',
+                20 => 'SensioGeneratorBundle',
             ),
             'assetic.twig_extension.class' => 'Symfony\\Bundle\\AsseticBundle\\Twig\\AsseticExtension',
             'assetic.twig_formula_loader.class' => 'Assetic\\Extension\\Twig\\TwigFormulaLoader',
@@ -8635,23 +9074,23 @@ class appDevDebugProjectContainer extends Container
     }
 }
 
-class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e7812dc5df0e431df4 extends \Doctrine\ORM\EntityManager implements \ProxyManager\Proxy\VirtualProxyInterface
+class DoctrineORMEntityManager_000000004e3f405d000000014539e713e3a62e4351ef78e7812dc5df0e431df4 extends \Doctrine\ORM\EntityManager implements \ProxyManager\Proxy\VirtualProxyInterface
 {
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $valueHolder58e9fca5b1b45970222889 = null;
+    private $valueHolder58eb391cee92e990703919 = null;
 
     /**
      * @var \Closure|null initializer responsible for generating the wrapped object
      */
-    private $initializer58e9fca5b1b66653343191 = null;
+    private $initializer58eb391cee951587888838 = null;
 
     /**
      * @var bool[] map of public properties of the parent class
      */
-    private static $publicProperties58e9fca5b1afa852248796 = array(
+    private static $publicProperties58eb391cee8dc742553164 = array(
         
     );
 
@@ -8660,9 +9099,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getConnection()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getConnection', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getConnection', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getConnection();
+        return $this->valueHolder58eb391cee92e990703919->getConnection();
     }
 
     /**
@@ -8670,9 +9109,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getMetadataFactory()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getMetadataFactory', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getMetadataFactory', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getMetadataFactory();
+        return $this->valueHolder58eb391cee92e990703919->getMetadataFactory();
     }
 
     /**
@@ -8680,9 +9119,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getExpressionBuilder()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getExpressionBuilder', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getExpressionBuilder', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getExpressionBuilder();
+        return $this->valueHolder58eb391cee92e990703919->getExpressionBuilder();
     }
 
     /**
@@ -8690,9 +9129,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function beginTransaction()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'beginTransaction', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'beginTransaction', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->beginTransaction();
+        return $this->valueHolder58eb391cee92e990703919->beginTransaction();
     }
 
     /**
@@ -8700,9 +9139,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getCache()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getCache', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getCache', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getCache();
+        return $this->valueHolder58eb391cee92e990703919->getCache();
     }
 
     /**
@@ -8710,9 +9149,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function transactional($func)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'transactional', array('func' => $func), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'transactional', array('func' => $func), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->transactional($func);
+        return $this->valueHolder58eb391cee92e990703919->transactional($func);
     }
 
     /**
@@ -8720,9 +9159,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function commit()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'commit', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'commit', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->commit();
+        return $this->valueHolder58eb391cee92e990703919->commit();
     }
 
     /**
@@ -8730,9 +9169,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function rollback()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'rollback', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'rollback', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->rollback();
+        return $this->valueHolder58eb391cee92e990703919->rollback();
     }
 
     /**
@@ -8740,9 +9179,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getClassMetadata($className)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getClassMetadata', array('className' => $className), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getClassMetadata', array('className' => $className), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getClassMetadata($className);
+        return $this->valueHolder58eb391cee92e990703919->getClassMetadata($className);
     }
 
     /**
@@ -8750,9 +9189,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function createQuery($dql = '')
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'createQuery', array('dql' => $dql), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'createQuery', array('dql' => $dql), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->createQuery($dql);
+        return $this->valueHolder58eb391cee92e990703919->createQuery($dql);
     }
 
     /**
@@ -8760,9 +9199,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function createNamedQuery($name)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'createNamedQuery', array('name' => $name), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'createNamedQuery', array('name' => $name), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->createNamedQuery($name);
+        return $this->valueHolder58eb391cee92e990703919->createNamedQuery($name);
     }
 
     /**
@@ -8770,9 +9209,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function createNativeQuery($sql, \Doctrine\ORM\Query\ResultSetMapping $rsm)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'createNativeQuery', array('sql' => $sql, 'rsm' => $rsm), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'createNativeQuery', array('sql' => $sql, 'rsm' => $rsm), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->createNativeQuery($sql, $rsm);
+        return $this->valueHolder58eb391cee92e990703919->createNativeQuery($sql, $rsm);
     }
 
     /**
@@ -8780,9 +9219,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function createNamedNativeQuery($name)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'createNamedNativeQuery', array('name' => $name), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'createNamedNativeQuery', array('name' => $name), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->createNamedNativeQuery($name);
+        return $this->valueHolder58eb391cee92e990703919->createNamedNativeQuery($name);
     }
 
     /**
@@ -8790,9 +9229,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function createQueryBuilder()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'createQueryBuilder', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'createQueryBuilder', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->createQueryBuilder();
+        return $this->valueHolder58eb391cee92e990703919->createQueryBuilder();
     }
 
     /**
@@ -8800,9 +9239,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function flush($entity = null)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'flush', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'flush', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->flush($entity);
+        return $this->valueHolder58eb391cee92e990703919->flush($entity);
     }
 
     /**
@@ -8810,9 +9249,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function find($entityName, $id, $lockMode = null, $lockVersion = null)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'find', array('entityName' => $entityName, 'id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'find', array('entityName' => $entityName, 'id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->find($entityName, $id, $lockMode, $lockVersion);
+        return $this->valueHolder58eb391cee92e990703919->find($entityName, $id, $lockMode, $lockVersion);
     }
 
     /**
@@ -8820,9 +9259,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getReference($entityName, $id)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getReference', array('entityName' => $entityName, 'id' => $id), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getReference', array('entityName' => $entityName, 'id' => $id), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getReference($entityName, $id);
+        return $this->valueHolder58eb391cee92e990703919->getReference($entityName, $id);
     }
 
     /**
@@ -8830,9 +9269,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getPartialReference($entityName, $identifier)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getPartialReference', array('entityName' => $entityName, 'identifier' => $identifier), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getPartialReference', array('entityName' => $entityName, 'identifier' => $identifier), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getPartialReference($entityName, $identifier);
+        return $this->valueHolder58eb391cee92e990703919->getPartialReference($entityName, $identifier);
     }
 
     /**
@@ -8840,9 +9279,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function clear($entityName = null)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'clear', array('entityName' => $entityName), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'clear', array('entityName' => $entityName), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->clear($entityName);
+        return $this->valueHolder58eb391cee92e990703919->clear($entityName);
     }
 
     /**
@@ -8850,9 +9289,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function close()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'close', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'close', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->close();
+        return $this->valueHolder58eb391cee92e990703919->close();
     }
 
     /**
@@ -8860,9 +9299,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function persist($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'persist', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'persist', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->persist($entity);
+        return $this->valueHolder58eb391cee92e990703919->persist($entity);
     }
 
     /**
@@ -8870,9 +9309,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function remove($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'remove', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'remove', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->remove($entity);
+        return $this->valueHolder58eb391cee92e990703919->remove($entity);
     }
 
     /**
@@ -8880,9 +9319,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function refresh($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'refresh', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'refresh', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->refresh($entity);
+        return $this->valueHolder58eb391cee92e990703919->refresh($entity);
     }
 
     /**
@@ -8890,9 +9329,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function detach($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'detach', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'detach', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->detach($entity);
+        return $this->valueHolder58eb391cee92e990703919->detach($entity);
     }
 
     /**
@@ -8900,9 +9339,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function merge($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'merge', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'merge', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->merge($entity);
+        return $this->valueHolder58eb391cee92e990703919->merge($entity);
     }
 
     /**
@@ -8910,9 +9349,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function copy($entity, $deep = false)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'copy', array('entity' => $entity, 'deep' => $deep), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'copy', array('entity' => $entity, 'deep' => $deep), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->copy($entity, $deep);
+        return $this->valueHolder58eb391cee92e990703919->copy($entity, $deep);
     }
 
     /**
@@ -8920,9 +9359,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function lock($entity, $lockMode, $lockVersion = null)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'lock', array('entity' => $entity, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'lock', array('entity' => $entity, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->lock($entity, $lockMode, $lockVersion);
+        return $this->valueHolder58eb391cee92e990703919->lock($entity, $lockMode, $lockVersion);
     }
 
     /**
@@ -8930,9 +9369,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getRepository($entityName)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getRepository', array('entityName' => $entityName), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getRepository', array('entityName' => $entityName), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getRepository($entityName);
+        return $this->valueHolder58eb391cee92e990703919->getRepository($entityName);
     }
 
     /**
@@ -8940,9 +9379,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function contains($entity)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'contains', array('entity' => $entity), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'contains', array('entity' => $entity), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->contains($entity);
+        return $this->valueHolder58eb391cee92e990703919->contains($entity);
     }
 
     /**
@@ -8950,9 +9389,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getEventManager()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getEventManager', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getEventManager', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getEventManager();
+        return $this->valueHolder58eb391cee92e990703919->getEventManager();
     }
 
     /**
@@ -8960,9 +9399,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getConfiguration()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getConfiguration', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getConfiguration', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getConfiguration();
+        return $this->valueHolder58eb391cee92e990703919->getConfiguration();
     }
 
     /**
@@ -8970,9 +9409,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function isOpen()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'isOpen', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'isOpen', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->isOpen();
+        return $this->valueHolder58eb391cee92e990703919->isOpen();
     }
 
     /**
@@ -8980,9 +9419,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getUnitOfWork()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getUnitOfWork', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getUnitOfWork', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getUnitOfWork();
+        return $this->valueHolder58eb391cee92e990703919->getUnitOfWork();
     }
 
     /**
@@ -8990,9 +9429,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getHydrator($hydrationMode)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getHydrator($hydrationMode);
+        return $this->valueHolder58eb391cee92e990703919->getHydrator($hydrationMode);
     }
 
     /**
@@ -9000,9 +9439,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function newHydrator($hydrationMode)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'newHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'newHydrator', array('hydrationMode' => $hydrationMode), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->newHydrator($hydrationMode);
+        return $this->valueHolder58eb391cee92e990703919->newHydrator($hydrationMode);
     }
 
     /**
@@ -9010,9 +9449,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getProxyFactory()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getProxyFactory', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getProxyFactory', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getProxyFactory();
+        return $this->valueHolder58eb391cee92e990703919->getProxyFactory();
     }
 
     /**
@@ -9020,9 +9459,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function initializeObject($obj)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'initializeObject', array('obj' => $obj), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'initializeObject', array('obj' => $obj), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->initializeObject($obj);
+        return $this->valueHolder58eb391cee92e990703919->initializeObject($obj);
     }
 
     /**
@@ -9030,9 +9469,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getFilters()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'getFilters', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'getFilters', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->getFilters();
+        return $this->valueHolder58eb391cee92e990703919->getFilters();
     }
 
     /**
@@ -9040,9 +9479,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function isFiltersStateClean()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'isFiltersStateClean', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'isFiltersStateClean', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->isFiltersStateClean();
+        return $this->valueHolder58eb391cee92e990703919->isFiltersStateClean();
     }
 
     /**
@@ -9050,9 +9489,9 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function hasFilters()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'hasFilters', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'hasFilters', array(), $this->initializer58eb391cee951587888838);
 
-        return $this->valueHolder58e9fca5b1b45970222889->hasFilters();
+        return $this->valueHolder58eb391cee92e990703919->hasFilters();
     }
 
     /**
@@ -9062,7 +9501,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function __construct($initializer)
     {
-        $this->initializer58e9fca5b1b66653343191 = $initializer;
+        $this->initializer58eb391cee951587888838 = $initializer;
     }
 
     /**
@@ -9070,16 +9509,16 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function & __get($name)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__get', array('name' => $name), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__get', array('name' => $name), $this->initializer58eb391cee951587888838);
 
-        if (isset(self::$publicProperties58e9fca5b1afa852248796[$name])) {
-            return $this->valueHolder58e9fca5b1b45970222889->$name;
+        if (isset(self::$publicProperties58eb391cee8dc742553164[$name])) {
+            return $this->valueHolder58eb391cee92e990703919->$name;
         }
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+            $targetObject = $this->valueHolder58eb391cee92e990703919;
 
             $backtrace = debug_backtrace(false);
             trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
@@ -9087,7 +9526,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
             return;
         }
 
-        $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+        $targetObject = $this->valueHolder58eb391cee92e990703919;
         $accessor = function & () use ($targetObject, $name) {
             return $targetObject->$name;
         };
@@ -9105,18 +9544,18 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function __set($name, $value)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer58eb391cee951587888838);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+            $targetObject = $this->valueHolder58eb391cee92e990703919;
 
             return $targetObject->$name = $value;;
             return;
         }
 
-        $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+        $targetObject = $this->valueHolder58eb391cee92e990703919;
         $accessor = function & () use ($targetObject, $name, $value) {
             return $targetObject->$name = $value;
         };
@@ -9133,18 +9572,18 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function __isset($name)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__isset', array('name' => $name), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__isset', array('name' => $name), $this->initializer58eb391cee951587888838);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+            $targetObject = $this->valueHolder58eb391cee92e990703919;
 
             return isset($targetObject->$name);;
             return;
         }
 
-        $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+        $targetObject = $this->valueHolder58eb391cee92e990703919;
         $accessor = function () use ($targetObject, $name) {
             return isset($targetObject->$name);
         };
@@ -9161,18 +9600,18 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function __unset($name)
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__unset', array('name' => $name), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__unset', array('name' => $name), $this->initializer58eb391cee951587888838);
 
         $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
 
         if (! $realInstanceReflection->hasProperty($name)) {
-            $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+            $targetObject = $this->valueHolder58eb391cee92e990703919;
 
             unset($targetObject->$name);;
             return;
         }
 
-        $targetObject = $this->valueHolder58e9fca5b1b45970222889;
+        $targetObject = $this->valueHolder58eb391cee92e990703919;
         $accessor = function () use ($targetObject, $name) {
             unset($targetObject->$name);
         };
@@ -9186,16 +9625,16 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
 
     public function __clone()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__clone', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__clone', array(), $this->initializer58eb391cee951587888838);
 
-        $this->valueHolder58e9fca5b1b45970222889 = clone $this->valueHolder58e9fca5b1b45970222889;
+        $this->valueHolder58eb391cee92e990703919 = clone $this->valueHolder58eb391cee92e990703919;
     }
 
     public function __sleep()
     {
-        $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, '__sleep', array(), $this->initializer58e9fca5b1b66653343191);
+        $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, '__sleep', array(), $this->initializer58eb391cee951587888838);
 
-        return array('valueHolder58e9fca5b1b45970222889');
+        return array('valueHolder58eb391cee92e990703919');
     }
 
     public function __wakeup()
@@ -9207,7 +9646,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function setProxyInitializer(\Closure $initializer = null)
     {
-        $this->initializer58e9fca5b1b66653343191 = $initializer;
+        $this->initializer58eb391cee951587888838 = $initializer;
     }
 
     /**
@@ -9215,7 +9654,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getProxyInitializer()
     {
-        return $this->initializer58e9fca5b1b66653343191;
+        return $this->initializer58eb391cee951587888838;
     }
 
     /**
@@ -9223,7 +9662,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function initializeProxy()
     {
-        return $this->initializer58e9fca5b1b66653343191 && $this->initializer58e9fca5b1b66653343191->__invoke($this->valueHolder58e9fca5b1b45970222889, $this, 'initializeProxy', array(), $this->initializer58e9fca5b1b66653343191);
+        return $this->initializer58eb391cee951587888838 && $this->initializer58eb391cee951587888838->__invoke($this->valueHolder58eb391cee92e990703919, $this, 'initializeProxy', array(), $this->initializer58eb391cee951587888838);
     }
 
     /**
@@ -9231,7 +9670,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function isProxyInitialized()
     {
-        return null !== $this->valueHolder58e9fca5b1b45970222889;
+        return null !== $this->valueHolder58eb391cee92e990703919;
     }
 
     /**
@@ -9239,7 +9678,7 @@ class DoctrineORMEntityManager_000000005171d093000000016cce40d3e3a62e4351ef78e78
      */
     public function getWrappedValueHolderValue()
     {
-        return $this->valueHolder58e9fca5b1b45970222889;
+        return $this->valueHolder58eb391cee92e990703919;
     }
 
 

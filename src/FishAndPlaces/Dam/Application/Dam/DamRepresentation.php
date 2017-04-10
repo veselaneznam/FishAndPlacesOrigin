@@ -89,6 +89,8 @@ class DamRepresentation
      */
     private $imageCollection = [];
 
+    private $description;
+
     /**
      * @param Dam|null $dam
      */
@@ -118,6 +120,7 @@ class DamRepresentation
             }
             $this->mainImage = new DamImageRepresentation($dam->getMainImage());
             $this->showOnFirstPage = $dam->isShowOnFirstPage();
+            $this->description = $dam->getDescription();
         }
     }
 
@@ -416,10 +419,12 @@ class DamRepresentation
      *
      * @return DamRepresentation
      */
-    public function setMainImage(File $mainImage)
+    public function setMainImage(File $mainImage = null)
     {
-        $damImage = new DamImage($this->dam, $mainImage->getPath(),1);
-        $this->mainImage = new DamImageRepresentation($damImage);
+        if(null !==$mainImage) {
+            $damImage = new DamImage($this->dam, $mainImage->getPath(),1);
+            $this->mainImage = new DamImageRepresentation($damImage);
+        }
 
         return $this;
     }
@@ -464,5 +469,24 @@ class DamRepresentation
             $list[$fish->getName()] = $fish;
         }
         return $list;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return DamRepresentation
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
     }
 }

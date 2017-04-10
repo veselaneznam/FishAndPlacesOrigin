@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "38db6f1602c77e6950a70f206f48ac0b",
+    "content-hash": "d946b30995df61967bccd9721166b11e",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -970,6 +970,71 @@
             "time": "2016-12-18T15:42:34+00:00"
         },
         {
+            "name": "egeloen/ckeditor-bundle",
+            "version": "5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
+                "reference": "2d7812a3a72f40726d6db66be5189b6c777b919f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/2d7812a3a72f40726d6db66be5189b6c777b919f",
+                "reference": "2d7812a3a72f40726d6db66be5189b6c777b919f",
+                "shasum": ""
+            },
+            "require": {
+                "egeloen/json-builder": "^2.0|^3.0",
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "^2.7|^3.0",
+                "symfony/form": "^2.7|^3.0",
+                "symfony/framework-bundle": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "^5.0",
+                "symfony/asset": "^2.7|^3.0",
+                "symfony/phpunit-bridge": "^2.7|^3.0",
+                "symfony/templating": "^2.7|^3.0",
+                "symfony/twig-bridge": "^2.7|^3.0",
+                "symfony/yaml": "^2.7|^3.0",
+                "twig/twig": "^1.12"
+            },
+            "suggest": {
+                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously",
+                "symfony/asset": "Allows to rewrite/version assets",
+                "symfony/templating": "Allows to use PHP templates",
+                "symfony/twig-bridge": "Allows to use Twig templates",
+                "twig/twig": "Allows to use Twig templates"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ivory\\CKEditorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                }
+            ],
+            "description": "Provides a CKEditor integration for your Symfony2 Project.",
+            "keywords": [
+                "CKEditor"
+            ],
+            "time": "2017-03-01T21:55:33+00:00"
+        },
+        {
             "name": "egeloen/google-map",
             "version": "2.0.1",
             "source": {
@@ -1361,12 +1426,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "298695ac5c23cae37a131acac63e4894a33d73aa"
+                "reference": "fda6cbe3db268ab35d569d28a37d9b0f6d0eef60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/298695ac5c23cae37a131acac63e4894a33d73aa",
-                "reference": "298695ac5c23cae37a131acac63e4894a33d73aa",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/fda6cbe3db268ab35d569d28a37d9b0f6d0eef60",
+                "reference": "fda6cbe3db268ab35d569d28a37d9b0f6d0eef60",
                 "shasum": ""
             },
             "require": {
@@ -1430,7 +1495,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-04-03 15:08:26"
+            "time": "2017-04-05 07:28:52"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1757,6 +1822,58 @@
             "time": "2014-01-12T16:20:24+00:00"
         },
         {
+            "name": "kms/froala-editor-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/froala/KMSFroalaEditorBundle.git",
+                "reference": "3e8d0f24f31a627661c464d2314892031fb6dd83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/froala/KMSFroalaEditorBundle/zipball/3e8d0f24f31a627661c464d2314892031fb6dd83",
+                "reference": "3e8d0f24f31a627661c464d2314892031fb6dd83",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3|^7.0",
+                "symfony/form": "^2.3|^3.0",
+                "symfony/framework-bundle": "^2.3|^3.0",
+                "twig/twig": "^1.1"
+            },
+            "require-dev": {
+                "symfony/twig-bundle": "^2.3|^3.0",
+                "symfony/yaml": "^2.3|^3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "KMS\\FroalaEditorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Guionniere",
+                    "email": "simon.guionniere@gmail.com"
+                },
+                {
+                    "name": "Stefan Neculai",
+                    "email": "stefan.neculai@gmail.com"
+                }
+            ],
+            "description": "Provides a Froala editor integration for Symfony 2/3.",
+            "keywords": [
+                "editor",
+                "froala",
+                "wysiwyg"
+            ],
+            "time": "2017-03-15 13:57:47"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "v1.4.0",
             "source": {
@@ -1973,46 +2090,6 @@
                 "service proxies"
             ],
             "time": "2015-08-09T04:28:19+00:00"
-        },
-        {
-            "name": "ohvitorino/openlayers3",
-            "version": "3.15.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ohvitorino/openlayers3.git",
-                "reference": "07a561994b06daa6369f34279e6cc132e8260508"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ohvitorino/openlayers3/zipball/07a561994b06daa6369f34279e6cc132e8260508",
-                "reference": "07a561994b06daa6369f34279e6cc132e8260508",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "ol.js"
-                    ],
-                    "files": [
-                        "ol-debug.js",
-                        "ol.css"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Copyright 2005-2016 OpenLayers Contributors"
-            ],
-            "authors": [
-                {
-                    "name": "Bruno Vitorino",
-                    "email": "bruno.vitorino@gmail.com"
-                }
-            ],
-            "description": "Openlayers 3 - A high-performance, feature-packed library for all your mapping needs",
-            "homepage": "http://openlayers.org",
-            "time": "2016-04-15T10:33:08+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3270,16 +3347,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.3.10",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90"
+                "reference": "b03f285a333f51e58c95cce54109a4a9ed691436"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/83e8d98b9915de76c659ce27d683c02a0f99fa90",
-                "reference": "83e8d98b9915de76c659ce27d683c02a0f99fa90",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/b03f285a333f51e58c95cce54109a4a9ed691436",
+                "reference": "b03f285a333f51e58c95cce54109a4a9ed691436",
                 "shasum": ""
             },
             "require": {
@@ -3287,17 +3364,19 @@
                 "psr/http-message": "~1.0"
             },
             "provide": {
-                "psr/http-message-implementation": "~1.0.0"
+                "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
                 "phpunit/phpunit": "^4.6 || ^5.5",
                 "zendframework/zend-coding-standard": "~1.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev",
-                    "dev-develop": "1.4-dev"
+                    "dev-master": "1.4-dev",
+                    "dev-develop": "1.5-dev"
                 }
             },
             "autoload": {
@@ -3316,7 +3395,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2017-01-23T04:53:24+00:00"
+            "time": "2017-04-06T16:18:34+00:00"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -3430,7 +3509,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.2.6",
+            "version": "v3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
@@ -3494,7 +3573,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20
+        "friendsofsymfony/user-bundle": 20,
+        "kms/froala-editor-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
