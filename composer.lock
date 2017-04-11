@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d946b30995df61967bccd9721166b11e",
+    "content-hash": "c030abc778193c9451bc41008246c92c",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1496,6 +1496,85 @@
                 "User management"
             ],
             "time": "2017-04-05 07:28:52"
+        },
+        {
+            "name": "glavweb/uploader-bundle",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glavweb/GlavwebUploaderBundle.git",
+                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderBundle/zipball/1a5057fec0425f47db47ab296a883a1eaff7f409",
+                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/form": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Glavweb\\UploaderBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Andrey Nilov",
+                    "email": "nilov@glavweb.ru",
+                    "homepage": "http://glavweb.ru"
+                },
+                {
+                    "name": "Glavweb Community",
+                    "homepage": "https://github.com/glavweb/GlavwebUploaderBundle/contributors"
+                }
+            ],
+            "description": "Symfony GlavwebUploaderBundle",
+            "time": "2017-03-17T02:20:33+00:00"
+        },
+        {
+            "name": "glavweb/uploader-dropzone-bundle",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle.git",
+                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderDropzoneBundle/zipball/65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
+                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
+                "shasum": ""
+            },
+            "require": {
+                "glavweb/uploader-bundle": "~2.0",
+                "symfony/form": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Glavweb\\UploaderDropzoneBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Andrey Nilov",
+                    "email": "nilov@glavweb.ru",
+                    "homepage": "http://glavweb.ru"
+                },
+                {
+                    "name": "Glavweb Community",
+                    "homepage": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle/contributors"
+                }
+            ],
+            "description": "Symfony GlavwebUploaderDropzoneBundle",
+            "time": "2017-03-17T02:29:51+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

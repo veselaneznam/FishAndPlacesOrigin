@@ -93,6 +93,17 @@ class DamImage extends Image
     }
 
     /**
+     * @param int $id
+     *
+     * @return DamImage
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isMain()

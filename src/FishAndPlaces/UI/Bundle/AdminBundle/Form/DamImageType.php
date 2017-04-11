@@ -17,12 +17,11 @@ class DamImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image_src', FileType::class, array("label" => "Images",
+            ->add('image', FileType::class, array("label" => "Images",
                 "required" => FALSE,
                 "attr" => array(
-                    "multiple" => "multiple")))
-            ->add('isMain')
-            ->add('path')
+                    "multiple" => "multiple")
+            ))
             ->add('Upload', SubmitType::class)
         ;
     }

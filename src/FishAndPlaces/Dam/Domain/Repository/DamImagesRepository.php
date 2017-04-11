@@ -2,6 +2,7 @@
 
 namespace FishAndPlaces\Dam\Domain\Repository;
 
+use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
 
 interface DamImagesRepository
@@ -33,16 +34,16 @@ interface DamImagesRepository
     public function add(DamImage $damImage);
 
     /**
-     * @param int $damId
+     * @param Dam $dam
      *
      * @return mixed
      */
-    public function findByDam($damId);
+    public function findByDam(Dam $dam);
 
     /**
-     * @param $dam
+     * @param Dam $dam
      *
      * @return void
      */
-    public function resetMain($dam);
+    public function resetMain(Dam $dam);
 }

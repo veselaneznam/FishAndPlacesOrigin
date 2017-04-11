@@ -9,11 +9,11 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 class DoctrineDamImageRepository extends DoctrineRepository implements DamImagesRepository
 {
     /**
-     * @param Dam $dam
+     * @param  Dam $dam
      *
      * @return DamImage[]
      */
-    public function findByDam($dam)
+    public function findByDam(Dam $dam)
     {
         return parent::findBy(['dam' => $dam]);
     }
@@ -34,7 +34,9 @@ class DoctrineDamImageRepository extends DoctrineRepository implements DamImages
      */
     public function remove(DamImage $damImage)
     {
-        // TODO: Implement remove() method.
+        $entity = $this->getEntityManager()->merge($damImage);
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -43,15 +45,15 @@ class DoctrineDamImageRepository extends DoctrineRepository implements DamImages
     public function add(DamImage $damImage)
     {
         $this->getEntityManager()->persist($damImage);
-        $this->getEntityManager()->flush($damImage);
+        $this->getEntityManager()->flush();
     }
 
     /**
-     * @param $dam
+     * @param Dam $dam
      *
      * @return void
      */
-    public function resetMain($dam)
+    public function resetMain(Dam $dam)
     {
        foreach ($this->findByDam($dam) as $damImage) {
            if ($damImage->isMain()) {

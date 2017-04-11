@@ -10,12 +10,12 @@ use FishAndPlaces\User\Domain\Model\User;
 class UpdateDamCommand
 {
     /** @var Dam */
-    private $dam;
+    protected $dam;
 
     /**
      * @var DamImage
      */
-    private $damImage;
+    protected $damImage;
 
     /**
      * @param DamRepresentation $damRepresentation
@@ -26,7 +26,6 @@ class UpdateDamCommand
     {
         $dam = new Dam();
         $currentDate = new \DateTime();
-        $dam->setCreatedAt($currentDate);
         $dam->setUpdatedAt($currentDate);
         $fishCollection = $damRepresentation->getFishCollection();
         $dam->setFishCollection($fishCollection);

@@ -31,5 +31,6 @@ FishAndPlaces\Dam\Domain\Model\DamImage:
             joinColumns:
                 dam_id:
                     referencedColumnName: id
+                    onDelete: null
             orphanRemoval: false
     lifecycleCallbacks: {  }

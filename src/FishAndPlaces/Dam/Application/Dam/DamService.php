@@ -78,4 +78,21 @@ class DamService
     {
         $this->damRepository->update($command->getDam());
     }
+
+    public function updateImages(UpdateDamImagesCommand $command)
+    {
+        foreach ($command->getDam()->getImageCollection() as $damImage) {
+            $this->damImagesRepository->update($damImage);
+        }
+    }
+
+    /**
+     * @param DeleteDamImagesCommand $command
+     */
+    public function deleteDamImages(DeleteDamImagesCommand $command)
+    {
+        foreach ($command->getDamImages() as $damImage) {
+            $this->damImagesRepository->remove($damImage);
+        }
+    }
 }
