@@ -2,35 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a86d80c4-07a1-4590-94ca-2411096fb311" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/images/background.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/images/x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamImageQueryService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Controller/DamImageController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/damImage/list.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/fishAndPlaces.iml" afterPath="$PROJECT_DIR$/.idea/fishAndPlaces.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/detail_view.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/galery.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/activate.html.twig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/delete.html.twig" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/ActivateDamCommand.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/ActivateDamCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamService.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeactivateDamCommand.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeactivateDamCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeleteDamImagesCommand.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeleteDamImagesCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/UpdateDamCommand.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/UpdateDamCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/UpdateDamImagesCommand.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/UpdateDamImagesCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/DamImage.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/DamImage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/Image.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/Image.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Repository/DamImagesRepository.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Repository/DamImagesRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM/DamImage.orm.yml" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM/DamImage.orm.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamImageRepository.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamImageRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamImageType.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamImageType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/config/services.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/add_images.html.twig" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/add_images.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/logs/dev.log" afterPath="$PROJECT_DIR$/var/logs/dev.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/custom.js" afterPath="$PROJECT_DIR$/web/js/custom.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -87,97 +68,91 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="fish_and_places@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="dam" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DamImageController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Controller/DamImageController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="147" column="5" lean-forward="false" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
-              <folding>
-                <element signature="e#66#127#0#PHP" expanded="true" />
-                <element signature="e#1301#1333#0#PHP" expanded="true" />
-                <element signature="e#3665#3682#0#PHP" expanded="true" />
-                <element signature="e#4561#4578#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Image.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/Image.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="56" lean-forward="false" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DamImage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/DamImage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="103" column="5" lean-forward="false" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DamImage.orm.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM/DamImage.orm.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DamService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="91" column="46" lean-forward="false" selection-start-line="91" selection-start-column="46" selection-end-line="91" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DamImagesRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Repository/DamImagesRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-              <folding>
-                <element signature="e#55#94#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DoctrineDamImageRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DoctrineDamImageRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamImageRepository.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
-              <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+              <caret line="48" column="5" lean-forward="false" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fish_and_places.dam_image" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/b3c89862/49b03e5e-9e4f-4203-af9c-82956c23af97/fish_and_places.dam_image">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true">
-                <filter text="dam_id=1" />
-              </filtering>
+      <file leaf-file-name="galery.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/galery.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
-          <provider editor-type-id="text-editor">
+        </entry>
+      </file>
+      <file leaf-file-name="custom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/custom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="73" />
+              <folding>
+                <element signature="e#284#292#0#Twig" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="58" column="83" lean-forward="false" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="open_layers_map.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/open_layers_map.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#1418#1431#0#Twig" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/search.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
@@ -185,24 +160,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeleteDamImagesCommand.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeleteDamImagesCommand.php">
+      <file leaf-file-name="detail_view.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/detail_view.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="43" lean-forward="false" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+            <state relative-caret-position="150">
+              <caret line="10" column="42" lean-forward="true" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
               <folding>
-                <element signature="e#53#97#0#PHP" expanded="true" />
+                <element signature="e#12#31#0#Twig" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#257#282#0#Twig" expanded="true" />
+                <marker date="1491982657000" expanded="false" signature="532:540" ph="/dam/{id}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadedFile.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/UploadedFile.php">
+      <file leaf-file-name="DamController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-              <folding />
+            <state relative-caret-position="335">
+              <caret line="91" column="5" lean-forward="false" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
+              <folding>
+                <element signature="e#2737#2769#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="43" lean-forward="false" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+              <folding>
+                <element signature="e#12#31#0#Twig" expanded="true" />
+                <element signature="e#91#114#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -231,6 +224,7 @@
       <find>FishAndPlaces\Infrastructure\Dam\Repository\Doctrine\ORM</find>
       <find>$response</find>
       <find>images_upload</find>
+      <find>myCarousel</find>
     </findStrings>
     <replaceStrings>
       <replace>$fLat</replace>
@@ -247,12 +241,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/49b03e5e-9e4f-4203-af9c-82956c23af97/console.sql" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml.dist" />
-        <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Core/FileUploader.php" />
-        <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM/Fish.orm.yml" />
         <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM/FishImage.orm.yml" />
         <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamImageRepresentation.php" />
         <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig" />
@@ -298,6 +286,12 @@
         <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Model/DamImage.php" />
         <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DeleteDamImagesCommand.php" />
         <option value="$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamImageRepository.php" />
+        <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php" />
+        <option value="$PROJECT_DIR$/web/js/custom.js" />
+        <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/galery.html.twig" />
+        <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/detail_view.html.twig" />
       </list>
     </option>
   </component>
@@ -433,7 +427,189 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Dam" />
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DamBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DamBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DamBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dam" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DamBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FishAndPlaces" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DamBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -456,40 +632,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Dam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Domain" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fishAndPlaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fishAndPlaces" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FishAndPlaces" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Domain" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -516,36 +658,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fishAndPlaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fishAndPlaces" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FishAndPlaces" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dam" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dam" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -590,7 +702,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="SearchEverywhereHistoryKey" value="composer.json&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/composer.json&#10;confi&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;app&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;DamC&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Controller/DamController.php&#10;DamTy&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;AppKer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;Routin&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/routing.yml&#10;Dam&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Domain/Model/Dam.php&#10;enti&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/entity.html.twig&#10;DamCon&#9;null&#9;null&#10;Da&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;base&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/base.html.twig&#10;conf&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;DamT&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;bas&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/base.html.twig&#10;compos&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/egeloen/ckeditor-bundle/composer.json&#10;DamRe&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamRepresentation.php&#10;App&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;DamType&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;DAm&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Domain/Model/Dam.php&#10;DamImage&#9;FILE&#9;dbDummy://dbtable:/b3c89862/49b03e5e-9e4f-4203-af9c-82956c23af97/fish_and_places.dam_image&#10;paramters&#9;null&#9;null&#10;DamIma&#9;null&#9;null&#10;DamQuer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamQueryService.php&#10;FishRepre&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Fish/FishRepresentation.php&#10;da&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamRepresentation.php&#10;FishIm&#9;null&#9;null&#10;list&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig&#10;Marker&#9;null&#9;null&#10;inde&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig&#10;index&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig&#10;map&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/google_map.html.twig&#10;custom.js&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;cus&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/css/custom.css&#10;cust&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/css/custom.css&#10;config&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;composer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/egeloen/google-map-bundle/composer.json&#10;custom.&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;cusom.css&#9;null&#9;null&#10;DamCo&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php&#10;custo&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;co&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;configure&#9;null&#9;null&#10;auto&#9;null&#9;null&#10;DamController&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php&#10;mess&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/translations/messages.bg.yml&#10;config.yml&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml" />
+    <property name="SearchEverywhereHistoryKey" value="bas&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig&#10;li&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig&#10;custom.&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;composer.json&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/composer.json&#10;confi&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;app&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;DamC&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Controller/DamController.php&#10;DamTy&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;AppKer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;Routin&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/routing.yml&#10;Dam&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Domain/Model/Dam.php&#10;enti&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/entity.html.twig&#10;DamCon&#9;null&#9;null&#10;Da&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;base&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/base.html.twig&#10;conf&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;DamT&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;compos&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/egeloen/ckeditor-bundle/composer.json&#10;DamRe&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamRepresentation.php&#10;App&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/AppKernel.php&#10;DamType&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamType.php&#10;DAm&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Domain/Model/Dam.php&#10;DamImage&#9;FILE&#9;dbDummy://dbtable:/b3c89862/49b03e5e-9e4f-4203-af9c-82956c23af97/fish_and_places.dam_image&#10;paramters&#9;null&#9;null&#10;DamIma&#9;null&#9;null&#10;DamQuer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamQueryService.php&#10;FishRepre&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Fish/FishRepresentation.php&#10;da&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Application/Dam/DamRepresentation.php&#10;FishIm&#9;null&#9;null&#10;list&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig&#10;Marker&#9;null&#9;null&#10;inde&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig&#10;index&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig&#10;map&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/google_map.html.twig&#10;custom.js&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;cus&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/css/custom.css&#10;cust&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/css/custom.css&#10;config&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;composer&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/egeloen/google-map-bundle/composer.json&#10;cusom.css&#9;null&#9;null&#10;DamCo&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php&#10;custo&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/web/js/custom.js&#10;co&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml&#10;configure&#9;null&#9;null&#10;auto&#9;null&#9;null&#10;DamController&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php&#10;mess&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/translations/messages.bg.yml&#10;config.yml&#9;FILE&#9;file:///Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/config.yml" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
     <property name="FullScreen" value="true" />
@@ -720,7 +832,7 @@
       <workItem from="1491731256980" duration="11053000" />
       <workItem from="1491748826543" duration="8922000" />
       <workItem from="1491811521904" duration="403000" />
-      <workItem from="1491811952569" duration="20677000" />
+      <workItem from="1491811952569" duration="25779000" />
     </task>
     <task id="LOCAL-00001" summary="Need to fix the map">
       <created>1491161793627</created>
@@ -764,11 +876,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491825837753</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added multiimages upload &#10;needs pagination, &#10;needs rating bundle&#10;needs comments bundle&#10;">
+      <created>1491919708225</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1491919708225</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154738000" />
+    <option name="totallyTimeSpent" value="159840000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -791,7 +910,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61442786" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.539801" sideWeight="0.49713466" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7997512" sideWeight="0.49713466" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -834,7 +953,8 @@
     <MESSAGE value="FE almost done now its time for the Admin" />
     <MESSAGE value="Admin edit create and add main picture working, &#10;needs pagination, &#10;addind possibiity for muliple file upload&#10;needs rating bundle&#10;needs comments bundle&#10;needs cke editor" />
     <MESSAGE value="Added ckeditor and some other functionalities&#10;needs pagination, &#10;addind possibiity for muliple file upload&#10;needs rating bundle&#10;needs comments bundle&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ckeditor and some other functionalities&#10;needs pagination, &#10;addind possibiity for muliple file upload&#10;needs rating bundle&#10;needs comments bundle&#10;" />
+    <MESSAGE value="Added multiimages upload &#10;needs pagination, &#10;needs rating bundle&#10;needs comments bundle&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added multiimages upload &#10;needs pagination, &#10;needs rating bundle&#10;needs comments bundle&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -875,92 +995,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="61" column="44" lean-forward="false" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
-          <folding>
-            <element signature="e#76#118#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Domain/Repository/DamRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="64" column="20" lean-forward="false" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="117" column="6" lean-forward="true" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="6" />
-          <folding>
-            <marker date="1491825764000" expanded="true" signature="1695:1938" ph="SELECT d.id,... dam" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/google_map.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#188#211#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="17" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/AdminBundle/Form/DamImageType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="34" column="72" lean-forward="false" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Application/Dam/DamQueryService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="119" column="5" lean-forward="false" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1148,7 +1182,7 @@
         <state relative-caret-position="210">
           <caret line="14" column="113" lean-forward="false" selection-start-line="14" selection-start-column="113" selection-end-line="14" selection-end-column="113" />
           <folding>
-            <element signature="e#53#97#0#PHP" expanded="true" />
+            <element signature="e#53#97#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1232,10 +1266,10 @@
         <state relative-caret-position="631">
           <caret line="147" column="5" lean-forward="false" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
           <folding>
-            <element signature="e#66#127#0#PHP" expanded="true" />
-            <element signature="e#1301#1333#0#PHP" expanded="true" />
-            <element signature="e#3665#3682#0#PHP" expanded="true" />
-            <element signature="e#4561#4578#0#PHP" expanded="true" />
+            <element signature="e#66#127#0#PHP" expanded="false" />
+            <element signature="e#1301#1333#0#PHP" expanded="false" />
+            <element signature="e#3665#3682#0#PHP" expanded="false" />
+            <element signature="e#4561#4578#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1310,8 +1344,102 @@
     <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/Dam/Infrastructure/Repository/Doctrine/ORM/DoctrineDamImageRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
-          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+          <caret line="48" column="5" lean-forward="false" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/delete.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/open_layers_map.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1418#1431#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/search.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Controller/DamController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="91" column="5" lean-forward="false" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
+          <folding>
+            <element signature="e#2737#2769#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="43" lean-forward="false" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+          <folding>
+            <element signature="e#12#31#0#Twig" expanded="true" />
+            <element signature="e#91#114#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/galery.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="73" />
+          <folding>
+            <element signature="e#284#292#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="58" column="83" lean-forward="false" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views/dam/detail_view.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="42" lean-forward="true" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+          <folding>
+            <element signature="e#12#31#0#Twig" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#257#282#0#Twig" expanded="true" />
+            <marker date="1491982657000" expanded="false" signature="532:540" ph="/dam/{id}" />
+          </folding>
         </state>
       </provider>
     </entry>

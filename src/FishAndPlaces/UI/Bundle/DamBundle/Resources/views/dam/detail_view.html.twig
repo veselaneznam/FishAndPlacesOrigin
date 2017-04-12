@@ -1,0 +1,29 @@
+{% extends '@Dam/base.html.twig' %}
+{% block content %}
+    {{ parent() }}
+    <div class="row">
+
+        <div class="col-lg-12" style="background: #eee; padding: 5%; border-radius: 5px;margin-top:10px;">
+            <h3>{{ dam.name }}</h3>
+    {% include '@Dam/dam/galery.html.twig' %}
+
+            <p>{{ dam.description }}</p>
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+    <script>
+        //Uncomment when its deployed
+         {#var disqus_config = function () {#}
+         {#this.page.url = {{ path('dam_view', {'id': dam.id}) }};  // Replace PAGE_URL with your page's canonical URL variable#}
+         {#this.page.identifier = {{ path(dam.id) }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable#}
+         {#};#}
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://ribar-bg.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+{% endblock %}

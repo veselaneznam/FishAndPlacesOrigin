@@ -78,10 +78,17 @@ class DamController extends Controller
      * @Route("/dam/{id}", name="dam_view", requirements={"id": "\d+"})
      *
      * @param Request $request
+     *
+     * @return Response
      */
-    public function damDetailView($id)
+    public function damDetailView(Request $request)
     {
+        $damQueryService = $this->get('fish_and_places.dam_query_service');
+        $dam = $damQueryService->getDam((int) $request->get('id'));
 
+        return $this->render('@Dam/dam/detail_view.html.twig', [
+            'dam' => $dam
+        ]);
     }
 
     /**
