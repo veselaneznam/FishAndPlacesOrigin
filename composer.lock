@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c030abc778193c9451bc41008246c92c",
+    "content-hash": "5bec87141321a7a569f4ff18aa5e862e",
     "packages": [
+        {
+            "name": "blackknight467/star-rating-bundle",
+            "version": "v2.0.1",
+            "target-dir": "blackknight467/StarRatingBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blackknight467/StarRatingBundle.git",
+                "reference": "5a95fe9cef75f8b3e3e763dc92b020091103d5b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blackknight467/StarRatingBundle/zipball/5a95fe9cef75f8b3e3e763dc92b020091103d5b1",
+                "reference": "5a95fe9cef75f8b3e3e763dc92b020091103d5b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "symfony/framework-bundle": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "blackknight467\\StarRatingBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Derick Felsman",
+                    "email": "derickfelsman@gmail.com"
+                },
+                {
+                    "name": "Steven Ng"
+                }
+            ],
+            "description": "Star Rating Bundle for use with Symfony 2 using Font Awesome.  This bundle adds the 'rating' form type and rating filter to render ratings.  Simple and easy to use.",
+            "homepage": "http://github.com/blackknight467/StarRatingBundle",
+            "keywords": [
+                "Rating",
+                "Symfony2",
+                "bundle",
+                "star",
+                "symfony"
+            ],
+            "time": "2016-04-12T01:57:35+00:00"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.0.7",
@@ -1498,85 +1549,6 @@
             "time": "2017-04-05 07:28:52"
         },
         {
-            "name": "glavweb/uploader-bundle",
-            "version": "v2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/glavweb/GlavwebUploaderBundle.git",
-                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderBundle/zipball/1a5057fec0425f47db47ab296a883a1eaff7f409",
-                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/form": "~2.3|~3.0",
-                "symfony/http-foundation": "~2.3|~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Glavweb\\UploaderBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Andrey Nilov",
-                    "email": "nilov@glavweb.ru",
-                    "homepage": "http://glavweb.ru"
-                },
-                {
-                    "name": "Glavweb Community",
-                    "homepage": "https://github.com/glavweb/GlavwebUploaderBundle/contributors"
-                }
-            ],
-            "description": "Symfony GlavwebUploaderBundle",
-            "time": "2017-03-17T02:20:33+00:00"
-        },
-        {
-            "name": "glavweb/uploader-dropzone-bundle",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle.git",
-                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderDropzoneBundle/zipball/65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
-                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
-                "shasum": ""
-            },
-            "require": {
-                "glavweb/uploader-bundle": "~2.0",
-                "symfony/form": "~2.3|~3.0",
-                "symfony/http-foundation": "~2.3|~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Glavweb\\UploaderDropzoneBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Andrey Nilov",
-                    "email": "nilov@glavweb.ru",
-                    "homepage": "http://glavweb.ru"
-                },
-                {
-                    "name": "Glavweb Community",
-                    "homepage": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle/contributors"
-                }
-            ],
-            "description": "Symfony GlavwebUploaderDropzoneBundle",
-            "time": "2017-03-17T02:29:51+00:00"
-        },
-        {
             "name": "guzzlehttp/guzzle",
             "version": "6.2.3",
             "source": {
@@ -1899,58 +1871,6 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
-        },
-        {
-            "name": "kms/froala-editor-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/froala/KMSFroalaEditorBundle.git",
-                "reference": "3e8d0f24f31a627661c464d2314892031fb6dd83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/froala/KMSFroalaEditorBundle/zipball/3e8d0f24f31a627661c464d2314892031fb6dd83",
-                "reference": "3e8d0f24f31a627661c464d2314892031fb6dd83",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3|^7.0",
-                "symfony/form": "^2.3|^3.0",
-                "symfony/framework-bundle": "^2.3|^3.0",
-                "twig/twig": "^1.1"
-            },
-            "require-dev": {
-                "symfony/twig-bundle": "^2.3|^3.0",
-                "symfony/yaml": "^2.3|^3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "KMS\\FroalaEditorBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Simon Guionniere",
-                    "email": "simon.guionniere@gmail.com"
-                },
-                {
-                    "name": "Stefan Neculai",
-                    "email": "stefan.neculai@gmail.com"
-                }
-            ],
-            "description": "Provides a Froala editor integration for Symfony 2/3.",
-            "keywords": [
-                "editor",
-                "froala",
-                "wysiwyg"
-            ],
-            "time": "2017-03-15 13:57:47"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3533,6 +3453,85 @@
     ],
     "packages-dev": [
         {
+            "name": "glavweb/uploader-bundle",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glavweb/GlavwebUploaderBundle.git",
+                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderBundle/zipball/1a5057fec0425f47db47ab296a883a1eaff7f409",
+                "reference": "1a5057fec0425f47db47ab296a883a1eaff7f409",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/form": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Glavweb\\UploaderBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Andrey Nilov",
+                    "email": "nilov@glavweb.ru",
+                    "homepage": "http://glavweb.ru"
+                },
+                {
+                    "name": "Glavweb Community",
+                    "homepage": "https://github.com/glavweb/GlavwebUploaderBundle/contributors"
+                }
+            ],
+            "description": "Symfony GlavwebUploaderBundle",
+            "time": "2017-03-17T02:20:33+00:00"
+        },
+        {
+            "name": "glavweb/uploader-dropzone-bundle",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle.git",
+                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glavweb/GlavwebUploaderDropzoneBundle/zipball/65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
+                "reference": "65fa7553b02ff74f9717f964a8cc650ec5dfcf68",
+                "shasum": ""
+            },
+            "require": {
+                "glavweb/uploader-bundle": "~2.0",
+                "symfony/form": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Glavweb\\UploaderDropzoneBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Andrey Nilov",
+                    "email": "nilov@glavweb.ru",
+                    "homepage": "http://glavweb.ru"
+                },
+                {
+                    "name": "Glavweb Community",
+                    "homepage": "https://github.com/glavweb/GlavwebUploaderDropzoneBundle/contributors"
+                }
+            ],
+            "description": "Symfony GlavwebUploaderDropzoneBundle",
+            "time": "2017-03-17T02:29:51+00:00"
+        },
+        {
             "name": "sensio/generator-bundle",
             "version": "v3.1.4",
             "source": {
@@ -3652,8 +3651,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20,
-        "kms/froala-editor-bundle": 20
+        "friendsofsymfony/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

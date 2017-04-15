@@ -33,6 +33,8 @@
                         <td>
                             <a href="{{ path('edit_dam', { 'id': dam.id }) }}" class="btn btn-success"
                                role="button">Edit</a>
+                            <a href="{{ path('dam_images_list', { 'id': dam.id }) }}" class="btn btn-success"
+                               role="button">Add Images</a>
                             {% if dam.isActive == 1 %}
                                 <a href="{{ path('deactivate_dam', { 'id': dam.id }) }}"
                                    class="btn delete btn-danger" role="button">Deactivate</a>

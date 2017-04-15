@@ -2,6 +2,7 @@
 
 namespace FishAndPlaces\Dam\Application\Fish;
 
+use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\FishRepository;
 
@@ -19,11 +20,21 @@ class FishQueryService
     }
 
     /**
-     * @return Fish[]
+     * @return FishRepresentation[]
      */
     public function getFishCollection()
     {
-        return $fishCollection = $this->fishRepository->findAll();
+        return $this->convertToRepresentation($this->fishRepository->findAll());
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return FishRepresentation
+     */
+    public function getFish($id)
+    {
+        return new FishRepresentation($this->fishRepository->find($id));
     }
 
     /**
@@ -38,6 +49,46 @@ class FishQueryService
         foreach ($this->getFishCollection() as $fish) {
             $list[$fish->getName()] = $fish;
         }
+
         return $list;
     }
+
+    /**
+     * @param $name
+     *
+     * @return FishRepresentation[]
+     */
+    public function getFishByName($name)
+    {
+        return $this->convertToRepresentation($this->fishRepository->findByName($name));
+    }
+
+    /**
+     * @param DamRepresentation $damRepresentation
+     *
+     * @return FishRepresentation[]
+     */
+    public function getFishByDam(DamRepresentation $damRepresentation)
+    {
+        return $this->convertToRepresentation($this->fishRepository->findByDam($damRepresentation->getDam()));
+    }
+
+    /**
+     * @param Fish[] $result
+     *
+     * @return FishRepresentation[]
+     */
+    private function convertToRepresentation($result)
+    {
+        if (null !== $result) {
+            return array_map(
+                function (Fish $fish) {
+                    $fishRepresentation = new FishRepresentation($fish);
+                    return $fishRepresentation;
+                }, $result
+            );
+        }
+        return [];
+    }
+
 }

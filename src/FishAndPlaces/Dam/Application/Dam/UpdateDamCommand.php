@@ -2,7 +2,6 @@
 
 namespace FishAndPlaces\Dam\Application\Dam;
 
-use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\User\Domain\Model\User;
@@ -22,13 +21,12 @@ class UpdateDamCommand
      * @param User              $user
      * @param string            $fileName
      */
-    public function __construct(DamRepresentation $damRepresentation, User $user, $fileName = null)
+    public function __construct(DamRepresentation $damRepresentation, User $user ,$fileName = null)
     {
         $dam = new Dam();
         $currentDate = new \DateTime();
         $dam->setUpdatedAt($currentDate);
-        $fishCollection = $damRepresentation->getFishCollection();
-        $dam->setFishCollection($fishCollection);
+        $dam->setCreatedAt($damRepresentation->getCreatedAt());
         $dam->setContact($damRepresentation->getContactInformation());
         $dam->setIsActive($damRepresentation->isActive());
         $dam->setLatitude($damRepresentation->getLat());
@@ -42,6 +40,10 @@ class UpdateDamCommand
         if(null !== $fileName) {
             $this->damImage = new DamImage($dam, $fileName, 1);
         }
+        foreach ($damRepresentation->getFishCollection() as $fishRepresentation) {
+            $dam->addFish($fishRepresentation->getFish());
+        }
+
         $this->dam = $dam;
     }
 

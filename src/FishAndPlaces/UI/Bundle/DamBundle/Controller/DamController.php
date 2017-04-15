@@ -4,6 +4,7 @@ namespace FishAndPlaces\UI\Bundle\DamBundle\Controller;
 
 use FishAndPlaces\Dam\Application\Dam\DamQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
+use FishAndPlaces\UI\Bundle\DamBundle\Form\DamRatingType;
 use FishAndPlaces\UI\Bundle\DamBundle\Map\MapHelper;
 use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
 use GuzzleHttp\Client;
@@ -85,9 +86,10 @@ class DamController extends Controller
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
         $dam = $damQueryService->getDam((int) $request->get('id'));
-
+        $rating = $this->createForm(DamRatingType::class, ['rating' => $dam->getRating()]);
         return $this->render('@Dam/dam/detail_view.html.twig', [
-            'dam' => $dam
+            'dam' => $dam,
+            'rating' => $rating->createView()
         ]);
     }
 

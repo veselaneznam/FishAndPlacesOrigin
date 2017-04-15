@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\Dam\Domain\Model;
 
-class DamImage extends Image
+class DamImage extends Image implements Entity
 {
     /**
      * @var int

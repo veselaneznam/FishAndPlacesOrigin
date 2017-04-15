@@ -24,13 +24,13 @@ FishAndPlaces\Dam\Domain\Model\DamImage:
     manyToOne:
         dam:
             targetEntity: FishAndPlaces\Dam\Domain\Model\Dam
-            cascade: ["persist"]
+            cascade:
+                - persist
             fetch: LAZY
             mappedBy: null
             inversedBy: imageCollection
             joinColumns:
                 dam_id:
                     referencedColumnName: id
-                    onDelete: null
             orphanRemoval: false
     lifecycleCallbacks: {  }

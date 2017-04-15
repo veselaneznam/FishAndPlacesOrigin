@@ -4,6 +4,7 @@ namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Domain\Repository\DamImagesRepository;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
+use FishAndPlaces\Dam\Domain\Repository\FishRepository;
 
 class DamService
 {
@@ -16,19 +17,25 @@ class DamService
     /** @var DamImagesRepository */
     private $damImagesRepository;
 
+    /** @var FishRepository */
+    private $fishRepository;
+
     /**
      * @param DamRepository       $damRepository
      * @param GeoLocatorService   $geoLocatorService
      * @param DamImagesRepository $damImagesRepository
+     * @param FishRepository      $fishRepository
      */
     public function __construct(
         DamRepository $damRepository,
         GeoLocatorService $geoLocatorService,
-        DamImagesRepository $damImagesRepository
+        DamImagesRepository $damImagesRepository,
+        FishRepository $fishRepository
     ) {
         $this->damRepository = $damRepository;
         $this->geoLocatorService = $geoLocatorService;
         $this->damImagesRepository = $damImagesRepository;
+        $this->fishRepository = $fishRepository;
     }
 
     /**
@@ -56,8 +63,14 @@ class DamService
         $location = $this->geoLocatorService->getLocation($command->getDam()->getLocation());
         $dam = $command->getDam();
         $dam->setLongitude($location->getLongitude());
-        $dam->setLatitude($location->getLatitude());;
+        $dam->setLatitude($location->getLatitude());
+
+        foreach ($dam->getFishCollection() as $fish)
+        {
+            $this->fishRepository->update($fish);
+        }
         $this->damRepository->update($dam);
+
         $damImage = $command->getDamImage();
         if (null !== $damImage) {
             $damImage->setDam($dam);

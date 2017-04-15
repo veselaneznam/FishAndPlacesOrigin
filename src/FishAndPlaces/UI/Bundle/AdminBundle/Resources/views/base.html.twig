@@ -31,6 +31,7 @@
             {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="btn-group btn-group-justified">
                 <a href="{{ path('dam_list') }}" class="btn btn-primary">Dam List</a>
+                <a href="{{ path('fish_list') }}" class="btn btn-primary">Fish List</a>
                 <a href="{{ path('logout') }}" class="btn btn-primary">LogOut</a>
             </div>
             {% endif %}

@@ -21,6 +21,7 @@
       <parameter key="IvorySerializerBundle">Ivory\SerializerBundle\IvorySerializerBundle</parameter>
       <parameter key="AsseticBundle">Symfony\Bundle\AsseticBundle\AsseticBundle</parameter>
       <parameter key="IvoryCKEditorBundle">Ivory\CKEditorBundle\IvoryCKEditorBundle</parameter>
+      <parameter key="StarRatingBundle">blackknight467\StarRatingBundle\StarRatingBundle</parameter>
       <parameter key="DamBundle">FishAndPlaces\UI\Bundle\DamBundle\DamBundle</parameter>
       <parameter key="ShopBundle">FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle</parameter>
       <parameter key="AdminBundle">FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle</parameter>
@@ -116,6 +117,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>IvoryCKEditorBundle:Form:ckeditor_widget.html.twig</parameter>
       <parameter>IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig</parameter>
+      <parameter>StarRatingBundle::rating.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
       <parameter>bootstrap_3_layout.html.twig</parameter>
     </parameter>
@@ -366,6 +368,7 @@
       <parameter>IvorySerializerBundle</parameter>
       <parameter>AsseticBundle</parameter>
       <parameter>IvoryCKEditorBundle</parameter>
+      <parameter>StarRatingBundle</parameter>
       <parameter>DamBundle</parameter>
       <parameter>ShopBundle</parameter>
       <parameter>AdminBundle</parameter>
@@ -397,6 +400,7 @@
     <parameter key="assetic.cache.class">Assetic\Cache\FilesystemCache</parameter>
     <parameter key="assetic.use_controller_worker.class">Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker</parameter>
     <parameter key="assetic.request_listener.class">Symfony\Bundle\AsseticBundle\EventListener\RequestListener</parameter>
+    <parameter key="star_rating.config" type="collection"/>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -514,8 +518,9 @@
       <argument type="service" id="fish_and_places.dam_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
       <argument type="service" id="fish_and_places.dam_image_repository"/>
+      <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
-    <service id="fish_and_places.fish_service" class="FishAndPlaces\Dam\Applicaiton\Fish\FishService">
+    <service id="fish_and_places.fish_service" class="FishAndPlaces\Dam\Application\Fish\FishService">
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
     <service id="fish_and_places.dam_images_query_service" class="FishAndPlaces\Dam\Application\Dam\DamImageQueryService">
@@ -627,7 +632,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>9qsSD6Pzlp9gcEamQcL5om</argument>
+                <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -750,7 +755,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>9qsSD6Pzlp9gcEamQcL5om</argument>
+          <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -771,7 +776,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>9qsSD6Pzlp9gcEamQcL5om</argument>
+      <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -781,7 +786,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>9qsSD6Pzlp9gcEamQcL5om</argument>
+      <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1403,6 +1408,7 @@
               <argument key="FOS\UserBundle\Form\Type\ResettingFormType">fos_user.resetting.form.type</argument>
               <argument key="Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType">ivory.google_map.form.type.place_autocomplete</argument>
               <argument key="Ivory\CKEditorBundle\Form\Type\CKEditorType">ivory_ck_editor.form.type</argument>
+              <argument key="blackknight467\StarRatingBundle\Form\RatingType">star_rating.type</argument>
             </argument>
             <argument type="collection">
               <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="collection">
@@ -2223,7 +2229,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58ecda0a50b304.45037215</argument>
+            <argument>58f20a85a47260.53755616</argument>
           </service>
         </argument>
       </argument>
@@ -2556,7 +2562,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58ecda0a50b304.45037215</argument>
+            <argument>58f20a85a47260.53755616</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2891,6 +2897,7 @@
               <argument>IvorySerializerBundle</argument>
               <argument>AsseticBundle</argument>
               <argument>IvoryCKEditorBundle</argument>
+              <argument>StarRatingBundle</argument>
               <argument>DamBundle</argument>
               <argument>ShopBundle</argument>
               <argument>AdminBundle</argument>
@@ -2910,6 +2917,9 @@
       </call>
       <call method="addExtension">
         <argument type="service" id="ivory_ck_editor.twig_extension"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="star_rating.twig"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -3005,6 +3015,7 @@
           <argument type="collection">
             <argument>IvoryCKEditorBundle:Form:ckeditor_widget.html.twig</argument>
             <argument>IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig</argument>
+            <argument>StarRatingBundle::rating.html.twig</argument>
             <argument>form_div_layout.html.twig</argument>
             <argument>bootstrap_3_layout.html.twig</argument>
           </argument>
@@ -5768,6 +5779,60 @@
               <argument type="service">
                 <service class="%assetic.directory_resource.class%" public="false">
                   <argument type="service" id="templating.loader"/>
+                  <argument>StarRatingBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/StarRatingBundle/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>StarRatingBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/blackknight467/star-rating-bundle/blackknight467/StarRatingBundle/Resources/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+            </argument>
+          </service>
+        </argument>
+        <argument>twig</argument>
+      </call>
+      <call method="addResource">
+        <argument type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
+            <tag name="assetic.templating.php"/>
+            <tag name="assetic.formula_resource" loader="php"/>
+            <argument type="collection">
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>StarRatingBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/StarRatingBundle/views</argument>
+                  <argument>/\.[^.]+\.php$/</argument>
+                </service>
+              </argument>
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>StarRatingBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/blackknight467/star-rating-bundle/blackknight467/StarRatingBundle/Resources/views</argument>
+                  <argument>/\.[^.]+\.php$/</argument>
+                </service>
+              </argument>
+            </argument>
+          </service>
+        </argument>
+        <argument>php</argument>
+      </call>
+      <call method="addResource">
+        <argument type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
+            <tag name="assetic.templating.twig"/>
+            <tag name="assetic.formula_resource" loader="twig"/>
+            <argument type="collection">
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
                   <argument>DamBundle</argument>
                   <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/DamBundle/views</argument>
                   <argument>/\.[^.]+\.twig$/</argument>
@@ -6319,6 +6384,13 @@
       <tag name="twig.extension"/>
       <argument type="service" id="ivory_ck_editor.renderer"/>
     </service>
+    <service id="star_rating.type" class="blackknight467\StarRatingBundle\Form\RatingType">
+      <tag name="form.type" alias="rating"/>
+    </service>
+    <service id="star_rating.twig" class="blackknight467\StarRatingBundle\Extensions\StarRatingExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig" priority="240"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
@@ -6738,6 +6810,10 @@
       <call method="addPath">
         <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/egeloen/ckeditor-bundle/Resources/views</argument>
         <argument>IvoryCKEditor</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/blackknight467/star-rating-bundle/blackknight467/StarRatingBundle/Resources/views</argument>
+        <argument>StarRating</argument>
       </call>
       <call method="addPath">
         <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views</argument>

@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new Ivory\SerializerBundle\IvorySerializerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-//            new KMS\FroalaEditorBundle\KMSFroalaEditorBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
             new FishAndPlaces\UI\Bundle\DamBundle\DamBundle(),
             new FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle(),
             new FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle(),

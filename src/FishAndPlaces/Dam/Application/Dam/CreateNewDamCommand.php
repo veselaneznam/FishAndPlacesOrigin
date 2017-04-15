@@ -2,7 +2,6 @@
 
 namespace FishAndPlaces\Dam\Application\Dam;
 
-use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\User\Domain\Model\User;
@@ -27,8 +26,11 @@ class CreateNewDamCommand
         $currentDate = new \DateTime();
         $dam->setCreatedAt($currentDate);
         $dam->setUpdatedAt($currentDate);
-        $fishCollection = $damRepresentation->getFishCollection();
-        $dam->setFishCollection($fishCollection);
+
+        foreach ($damRepresentation->getFishCollection() as $fishRepresentation) {
+            $dam->addFish($fishRepresentation->getFish());
+        }
+
         $dam->setContact($damRepresentation->getContactInformation());
         $dam->setIsActive($damRepresentation->isActive());
         $dam->setLatitude($damRepresentation->getLat());

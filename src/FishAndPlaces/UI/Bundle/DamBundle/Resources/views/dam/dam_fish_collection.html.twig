@@ -1,0 +1,16 @@
+
+<table class="table table-condensed">
+    <thead>
+    <tr colspan="2">
+        <th><h3>{% trans %}Fish in {% endtrans %} {{ dam.name }}</h3></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for fish in dam.fishCollection %}
+    <tr>
+        <td><a href="{{ path('fish_view', {'id': fish.id}) }}"><img src= "{{ fish.image.webPath}}" width="100px" height="40px">
+                <span>{{ fish.name }}</span></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

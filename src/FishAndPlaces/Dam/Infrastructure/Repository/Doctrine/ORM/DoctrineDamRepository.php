@@ -1,6 +1,7 @@
 <?php
 namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
+use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Value\Location;
@@ -13,7 +14,24 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
      */
     public function update(Dam $dam)
     {
-        $this->getEntityManager()->merge($dam);
+        $data = $this->getEntityManager()->getReference("DamBundle:Dam", $dam->getId());
+        $data->setName($dam->getName());
+        $data->setUpdatedAt($dam->getUpdatedAt());
+        $data->setCreatedAt($dam->getCreatedAt());
+        $data->setContact($dam->getContact());
+        $data->setIsActive($dam->isActive());
+        $data->setLatitude($dam->getLatitude());
+        $data->setLongitude($dam->getLongitude());
+        $data->setName($dam->getName());
+        $data->setLocation($dam->getLocation());
+        $data->setShowOnFirstPage($dam->isShowOnFirstPage());
+        $data->setPriceProPerson($dam->getPriceProPerson());
+        $data->setId($dam->getId());
+        $data->setDescription($dam->getDescription());
+
+        foreach ($dam->getFishCollection()->toArray() as $fish) {
+            $data->addFish($fish);
+        }
         $this->getEntityManager()->flush();
     }
 
@@ -125,5 +143,20 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
             ->setParameter('name', $name . '%')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param Fish $fish
+     *
+     * @return mixed
+     */
+    public function findByFish(Fish $fish)
+    {
+        return $this->createQueryBuilder('d')
+            ->innerJoin('d.fishCollection', 's', 'WITH', 's.id = :fish')
+            ->andWhere('d.isActive = :isActive')
+            ->setParameter('fish', $fish->getId())
+            ->setParameter('isActive', 1)
+            ->getQuery()->getResult();
     }
 }

@@ -112,7 +112,7 @@ class DamImageController extends Controller
         $damService = $this->get('fish_and_places.dam_service');
         $damService->deleteDamImages(new DeleteDamImagesCommand([$damImageRepresentation], $this->getUser()));
 
-        $fileName =  $fileName = $imagePath . $damImageRepresentation->getImageSrc();
+        $fileName = $imagePath . $damImageRepresentation->getImageSrc();
         $this->deletePhysicalFile($fileName);
 
         return $this->redirectToRoute('dam_images_list', array(

@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\Dam\Domain\Model;
 
-class Geocoder
+class Geocoder implements Entity
 {
     private $id;
 

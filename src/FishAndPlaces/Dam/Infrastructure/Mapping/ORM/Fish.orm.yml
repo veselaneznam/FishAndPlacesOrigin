@@ -1,25 +1,31 @@
 FishAndPlaces\Dam\Domain\Model\Fish:
-    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository
     type: entity
     table: fish
+    repositoryClass: FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository
     id:
         id:
+            id: true
             type: integer
-            generator: { strategy: AUTO }
-
+            generator:
+                strategy: IDENTITY
     fields:
         createdAt:
             type: datetime
+            nullable: false
+            column: created_at
         updatedAt:
             type: datetime
             nullable: true
+            column: updated_at
         name:
             type: string
             length: '255'
-        location:
+        image:
             type: string
-            length: '255'
-        lat:
-           type: float
-        long:
-           type: float
+            length: '40'
+        description:
+            type: string
+        isActive:
+            type: boolean
+            column: is_active
+    lifecycleCallbacks: {  }

@@ -2,27 +2,18 @@
 
 namespace FishAndPlaces\Dam\Domain\Model;
 
-use FishAndPlaces\Dam\Domain\Value\Location;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
-class Fish
+class Fish implements Entity
 {
     /** @var int */
     private $id;
+
     /**
      * @var string
      */
     private $name;
-
-    /**
-     * @var string
-     */
-    private $location;
-
-    /** @var float */
-    private $lat;
-
-    /** @var float */
-    private $long;
 
     /**
      * @var \DateTime
@@ -34,32 +25,20 @@ class Fish
      */
     private $updatedAt;
 
-    /** @var Dam */
-    private $dam;
-
     /**
      * @var string
      */
     private $description;
 
     /**
-     * @return Dam
+     * @var string
      */
-    public function getDam()
-    {
-        return $this->dam;
-    }
+    private $image;
 
     /**
-     * @param Dam $dam
-     *
-     * @return Fish
+     * @var bool
      */
-    public function setDam(Dam $dam)
-    {
-        $this->dam = $dam;
-        return $this;
-    }
+    private $isActive;
 
     /**
      * @return mixed
@@ -96,25 +75,6 @@ class Fish
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param Location $location
-     *
-     * @return Fish
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
         return $this;
     }
 
@@ -157,44 +117,6 @@ class Fish
     }
 
     /**
-     * @return mixed
-     */
-    public function getLat()
-    {
-        return $this->lat;
-    }
-
-    /**
-     * @param mixed $lat
-     *
-     * @return Fish
-     */
-    public function setLat($lat)
-    {
-        $this->lat = $lat;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLong()
-    {
-        return $this->long;
-    }
-
-    /**
-     * @param mixed $long
-     *
-     * @return Fish
-     */
-    public function setLong($long)
-    {
-        $this->long = $long;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getDescription()
@@ -211,5 +133,50 @@ class Fish
     {
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getImage()
+    {
+        $image = new Image();
+        $image->setImageSrc($this->image);
+        return $image;
+    }
+
+    /**
+     * @param string $image
+     *
+     * @return Fish
+     */
+    public function setImage($image)
+    {
+       $this->image = $image;
+       return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     *
+     * @return Fish
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

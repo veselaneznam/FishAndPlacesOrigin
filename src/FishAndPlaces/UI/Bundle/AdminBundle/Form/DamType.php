@@ -6,7 +6,6 @@ use FishAndPlaces\Dam\Application\Dam\DamImageRepresentation;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\Dam\Application\Fish\FishQueryService;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use KMS\FroalaEditorBundle\Form\Type\FroalaEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
@@ -33,9 +32,6 @@ class DamType extends AbstractType
         $this->fishQueryService = $options['fishQueryService'];
         $fishSelect = $this->fishQueryService->getFishSelect();
 
-        if ($options['data']->getFishCollection() === null) {
-            $options['data']->getFishCollection(true);
-        }
         $builder
             ->add('is_active', ChoiceType::class, array(
                 'required' => true,
@@ -45,7 +41,7 @@ class DamType extends AbstractType
                 'choices' => ['No' => 0, 'Yes' => 1]))
             ->add('name', TextType::class, array('required' => true))
             ->add('description', CKEditorType::class)
-            ->add('price_pro_person', NumberType::class, array('required' => true))
+            ->add('price_pro_person', TextType::class, array('required' => true))
             ->add('address', TextType::class, array('required' => true))
             ->add('contact_information', TextareaType::class, array('required' => false))
             ->add('mainImage', FileType::class, array('required' => false, 'data_class' => null))

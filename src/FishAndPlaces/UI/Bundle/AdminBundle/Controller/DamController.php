@@ -9,7 +9,7 @@ use FishAndPlaces\Dam\Application\Dam\CreateNewDamCommand;
 use FishAndPlaces\Dam\Application\Dam\DamQueryService;
 use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamType;
-use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamSearchType;
+use FishAndPlaces\UI\Bundle\AdminBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -26,7 +26,6 @@ class DamController extends Controller
      * @param Request $request
      *
      * @Route("/dam", name="dam_list")
-     * @Method({"GET", "POST"})
      * @return Response
      */
     public function indexAction(Request $request)
@@ -37,7 +36,7 @@ class DamController extends Controller
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
         $damCollection = $damQueryService->getDamCollection();
-        $searchForm = $this->createForm(DamSearchType::class);
+        $searchForm = $this->createForm(SearchType::class);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
@@ -102,7 +101,7 @@ class DamController extends Controller
 
         $damRepresentation = $damQueryService->getDam($id);
 
-        if(null !==$damRepresentation->getMainImage()) {
+        if(null !== $damRepresentation->getMainImage()->getImageSrc()) {
             $damRepresentation->setMainImage(
                 new File($this->getParameter('images_upload').'/'.$damRepresentation->getMainImage()->getImageSrc()));
         }
@@ -265,7 +264,7 @@ class DamController extends Controller
      */
     private function createSearchForm()
     {
-        return $this->createForm(DamSearchType::class);
+        return $this->createForm(SearchType::class);
     }
 
 

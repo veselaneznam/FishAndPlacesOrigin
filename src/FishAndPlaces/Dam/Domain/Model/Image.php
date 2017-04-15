@@ -29,4 +29,23 @@ class Image
     {
         return '/uploads/images/';
     }
+
+    /**
+     * @param string $imageSrc
+     *
+     * @return Image
+     */
+    public function setImageSrc($imageSrc)
+    {
+        $this->imageSrc = $imageSrc;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageSrc()
+    {
+        return $this->imageSrc;
+    }
 }

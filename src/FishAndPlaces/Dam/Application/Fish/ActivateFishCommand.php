@@ -1,8 +1,20 @@
 <?php
 
-namespace FishAndPlaces\Dam\Applicaiton\Fish;
+namespace FishAndPlaces\Dam\Application\Fish;
 
-class ActivateFishCommand
+use FishAndPlaces\Dam\Domain\Model\Fish;
+use FishAndPlaces\User\Domain\Model\User;
+
+class ActivateFishCommand extends UpdateFishCommand
 {
+    /**
+     * @var Fish
+     */
+    protected $fish;
 
+    public function __construct(FishRepresentation $fishRepresentation, User $user)
+    {
+        parent::__construct($fishRepresentation, $user);
+        $this->fish->setIsActive(1);
+    }
 }

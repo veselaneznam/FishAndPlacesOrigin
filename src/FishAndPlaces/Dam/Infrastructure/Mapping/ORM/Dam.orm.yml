@@ -27,7 +27,8 @@ FishAndPlaces\Dam\Domain\Model\Dam:
             type: boolean
             column: is_active
         priceProPerson:
-            type: float
+            type: string
+            length: '255'
             column: price_pro_person
         latitude:
             type: float
@@ -41,24 +42,14 @@ FishAndPlaces\Dam\Domain\Model\Dam:
     oneToMany:
         imageCollection:
             targetEntity: FishAndPlaces\Dam\Domain\Model\DamImage
+            cascade: {  }
+            fetch: LAZY
             mappedBy: dam
-
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
     manyToMany:
         fishCollection:
             targetEntity: FishAndPlaces\Dam\Domain\Model\Fish
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinTable:
                 name: dam_fish
-                joinColumns:
-                    -
-                        referencedColumnName: id
-                        name: dam_id
-                inverseJoinColumns:
-                    -
-                        referencedColumnName: id
-                        name: fish_id
-            orderBy: null
-    lifecycleCallbacks: {  }

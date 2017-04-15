@@ -1,7 +1,6 @@
 <?php
 
 namespace FishAndPlaces\Dam\Application\Dam;
-
 use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
@@ -28,7 +27,7 @@ class DamRepresentation
     private $location;
 
     /**
-     * @var float
+     * @var string
      */
     private $priceProPerson;
 
@@ -107,7 +106,7 @@ class DamRepresentation
             $this->updatedAt = $dam->getUpdatedAt();
             $this->isActive = $dam->isActive();
             $this->contactInformation = $dam->getContact();
-            foreach ($dam->getFishCollection() as $fish) {
+            foreach ($dam->getFishCollection()->toArray() as $fish) {
                 $this->fishCollection[] = new FishRepresentation($fish);
             }
             $this->location = new Location($dam->getLatitude(), $dam->getLongitude());
@@ -149,7 +148,7 @@ class DamRepresentation
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getPriceProPerson()
     {
@@ -294,7 +293,7 @@ class DamRepresentation
     }
 
     /**
-     * @param float $priceProPerson
+     * @param string $priceProPerson
      *
      * @return DamRepresentation
      */
@@ -305,14 +304,11 @@ class DamRepresentation
     }
 
     /**
-     * @param FishRepresentation[] $fishCollection
-     *
-     * @return DamRepresentation
+     * @param FishRepresentation[] $fishRepresentations
      */
-    public function setFishCollection($fishCollection)
+    public function setFishCollection($fishRepresentations)
     {
-        $this->fishCollection = $fishCollection;
-        return $this;
+        $this->fishCollection = $fishRepresentations;
     }
 
     /**

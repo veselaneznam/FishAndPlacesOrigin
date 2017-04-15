@@ -3,6 +3,7 @@
 namespace FishAndPlaces\Dam\Application\Dam;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
 use FishAndPlaces\Dam\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\DamBundle\Value\Location;
@@ -130,6 +131,17 @@ class DamQueryService
     {
         $damCollection = $this->damRepository->findByName($name);
 
+        return $this->convertToRepresentation($damCollection);
+    }
+
+    /**
+     * @param Fish $fish
+     *
+     * @return DamRepresentation[]
+     */
+    public function getDamByFish(Fish $fish)
+    {
+        $damCollection = $this->damRepository->findByFish($fish);
         return $this->convertToRepresentation($damCollection);
     }
 }

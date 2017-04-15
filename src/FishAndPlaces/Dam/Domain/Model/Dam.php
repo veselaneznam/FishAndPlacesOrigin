@@ -2,10 +2,12 @@
 
 namespace FishAndPlaces\Dam\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FishAndPlaces\Dam\Domain\Value\Contact;
 use FishAndPlaces\Dam\Domain\Value\Rating;
 
-class Dam
+class Dam implements Entity
 {
     /**
      * @var int
@@ -23,14 +25,14 @@ class Dam
     private $location;
 
     /**
-     * @var float
+     * @var string
      */
     private $priceProPerson;
 
     /**
-     * @var Fish[]
+     * @var Fish[]|Collection
      */
-    private $fishCollection = [];
+    private $fishCollection;
 
     /**
      * @var Rating
@@ -75,6 +77,11 @@ class Dam
      */
     private $description;
 
+    public function __construct()
+    {
+        $this->fishCollection = new ArrayCollection();
+    }
+
     /**
      * @return string
      */
@@ -92,7 +99,7 @@ class Dam
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getPriceProPerson()
     {
@@ -100,7 +107,7 @@ class Dam
     }
 
     /**
-     * @return Fish[]
+     * @return Fish[]|Collection
      */
     public function getFishCollection()
     {
@@ -205,7 +212,7 @@ class Dam
     }
 
     /**
-     * @param float $priceProPerson
+     * @param string $priceProPerson
      *
      * @return Dam
      */
@@ -216,13 +223,16 @@ class Dam
     }
 
     /**
-     * @param Fish[] $fishCollection
+     * @param Fish $fish
      *
      * @return Dam
      */
-    public function setFishCollection($fishCollection)
+    public function addFish(Fish $fish)
     {
-        $this->fishCollection = $fishCollection;
+        if(!$this->fishCollection->contains($fish)) {
+            $this->fishCollection->add($fish);
+        }
+
         return $this;
     }
 
@@ -350,7 +360,7 @@ class Dam
     }
 
     /**
-     * @return DamImage
+     * @return DamImage | null
      */
     public function getMainImage()
     {
@@ -359,7 +369,7 @@ class Dam
                 return $image;
             }
         }
-       // throw new MissingResourceException('Main image is mandatory');
+        return  null;
     }
 
     /**
@@ -379,5 +389,10 @@ class Dam
     {
         $this->description = $description;
         return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->name;
     }
 }

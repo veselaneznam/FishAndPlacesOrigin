@@ -23,4 +23,21 @@ class FishController extends Controller
             'fishCollection' => $fishQueryService->getFishCollection()
         ));
     }
+
+    /**
+     * @param Request $request
+     * @Route("/fish/{$id}", name="fish_view")
+     *
+     * @return Response
+     */
+    public function detailViewAction(Request $request)
+    {
+        $fishQueryService = $this->get('fish_and_places.fish_query_service');
+        $fishRepresentation = $fishQueryService->getFish((int) $request->get('id'));
+        $damCollection = $this->get('fish_and_places.dam_query_service')->getDamByFish($fishRepresentation->getFish());
+        return $this->render('@Dam/fish/fish_view.html.twig', array(
+            'fish' => $fishRepresentation,
+            'damCollection' => $damCollection
+        ));
+    }
 }

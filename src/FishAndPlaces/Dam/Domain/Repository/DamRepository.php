@@ -2,6 +2,7 @@
 namespace FishAndPlaces\Dam\Domain\Repository;
 
 use FishAndPlaces\Dam\Domain\Model\Dam;
+use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Value\Location;
 
 interface DamRepository
@@ -65,5 +66,12 @@ interface DamRepository
      * @return Dam[]
      */
     public function findByName($name);
+
+    /**
+     * @param Fish $fish
+     *
+     * @return mixed
+     */
+    public function findByFish(Fish $fish);
 
 }
