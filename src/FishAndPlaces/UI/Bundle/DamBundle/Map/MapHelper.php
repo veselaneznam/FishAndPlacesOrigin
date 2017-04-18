@@ -23,7 +23,7 @@ class MapHelper
     {
         $map = new Map();
         $map->addStylesheetOptions(['width' => '100%', 'height' => '500px']);
-        $map->setMapOption('zoom', 5);
+        $map->setMapOption('zoom', 10);
         $fullscreenControl = new FullscreenControl(ControlPosition::TOP_LEFT);
         $map->getControlManager()->setFullscreenControl($fullscreenControl);
 

@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /Users/vferdinandova/veselaProjects/fishAndPlaces/app/config/routing_dev.yml

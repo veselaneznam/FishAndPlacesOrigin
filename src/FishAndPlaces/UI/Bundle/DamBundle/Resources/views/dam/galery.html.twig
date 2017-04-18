@@ -1,49 +1,59 @@
-<div class="main_area">
-    <div class="row">
-        <div class="col-sm-6" id="slider-thumbs">
-            <ul class="hide-bullets">
-                {% set counter = 1 %}
-                {% for damImage in dam.imageCollection %}
-                {% if counter == dam.imageCollection|length %}
-                <li class="col-sm-3">
-                    <a class="thumbnail" id="carousel-selector-{{ dam.imageCollection|length }}">
-                        <img src="{{ damImage.webPath }}">
-                    </a>
-                </li>
-                {% else %}
-                <li class="col-sm-3">
-                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
-                </li>
-                    {% endif %}
-                    {% set counter = counter + 1 %}
-                {% endfor %}
-                {% set counter = 1 %}
-            </ul>
-        </div>
-        <div class="col-sm-6">
+<div class="container">
+    <div id="main_area">
+        <!-- Slider -->
+        <div class="row">
             <div class="col-xs-12" id="slider">
                 <!-- Top part of the slider -->
                 <div class="row">
                     <div class="col-sm-12" id="carousel-bounding-box">
                         <div class="carousel slide" id="myCarousel">
-                            <div class="carousel-inner">
+                            <!-- Carousel items -->
 
-                            {% for damImage in dam.imageCollection %}
-                                {% if counter == dam.imageCollection|length %}
-                                <div class="active item" data-slide-number="{{ dam.imageCollection|length }}">
-                                <img src="{{ damImage.webPath }}"></div>
-                            {% else %}
-                            <div class="item" data-slide-number="{{ counter }}">
-                                <img src="{{ damImage.webPath }}"></div>
+                            <div class="carousel-inner">
+                                {% set counter = 0 %}
+                                {% for damImage in dam.imageCollection %}
+                                    {% if counter == 0 %}
+                                <div class="active item" data-slide-number="{{ counter }}">
+                                    <img src="{{ damImage.webPath }}"></div>
+                                    {% else %}
+                                        <div class="item" data-slide-number="{{ counter }}">
+                                            <img src="{{ damImage.webPath }}"></div>
                                 {% endif %}
-                                {% set counter = counter + 1 %}
-                            {% endfor %}
-                            {% set counter = 1 %}
-                        </div>
+                                    {% set counter = counter + 1 %}
+                                {% endfor %}
+                            </div>
+
+                            <!-- Carousel nav -->
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
                         </div>
                     </div>
+
                 </div>
             </div>
+        </div><!--/Slider-->
+
+        <div class="row hidden-xs" id="slider-thumbs">
+            <!-- Bottom switcher of slider -->
+            <ul class="hide-bullets">
+                {% set counter = 0 %}
+                {% for damImage in dam.imageCollection %}
+                {% if counter == 0 %}
+                <li class="col-sm-2">
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                </li>
+                {% else %}
+                <li class="col-sm-2">
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                </li>
+                {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
@@ -54,26 +64,6 @@
             list-style: none;
             margin-left: -40px;
             margin-top: 20px;
-        }
-
-        .thumbnail {
-            padding: 0;
-        }
-
-        .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-            width: 100%;
-        }
-
-        .col-sm-3 a {
-            border: 1px solid transparent;
-            border-radius: 0;
-            transition: all 3s ease;
-        }
-
-        .col-sm-3 a:hover {
-            border: 1px solid #ff4647;
-            border-radius: 100% 60% / 30% 10%;
-            background: linear-gradient(rgba(56, 123, 131, 0.7), rgba(56, 123, 131, 0.7));
         }
     </style>
 {% endblock %}

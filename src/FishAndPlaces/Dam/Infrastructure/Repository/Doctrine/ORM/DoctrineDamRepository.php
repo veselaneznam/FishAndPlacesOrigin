@@ -1,6 +1,7 @@
 <?php
 namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
+use FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineRepository;
 use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\DamRepository;
 use FishAndPlaces\Dam\Domain\Model\Dam;
@@ -158,5 +159,23 @@ class DoctrineDamRepository extends DoctrineRepository implements DamRepository
             ->setParameter('fish', $fish->getId())
             ->setParameter('isActive', 1)
             ->getQuery()->getResult();
+    }
+
+    /**
+     * @return Dam[]
+     */
+    public function findAll()
+    {
+        return $this->findBy(['isActive' => 1]);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Dam
+     */
+    public function find($id)
+    {
+        return parent::find($id);
     }
 }

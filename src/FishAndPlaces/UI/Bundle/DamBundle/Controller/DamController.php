@@ -49,7 +49,14 @@ class DamController extends Controller
      */
     public function mapAction(Request $request, $location)
     {
-        $damCollection = $this->getDamQueryService()->search($location);
+        $damCollection = [];
+        try {
+            $damCollection = $this->getDamQueryService()->search($location);
+        } catch (\Exception $exception) {
+            $this->addFlash('error', $exception->getMessage());
+            $this->redirectToRoute('dam');
+        }
+
         $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
 
         return $this->render('@Dam/dam/google_map.html.twig', array(
@@ -58,6 +65,7 @@ class DamController extends Controller
             'title' => $this->get('translator')->trans("Search Result"),
         ));
     }
+
     /**
      *
      * @Route("/searchNearBy", name="_searchNearBy")
@@ -90,6 +98,23 @@ class DamController extends Controller
         return $this->render('@Dam/dam/detail_view.html.twig', [
             'dam' => $dam,
             'rating' => $rating->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/dam/map_direction/{id}", name="dam_map_direction", requirements={"id": "\d+"})
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function loadMapDirections(Request $request)
+    {
+        $damQueryService = $this->get('fish_and_places.dam_query_service');
+        $dam = $damQueryService->getDam((int) $request->get('id'));
+        return $this->render('@Dam/dam/map_directions.html.twig', [
+            'dam' => $dam,
+            'userLocation' => $this->getUserLocatiоn($request)
         ]);
     }
 

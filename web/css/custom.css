@@ -65,8 +65,8 @@ footer {
 #custom-search-input .glyphicon-search{
     font-size: 23px;
 }
-body {
-
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: inline-flex;
 }
 .jumbotron {
     background-image: url('../images/background.jpeg');
@@ -74,4 +74,15 @@ body {
     background-repeat: no-repeat;
     background-size:cover;
     margin-bottom:0;
+}
+
+.container_custome {
+    background-color: #fffacd;
+    background-repeat:repeat;
+    width: 100%;
+    font: normal 14px verdana;
+    line-height: 25px;
+    padding: 2px 10px;
+    border: solid 1px #fffacd;
+    border-radius: 5px;margin-top:10px;
 }

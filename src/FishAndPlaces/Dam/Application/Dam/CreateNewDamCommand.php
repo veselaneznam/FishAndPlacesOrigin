@@ -40,6 +40,7 @@ class CreateNewDamCommand
         $dam->setShowOnFirstPage($damRepresentation->isShowOnFirstPage());
         $dam->setPriceProPerson($damRepresentation->getPriceProPerson());
         $dam->setDescription($damRepresentation->getDescription());
+        $dam->setLocation($damRepresentation->getAddress());
         if(null !== $fileName) {
             $this->damImage = new DamImage($dam, $fileName, 1);
         }

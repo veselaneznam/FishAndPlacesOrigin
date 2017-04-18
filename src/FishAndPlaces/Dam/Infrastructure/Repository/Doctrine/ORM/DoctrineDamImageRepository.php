@@ -1,6 +1,7 @@
 <?php
 namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
+use FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineRepository;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\DamImage;
 use FishAndPlaces\Dam\Domain\Repository\DamImagesRepository;
@@ -61,5 +62,23 @@ class DoctrineDamImageRepository extends DoctrineRepository implements DamImages
                $this->update($damImage);
            }
        }
+    }
+
+    /**
+     * @return DamImage[]
+     */
+    public function findAll()
+    {
+        return parent::findAll();
+    }
+
+    /**
+     * @param $id
+     *
+     * @return DamImage
+     */
+    public function find($id)
+    {
+        return parent::find($id);
     }
 }

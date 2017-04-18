@@ -45,8 +45,8 @@ class DamService
     {
         $location = $this->geoLocatorService->getLocation($command->getDam()->getLocation());
         $dam = $command->getDam();
-        $dam->setLongitude($location->getLongitude());
-        $dam->setLatitude($location->getLatitude());
+        $dam->setLongitude($location->getLon());
+        $dam->setLatitude($location->getLat());
         $this->damRepository->add($dam);
         $damImage = $command->getDamImage();
         if(null !== $damImage) {
@@ -62,8 +62,8 @@ class DamService
     {
         $location = $this->geoLocatorService->getLocation($command->getDam()->getLocation());
         $dam = $command->getDam();
-        $dam->setLongitude($location->getLongitude());
-        $dam->setLatitude($location->getLatitude());
+        $dam->setLongitude($location->getLon());
+        $dam->setLatitude($location->getLat());
 
         foreach ($dam->getFishCollection() as $fish)
         {

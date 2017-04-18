@@ -71,7 +71,12 @@ doctrine:
                         prefix:    FishAndPlaces\User\Domain\Model
                         alias:     DamBundle
                         is_bundle: false
-
+                    core:
+                        type:      yml
+                        dir:       %kernel.root_dir%/../src/FishAndPlaces/Core/Infrastructure/Mapping/ORM
+                        prefix:    FishAndPlaces\Core\Domain\Model
+                        alias:     DamBundle
+                        is_bundle: false
                     shop:
                         type:      yml
                         dir:       %kernel.root_dir%/../src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM
@@ -119,33 +124,6 @@ sensio_framework_extra:
     cache:       { annotations: true }
     security:    { annotations: true }
     psr_message: { enabled: false }
-#kms_froala_editor:
-#  language: "en_gb"
-#  toolbarInline: false
-#  tableColors: [ "#FFFFFF", "#FF0000" ]
-#  saveParams: { "id" : "description" }
-#  pluginsEnabled: [ "image", "file" ]
-#  includeJQuery: true
-#
-#  # Disable CodeMirror inclusion.
-#  includeCodeMirror: true
-#
-#   # Disable Font Awesome inclusion.
-#  includeFontAwesome: true
-#
-#  # Disable all bundle javascripts inclusion (not concerning JQuery nor CodeMirror).
-#  # Usage: if you are using Grunt or other and you want to include yourself all scripts.
-#  includeJS: true
-#
-#  # Disable all bundle CSS inclusion (not concerning Font Awesome nor CodeMirror).
-#  # Usage: if you are using Grunt or other and you want to include yourself all stylesheets.
-#  includeCSS: true
-#  imageUploadFolder: "/uploads/user"
-#
-#  # The image upload URL base.
-#  # Usage: if you are using URL rewritting for your assets.
-#  # Default: same value as provided as folder.
-#  imageUploadPath: "%kernel.root_dir%/../web/uploads/user"
 
 ivory_ck_editor:
     enable: true

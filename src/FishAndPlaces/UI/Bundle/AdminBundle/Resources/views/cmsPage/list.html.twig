@@ -1,0 +1,54 @@
+{% extends '@Admin/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>Dam List</h2>
+        <a href="{{ path('create_cms_page') }}" class="btn btn-info" role="button">Add Page</a>
+        {% include '@Admin/dam/search.html.twig' %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Is Active</th>
+                <th>Is Navigation</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if pageCollection is not null %}
+                {% for page in pageCollection %}
+                    <tr>
+                        <td>{{ page.id }}</td>
+                        <td>{{ page.title }}</td>
+                        <td>{% if page.isActive == 1 %}
+                                <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove red" style="color: red" aria-hidden="true"></span>
+                            {% endif %}
+                        </td>
+                        <td>{% if page.isNavigation == 1 %}
+                                <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove red" style="color: red" aria-hidden="true"></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('edit_page', { 'id': page.id }) }}" class="btn btn-success"
+                               role="button">Edit</a>
+                            {#{% if dam.isActive == 1 %}#}
+                            {#<a href="{{ path('deactivate_dam', { 'id': dam.id }) }}"#}
+                            {#class="btn delete btn-danger" role="button">Deactivate</a>#}
+                            {#{% else %}#}
+                            {#<a href="{{ path('activate_dam', { 'id': dam.id }) }}"#}
+                            {#class="btn delete btn-danger" role="button">Activate</a>#}
+                            {#{% endif %}#}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

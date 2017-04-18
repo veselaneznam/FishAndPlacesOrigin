@@ -1,19 +1,42 @@
 {% extends '@Dam/base.html.twig' %}
 {% block content %}
     {{ parent() }}
-    <div class="row">
+    <div class="row container_custome">
 
             <div class="col-lg-6">
-                <h3>{{ dam.name }}</h3></div>
-        <div class="col-lg-12" >
-            <div class="col-lg-6 text-left">
-    {% include '@Dam/dam/galery.html.twig' %}
+                <h3>{{ dam.name }}</h3>
             </div>
-            <div class="col-lg-6 text-left">
+        <br />
+        <div class="col-lg-12" >
+    {% include '@Dam/dam/galery.html.twig' %}
+            <div class="col-lg-6 text-justify">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr colspan="2">
+                        <th><h3>{% trans %}Info{% endtrans %}</h3></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="color: green; font-weight: bold;">{% trans %}Rating{% endtrans %}</td> <td>{{ dam.rating }}</td>
+                    </tr>
+                        <tr>
+                            <td style="color: green; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ dam.priceProPerson }}</td>
+                        </tr>
+                        <tr>
+                        <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ dam.address }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: green; font-weight: bold;">{% trans %}See on Map{% endtrans %}</td> <td><a href="{{ path('dam_map_direction', {'id': dam.id}) }}">{% trans %}Directions{% endtrans %}</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6 text-justify">
     {% include '@Dam/dam/dam_fish_collection.html.twig' %}
             </div>
         </div>
-        <div class="col-lg-12 text-justify" style="background: #eee; padding: 5%; border-radius: 5px;margin-top:10px;">
+        <div class="col-lg-12 text-justify">
             <p>{{ dam.description | raw }}</p>
             <div id="disqus_thread"></div>
         </div>

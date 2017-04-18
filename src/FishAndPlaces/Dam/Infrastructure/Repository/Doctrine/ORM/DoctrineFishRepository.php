@@ -2,6 +2,7 @@
 
 namespace FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM;
 
+use FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineRepository;
 use FishAndPlaces\Dam\Domain\Model\Dam;
 use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\FishRepository;
@@ -47,5 +48,23 @@ class DoctrineFishRepository extends DoctrineRepository implements FishRepositor
     public function findByName($name)
     {
         return $this->findBy(['name' => $name]);
+    }
+
+    /**
+     * @return Fish[]
+     */
+    public function findAll()
+    {
+        return parent::findAll();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Fish
+     */
+    public function find($id)
+    {
+        return parent::find($id);
     }
 }

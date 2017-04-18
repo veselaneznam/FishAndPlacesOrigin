@@ -37,6 +37,7 @@ class UpdateDamCommand
         $dam->setPriceProPerson($damRepresentation->getPriceProPerson());
         $dam->setId($damRepresentation->getId());
         $dam->setDescription($damRepresentation->getDescription());
+        $dam->setLocation($damRepresentation->getAddress());
         if(null !== $fileName) {
             $this->damImage = new DamImage($dam, $fileName, 1);
         }

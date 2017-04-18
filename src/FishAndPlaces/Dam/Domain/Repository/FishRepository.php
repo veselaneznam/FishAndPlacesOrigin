@@ -13,7 +13,7 @@ interface FishRepository
     public function findAll();
 
     /**
-     * @param $id
+     * @param int $id
      * @return Fish
      */
     public function find($id);

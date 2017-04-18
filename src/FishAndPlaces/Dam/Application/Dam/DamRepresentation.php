@@ -246,8 +246,12 @@ class DamRepresentation
     public function toArray()
     {
         return [
+            'id' => $this->getId(),
             'name' => $this->getName(),
-            'contactInformation' => $this->getContactInformation(),
+            'rating' => $this->getRating(),
+            'priceProPerson' => $this->getPriceProPerson(),
+            'address' => $this->getAddress(),
+            'mainImage' => $this->getMainImage()->getWebPath(),
         ];
     }
 

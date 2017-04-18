@@ -526,6 +526,16 @@
     <service id="fish_and_places.dam_images_query_service" class="FishAndPlaces\Dam\Application\Dam\DamImageQueryService">
       <argument type="service" id="fish_and_places.dam_image_repository"/>
     </service>
+    <service id="fish_and_places.cms_page_repository" class="FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository">
+      <argument>FishAndPlaces\Core\Domain\Model\CmsPage</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.cms_page_query_service" class="FishAndPlaces\Core\Application\CmsPage\CmsPageQueryService">
+      <argument type="service" id="fish_and_places.cms_page_repository"/>
+    </service>
+    <service id="fish_and_places.cms_page_service" class="FishAndPlaces\Core\Application\CmsPage\CmsPageService">
+      <argument type="service" id="fish_and_places.cms_page_repository"/>
+    </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -632,7 +642,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
+                <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -755,7 +765,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
+          <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -776,7 +786,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
+      <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -786,7 +796,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>L7Df6gStD2a4q4Ck0Y-KS5</argument>
+      <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2229,7 +2239,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58f20a85a47260.53755616</argument>
+            <argument>58f4cdd1e09a22.46116817</argument>
           </service>
         </argument>
       </argument>
@@ -2562,7 +2572,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58f20a85a47260.53755616</argument>
+            <argument>58f4cdd1e09a22.46116817</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3214,6 +3224,7 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
                       </argument>
@@ -3229,6 +3240,23 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>FishAndPlaces\Core\Domain\Model</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
                       </argument>
@@ -3244,6 +3272,7 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
                       </argument>
@@ -6786,6 +6815,10 @@
       <call method="addPath">
         <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views</argument>
         <argument>Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/TwigBundle/views</argument>
+        <argument>Twig</argument>
       </call>
       <call method="addPath">
         <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views</argument>

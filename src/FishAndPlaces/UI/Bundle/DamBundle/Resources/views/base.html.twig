@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ asset('css/grid.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}"/>
-
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -22,13 +21,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">{% trans %} Bulgarian Fisherman {% endtrans %}</a>
+            <a class="navbar-brand" href="{{ path('dam') }}">{% trans %} Bulgarian Fisherman {% endtrans %}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ path('dam') }}">{% trans %}Home{% endtrans %}</a></li>
-                <li><a href="#">{% trans %}About{% endtrans %}</a></li>
-                <li><a href="#">{% trans %}Contact{% endtrans %}</a></li>
+                <li><a href="{{ path('page_view', {'slug': 'about-us'}) }}">{% trans %}About{% endtrans %}</a></li>
+                <li><a href="{{ path('page_view', {'slug': 'contact-us'}) }}">{% trans %}Contact{% endtrans %}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {% trans %}Login{% endtrans %}</a></li>
@@ -37,6 +36,16 @@
     </div>
 </nav>
     {% block body %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
     <div class="jumbotron">
         <div class="container text-center">
         {% include '@Dam/dam/search.html.twig' %}
@@ -46,7 +55,7 @@
     </div>
     {% endblock %}
         <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+            <p>CopyRight &copy; {{ date() | date('Y') }} ZaRiba.com</p>
         </footer>
 {% block javascripts %}
     <script src="{{ asset('js/jquery.js') }}"></script>

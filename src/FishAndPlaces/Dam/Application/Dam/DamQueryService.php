@@ -53,13 +53,12 @@ class DamQueryService
         $searchResultByLocation = [];
         if (null !== $data) {
             $address = $this->geoLocatorService->getLocation($data);
-            if (null !== $address) {
-                $searchResultByLocation = $this->damRepository->findByLocation(
-                    new DomainLocation($address->getLatitude(), $address->getLongitude()
-                    )
-                );
+            if (!empty($address)) {
+                $searchResultByLocation = $this->damRepository->findByLocation($address);
             }
-        } else {
+        }
+
+        if (empty($searchResultByLocation)) {
             $searchResultByLocation = $this->damRepository->findAll();
         }
 

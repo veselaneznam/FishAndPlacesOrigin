@@ -2,7 +2,6 @@
 
 namespace FishAndPlaces\Dam\Application\Fish;
 
-use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
 use FishAndPlaces\Dam\Domain\Model\Fish;
 use FishAndPlaces\Dam\Domain\Repository\FishRepository;
 
@@ -61,16 +60,6 @@ class FishQueryService
     public function getFishByName($name)
     {
         return $this->convertToRepresentation($this->fishRepository->findByName($name));
-    }
-
-    /**
-     * @param DamRepresentation $damRepresentation
-     *
-     * @return FishRepresentation[]
-     */
-    public function getFishByDam(DamRepresentation $damRepresentation)
-    {
-        return $this->convertToRepresentation($this->fishRepository->findByDam($damRepresentation->getDam()));
     }
 
     /**
