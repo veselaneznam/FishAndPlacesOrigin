@@ -7,5 +7,5 @@ services:
         arguments: [ FishAndPlaces\User\Domain\Model\User ]
 
     fish_and_places.images_uploader:
-        class: FishAndPlaces\Dam\Application\Core\FileUploader
+        class: FishAndPlaces\GreenObject\Application\Core\FileUploader
         arguments: ['%images_upload%']

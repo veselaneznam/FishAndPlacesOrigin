@@ -2,11 +2,9 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Form;
 
-use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
-use FishAndPlaces\Dam\Domain\Model\Fish;
+use FishAndPlaces\GreenObject\Domain\Model\Fish;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

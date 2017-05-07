@@ -11,4 +11,4 @@
 /bin/
 /composer.phar
 .idea
-/src/FishAndPlaces/Dam/Domain/Model/Fish.php
+/src/FishAndPlaces/GreenObject/Domain/Model/Fish.php

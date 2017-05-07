@@ -1,0 +1,59 @@
+FishAndPlaces\GreenObject\Domain\Model\GreenObject:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectRepository
+    type: entity
+    table: green_object
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: type
+        type: smallint
+    discriminatorMap:
+        1: FishAndPlaces\GreenObject\Domain\Model\Dam
+        2: FishAndPlaces\GreenObject\Domain\Model\Camp
+        3: FishAndPlaces\GreenObject\Domain\Model\VillageHoliday
+        4: FishAndPlaces\GreenObject\Domain\Model\Cabin
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        name:
+            type: string
+            length: '255'
+        location:
+            type: string
+            length: '255'
+        rating:
+            type: float
+        isActive:
+            type: boolean
+            column: is_active
+        priceProPerson:
+            type: string
+            length: '255'
+            column: price_pro_person
+        latitude:
+            type: float
+        longitude:
+            type: float
+        showOnFirstPage:
+            type: boolean
+        description:
+            type: text
+
+    oneToMany:
+        imageCollection:
+            targetEntity: FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: greenObject
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null

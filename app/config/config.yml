@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@DamBundle/Resources/config/services.yml" }
+    - { resource: "@GoGreenBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -10,6 +10,7 @@ imports:
 parameters:
     locale: en
     images_upload: '%kernel.root_dir%/../web/uploads/images/'
+    json_upload: '%kernel.root_dir%/../web/'
 
 framework:
     #esi:             ~
@@ -69,13 +70,13 @@ doctrine:
                         type:      yml
                         dir:       %kernel.root_dir%/../src/FishAndPlaces/User/Infrastructure/Mapping/ORM
                         prefix:    FishAndPlaces\User\Domain\Model
-                        alias:     DamBundle
+                        alias:     GoGreenBundle
                         is_bundle: false
                     core:
                         type:      yml
                         dir:       %kernel.root_dir%/../src/FishAndPlaces/Core/Infrastructure/Mapping/ORM
                         prefix:    FishAndPlaces\Core\Domain\Model
-                        alias:     DamBundle
+                        alias:     GoGreenBundle
                         is_bundle: false
                     shop:
                         type:      yml
@@ -83,11 +84,11 @@ doctrine:
                         prefix:    FishAndPlaces\Shop\Domain\Model
                         alias:     ShopBundle
                         is_bundle: false
-                    dam:
+                    green_object:
                         type:      yml
-                        dir:       %kernel.root_dir%/../src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM
-                        prefix:    FishAndPlaces\Dam\Domain\Model
-                        alias:     DamBundle
+                        dir:       %kernel.root_dir%/../src/FishAndPlaces/GreenObject/Infrastructure/Mapping/ORM
+                        prefix:    FishAndPlaces\GreenObject\Domain\Model
+                        alias:     GoGreenBundle
                         is_bundle: false
 
 # Swiftmailer Configuration

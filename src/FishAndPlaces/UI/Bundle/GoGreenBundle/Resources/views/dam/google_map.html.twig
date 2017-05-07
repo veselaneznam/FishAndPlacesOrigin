@@ -1,0 +1,10 @@
+{% extends '@GoGreen/base.html.twig' %}
+{% block content %}
+    {{ parent() }}
+<br />
+<div class="thumb">
+{{ ivory_google_map(map) }}
+{{ ivory_google_api([map]) }}
+    </div>
+     {% include '@GoGreen/dam/list.html.twig' %}
+{% endblock %}

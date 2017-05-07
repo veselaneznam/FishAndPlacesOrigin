@@ -2,12 +2,12 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
-use FishAndPlaces\Dam\Application\Dam\ActivateDamCommand;
-use FishAndPlaces\Dam\Application\Dam\DeactivateDamCommand;
-use FishAndPlaces\Dam\Application\Dam\UpdateDamCommand;
-use FishAndPlaces\Dam\Application\Dam\CreateNewDamCommand;
-use FishAndPlaces\Dam\Application\Dam\DamQueryService;
-use FishAndPlaces\Dam\Application\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\ActivateDamCommand;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DeactivateDamCommand;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\UpdateDamCommand;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\CreateNewDamCommand;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamType;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,7 +45,7 @@ class DamController extends Controller
 
         return $this->render('@Admin/dam/list.html.twig', array(
             'damCollection' => $damCollection,
-            'title' => "Dam List",
+            'title' => "GreenObject List",
             'path' => $this->getParameter('images_upload'),
             'searchForm' => $searchForm->createView(),
         ));
@@ -84,7 +84,7 @@ class DamController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
-            'title' => 'New Dam',
+            'title' => 'New GreenObject',
             'backUrl' => '/admin/dam'
         ));
     }
@@ -131,7 +131,7 @@ class DamController extends Controller
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
             'currentFishCollection' => $damRepresentation->getFishCollection(),
-            'title' => 'Edit Dam',
+            'title' => 'Edit GreenObject',
             'backUrl' => '/admin/dam'
         ));
     }
@@ -139,10 +139,12 @@ class DamController extends Controller
     /**
      * @param Request $request
      *
+     * @param int $id
+     *
+     * @return JsonResponse|RedirectResponse
      * @Route("/deactivate/{id}", name="deactivate_dam")
      * @Method({"GET", "DELETE"})
      *
-     * @return JsonResponse|RedirectResponse
      */
     public function deactivateAction(Request $request, $id)
     {
@@ -199,7 +201,7 @@ class DamController extends Controller
                 $response['message'] = 'Activated Successfully!';
             } else {
                 $response['success'] = false;
-                $response['message'] = 'Sorry Dam could not be activated!';
+                $response['message'] = 'Sorry GreenObject could not be activated!';
             }
 
             $this->addFlash('notice', 'Activate Successfully!');
@@ -260,14 +262,10 @@ class DamController extends Controller
     }
 
     /**
-     * @return Form
+     * @param $getId
+     *
+     * @return mixed
      */
-    private function createSearchForm()
-    {
-        return $this->createForm(SearchType::class);
-    }
-
-
     private function createActivateForm($getId)
     {
         return $this->createFormBuilder()

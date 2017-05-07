@@ -4,6 +4,7 @@
     <div class="container">
         <h2>Dam List</h2>
         <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Dam</a>
+        <a href="{{ path('import_json') }}" class="btn btn-info" role="button">Import from Json</a>
         {% include '@Admin/dam/search.html.twig' %}
         <table class="table table-striped">
             <thead>
@@ -20,7 +21,13 @@
             {% if damCollection is not null %}
                 {% for dam in damCollection %}
                     <tr>
-                        <td><img src="{{ dam.mainImage.webPath }}" width="100px" class="thumbnail"></td>
+                        <td>
+                            {% if dam.mainImage.webPath != null %}
+                            <img src="{{ dam.mainImage.webPath }}" width="100px" class="thumbnail">
+                            {% else %}
+                                <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" width="100px" class="thumbnail">
+                            {% endif %}
+                        </td>
                         <td>{{ dam.name }}</td>
                         <td>{% if dam.isActive == 1 %}
                             <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>

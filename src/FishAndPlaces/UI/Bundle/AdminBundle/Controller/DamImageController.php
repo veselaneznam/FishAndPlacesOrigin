@@ -2,9 +2,8 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
-use FishAndPlaces\Dam\Application\Dam\DeleteDamImagesCommand;
-use FishAndPlaces\Dam\Application\Dam\UpdateDamImagesCommand;
-use FishAndPlaces\UI\Bundle\AdminBundle\Form\DamImageType;
+use FishAndPlaces\GreenObject\Application\GreenObject\Image\DeleteGreenObjectImagesCommand;
+use FishAndPlaces\GreenObject\Application\GreenObject\Image\UpdateGreenObjectImagesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,11 +48,11 @@ class DamImageController extends Controller
         $damQueryService = $this->get('fish_and_places.dam_query_service');
         $damRepresentation = $damQueryService->getDam((int) $request->get('id'));
         $damImageCollection = [];
-
+        $successCounter = 0;
+        $tryAgainCounter = 0;
+        $invalidSizeCounter = 0;
         if (isset($_POST['submit'])) {
-            $successCounter = 0;
-            $tryAgainCounter = 0;
-            $invalidSizeCounter = 0;
+
             $target_path = $this->getParameter('images_upload');
             for ($imageIndex = 0; $imageIndex < count($_FILES['file']['name']); $imageIndex++) {
 
@@ -110,13 +109,13 @@ class DamImageController extends Controller
         $imagePath = $this->getParameter('images_upload');
 
         $damService = $this->get('fish_and_places.dam_service');
-        $damService->deleteDamImages(new DeleteDamImagesCommand([$damImageRepresentation], $this->getUser()));
+        $damService->deleteDamImages(new DeleteGreenObjectImagesCommand([$damImageRepresentation], $this->getUser()));
 
         $fileName = $imagePath . $damImageRepresentation->getImageSrc();
         $this->deletePhysicalFile($fileName);
 
         return $this->redirectToRoute('dam_images_list', array(
-            'id' => $damImageRepresentation->getDam()->getId()
+            'id' => $damImageRepresentation->getGreenObject()->getId()
         ));
     }
 
@@ -128,7 +127,7 @@ class DamImageController extends Controller
     {
         $damQueryService = $this->get('fish_and_places.dam_service');
 
-        $damImageCollection = new UpdateDamImagesCommand(
+        $damImageCollection = new UpdateGreenObjectImagesCommand(
             $damRepresentation,
             $this->getUser(),
             $damImageCollection

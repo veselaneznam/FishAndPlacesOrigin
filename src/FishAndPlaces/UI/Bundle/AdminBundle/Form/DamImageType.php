@@ -32,7 +32,7 @@ class DamImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'FishAndPlaces\Dam\Application\Dam\DamImageRepresentation'
+            'data_class' => 'FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamImageRepresentation'
         ));
     }
 }

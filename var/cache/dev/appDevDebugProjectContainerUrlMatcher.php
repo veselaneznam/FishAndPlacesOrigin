@@ -116,41 +116,65 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->redirect($pathinfo.'/', 'dam');
             }
 
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\DamController::indexAction',  '_route' => 'dam',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::indexAction',  '_route' => 'dam',);
         }
         not_dam:
 
-        // map_view
-        if (0 === strpos($pathinfo, '/map') && preg_match('#^/map/(?P<location>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\DamController::mapAction',));
+        if (0 === strpos($pathinfo, '/map')) {
+            // map_view
+            if (preg_match('#^/map/(?P<location>[^/]++)(?:/(?P<radius>[^/]++))?$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_map_view;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_view')), array (  'radius' => 100,  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::mapAction',));
+            }
+            not_map_view:
+
+            // post_map_view
+            if (rtrim($pathinfo, '/') === '/map') {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_post_map_view;
+                }
+
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'post_map_view');
+                }
+
+                return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::postMapAction',  '_route' => 'post_map_view',);
+            }
+            not_post_map_view:
+
         }
 
         // _searchNearBy
         if ($pathinfo === '/searchNearBy') {
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\DamController::searchNearBy',  '_route' => '_searchNearBy',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::searchNearBy',  '_route' => '_searchNearBy',);
         }
 
         if (0 === strpos($pathinfo, '/dam')) {
             // dam_view
             if (preg_match('#^/dam/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\DamController::damDetailView',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::damDetailView',));
             }
 
             // dam_map_direction
             if (0 === strpos($pathinfo, '/dam/map_direction') && preg_match('#^/dam/map_direction/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\DamController::loadMapDirections',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::loadMapDirections',));
             }
 
         }
 
         // fish_view
         if ($pathinfo === '/fish/{$id}') {
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\FishController::detailViewAction',  '_route' => 'fish_view',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\FishController::detailViewAction',  '_route' => 'fish_view',);
         }
 
         // page_view
         if ($pathinfo === '/page/{$slug}') {
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\DamBundle\\Controller\\PageController::detailViewAction',  '_route' => 'page_view',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\PageController::detailViewAction',  '_route' => 'page_view',);
         }
 
         if (0 === strpos($pathinfo, '/admin')) {

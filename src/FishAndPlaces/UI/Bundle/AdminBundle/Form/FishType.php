@@ -34,7 +34,7 @@ class FishType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'FishAndPlaces\Dam\Application\Fish\FishRepresentation',
+            'data_class' => 'FishAndPlaces\GreenObject\Application\Fish\FishRepresentation',
         ));
     }
 }

@@ -1,0 +1,3 @@
+FishAndPlaces\GreenObject\Domain\Model\VillageHoliday:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineVillageHolidayRepository
+    type: entity

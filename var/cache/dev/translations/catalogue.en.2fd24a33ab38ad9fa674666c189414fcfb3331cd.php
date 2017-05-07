@@ -403,6 +403,10 @@ $catalogueBg = new MessageCatalogue('bg', array (
     'Enter Location' => 'Въведете локация',
     'Directions' => 'Упътвания',
     'More details' => 'Повече детайли',
+    'No results found for' => 'Няма намерени резултати за',
+    'Radios in km' => 'Радиус в километри',
+    'Something went wrong. Please check your search criteria' => 'Нещо не е наред, моля проверете ващите критерии за търсене',
+    'Go Green' => 'На Зелено',
   ),
 ));
 $catalogue->addFallbackCatalogue($catalogueBg);

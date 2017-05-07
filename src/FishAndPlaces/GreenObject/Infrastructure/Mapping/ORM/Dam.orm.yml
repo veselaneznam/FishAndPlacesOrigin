@@ -1,0 +1,9 @@
+FishAndPlaces\GreenObject\Domain\Model\Dam:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository
+    type: entity
+
+    manyToMany:
+        fishCollection:
+            targetEntity: FishAndPlaces\GreenObject\Domain\Model\Fish
+            joinTable:
+                name: dam_fish

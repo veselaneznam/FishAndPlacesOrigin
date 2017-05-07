@@ -2,11 +2,10 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
-use FishAndPlaces\Dam\Application\Fish\CreateNewFishCommand;
-use FishAndPlaces\Dam\Application\Fish\FishQueryService;
-use FishAndPlaces\Dam\Application\Fish\FishRepresentation;
-use FishAndPlaces\Dam\Application\Fish\UpdateFishCommand;
-use FishAndPlaces\Dam\Domain\Model\Image;
+use FishAndPlaces\GreenObject\Application\Fish\CreateNewFishCommand;
+use FishAndPlaces\GreenObject\Application\Fish\FishQueryService;
+use FishAndPlaces\GreenObject\Application\Fish\FishRepresentation;
+use FishAndPlaces\GreenObject\Application\Fish\UpdateFishCommand;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\FishType;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -86,8 +85,10 @@ class FishController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/fish/edit/{id}", name="edit_fish")
+     * @param int $id
+     *
      * @return Response
+     * @Route("/fish/edit/{id}", name="edit_fish")
      */
     public function editAction(Request $request, $id)
     {
@@ -151,9 +152,9 @@ class FishController extends Controller
     }
 
     /**
-     * @param Image $image
+     * @param $image
      */
-    private function deleteOldImage(Image $image)
+    private function deleteOldImage($image)
     {
         if(null !== $image->getImageSrc()) {
             $oldImage = $this->getParameter('images_upload') . $image->getImageSrc();

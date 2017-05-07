@@ -1,5 +1,5 @@
-dam:
-    resource: "@DamBundle/Controller/"
+go_green:
+    resource: "@GoGreenBundle/Controller/"
     type:     annotation
 shop:
     resource: "@ShopBundle/Controller/"

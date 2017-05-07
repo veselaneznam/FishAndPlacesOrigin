@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new blackknight467\StarRatingBundle\StarRatingBundle(),
-            new FishAndPlaces\UI\Bundle\DamBundle\DamBundle(),
+            new FishAndPlaces\UI\Bundle\GoGreenBundle\GoGreenBundle(),
             new FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle(),
             new FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle(),
             new FishAndPlaces\UI\Bundle\UserBundle\UserBundle(),
@@ -56,19 +56,5 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
-    }
-
-    /**
-     * Checks if a given class name belongs to an active bundle.
-     *
-     * @param string $class A class name
-     *
-     * @return bool true if the class belongs to an active bundle, false otherwise
-     *
-     * @deprecated since version 2.6, to be removed in 3.0.
-     */
-    public function isClassInActiveBundle($class)
-    {
-        // TODO: Implement isClassInActiveBundle() method.
     }
 }

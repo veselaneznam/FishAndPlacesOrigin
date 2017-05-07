@@ -22,7 +22,7 @@
       <parameter key="AsseticBundle">Symfony\Bundle\AsseticBundle\AsseticBundle</parameter>
       <parameter key="IvoryCKEditorBundle">Ivory\CKEditorBundle\IvoryCKEditorBundle</parameter>
       <parameter key="StarRatingBundle">blackknight467\StarRatingBundle\StarRatingBundle</parameter>
-      <parameter key="DamBundle">FishAndPlaces\UI\Bundle\DamBundle\DamBundle</parameter>
+      <parameter key="GoGreenBundle">FishAndPlaces\UI\Bundle\GoGreenBundle\GoGreenBundle</parameter>
       <parameter key="ShopBundle">FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle</parameter>
       <parameter key="AdminBundle">FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle</parameter>
       <parameter key="UserBundle">FishAndPlaces\UI\Bundle\UserBundle\UserBundle</parameter>
@@ -46,6 +46,7 @@
     <parameter key="google_maps_api_key">AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="images_upload">/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/uploads/images/</parameter>
+    <parameter key="json_upload">/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">fb65f46debe44b34ac4f286bc5628b30bfbaf2dd</parameter>
@@ -369,7 +370,7 @@
       <parameter>AsseticBundle</parameter>
       <parameter>IvoryCKEditorBundle</parameter>
       <parameter>StarRatingBundle</parameter>
-      <parameter>DamBundle</parameter>
+      <parameter>GoGreenBundle</parameter>
       <parameter>ShopBundle</parameter>
       <parameter>AdminBundle</parameter>
       <parameter>UserBundle</parameter>
@@ -479,51 +480,47 @@
       <argument>FishAndPlaces\User\Domain\Model\User</argument>
       <factory service="doctrine" method="getRepository"/>
     </service>
-    <service id="fish_and_places.images_uploader" class="FishAndPlaces\Dam\Application\Core\FileUploader">
+    <service id="fish_and_places.images_uploader" class="FishAndPlaces\GreenObject\Application\Core\FileUploader">
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/uploads/images/</argument>
     </service>
-    <service id="fish_and_places.dam_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository">
-      <argument>FishAndPlaces\Dam\Domain\Model\Dam</argument>
+    <service id="fish_and_places.dam_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Dam</argument>
       <factory service="doctrine" method="getRepository"/>
     </service>
-    <service id="fish_and_places.fish_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository">
-      <argument>FishAndPlaces\Dam\Domain\Model\Fish</argument>
+    <service id="fish_and_places.fish_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Fish</argument>
       <factory service="doctrine" method="getRepository"/>
     </service>
-    <service id="fish_and_places.dam_image_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineDamImageRepository">
-      <argument>FishAndPlaces\Dam\Domain\Model\DamImage</argument>
+    <service id="fish_and_places.dam_image_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\DamImage</argument>
       <factory service="doctrine" method="getRepository"/>
     </service>
-    <service id="fish_and_places.fish_image_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineFishImageRepository">
-      <argument>FishAndPlaces\Dam\Domain\Model\FishImage</argument>
+    <service id="fish_and_places.local_geocoder_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Geocoder</argument>
       <factory service="doctrine" method="getRepository"/>
     </service>
-    <service id="fish_and_places.local_geocoder_repository" class="FishAndPlaces\Dam\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository">
-      <argument>FishAndPlaces\Dam\Domain\Model\Geocoder</argument>
-      <factory service="doctrine" method="getRepository"/>
-    </service>
-    <service id="fish_and_places.geocoder_proxy" class="FishAndPlaces\Dam\Infrastructure\Geocoder\GeocoderProxy"/>
-    <service id="fish_and_places.geolocator" class="FishAndPlaces\Dam\Application\Dam\GeoLocatorService">
+    <service id="fish_and_places.geocoder_proxy" class="FishAndPlaces\GreenObject\Infrastructure\Geocoder\GeocoderProxy"/>
+    <service id="fish_and_places.geolocator" class="FishAndPlaces\GreenObject\Application\Core\GeoLocatorService">
       <argument type="service" id="fish_and_places.geocoder_proxy"/>
       <argument type="service" id="fish_and_places.local_geocoder_repository"/>
     </service>
-    <service id="fish_and_places.dam_query_service" class="FishAndPlaces\Dam\Application\Dam\DamQueryService">
+    <service id="fish_and_places.dam_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService">
       <argument type="service" id="fish_and_places.dam_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
     </service>
-    <service id="fish_and_places.fish_query_service" class="FishAndPlaces\Dam\Application\Fish\FishQueryService">
+    <service id="fish_and_places.fish_query_service" class="FishAndPlaces\GreenObject\Application\Fish\FishQueryService">
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
-    <service id="fish_and_places.dam_service" class="FishAndPlaces\Dam\Application\Dam\DamService">
+    <service id="fish_and_places.dam_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamService">
       <argument type="service" id="fish_and_places.dam_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
       <argument type="service" id="fish_and_places.dam_image_repository"/>
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
-    <service id="fish_and_places.fish_service" class="FishAndPlaces\Dam\Application\Fish\FishService">
+    <service id="fish_and_places.fish_service" class="FishAndPlaces\GreenObject\Application\Fish\FishService">
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
-    <service id="fish_and_places.dam_images_query_service" class="FishAndPlaces\Dam\Application\Dam\DamImageQueryService">
+    <service id="fish_and_places.dam_images_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService">
       <argument type="service" id="fish_and_places.dam_image_repository"/>
     </service>
     <service id="fish_and_places.cms_page_repository" class="FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository">
@@ -642,7 +639,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
+                <argument>-Bt32c-5z1e9S6-Jr-XCgR</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -765,7 +762,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
+          <argument>-Bt32c-5z1e9S6-Jr-XCgR</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -786,7 +783,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
+      <argument>-Bt32c-5z1e9S6-Jr-XCgR</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -796,7 +793,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>ENq4TNlynBn5x6UNnUAEAB</argument>
+      <argument>-Bt32c-5z1e9S6-Jr-XCgR</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -880,7 +877,7 @@
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.bg.xlf</argument>
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/friendsofsymfony/user-bundle/Resources/translations/FOSUserBundle.bg.yml</argument>
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/friendsofsymfony/user-bundle/Resources/translations/validators.bg.yml</argument>
-            <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/translations/messages.bg.yml</argument>
+            <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/translations/messages.bg.yml</argument>
           </argument>
           <argument key="ca" type="collection">
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf</argument>
@@ -933,7 +930,7 @@
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.es.xlf</argument>
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/friendsofsymfony/user-bundle/Resources/translations/FOSUserBundle.es.yml</argument>
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/friendsofsymfony/user-bundle/Resources/translations/validators.es.yml</argument>
-            <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/translations/messages.es.yml</argument>
+            <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/translations/messages.es.yml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf</argument>
@@ -2239,7 +2236,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>58f4cdd1e09a22.46116817</argument>
+            <argument>58fcacba194674.77533468</argument>
           </service>
         </argument>
       </argument>
@@ -2572,7 +2569,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>58f4cdd1e09a22.46116817</argument>
+            <argument>58fcacba194674.77533468</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2908,7 +2905,7 @@
               <argument>AsseticBundle</argument>
               <argument>IvoryCKEditorBundle</argument>
               <argument>StarRatingBundle</argument>
-              <argument>DamBundle</argument>
+              <argument>GoGreenBundle</argument>
               <argument>ShopBundle</argument>
               <argument>AdminBundle</argument>
               <argument>UserBundle</argument>
@@ -3203,7 +3200,7 @@
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
             <argument type="collection">
-              <argument key="DamBundle">FishAndPlaces\Dam\Domain\Model</argument>
+              <argument key="GoGreenBundle">FishAndPlaces\GreenObject\Domain\Model</argument>
               <argument key="ShopBundle">FishAndPlaces\Shop\Domain\Model</argument>
             </argument>
           </call>
@@ -3226,7 +3223,7 @@
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
-                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/GreenObject/Infrastructure/Mapping/ORM">FishAndPlaces\GreenObject\Domain\Model</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -3242,7 +3239,7 @@
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
-                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/GreenObject/Infrastructure/Mapping/ORM">FishAndPlaces\GreenObject\Domain\Model</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -3258,7 +3255,7 @@
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
-                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/GreenObject/Infrastructure/Mapping/ORM">FishAndPlaces\GreenObject\Domain\Model</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -3274,14 +3271,14 @@
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/User/Infrastructure/Mapping/ORM">FishAndPlaces\User\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Core/Infrastructure/Mapping/ORM">FishAndPlaces\Core\Domain\Model</argument>
                         <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Shop/Infrastructure/Mapping/ORM">FishAndPlaces\Shop\Domain\Model</argument>
-                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/Dam/Infrastructure/Mapping/ORM">FishAndPlaces\Dam\Domain\Model</argument>
+                        <argument key="/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/GreenObject/Infrastructure/Mapping/ORM">FishAndPlaces\GreenObject\Domain\Model</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
                       </call>
                     </service>
                   </argument>
-                  <argument>FishAndPlaces\Dam\Domain\Model</argument>
+                  <argument>FishAndPlaces\GreenObject\Domain\Model</argument>
                 </call>
                 <call method="addDriver">
                   <argument type="service">
@@ -5862,16 +5859,16 @@
               <argument type="service">
                 <service class="%assetic.directory_resource.class%" public="false">
                   <argument type="service" id="templating.loader"/>
-                  <argument>DamBundle</argument>
-                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/DamBundle/views</argument>
+                  <argument>GoGreenBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/GoGreenBundle/views</argument>
                   <argument>/\.[^.]+\.twig$/</argument>
                 </service>
               </argument>
               <argument type="service">
                 <service class="%assetic.directory_resource.class%" public="false">
                   <argument type="service" id="templating.loader"/>
-                  <argument>DamBundle</argument>
-                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views</argument>
+                  <argument>GoGreenBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views</argument>
                   <argument>/\.[^.]+\.twig$/</argument>
                 </service>
               </argument>
@@ -5889,16 +5886,16 @@
               <argument type="service">
                 <service class="%assetic.directory_resource.class%" public="false">
                   <argument type="service" id="templating.loader"/>
-                  <argument>DamBundle</argument>
-                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/DamBundle/views</argument>
+                  <argument>GoGreenBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/Resources/GoGreenBundle/views</argument>
                   <argument>/\.[^.]+\.php$/</argument>
                 </service>
               </argument>
               <argument type="service">
                 <service class="%assetic.directory_resource.class%" public="false">
                   <argument type="service" id="templating.loader"/>
-                  <argument>DamBundle</argument>
-                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views</argument>
+                  <argument>GoGreenBundle</argument>
+                  <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views</argument>
                   <argument>/\.[^.]+\.php$/</argument>
                 </service>
               </argument>
@@ -6849,8 +6846,8 @@
         <argument>StarRating</argument>
       </call>
       <call method="addPath">
-        <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/DamBundle/Resources/views</argument>
-        <argument>Dam</argument>
+        <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views</argument>
+        <argument>GoGreen</argument>
       </call>
       <call method="addPath">
         <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/src/FishAndPlaces/UI/Bundle/ShopBundle/Resources/views</argument>

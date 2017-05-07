@@ -316,6 +316,12 @@ $catalogueBg = new MessageCatalogue('bg', array (
     'Info' => 'Кратка Информация',
     'See on Map' => 'Вижте на каратата',
     'Map' => 'Карта',
+    'Enter Location' => 'Въведете локация',
+    'Directions' => 'Упътвания',
+    'More details' => 'Повече детайли',
+    'No results found for' => 'Няма намерени резултати за',
+    'Radios in km' => 'Радиус в километри',
+    'Something went wrong. Please check your search criteria' => 'Нещо не е наред, моля проверете ващите критерии за търсене',
   ),
 ));
 $catalogueSr->addFallbackCatalogue($catalogueBg);

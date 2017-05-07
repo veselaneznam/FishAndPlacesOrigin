@@ -1,0 +1,36 @@
+FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository
+    type: entity
+    table: green_object_image
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        imageSrc:
+            type: string
+            column: image_src
+        isMain:
+            type: boolean
+            column: is_main
+    manyToOne:
+        greenObject:
+            targetEntity: FishAndPlaces\GreenObject\Domain\Model\GreenObject
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: imageCollection
+            joinColumns:
+                green_object_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
