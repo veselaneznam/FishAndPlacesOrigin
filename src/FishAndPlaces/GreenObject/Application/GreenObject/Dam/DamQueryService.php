@@ -17,7 +17,7 @@ class DamQueryService extends GreenObjectQueryService
     /**
      * @return array
      */
-    public function getDamCollection()
+    public function getCollection()
     {
         $damCollection = $this->greenObjectRepository->findAll();
 
@@ -51,7 +51,7 @@ class DamQueryService extends GreenObjectQueryService
      *
      * @return DamRepresentation
      */
-    public function getDam($id)
+    public function find($id)
     {
         return new DamRepresentation($this->greenObjectRepository->find($id));
     }
@@ -61,7 +61,7 @@ class DamQueryService extends GreenObjectQueryService
      *
      * @return DamRepresentation[]
      */
-    public function getDamByName($name)
+    public function findByName($name)
     {
         $damCollection = $this->greenObjectRepository->findByName($name);
 

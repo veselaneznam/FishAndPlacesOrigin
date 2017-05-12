@@ -23,16 +23,16 @@ abstract class GreenObjectService
     /**
      * @param GreenObjectRepository       $greenObjectRepository
      * @param GeoLocatorService           $geoLocatorService
-     * @param GreenObjectImagesRepository $damImagesRepository
+     * @param GreenObjectImagesRepository $imagesRepository
      */
     public function __construct(
         GreenObjectRepository $greenObjectRepository,
         GeoLocatorService $geoLocatorService,
-        GreenObjectImagesRepository $damImagesRepository
+        GreenObjectImagesRepository $imagesRepository
     ) {
         $this->greenObjectRepository = $greenObjectRepository;
         $this->geoLocatorService = $geoLocatorService;
-        $this->greenObjectImagesRepository = $damImagesRepository;
+        $this->greenObjectImagesRepository = $imagesRepository;
     }
 
     /**

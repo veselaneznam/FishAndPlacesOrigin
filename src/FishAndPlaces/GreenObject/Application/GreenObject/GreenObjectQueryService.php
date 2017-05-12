@@ -34,6 +34,24 @@ abstract class GreenObjectQueryService
      */
     abstract protected function convertToRepresentation(array $collection);
 
+    /**
+     * @return GreenObjectRepresentation[]
+     */
+    abstract public function getCollection();
+
+    /**
+     * @param int $id
+     *
+     * @return GreenObjectRepresentation
+     */
+    abstract public function find($id);
+
+    /**
+     * @param string $name
+     *
+     * @return GreenObjectRepresentation
+     */
+    abstract public function findByName($name);
 
     /**
      * @param string $data
@@ -66,11 +84,6 @@ abstract class GreenObjectQueryService
             new DomainLocation($location->getLat(), $location->getLon())
         );
         return $this->convertToRepresentation($searchResultByLocation);
-    }
-
-    public function searchDam($data)
-    {
-
     }
 
     /**

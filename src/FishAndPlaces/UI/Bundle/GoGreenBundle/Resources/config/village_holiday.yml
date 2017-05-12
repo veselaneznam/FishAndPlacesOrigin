@@ -1,0 +1,18 @@
+services:
+    fish_and_places.village_holiday_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineVillageHolidayRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\VillageHoliday ]
+
+    fish_and_places.village_holiday_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayQueryService
+        arguments:
+            - "@fish_and_places.village_holiday_repository"
+            - "@fish_and_places.geolocator"
+
+    fish_and_places.village_holiday_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayService
+        arguments:
+            - "@fish_and_places.village_holiday_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.greenobject_image_repository"

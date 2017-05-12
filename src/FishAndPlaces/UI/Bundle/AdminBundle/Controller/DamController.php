@@ -35,12 +35,12 @@ class DamController extends Controller
          */
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
-        $damCollection = $damQueryService->getDamCollection();
+        $damCollection = $damQueryService->getCollection();
         $searchForm = $this->createForm(SearchType::class);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $damCollection = $damQueryService->getDamByName($searchForm->get('search')->getData());
+            $damCollection = $damQueryService->findByName($searchForm->get('search')->getData());
         }
 
         return $this->render('@Admin/dam/list.html.twig', array(
@@ -99,7 +99,7 @@ class DamController extends Controller
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
-        $damRepresentation = $damQueryService->getDam($id);
+        $damRepresentation = $damQueryService->find($id);
 
         if(null !== $damRepresentation->getMainImage()->getImageSrc()) {
             $damRepresentation->setMainImage(
@@ -149,7 +149,7 @@ class DamController extends Controller
     public function deactivateAction(Request $request, $id)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam($id);
+        $dam = $damQueryService->find($id);
 
         $form = $this->createDeactivateForm($dam->getId());
         if ($request->getMethod() == 'DELETE') {
@@ -187,7 +187,7 @@ class DamController extends Controller
     public function activateAction(Request $request, $id)
     {
         $productQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $productQueryService->getDam($id);
+        $dam = $productQueryService->find($id);
 
         $form = $this->createActivateForm($dam->getId());
         if ($request->getMethod() == 'POST') {

@@ -1,0 +1,18 @@
+services:
+    fish_and_places.camp_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCampRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\Camp ]
+
+    fish_and_places.camp_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampQueryService
+        arguments:
+            - "@fish_and_places.camp_repository"
+            - "@fish_and_places.geolocator"
+
+    fish_and_places.camp_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampService
+        arguments:
+            - "@fish_and_places.camp_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.greenobject_image_repository"

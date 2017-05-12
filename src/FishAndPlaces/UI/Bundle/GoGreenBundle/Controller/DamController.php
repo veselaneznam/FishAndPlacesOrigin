@@ -104,7 +104,7 @@ class DamController extends Controller
     public function damDetailView(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int) $request->get('id'));
+        $dam = $damQueryService->find((int) $request->get('id'));
         $rating = $this->createForm(DamRatingType::class, ['rating' => $dam->getRating()]);
         return $this->render('@GoGreen/dam/detail_view.html.twig', [
             'dam' => $dam,
@@ -122,7 +122,7 @@ class DamController extends Controller
     public function loadMapDirections(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int) $request->get('id'));
+        $dam = $damQueryService->find((int) $request->get('id'));
         return $this->render('@GoGreen/dam/map_directions.html.twig', [
             'dam' => $dam,
             'userLocation' => $this->getUserLocatiоn($request)

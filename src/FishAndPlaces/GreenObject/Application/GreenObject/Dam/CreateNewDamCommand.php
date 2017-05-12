@@ -18,16 +18,16 @@ class CreateNewDamCommand extends CreateNewGreenObjectCommand
     protected $greenObjectImage;
 
     /**
-     * @param DamRepresentation $damRepresentation
+     * @param DamRepresentation $campRepresentation
      * @param User              $user
      * @param string            $fileName
      */
-    public function __construct(DamRepresentation $damRepresentation, User $user, $fileName = null)
+    public function __construct(DamRepresentation $campRepresentation, User $user, $fileName = null)
     {
 
-        parent::__construct($damRepresentation, new Dam(), $user, $fileName);
+        parent::__construct($campRepresentation, new Dam(), $user, $fileName);
 
-        foreach ($damRepresentation->getFishCollection() as $fishRepresentation) {
+        foreach ($campRepresentation->getFishCollection() as $fishRepresentation) {
             $this->greenObject->addFish($fishRepresentation->getFish());
         }
     }

@@ -4,6 +4,7 @@ namespace FishAndPlaces\GreenObject\Application\GreenObject\Dam;
 
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService;
+use FishAndPlaces\GreenObject\Domain\Model\Dam;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectImagesRepository;
 use FishAndPlaces\GreenObject\Domain\Repository\DamRepository;
 use FishAndPlaces\GreenObject\Domain\Repository\FishRepository;
@@ -23,38 +24,40 @@ class DamService extends GreenObjectService
     private $fishRepository;
 
     /**
-     * @param DamRepository               $damRepository
+     * @param DamRepository               $cabinRepository
      * @param GeoLocatorService           $geoLocatorService
-     * @param GreenObjectImagesRepository $damImagesRepository
+     * @param GreenObjectImagesRepository $imagesRepository
      * @param FishRepository              $fishRepository
      */
     public function __construct(
-        DamRepository $damRepository,
+        DamRepository $cabinRepository,
         GeoLocatorService $geoLocatorService,
-        GreenObjectImagesRepository $damImagesRepository,
+        GreenObjectImagesRepository $imagesRepository,
         FishRepository $fishRepository
     ) {
-        parent::__construct($damRepository, $geoLocatorService, $damImagesRepository);
+        parent::__construct($cabinRepository, $geoLocatorService, $imagesRepository);
         $this->fishRepository = $fishRepository;
     }
 
-//    /**
-//     * @param UpdateDamCommand $command
-//     *
-//     * @throws \Exception
-//     */
-//    public function update(UpdateDamCommand $command)
-//    {
-//        parent::update($command);
-//        $dam = $command->getGreenObject();
-//        if(!$dam instanceof GreenObject) {
-//            throw new \Exception('You are trying to save, something different from GreenObject');
-//        }
-//
-//        foreach ($dam->getFishCollection() as $fish)
-//        {
-//            $this->fishRepository->update($fish);
-//        }
-//        $this->damRepository->update($dam);
-//    }
+    /**
+     * @param UpdateDamCommand $command
+     *
+     * @throws \Exception
+     */
+    public function update(UpdateDamCommand $command)
+    {
+        parent::update($command);
+
+        $dam = $command->getGreenObject();
+        if(!$dam instanceof Dam) {
+            throw new \Exception('You are trying to save, something different from Dam');
+        }
+
+        foreach ($dam->getFishCollection() as $fish)
+        {
+            $this->fishRepository->update($fish);
+        }
+
+        $this->damRepository->update($dam);
+    }
 }

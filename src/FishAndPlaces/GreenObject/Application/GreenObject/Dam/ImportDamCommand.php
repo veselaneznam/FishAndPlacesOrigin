@@ -14,11 +14,11 @@ class ImportDamCommand extends ImportGreenObjectCommand
     protected $greenObject;
 
     /**
-     * @param DamRepresentation $damRepresentation
+     * @param DamRepresentation $cabinRepresentation
      */
-    public function __construct(DamRepresentation $damRepresentation)
+    public function __construct(DamRepresentation $cabinRepresentation)
     {
-        parent::__construct($damRepresentation, new Dam());
+        parent::__construct($cabinRepresentation, new Dam());
         $this->greenObject->setType(GreenObjectType::DAM);
     }
 

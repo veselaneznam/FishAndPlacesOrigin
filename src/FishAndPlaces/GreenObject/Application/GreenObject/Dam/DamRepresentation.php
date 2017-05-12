@@ -19,16 +19,16 @@ class DamRepresentation extends GreenObjectRepresentation
     protected $greenObject;
 
     /**
-     * @param Dam|null $dam
+     * @param Dam|null $villageHoliday
      */
-    public function __construct(Dam $dam = null)
+    public function __construct(Dam $villageHoliday = null)
     {
-        parent::__construct($dam);
-        if (null !== $dam) {
-            foreach ($dam->getFishCollection()->toArray() as $fish) {
+        parent::__construct($villageHoliday);
+        if (null !== $villageHoliday) {
+            foreach ($villageHoliday->getFishCollection()->toArray() as $fish) {
                 $this->fishCollection[] = new FishRepresentation($fish);
             }
-            $this->greenObject = $dam;
+            $this->greenObject = $villageHoliday;
         }
     }
 

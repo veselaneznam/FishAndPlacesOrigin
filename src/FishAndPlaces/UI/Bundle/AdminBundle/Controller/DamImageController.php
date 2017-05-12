@@ -28,7 +28,7 @@ class DamImageController extends Controller
     public function indexAction(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int) $request->get('id'));
+        $dam = $damQueryService->find((int) $request->get('id'));
         return $this->render('@Admin/damImage/list.html.twig', array(
             'damImageCollection' => $dam->getImageCollection(),
             'path' => $this->getParameter('images_upload'),
@@ -46,7 +46,7 @@ class DamImageController extends Controller
     public function uploadImagesAction(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $damRepresentation = $damQueryService->getDam((int) $request->get('id'));
+        $damRepresentation = $damQueryService->find((int) $request->get('id'));
         $damImageCollection = [];
         $successCounter = 0;
         $tryAgainCounter = 0;
