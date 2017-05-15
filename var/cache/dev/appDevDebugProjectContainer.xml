@@ -391,7 +391,7 @@
     <parameter key="assetic.write_to">/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">/usr/bin/node</parameter>
+    <parameter key="assetic.node.bin">/usr/local/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.reactjsx.bin">/usr/bin/jsx</parameter>
@@ -483,6 +483,32 @@
     <service id="fish_and_places.images_uploader" class="FishAndPlaces\GreenObject\Application\Core\FileUploader">
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/app/../web/uploads/images/</argument>
     </service>
+    <service id="fish_and_places.cabin_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCabinRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Cabin</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.cabin_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampQueryService">
+      <argument type="service" id="fish_and_places.cabin_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+    </service>
+    <service id="fish_and_places.cabin_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinService">
+      <argument type="service" id="fish_and_places.cabin_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
+    </service>
+    <service id="fish_and_places.camp_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCampRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Camp</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.camp_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampQueryService">
+      <argument type="service" id="fish_and_places.camp_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+    </service>
+    <service id="fish_and_places.camp_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampService">
+      <argument type="service" id="fish_and_places.camp_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
+    </service>
     <service id="fish_and_places.dam_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository">
       <argument>FishAndPlaces\GreenObject\Domain\Model\Dam</argument>
       <factory service="doctrine" method="getRepository"/>
@@ -490,19 +516,6 @@
     <service id="fish_and_places.fish_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository">
       <argument>FishAndPlaces\GreenObject\Domain\Model\Fish</argument>
       <factory service="doctrine" method="getRepository"/>
-    </service>
-    <service id="fish_and_places.dam_image_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository">
-      <argument>FishAndPlaces\GreenObject\Domain\Model\DamImage</argument>
-      <factory service="doctrine" method="getRepository"/>
-    </service>
-    <service id="fish_and_places.local_geocoder_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository">
-      <argument>FishAndPlaces\GreenObject\Domain\Model\Geocoder</argument>
-      <factory service="doctrine" method="getRepository"/>
-    </service>
-    <service id="fish_and_places.geocoder_proxy" class="FishAndPlaces\GreenObject\Infrastructure\Geocoder\GeocoderProxy"/>
-    <service id="fish_and_places.geolocator" class="FishAndPlaces\GreenObject\Application\Core\GeoLocatorService">
-      <argument type="service" id="fish_and_places.geocoder_proxy"/>
-      <argument type="service" id="fish_and_places.local_geocoder_repository"/>
     </service>
     <service id="fish_and_places.dam_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService">
       <argument type="service" id="fish_and_places.dam_repository"/>
@@ -514,14 +527,46 @@
     <service id="fish_and_places.dam_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamService">
       <argument type="service" id="fish_and_places.dam_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
-      <argument type="service" id="fish_and_places.dam_image_repository"/>
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
     <service id="fish_and_places.fish_service" class="FishAndPlaces\GreenObject\Application\Fish\FishService">
       <argument type="service" id="fish_and_places.fish_repository"/>
     </service>
-    <service id="fish_and_places.dam_images_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService">
-      <argument type="service" id="fish_and_places.dam_image_repository"/>
+    <service id="fish_and_places.village_holiday_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineVillageHolidayRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\VillageHoliday</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.village_holiday_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayQueryService">
+      <argument type="service" id="fish_and_places.village_holiday_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+    </service>
+    <service id="fish_and_places.village_holiday_service" class="FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayService">
+      <argument type="service" id="fish_and_places.village_holiday_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
+    </service>
+    <service id="fish_and_places.greenobject_image_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.local_geocoder_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\Geocoder</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.geocoder_proxy" class="FishAndPlaces\GreenObject\Infrastructure\Geocoder\GeocoderProxy"/>
+    <service id="fish_and_places.geolocator" class="FishAndPlaces\GreenObject\Application\Core\GeoLocatorService">
+      <argument type="service" id="fish_and_places.geocoder_proxy"/>
+      <argument type="service" id="fish_and_places.local_geocoder_repository"/>
+    </service>
+    <service id="fish_and_places.green_object_repository" class="FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectRepository">
+      <argument>FishAndPlaces\GreenObject\Domain\Model\GreenObject</argument>
+      <factory service="doctrine" method="getRepository"/>
+    </service>
+    <service id="fish_and_places.green_object_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService"/>
+    <service id="fish_and_places.green_object_service" class="FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService"/>
+    <service id="fish_and_places.greenobject_images_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService">
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
     </service>
     <service id="fish_and_places.cms_page_repository" class="FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository">
       <argument>FishAndPlaces\Core\Domain\Model\CmsPage</argument>
@@ -639,7 +684,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>NqGsHwCw6Ux2DL90GR0CEx</argument>
+                <argument>5ybSLl7Bgo8H3ONOvbkmTw</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -762,7 +807,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>NqGsHwCw6Ux2DL90GR0CEx</argument>
+          <argument>5ybSLl7Bgo8H3ONOvbkmTw</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -783,7 +828,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>NqGsHwCw6Ux2DL90GR0CEx</argument>
+      <argument>5ybSLl7Bgo8H3ONOvbkmTw</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -793,7 +838,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>NqGsHwCw6Ux2DL90GR0CEx</argument>
+      <argument>5ybSLl7Bgo8H3ONOvbkmTw</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2236,7 +2281,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>59102aa3b3aee3.66753036</argument>
+            <argument>591989caed4881.78268125</argument>
           </service>
         </argument>
       </argument>
@@ -2569,7 +2614,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>59102aa3b3aee3.66753036</argument>
+            <argument>591989caed4881.78268125</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

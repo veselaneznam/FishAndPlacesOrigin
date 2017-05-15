@@ -1,19 +1,19 @@
 
-{% if damCollection is defined %}
+{% if greenObjectCollection is defined %}
 <div class="row text-center">
 
     <div class="col-lg-10">
         <h3 class="page-header">{{ title }}</h3>
     </div>
-    {% for dam in damCollection %}
+    {% for greenObject in greenObjectCollection %}
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="{{ path('dam_view', {'id': dam.id}) }}">
-            {% if dam.mainImage.webPath != null %}
-                <img class="img-responsive" src="{{  dam.mainImage.webPath }}" alt="{{ dam.name }}">
+        <a class="thumbnail" href="{{ path('green_object_view', {'id': greenObject.id}) }}">
+            {% if greenObject.mainImage.webPath != null %}
+                <img class="img-responsive" src="{{  greenObject.mainImage.webPath }}" alt="{{ greenObject.name }}">
             {% else %}
                 <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" class="img-responsive">
             {% endif %}
-            <span>{{ dam.name }}</span>
+            <span>{{ greenObject.name }}</span>
         </a>
     </div>
     {% endfor %}

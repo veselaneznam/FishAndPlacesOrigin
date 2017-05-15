@@ -10,7 +10,7 @@ use FishAndPlaces\GreenObject\Domain\Value\Rating;
 use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 use Symfony\Component\HttpFoundation\File\File;
 
-abstract class GreenObjectRepresentation
+class GreenObjectRepresentation
 {
     /**
      * @var int

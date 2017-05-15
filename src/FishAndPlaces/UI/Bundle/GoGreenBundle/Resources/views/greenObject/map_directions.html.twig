@@ -2,10 +2,10 @@
 {% block javascripts %}
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=bg"></script>
     <script>
-        var userPosition = navigator.geolocation.getCurrentPosition(initMap);
+        var position = navigator.geolocation.getCurrentPosition(initMap);
         function initMap(position) {
             var pointA = new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                pointB = new google.maps.LatLng({{dam.location.lat}}, {{ dam.location.lon }}),
+                pointB = new google.maps.LatLng({{greenObject.location.lat}}, {{ greenObject.location.lon }}),
                 myOptions = {
                     zoom: 7,
                     center: pointA
@@ -26,7 +26,7 @@
                 }),
                 markerB = new google.maps.Marker({
                     position: pointB,
-                    title: "{{ dam.name }}",
+                    title: "{{ greenObject.name }}",
                     label: "B",
                     map: map
                 });
@@ -79,7 +79,6 @@
             height: 100%;
             float: left;
             width: 63%;
-            height: 100%;
         }
         #right-panel {
             float: right;

@@ -3,11 +3,11 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
+use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
 use FishAndPlaces\GreenObject\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
-
-abstract class GreenObjectQueryService
+ class GreenObjectQueryService extends BaseQueryService
 {
     /** @var GreenObjectRepository */
     protected $greenObjectRepository;
@@ -26,32 +26,6 @@ abstract class GreenObjectQueryService
         $this->greenObjectRepository = $objectRepository;
         $this->geoLocatorService = $geoLocatorService;
     }
-
-    /**
-     * @param array $collection
-     *
-     * @return GreenObjectRepresentation[]
-     */
-    abstract protected function convertToRepresentation(array $collection);
-
-    /**
-     * @return GreenObjectRepresentation[]
-     */
-    abstract public function getCollection();
-
-    /**
-     * @param int $id
-     *
-     * @return GreenObjectRepresentation
-     */
-    abstract public function find($id);
-
-    /**
-     * @param string $name
-     *
-     * @return GreenObjectRepresentation
-     */
-    abstract public function findByName($name);
 
     /**
      * @param string $data
@@ -95,4 +69,59 @@ abstract class GreenObjectQueryService
 
         return $this->convertToRepresentation($greenObjects);
     }
-}
+
+     /**
+      * @return array
+      */
+     public function getCollection()
+     {
+         $greenObjects = $this->greenObjectRepository->findAll();
+
+         return array_map(
+             function (GreenObject $dam) {
+                 return new GreenObjectRepresentation($dam);
+             }, $greenObjects
+         );
+     }
+
+     /**
+      * @param array $collection
+      *
+      * @return GreenObjectRepresentation[]
+      */
+     protected function convertToRepresentation(array $collection)
+     {
+         if (null !== $collection) {
+             return array_map(
+                 function (GreenObject $greenObject) {
+                     $greenObjectRepresentation = new GreenObjectRepresentation($greenObject);
+                     return $greenObjectRepresentation;
+                 }, $collection
+             );
+         }
+         return [];
+     }
+
+     /**
+      * @param $id
+      *
+      * @return GreenObjectRepresentation
+      */
+     public function find($id)
+     {
+         return new GreenObjectRepresentation($this->greenObjectRepository->find($id));
+     }
+
+     /**
+      * @param string $name
+      *
+      * @return GreenObjectRepresentation[]
+      */
+     public function findByName($name)
+     {
+         $greenObjects = $this->greenObjectRepository->findByName($name);
+
+         return $this->convertToRepresentation($greenObjects);
+     }
+
+ }

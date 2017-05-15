@@ -385,4 +385,14 @@ abstract class GreenObject implements Entity
         $this->type = $type;
         return $this;
     }
+
+    /**
+     * @param $type
+     *
+     * @return bool
+     */
+    public function isTypeOf($type)
+    {
+        return $this->type === $type;
+    }
 }

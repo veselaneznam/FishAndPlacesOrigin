@@ -2,23 +2,22 @@
 
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
-
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\DeleteGreenObjectImagesCommand;
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\UpdateGreenObjectImagesCommand;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectImagesRepository;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
 
-abstract class GreenObjectService
+class GreenObjectService
 {
     /** @var GreenObjectRepository */
-    private $greenObjectRepository;
+    protected $greenObjectRepository;
 
     /** @var GeoLocatorService */
-    private $geoLocatorService;
+    protected $geoLocatorService;
 
     /** @var GreenObjectImagesRepository */
-    private $greenObjectImagesRepository;
+    protected $greenObjectImagesRepository;
 
     /**
      * @param GreenObjectRepository       $greenObjectRepository

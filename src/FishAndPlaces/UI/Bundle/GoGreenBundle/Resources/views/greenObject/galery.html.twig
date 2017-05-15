@@ -11,13 +11,13 @@
 
                             <div class="carousel-inner">
                                 {% set counter = 0 %}
-                                {% for damImage in dam.imageCollection %}
+                                {% for greenObjectImage in greenObject.imageCollection %}
                                     {% if counter == 0 %}
                                 <div class="active item" data-slide-number="{{ counter }}">
-                                    <img src="{{ damImage.webPath }}"></div>
+                                    <img src="{{ greenObjectImage.webPath }}"></div>
                                     {% else %}
                                         <div class="item" data-slide-number="{{ counter }}">
-                                            <img src="{{ damImage.webPath }}"></div>
+                                            <img src="{{ greenObjectImage.webPath }}"></div>
                                 {% endif %}
                                     {% set counter = counter + 1 %}
                                 {% endfor %}
@@ -41,14 +41,14 @@
             <!-- Bottom switcher of slider -->
             <ul class="hide-bullets">
                 {% set counter = 0 %}
-                {% for damImage in dam.imageCollection %}
+                {% for greenObjectImage in greenObject.imageCollection %}
                 {% if counter == 0 %}
                 <li class="col-sm-2">
-                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ greenObjectImage.webPath }}"></a>
                 </li>
                 {% else %}
                 <li class="col-sm-2">
-                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ greenObjectImage.webPath }}"></a>
                 </li>
                 {% endif %}
                     {% set counter = counter + 1 %}

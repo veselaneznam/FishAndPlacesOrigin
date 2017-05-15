@@ -105,20 +105,25 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // dam
+        // fish_view
+        if ($pathinfo === '/fish/{$id}') {
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\FishController::detailViewAction',  '_route' => 'fish_view',);
+        }
+
+        // green_object
         if (rtrim($pathinfo, '/') === '') {
             if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
                 $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                goto not_dam;
+                goto not_green_object;
             }
 
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'dam');
+                return $this->redirect($pathinfo.'/', 'green_object');
             }
 
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::indexAction',  '_route' => 'dam',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::indexAction',  '_route' => 'green_object',);
         }
-        not_dam:
+        not_green_object:
 
         if (0 === strpos($pathinfo, '/map')) {
             // map_view
@@ -128,7 +133,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     goto not_map_view;
                 }
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_view')), array (  'radius' => 100,  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::mapAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_view')), array (  'radius' => 100,  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::mapAction',));
             }
             not_map_view:
 
@@ -143,7 +148,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return $this->redirect($pathinfo.'/', 'post_map_view');
                 }
 
-                return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::postMapAction',  '_route' => 'post_map_view',);
+                return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::postMapAction',  '_route' => 'post_map_view',);
             }
             not_post_map_view:
 
@@ -151,25 +156,12 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         // _searchNearBy
         if ($pathinfo === '/searchNearBy') {
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::searchNearBy',  '_route' => '_searchNearBy',);
+            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::searchNearBy',  '_route' => '_searchNearBy',);
         }
 
-        if (0 === strpos($pathinfo, '/dam')) {
-            // dam_view
-            if (preg_match('#^/dam/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::damDetailView',));
-            }
-
-            // dam_map_direction
-            if (0 === strpos($pathinfo, '/dam/map_direction') && preg_match('#^/dam/map_direction/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::loadMapDirections',));
-            }
-
-        }
-
-        // fish_view
-        if ($pathinfo === '/fish/{$id}') {
-            return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\FishController::detailViewAction',  '_route' => 'fish_view',);
+        // green_object_map_direction
+        if (0 === strpos($pathinfo, '/green_object/map_direction') && preg_match('#^/green_object/map_direction/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::loadMapDirections',));
         }
 
         // page_view
@@ -178,6 +170,86 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         if (0 === strpos($pathinfo, '/admin')) {
+            if (0 === strpos($pathinfo, '/admin/cabin')) {
+                // cabin_list
+                if ($pathinfo === '/admin/cabin') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CabinController::indexAction',  '_route' => 'cabin_list',);
+                }
+
+                // create_cabin
+                if ($pathinfo === '/admin/cabin/add') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CabinController::addAction',  '_route' => 'create_cabin',);
+                }
+
+                // edit_cabin
+                if (0 === strpos($pathinfo, '/admin/cabin/edit') && preg_match('#^/admin/cabin/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'edit_cabin')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CabinController::editAction',));
+                }
+
+            }
+
+            // deactivate_cabin
+            if (0 === strpos($pathinfo, '/admin/deactivate') && preg_match('#^/admin/deactivate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'DELETE', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'DELETE', 'HEAD'));
+                    goto not_deactivate_cabin;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'deactivate_cabin')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CabinController::deactivateAction',));
+            }
+            not_deactivate_cabin:
+
+            // activate_cabin
+            if (0 === strpos($pathinfo, '/admin/activate') && preg_match('#^/admin/activate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_activate_cabin;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'activate_cabin')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CabinController::activateAction',));
+            }
+            not_activate_cabin:
+
+            if (0 === strpos($pathinfo, '/admin/camp')) {
+                // camp_list
+                if ($pathinfo === '/admin/camp') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CampController::indexAction',  '_route' => 'camp_list',);
+                }
+
+                // create_camp
+                if ($pathinfo === '/admin/camp/add') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CampController::addAction',  '_route' => 'create_camp',);
+                }
+
+                // edit_camp
+                if (0 === strpos($pathinfo, '/admin/camp/edit') && preg_match('#^/admin/camp/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'edit_camp')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CampController::editAction',));
+                }
+
+            }
+
+            // deactivate_camp
+            if (0 === strpos($pathinfo, '/admin/deactivate') && preg_match('#^/admin/deactivate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'DELETE', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'DELETE', 'HEAD'));
+                    goto not_deactivate_camp;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'deactivate_camp')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CampController::deactivateAction',));
+            }
+            not_deactivate_camp:
+
+            // activate_camp
+            if (0 === strpos($pathinfo, '/admin/activate') && preg_match('#^/admin/activate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_activate_camp;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'activate_camp')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\CampController::activateAction',));
+            }
+            not_activate_camp:
+
             if (0 === strpos($pathinfo, '/admin/page')) {
                 // page_list
                 if ($pathinfo === '/admin/page') {
@@ -239,30 +311,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             }
             not_activate_dam:
 
-            if (0 === strpos($pathinfo, '/admin/dam')) {
-                // dam_images_list
-                if ($pathinfo === '/admin/dam/images/{$id}') {
-                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\DamImageController::indexAction',  '_route' => 'dam_images_list',);
-                }
-
-                // dam_images_upload
-                if ($pathinfo === '/admin/dam/upload/images/{$id}') {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_dam_images_upload;
-                    }
-
-                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\DamImageController::uploadImagesAction',  '_route' => 'dam_images_upload',);
-                }
-                not_dam_images_upload:
-
-                // dam_images_delete
-                if (0 === strpos($pathinfo, '/admin/dam/images/delete') && preg_match('#^/admin/dam/images/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_images_delete')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\DamImageController::deleteAction',));
-                }
-
-            }
-
             if (0 === strpos($pathinfo, '/admin/fish')) {
                 // fish_list
                 if ($pathinfo === '/admin/fish') {
@@ -281,6 +329,35 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
+            if (0 === strpos($pathinfo, '/admin/green_object')) {
+                // green_object_view
+                if (preg_match('#^/admin/green_object/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectController::damDetailView',));
+                }
+
+                // green_object_images_list
+                if ($pathinfo === '/admin/green_object/images/{$id}') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectImageController::indexAction',  '_route' => 'green_object_images_list',);
+                }
+
+                // green_object_images_upload
+                if ($pathinfo === '/admin/green_object/upload/images/{$id}') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_green_object_images_upload;
+                    }
+
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectImageController::uploadImagesAction',  '_route' => 'green_object_images_upload',);
+                }
+                not_green_object_images_upload:
+
+                // green_object_images_delete
+                if (0 === strpos($pathinfo, '/admin/green_object/images/delete') && preg_match('#^/admin/green_object/images/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_images_delete')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectImageController::deleteAction',));
+                }
+
+            }
+
             // admin
             if (rtrim($pathinfo, '/') === '/admin') {
                 if (substr($pathinfo, -1) !== '/') {
@@ -294,6 +371,46 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             if ($pathinfo === '/admin/login') {
                 return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
             }
+
+            if (0 === strpos($pathinfo, '/admin/village')) {
+                // village_holiday_list
+                if ($pathinfo === '/admin/villageHoliday') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\VillageHolidayController::indexAction',  '_route' => 'village_holiday_list',);
+                }
+
+                // create_villageHoliday
+                if ($pathinfo === '/admin/village_holiday/add') {
+                    return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\VillageHolidayController::addAction',  '_route' => 'create_villageHoliday',);
+                }
+
+                // edit_village_holiday
+                if (0 === strpos($pathinfo, '/admin/villageHoliday/edit') && preg_match('#^/admin/villageHoliday/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'edit_village_holiday')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\VillageHolidayController::editAction',));
+                }
+
+            }
+
+            // deactivate_village_holiday
+            if (0 === strpos($pathinfo, '/admin/deactivate') && preg_match('#^/admin/deactivate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'DELETE', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'DELETE', 'HEAD'));
+                    goto not_deactivate_village_holiday;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'deactivate_village_holiday')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\VillageHolidayController::deactivateAction',));
+            }
+            not_deactivate_village_holiday:
+
+            // activate_village_holiday
+            if (0 === strpos($pathinfo, '/admin/activate') && preg_match('#^/admin/activate/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_activate_village_holiday;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'activate_village_holiday')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\VillageHolidayController::activateAction',));
+            }
+            not_activate_village_holiday:
 
         }
 

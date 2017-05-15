@@ -28,8 +28,8 @@
                 <tr>
                     <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ address }}</td>
                 </tr>
-                    <td><a href="{{ path('dam_map_direction', {'id': id}) }}">{% trans %}Directions{% endtrans %}</a></td>
-                    <td><a href="{{ path('dam_view', {'id': id}) }}">{% trans %}More details{% endtrans %}</a></td>
+                    <td><a href="{{ path('green_object_map_direction', {'id': id}) }}">{% trans %}Directions{% endtrans %}</a></td>
+                    <td><a href="{{ path('green_object_view', {'id': id}) }}">{% trans %}More details{% endtrans %}</a></td>
                 </tr>
                 </tbody>
             </table>
