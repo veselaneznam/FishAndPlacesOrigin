@@ -17,40 +17,40 @@ class GreenObjectImageQueryService
     }
 
     /**
-     * @param  GreenObject $damId
+     * @param  GreenObject $greenObjectId
      *
      * @return GreenObjectImageRepresentation[]
      */
-    public function getDamImages($damId)
+    public function getImages($greenObjectId)
     {
-        $damImages = $this->greenObjectImagesRepository->findByGreenObject($damId);
+        $greenObject = $this->greenObjectImagesRepository->findByGreenObject($greenObjectId);
 
-        return $this->convertToRepresentation($damImages);
+        return $this->convertToRepresentation($greenObject);
     }
 
     /**
-     * @param int $damImageId
+     * @param int $greenObjectImageId
      *
      * @return GreenObjectImageRepresentation
      */
-    public function getDamImage($damImageId)
+    public function getImage($greenObjectImageId)
     {
-        return new GreenObjectImageRepresentation($this->greenObjectImagesRepository->find($damImageId));
+        return new GreenObjectImageRepresentation($this->greenObjectImagesRepository->find($greenObjectImageId));
     }
 
     /**
-     * @param GreenObjectImage[] $damImages
+     * @param GreenObjectImage[] $greenObjectImages
      *
      * @return GreenObjectImageRepresentation[]
      */
-    private function convertToRepresentation($damImages)
+    private function convertToRepresentation($greenObjectImages)
     {
-        if (null !== $damImages) {
+        if (null !== $greenObjectImages) {
             return array_map(
-                function (GreenObjectImage $damImage) {
-                    $damImageRepresentation = new GreenObjectImageRepresentation($damImage);
-                    return $damImageRepresentation;
-                }, $damImages
+                function (GreenObjectImage $greenObjectImage) {
+                    $greenObjectImageRepresentation = new GreenObjectImageRepresentation($greenObjectImage);
+                    return $greenObjectImageRepresentation;
+                }, $greenObjectImages
             );
         }
         return [];

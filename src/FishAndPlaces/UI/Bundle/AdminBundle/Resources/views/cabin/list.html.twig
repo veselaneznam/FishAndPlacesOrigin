@@ -3,8 +3,8 @@
     {{ parent() }}
     <div class="container">
         <h2>Dam List</h2>
-        <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Dam</a>
-        {% include '@Admin/dam/search.html.twig' %}
+        <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Cabin</a>
+        {% include '@Admin/cabin/search.html.twig' %}
         <table class="table table-striped">
             <thead>
             <tr>
@@ -17,35 +17,35 @@
             </tr>
             </thead>
             <tbody>
-            {% if damCollection is not null %}
-                {% for dam in damCollection %}
+            {% if cabinCollection is not null %}
+                {% for cabin in cabinCollection %}
                     <tr>
                         <td>
-                            {% if dam.mainImage.webPath != null %}
-                            <img src="{{ dam.mainImage.webPath }}" width="100px" class="thumbnail">
+                            {% if cabin.mainImage.webPath != null %}
+                            <img src="{{ cabin.mainImage.webPath }}" width="100px" class="thumbnail">
                             {% else %}
                                 <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" width="100px" class="thumbnail">
                             {% endif %}
                         </td>
-                        <td>{{ dam.name }}</td>
-                        <td>{% if dam.isActive == 1 %}
+                        <td>{{ cabin.name }}</td>
+                        <td>{% if cabin.isActive == 1 %}
                             <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
                             {% else %}
                             <span class="glyphicon glyphicon-remove red" style="color: red" aria-hidden="true"></span>
                             {% endif %}
                         </td>
-                        <td>{{ dam.showOnFirstPage }}</td>
-                        <td>{{ dam.priceProPerson }}</td>
+                        <td>{{ cabin.showOnFirstPage }}</td>
+                        <td>{{ cabin.priceProPerson }}</td>
                         <td>
-                            <a href="{{ path('edit_dam', { 'id': dam.id }) }}" class="btn btn-success"
+                            <a href="{{ path('edit_cabin', { 'id': cabin.id }) }}" class="btn btn-success"
                                role="button">Edit</a>
-                            <a href="{{ path('dam_images_list', { 'id': dam.id }) }}" class="btn btn-success"
+                            <a href="{{ path('cabin_images_list', { 'id': cabin.id }) }}" class="btn btn-success"
                                role="button">Add Images</a>
-                            {% if dam.isActive == 1 %}
-                                <a href="{{ path('deactivate_dam', { 'id': dam.id }) }}"
+                            {% if cabin.isActive == 1 %}
+                                <a href="{{ path('deactivate_cabin', { 'id': cabin.id }) }}"
                                    class="btn delete btn-danger" role="button">Deactivate</a>
                             {% else %}
-                                <a href="{{ path('activate_dam', { 'id': dam.id }) }}"
+                                <a href="{{ path('activate_cabin', { 'id': cabin.id }) }}"
                                    class="btn delete btn-danger" role="button">Activate</a>
                             {% endif %}
                         </td>

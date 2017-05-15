@@ -23,3 +23,23 @@ services:
         arguments:
             - "@fish_and_places.geocoder_proxy"
             - "@fish_and_places.local_geocoder_repository"
+
+    fish_and_places.green_object_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\GreenObject ]
+
+    fish_and_places.green_object_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService
+        arguments:
+        aruments:
+            - "@fish_and_places.green_object_repository"
+            - "@fish_and_places.geolocator"
+
+    fish_and_places.green_object_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService
+        arguments:
+        aruments:
+            - "@fish_and_places.green_object_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.greenobject_image_repository"

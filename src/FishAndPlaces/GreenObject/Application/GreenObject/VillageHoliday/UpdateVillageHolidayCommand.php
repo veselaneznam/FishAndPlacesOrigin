@@ -1,6 +1,6 @@
 <?php
 
-namespace FishAndPlaces\GreenObject\Application\GreenObject\Camp;
+namespace FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\UpdateGreenObjectCommand;
 use FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayRepresentation;

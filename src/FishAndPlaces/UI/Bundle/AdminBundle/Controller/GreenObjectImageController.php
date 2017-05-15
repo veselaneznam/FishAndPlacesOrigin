@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
-class DamImageController extends Controller
+class GreenObjectImageController extends Controller
 {
     const SUCCESS_MESSAGE = '%d Image uploaded successfully!';
     const TRY_AGAIN_MESSAGE = '%d Upload failed! Please try again!';
@@ -21,33 +21,33 @@ class DamImageController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/dam/images/{$id}", name="dam_images_list")
+     * @Route("/green_object/images/{$id}", name="green_object_images_list")
      *
      * @return Response
      */
     public function indexAction(Request $request)
     {
-        $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->find((int) $request->get('id'));
-        return $this->render('@Admin/damImage/list.html.twig', array(
-            'damImageCollection' => $dam->getImageCollection(),
+        $greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
+        $greenObject = $greenObjectQueryService->find((int) $request->get('id'));
+        return $this->render('@Admin/greenObjectImage/list.html.twig', array(
+            'greenObjectImageCollection' => $greenObject->getImageCollection(),
             'path' => $this->getParameter('images_upload'),
-            'dam' => $dam,
+            'greenObject' => $greenObject,
         ));
     }
 
     /**
      * @param Request $request
-     * @Route("/dam/upload/images/{$id}", name="dam_images_upload")
+     * @Route("/green_object/upload/images/{$id}", name="green_object_images_upload")
      * @Method({"POST"})
      *
      * @return Response
      */
     public function uploadImagesAction(Request $request)
     {
-        $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $damRepresentation = $damQueryService->find((int) $request->get('id'));
-        $damImageCollection = [];
+        $greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
+        $greenObjectRepresentation = $greenObjectQueryService->find((int) $request->get('id'));
+        $greenObjectImageCollection = [];
         $successCounter = 0;
         $tryAgainCounter = 0;
         $invalidSizeCounter = 0;
@@ -69,7 +69,7 @@ class DamImageController extends Controller
                 ) {
                     if (move_uploaded_file($_FILES['file']['tmp_name'][$imageIndex], $target_path . $filename)) {
                         $successCounter ++;
-                        $damImageCollection[] = $filename;
+                        $greenObjectImageCollection[] = $filename;
                     } else {
                         $tryAgainCounter ++;
                     }
@@ -77,7 +77,7 @@ class DamImageController extends Controller
                     $invalidSizeCounter ++;
                 }
             }
-            $this->updateImages($damRepresentation, $damImageCollection);
+            $this->updateImages($greenObjectRepresentation, $greenObjectImageCollection);
         }
 
         if(0 !== $successCounter) {
@@ -91,55 +91,55 @@ class DamImageController extends Controller
             $this->addFlash('error', sprintf(self::INVALID_FILE_SIZE_MESSAGE, $invalidSizeCounter, self::VALID_SIZE/1024));
         }
 
-        return $this->redirectToRoute('dam_images_list', array(
-            'id' => $damRepresentation->getId()
+        return $this->redirectToRoute('green_object_images_list', array(
+            'id' => $greenObjectRepresentation->getId()
         ));
     }
 
     /**
      * @param Request $request
-     * @Route("/dam/images/delete/{id}", name="dam_images_delete")
+     * @Route("/green_object/images/delete/{id}", name="green_object_images_delete")
      *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request)
     {
-        $damImageQueryService = $this->get('fish_and_places.dam_images_query_service');
-        $damImageRepresentation = $damImageQueryService->getDamImage((int) $request->get('id'));
+        $greenObjectImageQueryService = $this->get('fish_and_places.greenobject_images_query_service');
+        $greenObjectImageRepresentation = $greenObjectImageQueryService->getImage((int) $request->get('id'));
         $imagePath = $this->getParameter('images_upload');
 
-        $damService = $this->get('fish_and_places.dam_service');
-        $damService->deleteDamImages(new DeleteGreenObjectImagesCommand([$damImageRepresentation], $this->getUser()));
+        $damService = $this->get('fish_and_places.green_object_service');
+        $damService->deleteDamImages(new DeleteGreenObjectImagesCommand([$greenObjectImageRepresentation], $this->getUser()));
 
-        $fileName = $imagePath . $damImageRepresentation->getImageSrc();
+        $fileName = $imagePath . $greenObjectImageRepresentation->getImageSrc();
         $this->deletePhysicalFile($fileName);
 
-        return $this->redirectToRoute('dam_images_list', array(
-            'id' => $damImageRepresentation->getGreenObject()->getId()
+        return $this->redirectToRoute('green_object_images_list', array(
+            'id' => $greenObjectImageRepresentation->getGreenObject()->getId()
         ));
     }
 
     /**
-     * @param $damRepresentation
-     * @param $damImageCollection
+     * @param $greenObjectRepresentation
+     * @param $greenObjectImageCollection
      */
-    public function updateImages($damRepresentation, $damImageCollection)
+    public function updateImages($greenObjectRepresentation, $greenObjectImageCollection)
     {
-        $damQueryService = $this->get('fish_and_places.dam_service');
+        $greenObjectService = $this->get('fish_and_places.green_object_service');
 
-        $damImageCollection = new UpdateGreenObjectImagesCommand(
-            $damRepresentation,
+        $greenObjectImageCollection = new UpdateGreenObjectImagesCommand(
+            $greenObjectRepresentation,
             $this->getUser(),
-            $damImageCollection
+            $greenObjectImageCollection
         );
 
-        $damQueryService->updateImages($damImageCollection);
+        $greenObjectService->updateImages($greenObjectImageCollection);
     }
 
     /**
      * @param string $fileName
      */
-    public function deletePhysicalFile($fileName)
+    public function deletePhysiscalFile($fileName)
     {
         if (file_exists($fileName)) {
             unlink($fileName);

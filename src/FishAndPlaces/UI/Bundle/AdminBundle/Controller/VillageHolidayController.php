@@ -168,21 +168,21 @@ class VillageHolidayController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/activate/{id}", name="activate_cabin")
+     * @Route("/activate/{id}", name="activate_village_holiday")
      * @Method({"GET", "POST"})
      *
      * @return JsonResponse|RedirectResponse
      */
     public function activateAction(Request $request, $id)
     {
-        $villageHolidayQueryService = $this->get('fish_and_places.cabin_query_service');
+        $villageHolidayQueryService = $this->get('fish_and_places.village_holiday_query_service');
         $villageHoliday = $villageHolidayQueryService->find($id);
 
         $form = $this->createActivateForm($villageHoliday->getId());
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $villageHolidayService = $this->get('fish_and_places.villageHoliday_service');
+                $villageHolidayService = $this->get('fish_and_places.village_holiday_service');
 
                 $villageHolidayService->activate(new ActivateVillageHolidayCommand($villageHoliday, $this->getUser()));
 
@@ -194,7 +194,7 @@ class VillageHolidayController extends Controller
             }
 
             $this->addFlash('notice', 'Activate Successfully!');
-            return $this->redirectToRoute('villageHoliday_list');
+            return $this->redirectToRoute('village_holiday_list');
         }
 
         return $this->render('@Admin/villageHoliday/activate.html.twig', array(
@@ -209,7 +209,7 @@ class VillageHolidayController extends Controller
      */
     private function createVillageHoliday(VillageHolidayRepresentation $villageHolidayRepresentation, $fileName = null)
     {
-        $villageHolidayService = $this->get('fish_and_places.villageHoliday_service');
+        $villageHolidayService = $this->get('fish_and_places.village_holiday_service');
 
         $productCreate = new CreateNewVillageHolidayCommand(
             $villageHolidayRepresentation,
@@ -226,7 +226,7 @@ class VillageHolidayController extends Controller
      */
     private function updateVillageHoliday(VillageHolidayRepresentation $villageHolidayRepresentation, $fileName = null)
     {
-        $damQueryService = $this->get('fish_and_places.cabin_service');
+        $damQueryService = $this->get('fish_and_places.village_holiday_service');
 
         $productCreate = new UpdateVillageHolidayCommand(
             $villageHolidayRepresentation,

@@ -21,13 +21,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DamController extends Controller
-{
-    /**
-     * @param Request $request
-     *
-     * @Route("/dam", name="dam_list")
-     * @return Response
-     */
+{/**
+ * @param Request $request
+ *
+ * @Route("/dam", name="dam_list")
+ * @return Response
+ */
     public function indexAction(Request $request)
     {
         /**
@@ -273,4 +272,5 @@ class DamController extends Controller
             ->setMethod('POST')
             ->getForm();
     }
+
 }
