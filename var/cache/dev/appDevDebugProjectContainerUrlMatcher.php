@@ -332,7 +332,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             if (0 === strpos($pathinfo, '/admin/green_object')) {
                 // green_object_view
                 if (preg_match('#^/admin/green_object/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectController::damDetailView',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectController::greenObjectDetailView',));
                 }
 
                 // green_object_images_list

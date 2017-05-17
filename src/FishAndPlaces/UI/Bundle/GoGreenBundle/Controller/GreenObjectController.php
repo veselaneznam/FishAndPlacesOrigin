@@ -2,11 +2,8 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService;
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
-use FishAndPlaces\UI\Bundle\GoGreenBundle\Form\DamRatingType;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MapHelper;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
 use GuzzleHttp\Client;
@@ -107,10 +104,8 @@ class GreenObjectController extends Controller
     {
         $greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
         $greenObject = $greenObjectQueryService->find((int) $request->get('id'));
-       // $rating = $this->createForm(DamRatingType::class, ['rating' => $greenObject->getRating()]);
         return $this->render('@GoGreen/greenObject/detail_view.html.twig', [
             'greenObject' => $greenObject,
-           // 'rating' => $rating->createView()
         ]);
     }
 

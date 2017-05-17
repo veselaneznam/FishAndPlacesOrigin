@@ -102,18 +102,18 @@ class GreenObjectService
      */
     public function updateImages(UpdateGreenObjectImagesCommand $command)
     {
-        foreach ($command->getGreenObject()->getImageCollection() as $damImage) {
-            $this->greenObjectImagesRepository->update($damImage);
+        foreach ($command->getGreenObject()->getImageCollection() as $greenObjectImage) {
+            $this->greenObjectImagesRepository->update($greenObjectImage);
         }
     }
 
     /**
      * @param DeleteGreenObjectImagesCommand $command
      */
-    public function deleteDamImages(DeleteGreenObjectImagesCommand $command)
+    public function deleteGreenObjectImages(DeleteGreenObjectImagesCommand $command)
     {
-        foreach ($command->getGreenObjectImages() as $damImage) {
-            $this->greenObjectImagesRepository->remove($damImage);
+        foreach ($command->getGreenObjectImages() as $greenObjectImage) {
+            $this->greenObjectImagesRepository->remove($greenObjectImage);
         }
     }
 }

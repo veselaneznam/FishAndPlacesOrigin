@@ -226,7 +226,7 @@ class CampController extends Controller
      */
     private function updateCamp(CampRepresentation $campRepresentation, $fileName = null)
     {
-        $damQueryService = $this->get('fish_and_places.camp_service');
+        $campService = $this->get('fish_and_places.camp_service');
 
         $productCreate = new UpdateCampCommand(
             $campRepresentation,
@@ -234,7 +234,7 @@ class CampController extends Controller
             $fileName
         );
 
-        $damQueryService->update($productCreate);
+        $campService->update($productCreate);
     }
 
     /**

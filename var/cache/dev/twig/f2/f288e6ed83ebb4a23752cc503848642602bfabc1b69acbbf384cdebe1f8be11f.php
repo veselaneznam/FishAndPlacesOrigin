@@ -21,29 +21,29 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_9c012b4fc270e627cb26be7594eeb410299ba7d0e94ca08e5e2968beda823afb = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_9c012b4fc270e627cb26be7594eeb410299ba7d0e94ca08e5e2968beda823afb->enter($__internal_9c012b4fc270e627cb26be7594eeb410299ba7d0e94ca08e5e2968beda823afb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/dam/list.html.twig"));
+        $__internal_66eab8a61b96ca6f18e1d343c90e3d15ea282ecc890136cfe13b51047a7fea18 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_66eab8a61b96ca6f18e1d343c90e3d15ea282ecc890136cfe13b51047a7fea18->enter($__internal_66eab8a61b96ca6f18e1d343c90e3d15ea282ecc890136cfe13b51047a7fea18_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/dam/list.html.twig"));
 
-        $__internal_02ab26101546767bc94a885544015f4135fb0d0b8b113c200e13193d03323a25 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_02ab26101546767bc94a885544015f4135fb0d0b8b113c200e13193d03323a25->enter($__internal_02ab26101546767bc94a885544015f4135fb0d0b8b113c200e13193d03323a25_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/dam/list.html.twig"));
+        $__internal_6c6a9c0d7055078c2c328f21c71c9ad07e99c0a0b1c08466304435a7dd153df5 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_6c6a9c0d7055078c2c328f21c71c9ad07e99c0a0b1c08466304435a7dd153df5->enter($__internal_6c6a9c0d7055078c2c328f21c71c9ad07e99c0a0b1c08466304435a7dd153df5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/dam/list.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_9c012b4fc270e627cb26be7594eeb410299ba7d0e94ca08e5e2968beda823afb->leave($__internal_9c012b4fc270e627cb26be7594eeb410299ba7d0e94ca08e5e2968beda823afb_prof);
+        $__internal_66eab8a61b96ca6f18e1d343c90e3d15ea282ecc890136cfe13b51047a7fea18->leave($__internal_66eab8a61b96ca6f18e1d343c90e3d15ea282ecc890136cfe13b51047a7fea18_prof);
 
         
-        $__internal_02ab26101546767bc94a885544015f4135fb0d0b8b113c200e13193d03323a25->leave($__internal_02ab26101546767bc94a885544015f4135fb0d0b8b113c200e13193d03323a25_prof);
+        $__internal_6c6a9c0d7055078c2c328f21c71c9ad07e99c0a0b1c08466304435a7dd153df5->leave($__internal_6c6a9c0d7055078c2c328f21c71c9ad07e99c0a0b1c08466304435a7dd153df5_prof);
 
     }
 
     // line 2
     public function block_body($context, array $blocks = array())
     {
-        $__internal_fbe81ffb6b84b943956a9eee43b066aa9c88df0baf41660b69c16fa4f51e8e48 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_fbe81ffb6b84b943956a9eee43b066aa9c88df0baf41660b69c16fa4f51e8e48->enter($__internal_fbe81ffb6b84b943956a9eee43b066aa9c88df0baf41660b69c16fa4f51e8e48_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_3badf04c7fa4bcf3c551bffbfeb38fb41531aa6e22bb146b2afa2b24305e3bfe = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_3badf04c7fa4bcf3c551bffbfeb38fb41531aa6e22bb146b2afa2b24305e3bfe->enter($__internal_3badf04c7fa4bcf3c551bffbfeb38fb41531aa6e22bb146b2afa2b24305e3bfe_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_d0785910a64092d1e5f79011c515d7af5069681c6da2f565cd0cd50dd3e01b2e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_d0785910a64092d1e5f79011c515d7af5069681c6da2f565cd0cd50dd3e01b2e->enter($__internal_d0785910a64092d1e5f79011c515d7af5069681c6da2f565cd0cd50dd3e01b2e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_ec309d941209e4059e6523e32d282afa8d9df01cd513cfad900362ceef8a041b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_ec309d941209e4059e6523e32d282afa8d9df01cd513cfad900362ceef8a041b->enter($__internal_ec309d941209e4059e6523e32d282afa8d9df01cd513cfad900362ceef8a041b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 3
         echo "    ";
@@ -55,14 +55,10 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
         // line 6
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("create_dam");
         echo "\" class=\"btn btn-info\" role=\"button\">Add Dam</a>
-        <a href=\"";
-        // line 7
-        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("import_json");
-        echo "\" class=\"btn btn-info\" role=\"button\">Import from Json</a>
         ";
+        // line 7
+        $this->loadTemplate("@Admin/dam/search.html.twig", "@Admin/dam/list.html.twig", 7)->display($context);
         // line 8
-        $this->loadTemplate("@Admin/dam/search.html.twig", "@Admin/dam/list.html.twig", 8)->display($context);
-        // line 9
         echo "        <table class=\"table table-striped\">
             <thead>
             <tr>
@@ -76,87 +72,87 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
             </thead>
             <tbody>
             ";
-        // line 21
+        // line 20
         if ( !(null === (isset($context["damCollection"]) ? $context["damCollection"] : $this->getContext($context, "damCollection")))) {
-            // line 22
+            // line 21
             echo "                ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["damCollection"]) ? $context["damCollection"] : $this->getContext($context, "damCollection")));
             foreach ($context['_seq'] as $context["_key"] => $context["dam"]) {
-                // line 23
+                // line 22
                 echo "                    <tr>
                         <td>
                             ";
-                // line 25
+                // line 24
                 if (($this->getAttribute($this->getAttribute($context["dam"], "mainImage", array()), "webPath", array()) != null)) {
-                    // line 26
+                    // line 25
                     echo "                            <img src=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["dam"], "mainImage", array()), "webPath", array()), "html", null, true);
                     echo "\" width=\"100px\" class=\"thumbnail\">
                             ";
                 } else {
-                    // line 28
+                    // line 27
                     echo "                                <img src=\"";
                     echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg"), "html", null, true);
                     echo "\" width=\"100px\" class=\"thumbnail\">
                             ";
                 }
-                // line 30
+                // line 29
                 echo "                        </td>
                         <td>";
-                // line 31
+                // line 30
                 echo twig_escape_filter($this->env, $this->getAttribute($context["dam"], "name", array()), "html", null, true);
                 echo "</td>
                         <td>";
-                // line 32
+                // line 31
                 if (($this->getAttribute($context["dam"], "isActive", array()) == 1)) {
-                    // line 33
+                    // line 32
                     echo "                            <span class=\"glyphicon glyphicon-ok\" style=\"color: green\" aria-hidden=\"true\"></span>
                             ";
                 } else {
-                    // line 35
+                    // line 34
                     echo "                            <span class=\"glyphicon glyphicon-remove red\" style=\"color: red\" aria-hidden=\"true\"></span>
                             ";
                 }
-                // line 37
+                // line 36
                 echo "                        </td>
                         <td>";
-                // line 38
+                // line 37
                 echo twig_escape_filter($this->env, $this->getAttribute($context["dam"], "showOnFirstPage", array()), "html", null, true);
                 echo "</td>
                         <td>";
-                // line 39
+                // line 38
                 echo twig_escape_filter($this->env, $this->getAttribute($context["dam"], "priceProPerson", array()), "html", null, true);
                 echo "</td>
                         <td>
                             <a href=\"";
-                // line 41
+                // line 40
                 echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("edit_dam", array("id" => $this->getAttribute($context["dam"], "id", array()))), "html", null, true);
                 echo "\" class=\"btn btn-success\"
                                role=\"button\">Edit</a>
                             <a href=\"";
-                // line 43
+                // line 42
                 echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("dam_images_list", array("id" => $this->getAttribute($context["dam"], "id", array()))), "html", null, true);
                 echo "\" class=\"btn btn-success\"
                                role=\"button\">Add Images</a>
                             ";
-                // line 45
+                // line 44
                 if (($this->getAttribute($context["dam"], "isActive", array()) == 1)) {
-                    // line 46
+                    // line 45
                     echo "                                <a href=\"";
                     echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("deactivate_dam", array("id" => $this->getAttribute($context["dam"], "id", array()))), "html", null, true);
                     echo "\"
                                    class=\"btn delete btn-danger\" role=\"button\">Deactivate</a>
                             ";
                 } else {
-                    // line 49
+                    // line 48
                     echo "                                <a href=\"";
                     echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("activate_dam", array("id" => $this->getAttribute($context["dam"], "id", array()))), "html", null, true);
                     echo "\"
                                    class=\"btn delete btn-danger\" role=\"button\">Activate</a>
                             ";
                 }
-                // line 52
+                // line 51
                 echo "                        </td>
                     </tr>
                 ";
@@ -164,20 +160,20 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['dam'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 55
+            // line 54
             echo "
             ";
         }
-        // line 57
+        // line 56
         echo "            </tbody>
         </table>
     </div>
 ";
         
-        $__internal_d0785910a64092d1e5f79011c515d7af5069681c6da2f565cd0cd50dd3e01b2e->leave($__internal_d0785910a64092d1e5f79011c515d7af5069681c6da2f565cd0cd50dd3e01b2e_prof);
+        $__internal_ec309d941209e4059e6523e32d282afa8d9df01cd513cfad900362ceef8a041b->leave($__internal_ec309d941209e4059e6523e32d282afa8d9df01cd513cfad900362ceef8a041b_prof);
 
         
-        $__internal_fbe81ffb6b84b943956a9eee43b066aa9c88df0baf41660b69c16fa4f51e8e48->leave($__internal_fbe81ffb6b84b943956a9eee43b066aa9c88df0baf41660b69c16fa4f51e8e48_prof);
+        $__internal_3badf04c7fa4bcf3c551bffbfeb38fb41531aa6e22bb146b2afa2b24305e3bfe->leave($__internal_3badf04c7fa4bcf3c551bffbfeb38fb41531aa6e22bb146b2afa2b24305e3bfe_prof);
 
     }
 
@@ -193,7 +189,7 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
 
     public function getDebugInfo()
     {
-        return array (  172 => 57,  168 => 55,  160 => 52,  153 => 49,  146 => 46,  144 => 45,  139 => 43,  134 => 41,  129 => 39,  125 => 38,  122 => 37,  118 => 35,  114 => 33,  112 => 32,  108 => 31,  105 => 30,  99 => 28,  93 => 26,  91 => 25,  87 => 23,  82 => 22,  80 => 21,  66 => 9,  64 => 8,  60 => 7,  56 => 6,  49 => 3,  40 => 2,  11 => 1,);
+        return array (  168 => 56,  164 => 54,  156 => 51,  149 => 48,  142 => 45,  140 => 44,  135 => 42,  130 => 40,  125 => 38,  121 => 37,  118 => 36,  114 => 34,  110 => 32,  108 => 31,  104 => 30,  101 => 29,  95 => 27,  89 => 25,  87 => 24,  83 => 22,  78 => 21,  76 => 20,  62 => 8,  60 => 7,  56 => 6,  49 => 3,  40 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -212,7 +208,6 @@ class __TwigTemplate_5201300150e5128af581a847d188b4954ec08ec20e4afbb7bf635258ef4
     <div class=\"container\">
         <h2>Dam List</h2>
         <a href=\"{{ path('create_dam') }}\" class=\"btn btn-info\" role=\"button\">Add Dam</a>
-        <a href=\"{{ path('import_json') }}\" class=\"btn btn-info\" role=\"button\">Import from Json</a>
         {% include '@Admin/dam/search.html.twig' %}
         <table class=\"table table-striped\">
             <thead>

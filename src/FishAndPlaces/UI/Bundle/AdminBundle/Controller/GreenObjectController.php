@@ -17,7 +17,7 @@ class GreenObjectController extends Controller
      *
      * @return Response
      */
-    public function damDetailView(Request $request)
+    public function greenObjectDetailView(Request $request)
     {
         $greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
         $greenObject = $greenObjectQueryService->find((int) $request->get('id'));

@@ -113,8 +113,8 @@ class GreenObjectRepresentation
             $this->address = $greenObject->getLocation();
             $this->lat = $greenObject->getLatitude();
             $this->long = $greenObject->getLongitude();
-            foreach ($greenObject->getImageCollection() as $damImage) {
-                $this->imageCollection[] = new GreenObjectImageRepresentation($damImage);
+            foreach ($greenObject->getImageCollection() as $greenObjectImage) {
+                $this->imageCollection[] = new GreenObjectImageRepresentation($greenObjectImage);
 
             }
             $this->mainImage = new GreenObjectImageRepresentation($greenObject->getMainImage());
@@ -409,8 +409,8 @@ class GreenObjectRepresentation
     public function setMainImage(File $mainImage = null)
     {
         if(null !==$mainImage) {
-            $damImage = new GreenObjectImage($this->greenObject, $mainImage->getPath(),1);
-            $this->mainImage = new GreenObjectImageRepresentation($damImage);
+            $greenObjectImage = new GreenObjectImage($this->greenObject, $mainImage->getPath(),1);
+            $this->mainImage = new GreenObjectImageRepresentation($greenObjectImage);
         }
 
         return $this;

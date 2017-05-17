@@ -226,7 +226,7 @@ class VillageHolidayController extends Controller
      */
     private function updateVillageHoliday(VillageHolidayRepresentation $villageHolidayRepresentation, $fileName = null)
     {
-        $damQueryService = $this->get('fish_and_places.village_holiday_service');
+        $villageHolidayService = $this->get('fish_and_places.village_holiday_service');
 
         $productCreate = new UpdateVillageHolidayCommand(
             $villageHolidayRepresentation,
@@ -234,7 +234,7 @@ class VillageHolidayController extends Controller
             $fileName
         );
 
-        $damQueryService->update($productCreate);
+        $villageHolidayService->update($productCreate);
     }
 
     /**

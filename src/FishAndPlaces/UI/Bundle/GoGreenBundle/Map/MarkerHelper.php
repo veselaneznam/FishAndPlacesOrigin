@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Map;
 
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Overlay\Marker;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -10,17 +10,17 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class MarkerHelper
 {
     /**
-     * @param DamRepresentation $damRepresentation
+     * @param GreenObjectRepresentation $greenObjectRepresentation
      * @param                   $twig
      *
      * @return Marker
      */
-    public static function build(DamRepresentation $damRepresentation, $twig)
+    public static function build(GreenObjectRepresentation $greenObjectRepresentation, $twig)
     {
-        if(null !== $damRepresentation->getLat() && null !== $damRepresentation->getLong()) {
+        if(null !== $greenObjectRepresentation->getLat() && null !== $greenObjectRepresentation->getLong()) {
             $marker = new Marker(
-                new Coordinate($damRepresentation->getLat(), $damRepresentation->getLong()));
-            $marker->setInfoWindow(InfoWindowHelper::build($damRepresentation, $twig));
+                new Coordinate($greenObjectRepresentation->getLat(), $greenObjectRepresentation->getLong()));
+            $marker->setInfoWindow(InfoWindowHelper::build($greenObjectRepresentation, $twig));
             return $marker;
         }
 

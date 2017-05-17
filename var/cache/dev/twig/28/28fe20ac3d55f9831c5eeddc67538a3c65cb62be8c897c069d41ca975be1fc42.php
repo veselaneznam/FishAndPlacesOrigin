@@ -17,11 +17,11 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_853085cb7052b04a235fd89dc083d83f85c818814f935d67460e6f9e4a233fc1 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_853085cb7052b04a235fd89dc083d83f85c818814f935d67460e6f9e4a233fc1->enter($__internal_853085cb7052b04a235fd89dc083d83f85c818814f935d67460e6f9e4a233fc1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/add_images.html.twig"));
+        $__internal_44782b9f25dd6a00f477c37c23c7bb28797b1fd9bdd6c3bd108e92c211209080 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_44782b9f25dd6a00f477c37c23c7bb28797b1fd9bdd6c3bd108e92c211209080->enter($__internal_44782b9f25dd6a00f477c37c23c7bb28797b1fd9bdd6c3bd108e92c211209080_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/add_images.html.twig"));
 
-        $__internal_021ff03a6810bec05a4ffdce6877e3eb3bd4ea519a1609e4cf0c092bf82a928b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_021ff03a6810bec05a4ffdce6877e3eb3bd4ea519a1609e4cf0c092bf82a928b->enter($__internal_021ff03a6810bec05a4ffdce6877e3eb3bd4ea519a1609e4cf0c092bf82a928b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/add_images.html.twig"));
+        $__internal_331bb920b3bb2e23a3422d16b72fa3a0069a2e0a02ddd508a417a514e70bc55a = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_331bb920b3bb2e23a3422d16b72fa3a0069a2e0a02ddd508a417a514e70bc55a->enter($__internal_331bb920b3bb2e23a3422d16b72fa3a0069a2e0a02ddd508a417a514e70bc55a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/add_images.html.twig"));
 
         // line 1
         echo "<div id=\"maindiv\">
@@ -30,7 +30,7 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
         <h2>Multiple Image Upload Form</h2>
         <form enctype=\"multipart/form-data\" action=\"";
         // line 5
-        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("dam_images_upload", array("id" => $this->getAttribute((isset($context["dam"]) ? $context["dam"] : $this->getContext($context, "dam")), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("green_object_images_upload", array("id" => $this->getAttribute((isset($context["greenObject"]) ? $context["greenObject"] : $this->getContext($context, "greenObject")), "id", array()))), "html", null, true);
         echo "\" method=\"post\">
             First Field is Compulsory. Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 100KB.
             <hr/>
@@ -50,21 +50,21 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
         // line 69
         $this->displayBlock('styles', $context, $blocks);
         
-        $__internal_853085cb7052b04a235fd89dc083d83f85c818814f935d67460e6f9e4a233fc1->leave($__internal_853085cb7052b04a235fd89dc083d83f85c818814f935d67460e6f9e4a233fc1_prof);
+        $__internal_44782b9f25dd6a00f477c37c23c7bb28797b1fd9bdd6c3bd108e92c211209080->leave($__internal_44782b9f25dd6a00f477c37c23c7bb28797b1fd9bdd6c3bd108e92c211209080_prof);
 
         
-        $__internal_021ff03a6810bec05a4ffdce6877e3eb3bd4ea519a1609e4cf0c092bf82a928b->leave($__internal_021ff03a6810bec05a4ffdce6877e3eb3bd4ea519a1609e4cf0c092bf82a928b_prof);
+        $__internal_331bb920b3bb2e23a3422d16b72fa3a0069a2e0a02ddd508a417a514e70bc55a->leave($__internal_331bb920b3bb2e23a3422d16b72fa3a0069a2e0a02ddd508a417a514e70bc55a_prof);
 
     }
 
     // line 18
     public function block_javascripts($context, array $blocks = array())
     {
-        $__internal_879e9d7a672d87cf2d49e860adea30540ae492f9b99f806e7381c09d636b9274 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_879e9d7a672d87cf2d49e860adea30540ae492f9b99f806e7381c09d636b9274->enter($__internal_879e9d7a672d87cf2d49e860adea30540ae492f9b99f806e7381c09d636b9274_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_c9a25bab6336d607079aa1c96cbbf3f46218a232478c703f3dac465dbc2aa29c = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_c9a25bab6336d607079aa1c96cbbf3f46218a232478c703f3dac465dbc2aa29c->enter($__internal_c9a25bab6336d607079aa1c96cbbf3f46218a232478c703f3dac465dbc2aa29c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        $__internal_9d9b520eb443057838f0df1668b25062690065a0a3b777b71651fde8b809783c = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9d9b520eb443057838f0df1668b25062690065a0a3b777b71651fde8b809783c->enter($__internal_9d9b520eb443057838f0df1668b25062690065a0a3b777b71651fde8b809783c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_49b54b91889c1c8da616498cbe5f7ae8a6db955c79d569288fceaa3ed5f3b9de = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_49b54b91889c1c8da616498cbe5f7ae8a6db955c79d569288fceaa3ed5f3b9de->enter($__internal_49b54b91889c1c8da616498cbe5f7ae8a6db955c79d569288fceaa3ed5f3b9de_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
         // line 19
         echo "    <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
@@ -121,21 +121,21 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
         </script>
 ";
         
-        $__internal_9d9b520eb443057838f0df1668b25062690065a0a3b777b71651fde8b809783c->leave($__internal_9d9b520eb443057838f0df1668b25062690065a0a3b777b71651fde8b809783c_prof);
+        $__internal_49b54b91889c1c8da616498cbe5f7ae8a6db955c79d569288fceaa3ed5f3b9de->leave($__internal_49b54b91889c1c8da616498cbe5f7ae8a6db955c79d569288fceaa3ed5f3b9de_prof);
 
         
-        $__internal_879e9d7a672d87cf2d49e860adea30540ae492f9b99f806e7381c09d636b9274->leave($__internal_879e9d7a672d87cf2d49e860adea30540ae492f9b99f806e7381c09d636b9274_prof);
+        $__internal_c9a25bab6336d607079aa1c96cbbf3f46218a232478c703f3dac465dbc2aa29c->leave($__internal_c9a25bab6336d607079aa1c96cbbf3f46218a232478c703f3dac465dbc2aa29c_prof);
 
     }
 
     // line 69
     public function block_styles($context, array $blocks = array())
     {
-        $__internal_9cccb48d74bf181e9ac55ee22ad93f2fa9ea5e545d75ef092c3830cae1fcf8a4 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_9cccb48d74bf181e9ac55ee22ad93f2fa9ea5e545d75ef092c3830cae1fcf8a4->enter($__internal_9cccb48d74bf181e9ac55ee22ad93f2fa9ea5e545d75ef092c3830cae1fcf8a4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "styles"));
+        $__internal_e2a8acde5fd348635100bb849b38dd878b56325631c02bfb4fe456ab46b50dd3 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_e2a8acde5fd348635100bb849b38dd878b56325631c02bfb4fe456ab46b50dd3->enter($__internal_e2a8acde5fd348635100bb849b38dd878b56325631c02bfb4fe456ab46b50dd3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "styles"));
 
-        $__internal_f476ac0dbb2e289c485305ff4a1e5a2f2f613c807d885cf975be43f3bea35500 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_f476ac0dbb2e289c485305ff4a1e5a2f2f613c807d885cf975be43f3bea35500->enter($__internal_f476ac0dbb2e289c485305ff4a1e5a2f2f613c807d885cf975be43f3bea35500_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "styles"));
+        $__internal_ef11910b15af2d0151bd7564b98fa125c802eb39dc4a540b67c7e8208bd8c944 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_ef11910b15af2d0151bd7564b98fa125c802eb39dc4a540b67c7e8208bd8c944->enter($__internal_ef11910b15af2d0151bd7564b98fa125c802eb39dc4a540b67c7e8208bd8c944_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "styles"));
 
         // line 70
         echo "    <style>
@@ -222,10 +222,10 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
         </style>
 ";
         
-        $__internal_f476ac0dbb2e289c485305ff4a1e5a2f2f613c807d885cf975be43f3bea35500->leave($__internal_f476ac0dbb2e289c485305ff4a1e5a2f2f613c807d885cf975be43f3bea35500_prof);
+        $__internal_ef11910b15af2d0151bd7564b98fa125c802eb39dc4a540b67c7e8208bd8c944->leave($__internal_ef11910b15af2d0151bd7564b98fa125c802eb39dc4a540b67c7e8208bd8c944_prof);
 
         
-        $__internal_9cccb48d74bf181e9ac55ee22ad93f2fa9ea5e545d75ef092c3830cae1fcf8a4->leave($__internal_9cccb48d74bf181e9ac55ee22ad93f2fa9ea5e545d75ef092c3830cae1fcf8a4_prof);
+        $__internal_e2a8acde5fd348635100bb849b38dd878b56325631c02bfb4fe456ab46b50dd3->leave($__internal_e2a8acde5fd348635100bb849b38dd878b56325631c02bfb4fe456ab46b50dd3_prof);
 
     }
 
@@ -258,7 +258,7 @@ class __TwigTemplate_620757dcc1f92ee920d0bec731a3a703d24f5c9c92de1b7fc619f4d23f0
 
     <div id=\"formdiv\">
         <h2>Multiple Image Upload Form</h2>
-        <form enctype=\"multipart/form-data\" action=\"{{ path('dam_images_upload',  { 'id': dam.id }) }}\" method=\"post\">
+        <form enctype=\"multipart/form-data\" action=\"{{ path('green_object_images_upload',  { 'id': greenObject.id }) }}\" method=\"post\">
             First Field is Compulsory. Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 100KB.
             <hr/>
             <div id=\"filediv\"><input name=\"file[]\" type=\"file\" id=\"file\"/></div><br/>

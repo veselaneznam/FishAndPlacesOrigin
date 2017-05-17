@@ -4,7 +4,7 @@
     <div class="row container_custome">
 
             <div class="col-lg-6">
-                <h3>{{ dam.name }}</h3>
+                <h3>{{ greenObject.name }}</h3>
             </div>
         <br />
         <div class="col-lg-12" >
@@ -27,7 +27,7 @@
                         <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>
                     </tr>
                     <tr>
-                        <td style="color: green; font-weight: bold;">{% trans %}See on Map{% endtrans %}</td> <td><a href="{{ path('greenObject_map_direction', {'id': greenObject.id}) }}">{% trans %}Directions{% endtrans %}</a></td>
+                        <td style="color: green; font-weight: bold;">{% trans %}See on Map{% endtrans %}</td> <td><a href="{{ path('green_object_map_direction', {'id': greenObject.id}) }}">{% trans %}Directions{% endtrans %}</a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -3,8 +3,13 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
+use FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayRepresentation;
 use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
+use FishAndPlaces\GreenObject\Domain\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
  class GreenObjectQueryService extends BaseQueryService
@@ -78,8 +83,8 @@ use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
          $greenObjects = $this->greenObjectRepository->findAll();
 
          return array_map(
-             function (GreenObject $dam) {
-                 return new GreenObjectRepresentation($dam);
+             function (GreenObject $greenObject) {
+                 return self::decideRepresentation($greenObject);
              }, $greenObjects
          );
      }
@@ -94,7 +99,7 @@ use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
          if (null !== $collection) {
              return array_map(
                  function (GreenObject $greenObject) {
-                     $greenObjectRepresentation = new GreenObjectRepresentation($greenObject);
+                     $greenObjectRepresentation = self::decideRepresentation($greenObject);
                      return $greenObjectRepresentation;
                  }, $collection
              );
@@ -109,7 +114,7 @@ use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
       */
      public function find($id)
      {
-         return new GreenObjectRepresentation($this->greenObjectRepository->find($id));
+         return self::decideRepresentation($this->greenObjectRepository->find($id));
      }
 
      /**
@@ -122,6 +127,16 @@ use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
          $greenObjects = $this->greenObjectRepository->findByName($name);
 
          return $this->convertToRepresentation($greenObjects);
+     }
+
+     private static function decideRepresentation(GreenObject $greenObject)
+     {
+         switch ($greenObject->getType()) {
+             case GreenObjectType::DAM : return new DamRepresentation($greenObject);
+             case GreenObjectType::CAMP : return new CampRepresentation($greenObject);
+             case GreenObjectType::VILLAGE_HOLIDAY : return new VillageHolidayRepresentation($greenObject);
+             case GreenObjectType::CABIN : return new  CabinRepresentation($greenObject);
+         }
      }
 
  }

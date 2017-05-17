@@ -226,7 +226,7 @@ class CabinController extends Controller
      */
     private function updateCabin(CabinRepresentation $cabinRepresentation, $fileName = null)
     {
-        $damQueryService = $this->get('fish_and_places.cabin_service');
+        $cabinService = $this->get('fish_and_places.cabin_service');
 
         $productCreate = new UpdateCabinCommand(
             $cabinRepresentation,
@@ -234,7 +234,7 @@ class CabinController extends Controller
             $fileName
         );
 
-        $damQueryService->update($productCreate);
+        $cabinService->update($productCreate);
     }
 
     /**

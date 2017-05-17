@@ -13,14 +13,14 @@ class CampRepresentation extends GreenObjectRepresentation
     protected $greenObject;
 
     /**
-     * @param Camp|null $villageHoliday
+     * @param Camp|null $camp
      */
-    public function __construct(Camp $villageHoliday = null)
+    public function __construct(Camp $camp = null)
     {
-        parent::__construct($villageHoliday);
+        parent::__construct($camp);
 
-        if (null !== $villageHoliday) {
-            $this->greenObject = $villageHoliday;
+        if (null !== $camp) {
+            $this->greenObject = $camp;
         }
     }
 

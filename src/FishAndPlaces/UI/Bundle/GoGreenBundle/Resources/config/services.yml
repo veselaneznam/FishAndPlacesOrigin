@@ -32,7 +32,6 @@ services:
     fish_and_places.green_object_query_service:
         class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService
         arguments:
-        aruments:
             - "@fish_and_places.green_object_repository"
             - "@fish_and_places.geolocator"
 

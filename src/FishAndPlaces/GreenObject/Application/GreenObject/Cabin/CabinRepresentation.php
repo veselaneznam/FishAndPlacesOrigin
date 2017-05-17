@@ -13,14 +13,14 @@ class CabinRepresentation extends GreenObjectRepresentation
     protected $greenObject;
 
     /**
-     * @param Cabin|null $villageHoliday
+     * @param Cabin|null $cabin
      */
-    public function __construct(Cabin $villageHoliday = null)
+    public function __construct(Cabin $cabin = null)
     {
-        parent::__construct($villageHoliday);
+        parent::__construct($cabin);
 
-        if (null !== $villageHoliday) {
-            $this->greenObject = $villageHoliday;
+        if (null !== $cabin) {
+            $this->greenObject = $cabin;
         }
     }
 

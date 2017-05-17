@@ -2,8 +2,8 @@
 {% block body %}
     {{ parent() }}
     <div class="container">
-        <h2>Dam List</h2>
-        <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Cabin</a>
+        <h2>Cabin List</h2>
+        <a href="{{ path('create_cabin') }}" class="btn btn-info" role="button">Add Cabin</a>
         {% include '@Admin/cabin/search.html.twig' %}
         <table class="table table-striped">
             <thead>
@@ -39,7 +39,7 @@
                         <td>
                             <a href="{{ path('edit_cabin', { 'id': cabin.id }) }}" class="btn btn-success"
                                role="button">Edit</a>
-                            <a href="{{ path('cabin_images_list', { 'id': cabin.id }) }}" class="btn btn-success"
+                            <a href="{{ path('green_object_images_list', { 'id': cabin.id }) }}" class="btn btn-success"
                                role="button">Add Images</a>
                             {% if cabin.isActive == 1 %}
                                 <a href="{{ path('deactivate_cabin', { 'id': cabin.id }) }}"

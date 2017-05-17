@@ -108,8 +108,8 @@ class GreenObjectImageController extends Controller
         $greenObjectImageRepresentation = $greenObjectImageQueryService->getImage((int) $request->get('id'));
         $imagePath = $this->getParameter('images_upload');
 
-        $damService = $this->get('fish_and_places.green_object_service');
-        $damService->deleteDamImages(new DeleteGreenObjectImagesCommand([$greenObjectImageRepresentation], $this->getUser()));
+        $greenObjectService = $this->get('fish_and_places.green_object_service');
+        $greenObjectService->deleteGreenObjectImages(new DeleteGreenObjectImagesCommand([$greenObjectImageRepresentation], $this->getUser()));
 
         $fileName = $imagePath . $greenObjectImageRepresentation->getImageSrc();
         $this->deletePhysicalFile($fileName);
@@ -139,7 +139,7 @@ class GreenObjectImageController extends Controller
     /**
      * @param string $fileName
      */
-    public function deletePhysiscalFile($fileName)
+    public function deletePhysicalFile($fileName)
     {
         if (file_exists($fileName)) {
             unlink($fileName);

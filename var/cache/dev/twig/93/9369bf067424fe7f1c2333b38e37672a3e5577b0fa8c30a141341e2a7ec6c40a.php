@@ -21,36 +21,36 @@ class __TwigTemplate_e01974eacc73b384b1fd07b4aa5c9c12d0a5157fdb97adf6a47fe43318d
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_aa0fe739aea34e4d45d8e9d60a49e5d2f26d8a4a65c0a14e31e3fcccf64bb781 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_aa0fe739aea34e4d45d8e9d60a49e5d2f26d8a4a65c0a14e31e3fcccf64bb781->enter($__internal_aa0fe739aea34e4d45d8e9d60a49e5d2f26d8a4a65c0a14e31e3fcccf64bb781_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/cmsPage/list.html.twig"));
+        $__internal_aa0afabf5ed5a8420de04ca69d5299bcb986f1540d7caed118c8963e5792bc77 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_aa0afabf5ed5a8420de04ca69d5299bcb986f1540d7caed118c8963e5792bc77->enter($__internal_aa0afabf5ed5a8420de04ca69d5299bcb986f1540d7caed118c8963e5792bc77_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/cmsPage/list.html.twig"));
 
-        $__internal_e510d6c528301dddeffcbd38f07461687dd1aa3acbe7c9d5f79200ee82decea3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_e510d6c528301dddeffcbd38f07461687dd1aa3acbe7c9d5f79200ee82decea3->enter($__internal_e510d6c528301dddeffcbd38f07461687dd1aa3acbe7c9d5f79200ee82decea3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/cmsPage/list.html.twig"));
+        $__internal_0e0cfe7c3f064a4d4605b1438e0cd5e31df9e056c1293fa6f069ca4ed23e8e90 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_0e0cfe7c3f064a4d4605b1438e0cd5e31df9e056c1293fa6f069ca4ed23e8e90->enter($__internal_0e0cfe7c3f064a4d4605b1438e0cd5e31df9e056c1293fa6f069ca4ed23e8e90_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Admin/cmsPage/list.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_aa0fe739aea34e4d45d8e9d60a49e5d2f26d8a4a65c0a14e31e3fcccf64bb781->leave($__internal_aa0fe739aea34e4d45d8e9d60a49e5d2f26d8a4a65c0a14e31e3fcccf64bb781_prof);
+        $__internal_aa0afabf5ed5a8420de04ca69d5299bcb986f1540d7caed118c8963e5792bc77->leave($__internal_aa0afabf5ed5a8420de04ca69d5299bcb986f1540d7caed118c8963e5792bc77_prof);
 
         
-        $__internal_e510d6c528301dddeffcbd38f07461687dd1aa3acbe7c9d5f79200ee82decea3->leave($__internal_e510d6c528301dddeffcbd38f07461687dd1aa3acbe7c9d5f79200ee82decea3_prof);
+        $__internal_0e0cfe7c3f064a4d4605b1438e0cd5e31df9e056c1293fa6f069ca4ed23e8e90->leave($__internal_0e0cfe7c3f064a4d4605b1438e0cd5e31df9e056c1293fa6f069ca4ed23e8e90_prof);
 
     }
 
     // line 2
     public function block_body($context, array $blocks = array())
     {
-        $__internal_2672ce3d7388b66abb0f2c7b470a550f49638329cd7ff07a50b851e778d1050e = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_2672ce3d7388b66abb0f2c7b470a550f49638329cd7ff07a50b851e778d1050e->enter($__internal_2672ce3d7388b66abb0f2c7b470a550f49638329cd7ff07a50b851e778d1050e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_8fa02d2be2790bbd9254871e243517d8ebaf99f58a293554ad0405eab47bb50d = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_8fa02d2be2790bbd9254871e243517d8ebaf99f58a293554ad0405eab47bb50d->enter($__internal_8fa02d2be2790bbd9254871e243517d8ebaf99f58a293554ad0405eab47bb50d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        $__internal_d45b979a1581bec58a558be2a63d2bd6efff559396692f63427c8e8b7baaf2eb = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_d45b979a1581bec58a558be2a63d2bd6efff559396692f63427c8e8b7baaf2eb->enter($__internal_d45b979a1581bec58a558be2a63d2bd6efff559396692f63427c8e8b7baaf2eb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_4339083d77c8ea3e2e408de24e7b6308e33cca5c9ec35e9fec20bf40cadb49f4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_4339083d77c8ea3e2e408de24e7b6308e33cca5c9ec35e9fec20bf40cadb49f4->enter($__internal_4339083d77c8ea3e2e408de24e7b6308e33cca5c9ec35e9fec20bf40cadb49f4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 3
         echo "    ";
         $this->displayParentBlock("body", $context, $blocks);
         echo "
     <div class=\"container\">
-        <h2>Dam List</h2>
+        <h2>CMS page List</h2>
         <a href=\"";
         // line 6
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("create_cms_page");
@@ -151,10 +151,10 @@ class __TwigTemplate_e01974eacc73b384b1fd07b4aa5c9c12d0a5157fdb97adf6a47fe43318d
     </div>
 ";
         
-        $__internal_d45b979a1581bec58a558be2a63d2bd6efff559396692f63427c8e8b7baaf2eb->leave($__internal_d45b979a1581bec58a558be2a63d2bd6efff559396692f63427c8e8b7baaf2eb_prof);
+        $__internal_4339083d77c8ea3e2e408de24e7b6308e33cca5c9ec35e9fec20bf40cadb49f4->leave($__internal_4339083d77c8ea3e2e408de24e7b6308e33cca5c9ec35e9fec20bf40cadb49f4_prof);
 
         
-        $__internal_2672ce3d7388b66abb0f2c7b470a550f49638329cd7ff07a50b851e778d1050e->leave($__internal_2672ce3d7388b66abb0f2c7b470a550f49638329cd7ff07a50b851e778d1050e_prof);
+        $__internal_8fa02d2be2790bbd9254871e243517d8ebaf99f58a293554ad0405eab47bb50d->leave($__internal_8fa02d2be2790bbd9254871e243517d8ebaf99f58a293554ad0405eab47bb50d_prof);
 
     }
 
@@ -187,7 +187,7 @@ class __TwigTemplate_e01974eacc73b384b1fd07b4aa5c9c12d0a5157fdb97adf6a47fe43318d
 {% block body %}
     {{ parent() }}
     <div class=\"container\">
-        <h2>Dam List</h2>
+        <h2>CMS page List</h2>
         <a href=\"{{ path('create_cms_page') }}\" class=\"btn btn-info\" role=\"button\">Add Page</a>
         {% include '@Admin/dam/search.html.twig' %}
         <table class=\"table table-striped\">

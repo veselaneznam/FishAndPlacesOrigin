@@ -11,9 +11,9 @@ class GreenObjectImageQueryService
     /** @var GreenObjectImagesRepository */
     private $greenObjectImagesRepository;
 
-    public function __construct(GreenObjectImagesRepository $damImagesRepository)
+    public function __construct(GreenObjectImagesRepository $greenObjectImagesRepository)
     {
-        $this->greenObjectImagesRepository = $damImagesRepository;
+        $this->greenObjectImagesRepository = $greenObjectImagesRepository;
     }
 
     /**

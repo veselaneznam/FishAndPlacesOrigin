@@ -2,7 +2,7 @@
 {% block body %}
     {{ parent() }}
     <div class="container">
-        <h2>Dam List</h2>
+        <h2>Fish List</h2>
         <a href="{{ path('create_fish') }}" class="btn btn-info" role="button">Add Fish</a>
         {% include '@Admin/dam/search.html.twig' %}
         <table class="table table-striped">
