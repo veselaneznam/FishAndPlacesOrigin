@@ -105,6 +105,24 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        if (0 === strpos($pathinfo, '/ca')) {
+            // cabin_view
+            if (0 === strpos($pathinfo, '/cabin') && preg_match('#^/cabin/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'cabin_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\CabinController::cabinDetailView',));
+            }
+
+            // camp_view
+            if (0 === strpos($pathinfo, '/camp') && preg_match('#^/camp/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'camp_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\CampController::campDetailView',));
+            }
+
+        }
+
+        // dam_view
+        if (0 === strpos($pathinfo, '/dam') && preg_match('#^/dam/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'dam_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\DamController::damDetailView',));
+        }
+
         // fish_view
         if ($pathinfo === '/fish/{$id}') {
             return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\FishController::detailViewAction',  '_route' => 'fish_view',);
@@ -159,14 +177,27 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::searchNearBy',  '_route' => '_searchNearBy',);
         }
 
-        // green_object_map_direction
-        if (0 === strpos($pathinfo, '/green_object/map_direction') && preg_match('#^/green_object/map_direction/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::loadMapDirections',));
+        if (0 === strpos($pathinfo, '/green_object')) {
+            // green_object_view
+            if (preg_match('#^/green_object/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::greenObjectDetailView',));
+            }
+
+            // green_object_map_direction
+            if (0 === strpos($pathinfo, '/green_object/map_direction') && preg_match('#^/green_object/map_direction/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_map_direction')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::loadMapDirections',));
+            }
+
         }
 
         // page_view
         if ($pathinfo === '/page/{$slug}') {
             return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\PageController::detailViewAction',  '_route' => 'page_view',);
+        }
+
+        // village_holiday_view
+        if (0 === strpos($pathinfo, '/village_holiday') && preg_match('#^/village_holiday/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'village_holiday_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\VillageHolidayController::villageHolidayDetailView',));
         }
 
         if (0 === strpos($pathinfo, '/admin')) {
@@ -330,11 +361,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             }
 
             if (0 === strpos($pathinfo, '/admin/green_object')) {
-                // green_object_view
-                if (preg_match('#^/admin/green_object/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'green_object_view')), array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectController::greenObjectDetailView',));
-                }
-
                 // green_object_images_list
                 if ($pathinfo === '/admin/green_object/images/{$id}') {
                     return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\AdminBundle\\Controller\\GreenObjectImageController::indexAction',  '_route' => 'green_object_images_list',);

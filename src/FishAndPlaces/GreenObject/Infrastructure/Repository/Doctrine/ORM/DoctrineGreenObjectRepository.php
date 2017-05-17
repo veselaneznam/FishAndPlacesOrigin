@@ -62,6 +62,7 @@ class DoctrineGreenObjectRepository extends DoctrineRepository implements GreenO
     {
         $location = new Location($location->getLat(), $location->getLon());
         $ids = $this->getGreenObjectIdByNearByLocation($location, $radius);
+
         return $this->findByIds($ids);
     }
 
@@ -92,7 +93,7 @@ class DoctrineGreenObjectRepository extends DoctrineRepository implements GreenO
         }
         $SQL = "SELECT d.id,
  ( 6380 * acos( cos( radians($fLat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($fLon) ) + sin( radians($fLat) ) * sin( radians( latitude ) ) ) ) AS distance 
- FROM dam as d
+ FROM green_object as d
  HAVING distance < $radius LIMIT 25;";
         $em = $this->getEntityManager();
         $stmt = $em->getConnection()->prepare($SQL);

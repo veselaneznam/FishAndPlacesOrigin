@@ -3,6 +3,7 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject\Cabin;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
+use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Model\Cabin;
 
 class CabinRepresentation extends GreenObjectRepresentation
@@ -30,5 +31,13 @@ class CabinRepresentation extends GreenObjectRepresentation
     public function getGreenObject()
     {
         return $this->greenObject;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return GreenObjectType::CABIN;
     }
 }

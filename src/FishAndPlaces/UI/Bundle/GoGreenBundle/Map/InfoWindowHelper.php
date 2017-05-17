@@ -17,7 +17,7 @@ class InfoWindowHelper
      */
     public static function build(GreenObjectRepresentation $greenObjectRepresentation, $twig)
     {
-        $templatePath = '@GreenObject/greenObject/map_info_window.html.twig';
+        $templatePath = '@GoGreen/greenObject/map_info_window.html.twig';
         $html = $twig->render($templatePath, $greenObjectRepresentation->toArray());
         $infoWindow = new InfoWindow(
             $html,

@@ -129,6 +129,11 @@ use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
          return $this->convertToRepresentation($greenObjects);
      }
 
+     /**
+      * @param GreenObject $greenObject
+      *
+      * @return CabinRepresentation|CampRepresentation|DamRepresentation|VillageHolidayRepresentation
+      */
      private static function decideRepresentation(GreenObject $greenObject)
      {
          switch ($greenObject->getType()) {

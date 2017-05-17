@@ -59,10 +59,6 @@ class GreenObjectController extends Controller
      * @Method({"GET", "POST"})
      * @param Request $request
      *
-     * @param string  $location
-     *
-     * @param int|null  $radius
-     *
      * @return Response
      */
     public function postMapAction(Request $request)
@@ -72,7 +68,7 @@ class GreenObjectController extends Controller
            $radius = (int) $request->get('km');
            return $this->handleMapSearch($request, $location, $radius);
        } else {
-           return $this->redirectToRoute('dam');
+           return $this->redirectToRoute('green_object');
        }
     }
 
@@ -104,6 +100,7 @@ class GreenObjectController extends Controller
     {
         $greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
         $greenObject = $greenObjectQueryService->find((int) $request->get('id'));
+
         return $this->render('@GoGreen/greenObject/detail_view.html.twig', [
             'greenObject' => $greenObject,
         ]);
@@ -138,14 +135,13 @@ class GreenObjectController extends Controller
     }
 
     /**
-     * @param Request             $request
      * @param GreenObjectRepresentation[] $greenObjectCollection
      *
      * @param                     $twig
      *
      * @return Map
      */
-    private function getMap(Request $request, $greenObjectCollection, $twig)
+    private function getMap($greenObjectCollection, $twig)
     {
         $userLocation = $this->getUserLocatiоn();
         if (empty($greenObjectCollection)) {
@@ -181,15 +177,15 @@ class GreenObjectController extends Controller
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
             $this->addFlash('error', $this->get('translator')->trans("Something went wrong. Please check your search criteria"));
             return
-                 $this->redirectToRoute('dam');
+                 $this->redirectToRoute('green_object');
         }
 
         if (empty($greenObjectCollection)) {
             $this->addFlash('notice', $this->get('translator')->trans("No results found for") . $location);
-            return $this->redirectToRoute('dam');
+            return $this->redirectToRoute('green_object');
         }
 
-        $map = $this->getMap($request, $greenObjectCollection, $this->container->get('twig'));
+        $map = $this->getMap($greenObjectCollection, $this->container->get('twig'));
 
         return $this->render('@GoGreen/greenObject/google_map.html.twig', array(
             'map' => $map,

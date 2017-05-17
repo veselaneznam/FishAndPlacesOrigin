@@ -3,6 +3,7 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageRepresentation;
+use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage;
 use FishAndPlaces\GreenObject\Domain\Value\Contact;
 use FishAndPlaces\GreenObject\Domain\Value\Location;
@@ -10,7 +11,7 @@ use FishAndPlaces\GreenObject\Domain\Value\Rating;
 use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 use Symfony\Component\HttpFoundation\File\File;
 
-class GreenObjectRepresentation
+abstract class GreenObjectRepresentation
 {
     /**
      * @var int
@@ -123,6 +124,18 @@ class GreenObjectRepresentation
         }
     }
 
+    /**
+     * @return int
+     */
+    abstract public function getType();
+
+    /**
+     * @return string
+     */
+    public function getDetailRoutePrefix()
+    {
+        return GreenObjectType::TYPE_TO_ROUTE_PREFIX[$this->getType()];
+    }
     /**
      * @return int
      */

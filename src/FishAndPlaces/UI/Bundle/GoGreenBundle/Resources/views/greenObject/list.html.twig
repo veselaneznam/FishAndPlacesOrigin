@@ -6,8 +6,11 @@
         <h3 class="page-header">{{ title }}</h3>
     </div>
     {% for greenObject in greenObjectCollection %}
+        {% set route_prefix = greenObject.getDetailRoutePrefix %}
+        {% set route_suffix = "_view" %}
+        {% set route = route_prefix ~ route_suffix %}
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="{{ path('green_object_view', {'id': greenObject.id}) }}">
+        <a class="thumbnail" href="{{ path(route, {'id': greenObject.id}) }}">
             {% if greenObject.mainImage.webPath != null %}
                 <img class="img-responsive" src="{{  greenObject.mainImage.webPath }}" alt="{{ greenObject.name }}">
             {% else %}

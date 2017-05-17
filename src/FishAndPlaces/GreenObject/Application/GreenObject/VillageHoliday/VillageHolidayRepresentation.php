@@ -3,6 +3,7 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
+use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Model\VillageHoliday;
 
 class VillageHolidayRepresentation extends GreenObjectRepresentation
@@ -30,5 +31,13 @@ class VillageHolidayRepresentation extends GreenObjectRepresentation
     public function getGreenObject()
     {
         return $this->greenObject;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return GreenObjectType::VILLAGE_HOLIDAY;
     }
 }

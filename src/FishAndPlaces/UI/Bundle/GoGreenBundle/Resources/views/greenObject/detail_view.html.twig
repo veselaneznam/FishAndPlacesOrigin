@@ -32,10 +32,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-6 text-justify">
-    {% include '@GoGreen/greenObject/greenObject_fish_collection.html.twig' %}
-            </div>
         </div>
+        {% block fish_collection %}
+        {% endblock%}
         <div class="col-lg-12 text-justify">
             <p>{{ greenObject.description | raw }}</p>
             <div id="disqus_thread"></div>
