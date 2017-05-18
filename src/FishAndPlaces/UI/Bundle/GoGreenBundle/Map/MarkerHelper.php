@@ -3,7 +3,10 @@
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Map;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
+use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Base\Size;
+use Ivory\GoogleMap\Overlay\Icon;
 use Ivory\GoogleMap\Overlay\Marker;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
@@ -19,7 +22,13 @@ class MarkerHelper
     {
         if(null !== $greenObjectRepresentation->getLat() && null !== $greenObjectRepresentation->getLong()) {
             $marker = new Marker(
-                new Coordinate($greenObjectRepresentation->getLat(), $greenObjectRepresentation->getLong()));
+                new Coordinate(
+                    $greenObjectRepresentation->getLat(),
+                    $greenObjectRepresentation->getLong()
+                ),
+                null,
+                new Icon(GreenObjectType::TYPE_TO_ICON[$greenObjectRepresentation->getType()], null, null, new Size(50,50,'px', 'px'))
+            );
             $marker->setInfoWindow(InfoWindowHelper::build($greenObjectRepresentation, $twig));
             return $marker;
         }
