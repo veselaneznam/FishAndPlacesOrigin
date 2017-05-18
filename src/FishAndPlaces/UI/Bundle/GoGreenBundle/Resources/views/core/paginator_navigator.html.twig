@@ -1,0 +1,47 @@
+{% set currentPath = path(app.request.get('_route'), app.request.get('_route_params')) %}
+{% set params = app.request.query.all %}
+{%  set query = '' %}
+{% for paramName, paramValue in params %}
+    {% if paramName != 'page' %}
+    {% set query = query ~ paramName ~ '=' ~ paramValue ~ '&'  %}
+    {% endif %}
+{% endfor %}
+
+{% set currentPath = currentPath ~ '?' ~  query %}
+{% set currentPage = paginator.getCurrentPage() %}
+{% set totalPages = paginator.getTotalPages() %}
+
+<nav  aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if currentPage > 1 %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page=1">{% trans %}Beginning{% endtrans %}</a></li>
+            <li><a href="{{ currentPath }}page={{ currentPage > 1 ? currentPage - 1 : 1 }}">{% trans %}Next{% endtrans %}</a></li>
+        {% endif %}
+
+        {% if (currentPage - 3) > 0 %}
+            <li class="page-item" ><a class="page-link" href="#">...</a></li>
+        {% endif %}
+        {% if (currentPage - 2) > 0 %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ currentPage - 2 }}">{{ currentPage - 2 }}</a></li>
+        {% endif %}
+        {% if (currentPage - 1) > 0 %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ currentPage - 1 }}">{{ currentPage - 1 }}</a></li>
+        {% endif %}
+        <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+        {% if (currentPage + 1) <= totalPages %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ currentPage + 1 }}">{{ currentPage + 1 }}</a></li>
+        {% endif %}
+        {% if (currentPage + 2) <= totalPages %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ currentPage + 2 }}">{{ currentPage + 2 }}</a></li>
+        {% endif %}
+        {% if (currentPage + 2) < totalPages %}
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+        {% endif %}
+
+        {% if currentPage < totalPages %}
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ currentPage < totalPages ? currentPage + 1 : currentPage }}">{% trans %}Previous{% endtrans %}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ currentPath }}page={{ totalPages }}">{% trans %}End{% endtrans %}</a></li>
+        {% endif %}
+
+    </ul>
+</nav>

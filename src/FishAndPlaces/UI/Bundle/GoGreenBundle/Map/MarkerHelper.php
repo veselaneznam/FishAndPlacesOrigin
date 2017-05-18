@@ -27,7 +27,7 @@ class MarkerHelper
                     $greenObjectRepresentation->getLong()
                 ),
                 null,
-                new Icon(GreenObjectType::TYPE_TO_ICON[$greenObjectRepresentation->getType()], null, null, new Size(50,50,'px', 'px'))
+                new Icon(GreenObjectType::TYPE_TO_ICON[$greenObjectRepresentation->getType()], null, null, new Size(40,60,'px', 'px'))
             );
             $marker->setInfoWindow(InfoWindowHelper::build($greenObjectRepresentation, $twig));
             return $marker;

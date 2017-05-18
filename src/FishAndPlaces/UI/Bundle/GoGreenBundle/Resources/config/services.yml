@@ -38,7 +38,9 @@ services:
     fish_and_places.green_object_service:
         class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService
         arguments:
-        aruments:
             - "@fish_and_places.green_object_repository"
             - "@fish_and_places.geolocator"
             - "@fish_and_places.greenobject_image_repository"
+
+    fish_and_places.paginator:
+        class: FishAndPlaces\GreenObject\Application\Core\Paginator

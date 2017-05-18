@@ -16,10 +16,17 @@ class GreenObjectType
         self::VILLAGE_HOLIDAY => 'village_holiday',
     ];
 
+//    const TYPE_TO_ICON = [
+//        self::DAM => '/images/FREE-map-parkers-png/free-map-marker-icon-blue-darker.png',
+//        self::CAMP => '/images/FREE-map-parkers-png/free-map-marker-icon-green-darker.png',
+//        self::CABIN => '/images/FREE-map-parkers-png/free-map-marker-icon-orange.png',
+//        self::VILLAGE_HOLIDAY => '/images/FREE-map-parkers-png/free-map-marker-icon-pink.png',
+//    ];
+
     const TYPE_TO_ICON = [
-        self::DAM => '/images/FREE-map-parkers-png/free-map-marker-icon-blue-darker.png',
-        self::CAMP => '/images/FREE-map-parkers-png/free-map-marker-icon-green-darker.png',
-        self::CABIN => '/images/FREE-map-parkers-png/free-map-marker-icon-orange.png',
-        self::VILLAGE_HOLIDAY => '/images/FREE-map-parkers-png/free-map-marker-icon-pink.png',
+        self::DAM => 'https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=ship|0099ff',
+        self::CAMP => 'https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=camping|009933',
+        self::CABIN => 'https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=home|ff6600',
+        self::VILLAGE_HOLIDAY => 'https://chart.googleapis.com/chart?chst=d_map_pin_icon&chld=home|ff66cc',
     ];
 }

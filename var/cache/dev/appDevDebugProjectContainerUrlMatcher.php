@@ -143,34 +143,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_green_object:
 
-        if (0 === strpos($pathinfo, '/map')) {
-            // map_view
-            if (preg_match('#^/map/(?P<location>[^/]++)(?:/(?P<radius>[^/]++))?$#s', $pathinfo, $matches)) {
-                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                    goto not_map_view;
-                }
-
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_view')), array (  'radius' => 100,  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::mapAction',));
+        // post_map_view
+        if (0 === strpos($pathinfo, '/map') && preg_match('#^/map(?:/(?P<location>[^/]+)(?:(?P<radius>[^/]+)(?:(?P<page>[^/]++))?)?)?$#s', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_post_map_view;
             }
-            not_map_view:
 
-            // post_map_view
-            if (rtrim($pathinfo, '/') === '/map') {
-                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
-                    goto not_post_map_view;
-                }
-
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'post_map_view');
-                }
-
-                return array (  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::postMapAction',  '_route' => 'post_map_view',);
-            }
-            not_post_map_view:
-
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'post_map_view')), array (  'page' => 1,  'location' => 'sofia',  'radius' => 100,  '_controller' => 'FishAndPlaces\\UI\\Bundle\\GoGreenBundle\\Controller\\GreenObjectController::postMapAction',));
         }
+        not_post_map_view:
 
         // _searchNearBy
         if ($pathinfo === '/searchNearBy') {

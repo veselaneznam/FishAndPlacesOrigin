@@ -2,6 +2,7 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 
+use FishAndPlaces\GreenObject\Application\Core\Paginator;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MapHelper;
@@ -38,32 +39,32 @@ class GreenObjectController extends Controller
         ));
     }
 
-    /**
-     * @Route("/map/{location}/{radius}", defaults={"radius" = 100},  name="map_view")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     *
-     * @param string  $location
-     *
-     * @param int| null  $radius
-     *
-     * @return Response
-     */
-    public function mapAction(Request $request, $location, $radius)
-    {
-        return $this->handleMapSearch($request, $location, $radius);
-    }
+//    /**
+//     * @Route("/map/{location}/{radius}", defaults={"radius" = 100},  name="map_view")
+//     * @Method({"GET", "POST"})
+//     * @param Request $request
+//     *
+//     * @param string  $location
+//     *
+//     * @param int| null  $radius
+//     *
+//     * @return Response
+//     */
+//    public function mapAction(Request $request, $location, $radius)
+//    {
+//        return $this->handleMapSearch($request, $location, $radius);
+//    }
 
     /**
-     * @Route("/map/", name="post_map_view")
-     * @Method({"GET", "POST"})
+     * @Route("/map/{location}{radius}{page}", defaults={"page"=1, "location" = "sofia", "radius" = 100}, name="post_map_view")
+     * @Method({"GET"})
      * @param Request $request
      *
      * @return Response
      */
     public function postMapAction(Request $request)
     {
-       if ($request->getMethod() == 'POST') {
+       if ($request->getMethod() == 'GET') {
            $location = $request->get('search');
            $radius = (int) $request->get('km');
            return $this->handleMapSearch($request, $location, $radius);
@@ -187,9 +188,12 @@ class GreenObjectController extends Controller
 
         $map = $this->getMap($greenObjectCollection, $this->container->get('twig'));
 
+        $paginator = new Paginator();
+
         return $this->render('@GoGreen/greenObject/google_map.html.twig', array(
             'map' => $map,
-            'greenObjectCollection' => $greenObjectCollection,
+            'greenObjectCollection' => $paginator->paginate($greenObjectCollection,$request->query->get('page', 1)),
+            'paginator' => $paginator,
             'title' => $this->get('translator')->trans("Search Result"),
         ));
     }

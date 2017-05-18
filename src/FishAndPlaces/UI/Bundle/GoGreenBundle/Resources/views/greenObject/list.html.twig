@@ -16,10 +16,18 @@
             {% else %}
                 <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" class="img-responsive">
             {% endif %}
-            <span>{{ greenObject.name }}</span>
+            {% if  greenObject.name | length > 30 %}
+            <span>{{ greenObject.name[:30] ~ '...'  }}</span>
+            {% else %}
+            <span>{{ greenObject.name}}</span>
+            {% endif %}
         </a>
     </div>
     {% endfor %}
+
+    {% if paginator is defined and paginator.count > 0 and paginator.getTotalPages() > 1 %}
+        {{ include('@GoGreen/core/paginator_navigator.html.twig', {'paginator' : paginator}) }}
+    {% endif %}
 </div>
 
 {% endif %}

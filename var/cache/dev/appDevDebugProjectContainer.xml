@@ -567,7 +567,12 @@
       <argument type="service" id="fish_and_places.green_object_repository"/>
       <argument type="service" id="fish_and_places.geolocator"/>
     </service>
-    <service id="fish_and_places.green_object_service" class="FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService"/>
+    <service id="fish_and_places.green_object_service" class="FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService">
+      <argument type="service" id="fish_and_places.green_object_repository"/>
+      <argument type="service" id="fish_and_places.geolocator"/>
+      <argument type="service" id="fish_and_places.greenobject_image_repository"/>
+    </service>
+    <service id="fish_and_places.paginator" class="FishAndPlaces\GreenObject\Application\Core\Paginator"/>
     <service id="fish_and_places.greenobject_images_query_service" class="FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService">
       <argument type="service" id="fish_and_places.greenobject_image_repository"/>
     </service>
@@ -687,7 +692,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>zTXZy1d-5a</argument>
                 <argument>0</argument>
-                <argument>yhhcuZwqMqiUILKwGZG92O</argument>
+                <argument>cKTB4ylTtMbe+Ovj4UYbPO</argument>
                 <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -810,7 +815,7 @@
           <tag name="monolog.logger" channel="cache"/>
           <argument>xX8EXZxB0j</argument>
           <argument>null</argument>
-          <argument>yhhcuZwqMqiUILKwGZG92O</argument>
+          <argument>cKTB4ylTtMbe+Ovj4UYbPO</argument>
           <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
           <factory class="Symfony\Component\PropertyAccess\PropertyAccessor" method="createCache"/>
         </service>
@@ -831,7 +836,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>1YnklBjlH6</argument>
       <argument>0</argument>
-      <argument>yhhcuZwqMqiUILKwGZG92O</argument>
+      <argument>cKTB4ylTtMbe+Ovj4UYbPO</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -841,7 +846,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>34cg6AMXrB</argument>
       <argument>0</argument>
-      <argument>yhhcuZwqMqiUILKwGZG92O</argument>
+      <argument>cKTB4ylTtMbe+Ovj4UYbPO</argument>
       <argument>/Users/vferdinandova/veselaProjects/fishAndPlaces/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2284,7 +2289,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>591c5f8ca297d2.42995338</argument>
+            <argument>591d95f96bd1e8.92044926</argument>
           </service>
         </argument>
       </argument>
@@ -2617,7 +2622,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>591c5f8ca297d2.42995338</argument>
+            <argument>591d95f96bd1e8.92044926</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

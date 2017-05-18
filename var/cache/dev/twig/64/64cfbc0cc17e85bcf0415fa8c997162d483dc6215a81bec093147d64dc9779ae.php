@@ -15,11 +15,11 @@ class __TwigTemplate_19c2c570ff935d1cdf501f2ab341b071930d96b784153f10dd8dad932d2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_a371cc8823248c8e38a0759541ceafff4f544daeb15cbaec09d7385e964c70e3 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_a371cc8823248c8e38a0759541ceafff4f544daeb15cbaec09d7385e964c70e3->enter($__internal_a371cc8823248c8e38a0759541ceafff4f544daeb15cbaec09d7385e964c70e3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@StarRating/Display/ratingDisplay.html.twig"));
+        $__internal_43c216b25d379c8e39a4b08f762b37f2208c2121a7d1991623128c3153a74d6b = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_43c216b25d379c8e39a4b08f762b37f2208c2121a7d1991623128c3153a74d6b->enter($__internal_43c216b25d379c8e39a4b08f762b37f2208c2121a7d1991623128c3153a74d6b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@StarRating/Display/ratingDisplay.html.twig"));
 
-        $__internal_f7a8c2635ee5849ff5936edc633def8c6a8b3a17668c8b68f1e6e095bc66c7fd = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_f7a8c2635ee5849ff5936edc633def8c6a8b3a17668c8b68f1e6e095bc66c7fd->enter($__internal_f7a8c2635ee5849ff5936edc633def8c6a8b3a17668c8b68f1e6e095bc66c7fd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@StarRating/Display/ratingDisplay.html.twig"));
+        $__internal_07437b5f1e69679f52b4a730cacf68a6d0a35d74929a9b247c3436359b078476 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_07437b5f1e69679f52b4a730cacf68a6d0a35d74929a9b247c3436359b078476->enter($__internal_07437b5f1e69679f52b4a730cacf68a6d0a35d74929a9b247c3436359b078476_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@StarRating/Display/ratingDisplay.html.twig"));
 
         // line 1
         echo "<div class=\"rating\">
@@ -46,10 +46,10 @@ class __TwigTemplate_19c2c570ff935d1cdf501f2ab341b071930d96b784153f10dd8dad932d2
         // line 5
         echo "</div>";
         
-        $__internal_a371cc8823248c8e38a0759541ceafff4f544daeb15cbaec09d7385e964c70e3->leave($__internal_a371cc8823248c8e38a0759541ceafff4f544daeb15cbaec09d7385e964c70e3_prof);
+        $__internal_43c216b25d379c8e39a4b08f762b37f2208c2121a7d1991623128c3153a74d6b->leave($__internal_43c216b25d379c8e39a4b08f762b37f2208c2121a7d1991623128c3153a74d6b_prof);
 
         
-        $__internal_f7a8c2635ee5849ff5936edc633def8c6a8b3a17668c8b68f1e6e095bc66c7fd->leave($__internal_f7a8c2635ee5849ff5936edc633def8c6a8b3a17668c8b68f1e6e095bc66c7fd_prof);
+        $__internal_07437b5f1e69679f52b4a730cacf68a6d0a35d74929a9b247c3436359b078476->leave($__internal_07437b5f1e69679f52b4a730cacf68a6d0a35d74929a9b247c3436359b078476_prof);
 
     }
 
