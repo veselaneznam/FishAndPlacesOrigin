@@ -43,3 +43,5 @@ bf6e57,127.0.0.1,GET,http://127.0.0.1:8000/green_object/map_direction/61,1495116
 928269,127.0.0.1,GET,http://127.0.0.1:8000/map?km=100&search=Shumen,1495116440,,200
 62a82b,127.0.0.1,GET,http://127.0.0.1:8000/green_object/map_direction/31,1495116497,,200
 a4b95e,127.0.0.1,GET,http://127.0.0.1:8000/green_object/map_direction/31,1495116646,,200
+44ff69,127.0.0.1,GET,http://127.0.0.1:8000/green_object/map_direction/31,1495117193,,200
+c8d17b,127.0.0.1,GET,http://127.0.0.1:8000/map?km=100&search=Shumen,1495117201,,200

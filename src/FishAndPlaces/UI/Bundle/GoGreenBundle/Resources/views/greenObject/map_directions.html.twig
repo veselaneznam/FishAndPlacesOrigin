@@ -119,7 +119,7 @@
         <img src="{{ asset('images/progress.gif') }}" />
     </div>
     <div id="right-panel">
-        {%  set referer = app.request.server.get('http-referer')|default('/')  %}
+        {%  set referer = app.request.headers.get('referer') %}
         <td><a  class="btn btn-success" href="{{ referer}}">{% trans %}Back{% endtrans %}</a></td>
 
         <p>Total Distance: <span id="total">

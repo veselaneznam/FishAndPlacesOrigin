@@ -3,23 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a86d80c4-07a1-4590-94ca-2411096fb311" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/translations/messages.bg.yml" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/translations/messages.bg.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_directions.html.twig" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_directions.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_info_window.html.twig" afterPath="$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_info_window.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.bg.2fd24a33ab38ad9fa674666c189414fcfb3331cd.php" afterPath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.bg.2fd24a33ab38ad9fa674666c189414fcfb3331cd.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.en.2fd24a33ab38ad9fa674666c189414fcfb3331cd.php" afterPath="$PROJECT_DIR$/var/cache/dev/translations/catalogue.en.2fd24a33ab38ad9fa674666c189414fcfb3331cd.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/01/01edc044d5d291640511e62a817b2d1e5c031e497bc10a9fb74974237b8d1cb5.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/01/01edc044d5d291640511e62a817b2d1e5c031e497bc10a9fb74974237b8d1cb5.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/39/39b9772433b0e50a8659b1df02bd13a016a358a900c32407c2505790e04e3251.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/39/39b9772433b0e50a8659b1df02bd13a016a358a900c32407c2505790e04e3251.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/55/554c54b1af99c6e4f1972c0ddfbd82f536f9798dac456deffdd7f51e054419da.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/55/554c54b1af99c6e4f1972c0ddfbd82f536f9798dac456deffdd7f51e054419da.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/75/75ed51ecd01b3adacc233d61d7fc18bf32ffa752498330442659da892465f6a1.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/75/75ed51ecd01b3adacc233d61d7fc18bf32ffa752498330442659da892465f6a1.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/c6/c617eec387aa2ff127cf6052a4ff35ae1fc88b5d0ce7bcdbbd0bc5c185371770.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/c6/c617eec387aa2ff127cf6052a4ff35ae1fc88b5d0ce7bcdbbd0bc5c185371770.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/e2/e2259392b29c03fe88d5cbf9dd8365447774f5767847a17ba9ccd8410ae22667.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/e2/e2259392b29c03fe88d5cbf9dd8365447774f5767847a17ba9ccd8410ae22667.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/twig/fa/fa49c4f49d4386435db8758649fe9d35927e01dd097db7bfab98bca27ed5d065.php" afterPath="$PROJECT_DIR$/var/cache/dev/twig/fa/fa49c4f49d4386435db8758649fe9d35927e01dd097db7bfab98bca27ed5d065.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/logs/dev.log" afterPath="$PROJECT_DIR$/var/logs/dev.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/custom.css" afterPath="$PROJECT_DIR$/web/css/custom.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -99,8 +83,8 @@
       <file leaf-file-name="map_directions.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_directions.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="122" column="56" lean-forward="false" selection-start-line="122" selection-start-column="56" selection-end-line="122" selection-end-column="56" />
+            <state relative-caret-position="653">
+              <caret line="121" column="60" lean-forward="false" selection-start-line="121" selection-start-column="60" selection-end-line="121" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -1034,7 +1018,7 @@
       <workItem from="1494942477984" duration="4085000" />
       <workItem from="1495019872727" duration="661000" />
       <workItem from="1495024654490" duration="7615000" />
-      <workItem from="1495095232331" duration="17506000" />
+      <workItem from="1495095232331" duration="18004000" />
     </task>
     <task id="LOCAL-00001" summary="Need to fix the map">
       <created>1491161793627</created>
@@ -1117,7 +1101,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="319628000" />
+    <option name="totallyTimeSpent" value="320126000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1130,7 +1114,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1080" height="1920" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.265444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1139,7 +1123,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7044956" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32785088" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981578" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49780703" sideWeight="0.4915254" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49780703" sideWeight="0.4915254" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1636,8 +1620,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FishAndPlaces/UI/Bundle/GoGreenBundle/Resources/views/greenObject/map_directions.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="122" column="56" lean-forward="false" selection-start-line="122" selection-start-column="56" selection-end-line="122" selection-end-column="56" />
+        <state relative-caret-position="653">
+          <caret line="121" column="60" lean-forward="false" selection-start-line="121" selection-start-column="60" selection-end-line="121" selection-end-column="60" />
           <folding />
         </state>
       </provider>
