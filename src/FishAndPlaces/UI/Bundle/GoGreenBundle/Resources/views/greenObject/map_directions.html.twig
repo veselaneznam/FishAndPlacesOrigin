@@ -8,7 +8,13 @@
                 pointB = new google.maps.LatLng({{greenObject.location.lat}}, {{ greenObject.location.lon }}),
                 myOptions = {
                     zoom: 7,
-                    center: pointA
+                    center: pointA,
+                    zoomControl: true,
+                    mapTypeControl: true,
+                    scaleControl: true,
+                    streetViewControl: true,
+                    rotateControl: true,
+                    fullscreenControl: true
                 },
                 map = new google.maps.Map(document.getElementById('map-canvas'), myOptions),
                 // Instantiate a directions service.
@@ -113,6 +119,9 @@
         <img src="{{ asset('images/progress.gif') }}" />
     </div>
     <div id="right-panel">
+        {%  set referer = app.request.server.get('http-referer')|default('/')  %}
+        <td><a  class="btn btn-success" href="{{ referer}}">{% trans %}Back{% endtrans %}</a></td>
+
         <p>Total Distance: <span id="total">
                 <img src="{{ asset('images/progress.gif') }}" /></span></p>
     </div>

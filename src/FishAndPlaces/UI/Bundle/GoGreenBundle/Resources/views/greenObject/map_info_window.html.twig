@@ -1,22 +1,19 @@
-<div id="content">
-    <div id="siteNotice">
-    </div>
-    <h5 id="firstHeading" class="firstHeading">{{ name }}</h5>
-    <div id="bodyContent">
-        <div class="col-lg-6 text-justify">
+        <div class="col-ls-2 text-justify">
+            <h5>{{ name }}</h5>
             <table class="table table-condensed">
                 <thead>
                 <tr colspan="2">
                     <th>
 
                         {% if mainImage != null %}
-                            <img src="{{ mainImage }}" width="80px" title="{{ name }}" >
+                            <img src="{{ mainImage }}" width="200px" title="{{ name }}" >
                         {% else %}
-                            <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" class="img-responsive">
+                            <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}"  width="200px" class="img-responsive">
                         {% endif %}
                     </th>
-                    <th><h5>{% trans %}Info{% endtrans %}</h5></th>
+
                 </tr>
+                <tr> <th><h5>{% trans %}Info{% endtrans %}</h5></th></tr>
                 </thead>
                 <tbody>
                 <tr>
@@ -28,11 +25,10 @@
                 <tr>
                     <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ address }}</td>
                 </tr>
-                    <td><a href="{{ path('green_object_map_direction', {'id': id}) }}">{% trans %}Directions{% endtrans %}</a></td>
-                    <td><a href="{{ path('green_object_view', {'id': id}) }}">{% trans %}More details{% endtrans %}</a></td>
+                <tr>
+                    <td><a  class="btn btn-success" href="{{ path('green_object_map_direction', {'id': id}) }}">{% trans %}Directions{% endtrans %}</a></td>
+                    <td><a class="btn btn-info" href="{{ path('green_object_view', {'id': id}) }}">{% trans %}More details{% endtrans %}</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-</div>

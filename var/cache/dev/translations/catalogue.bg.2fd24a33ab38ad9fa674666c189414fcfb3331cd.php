@@ -220,7 +220,7 @@ $catalogue = new MessageCatalogue('bg', array (
     'Go Green' => 'На Зелено',
     'Beginning' => 'Начало',
     'End' => 'Край',
-    'Green Objects List' => 'Списък с топ Места',
+    'Green Object List' => 'Списък със осемте топ места',
     'Previous' => 'Предишна',
     'Next' => 'Следваща',
   ),

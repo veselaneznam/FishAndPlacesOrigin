@@ -102,3 +102,7 @@ footer {
 .navbar-inverse .navbar-nav>li>a {
     color: white;
 }
+.page-header {
+    color:whitesmoke;
+    text-shadow: 2px 0 black, 0 1px black, 3px 0 black, 0 1px black;
+}
