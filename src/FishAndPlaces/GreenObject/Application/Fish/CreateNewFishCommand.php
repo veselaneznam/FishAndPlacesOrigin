@@ -23,6 +23,9 @@ class CreateNewFishCommand
         $fish->setCreatedAt(new \DateTime('now'));
         $fish->setUpdatedAt(new \DateTime('now'));
         $fish->setIsActive($fishRepresentation->isActive());
+        foreach ($fishRepresentation->getDamCollection() as $damRepresentation) {
+            $fish->addDam($damRepresentation->getDam());
+        }
         $this->fish = $fish;
     }
 

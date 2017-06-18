@@ -62,7 +62,6 @@ class DoctrineGreenObjectRepository extends DoctrineRepository implements GreenO
     {
         $location = new Location($location->getLat(), $location->getLon());
         $ids = $this->getGreenObjectIdByNearByLocation($location, $radius);
-
         return $this->findByIds($ids);
     }
 

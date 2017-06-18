@@ -47,6 +47,8 @@ FishAndPlaces\GreenObject\Domain\Model\GreenObject:
             type: boolean
         description:
             type: text
+        contact:
+            type: text
 
     oneToMany:
         imageCollection:

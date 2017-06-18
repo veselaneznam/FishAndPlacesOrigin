@@ -1,14 +1,18 @@
-imports:
-    - { resource: cabin.yml }
-    - { resource: camp.yml }
-    - { resource: dam.yml }
-    - { resource: village_holiday.yml }
-
 services:
-    fish_and_places.greenobject_image_repository:
+    fish_and_places.dam_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineDamRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\Dam ]
+
+    fish_and_places.fish_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineFishRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\Fish ]
+
+    fish_and_places.dam_image_repository:
         class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage ]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\DamImage ]
 
     fish_and_places.local_geocoder_repository:
         class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository
@@ -24,23 +28,26 @@ services:
             - "@fish_and_places.geocoder_proxy"
             - "@fish_and_places.local_geocoder_repository"
 
-    fish_and_places.green_object_repository:
-        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectRepository
-        factory: ["@doctrine", getRepository]
-        arguments: [ FishAndPlaces\GreenObject\Domain\Model\GreenObject ]
-
-    fish_and_places.green_object_query_service:
-        class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService
+    fish_and_places.dam_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService
         arguments:
-            - "@fish_and_places.green_object_repository"
+            - "@fish_and_places.dam_repository"
             - "@fish_and_places.geolocator"
 
-    fish_and_places.green_object_service:
-        class: FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectService
+    fish_and_places.fish_query_service:
+        class: FishAndPlaces\GreenObject\Application\Fish\FishQueryService
         arguments:
-            - "@fish_and_places.green_object_repository"
-            - "@fish_and_places.geolocator"
-            - "@fish_and_places.greenobject_image_repository"
+            - "@fish_and_places.fish_repository"
 
-    fish_and_places.paginator:
-        class: FishAndPlaces\GreenObject\Application\Core\Paginator
+    fish_and_places.dam_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamService
+        arguments:
+            - "@fish_and_places.dam_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.dam_image_repository"
+            - "@fish_and_places.fish_repository"
+
+    fish_and_places.fish_service:
+        class: FishAndPlaces\GreenObject\Application\Fish\FishService
+        arguments:
+            - "@fish_and_places.fish_repository"

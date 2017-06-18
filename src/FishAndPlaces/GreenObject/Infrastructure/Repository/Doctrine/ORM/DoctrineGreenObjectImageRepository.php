@@ -47,16 +47,16 @@ class DoctrineGreenObjectImageRepository extends DoctrineRepository implements G
     }
 
     /**
-     * @param GreenObject $greenObject
+     * @param GreenObject $dam
      *
      * @return void
      */
-    public function resetMain(GreenObject $greenObject)
+    public function resetMain(GreenObject $dam)
     {
-       foreach ($this->findByGreenObject($greenObject) as $greenObjectImage) {
-           if ($greenObjectImage->isMain()) {
-               $greenObjectImage->setIsMain(0);
-               $this->update($greenObjectImage);
+       foreach ($this->findByGreenObject($dam) as $damImage) {
+           if ($damImage->isMain()) {
+               $damImage->setIsMain(0);
+               $this->update($damImage);
            }
        }
     }

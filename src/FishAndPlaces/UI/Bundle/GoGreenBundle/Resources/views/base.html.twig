@@ -21,11 +21,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('green_object') }}">{% trans %}Go Green{% endtrans %}</a>
+            <a class="navbar-brand" href="{{ path('dam') }}">{% trans %}Go Green{% endtrans %}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('green_object') }}">{% trans %}Home{% endtrans %}</a></li>
+                <li class="active"><a href="{{ path('dam') }}">{% trans %}Home{% endtrans %}</a></li>
                 <li><a href="{{ path('page_view', {'slug': 'about-us'}) }}">{% trans %}About{% endtrans %}</a></li>
                 <li><a href="{{ path('page_view', {'slug': 'contact-us'}) }}">{% trans %}Contact{% endtrans %}</a></li>
             </ul>
@@ -48,7 +48,7 @@
         {% endfor %}
     <div class="jumbotron">
         <div class="container text-center">
-        {% include '@GoGreen/greenObject/search.html.twig' %}
+        {% include '@GoGreen/dam/search.html.twig' %}
             {% block content %}
             {% endblock %}
         </div>

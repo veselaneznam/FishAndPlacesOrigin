@@ -4,7 +4,6 @@ namespace FishAndPlaces\GreenObject\Application\GreenObject\Dam;
 
 use FishAndPlaces\GreenObject\Application\Fish\FishRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
-use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Model\Dam;
 
 class DamRepresentation extends GreenObjectRepresentation
@@ -70,13 +69,5 @@ class DamRepresentation extends GreenObjectRepresentation
             $list[$fish->getName()] = $fish;
         }
         return $list;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return GreenObjectType::DAM;
     }
 }

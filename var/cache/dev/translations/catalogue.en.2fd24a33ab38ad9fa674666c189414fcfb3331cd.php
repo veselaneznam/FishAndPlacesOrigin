@@ -407,11 +407,6 @@ $catalogueBg = new MessageCatalogue('bg', array (
     'Radios in km' => 'Радиус в километри',
     'Something went wrong. Please check your search criteria' => 'Нещо не е наред, моля проверете ващите критерии за търсене',
     'Go Green' => 'На Зелено',
-    'Beginning' => 'Начало',
-    'End' => 'Край',
-    'Green Object List' => 'Списък със осемте топ места',
-    'Previous' => 'Предишна',
-    'Next' => 'Следваща',
   ),
 ));
 $catalogue->addFallbackCatalogue($catalogueBg);

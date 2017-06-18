@@ -16,15 +16,15 @@ class UpdateGreenObjectImagesCommand extends UpdateGreenObjectCommand
      */
     public function __construct(GreenObjectRepresentation $greenObjectRepresentation, User $user, $greenObjectImagesCollection = array())
     {
-        $greeObjectImages = [];
+        $damImages = [];
 
         foreach ($greenObjectImagesCollection as $image)
         {
-            $greeObjectImages[] = new GreenObjectImage($greenObjectRepresentation->getGreenObject(), $image, 0);
+            $damImages[] = new GreenObjectImage($greenObjectRepresentation->getGreenObject(), $image, 0);
         }
 
         parent::__construct($greenObjectRepresentation, $user);
 
-        $this->greenObject->setImageCollection($greeObjectImages);
+        $this->greenObject->setImageCollection($damImages);
     }
 }

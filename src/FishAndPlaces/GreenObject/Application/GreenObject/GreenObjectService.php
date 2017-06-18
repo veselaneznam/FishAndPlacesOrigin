@@ -2,36 +2,37 @@
 
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
+
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\DeleteGreenObjectImagesCommand;
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\UpdateGreenObjectImagesCommand;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectImagesRepository;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
 
-class GreenObjectService
+abstract class GreenObjectService
 {
     /** @var GreenObjectRepository */
-    protected $greenObjectRepository;
+    private $greenObjectRepository;
 
     /** @var GeoLocatorService */
-    protected $geoLocatorService;
+    private $geoLocatorService;
 
     /** @var GreenObjectImagesRepository */
-    protected $greenObjectImagesRepository;
+    private $greenObjectImagesRepository;
 
     /**
      * @param GreenObjectRepository       $greenObjectRepository
      * @param GeoLocatorService           $geoLocatorService
-     * @param GreenObjectImagesRepository $imagesRepository
+     * @param GreenObjectImagesRepository $ImagesRepository
      */
     public function __construct(
         GreenObjectRepository $greenObjectRepository,
         GeoLocatorService $geoLocatorService,
-        GreenObjectImagesRepository $imagesRepository
+        GreenObjectImagesRepository $ImagesRepository
     ) {
         $this->greenObjectRepository = $greenObjectRepository;
         $this->geoLocatorService = $geoLocatorService;
-        $this->greenObjectImagesRepository = $imagesRepository;
+        $this->greenObjectImagesRepository = $ImagesRepository;
     }
 
     /**
@@ -102,18 +103,18 @@ class GreenObjectService
      */
     public function updateImages(UpdateGreenObjectImagesCommand $command)
     {
-        foreach ($command->getGreenObject()->getImageCollection() as $greenObjectImage) {
-            $this->greenObjectImagesRepository->update($greenObjectImage);
+        foreach ($command->getGreenObject()->getImageCollection() as $Image) {
+            $this->greenObjectImagesRepository->update($Image);
         }
     }
 
     /**
      * @param DeleteGreenObjectImagesCommand $command
      */
-    public function deleteGreenObjectImages(DeleteGreenObjectImagesCommand $command)
+    public function deleteImages(DeleteGreenObjectImagesCommand $command)
     {
-        foreach ($command->getGreenObjectImages() as $greenObjectImage) {
-            $this->greenObjectImagesRepository->remove($greenObjectImage);
+        foreach ($command->getGreenObjectImages() as $Image) {
+            $this->greenObjectImagesRepository->remove($Image);
         }
     }
 }

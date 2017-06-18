@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: fish_and_places
+    database_user: root
+    database_password: 123456
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: fb65f46debe44b34ac4f286bc5628b30bfbaf2dd
+    google_maps_api_key: AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE

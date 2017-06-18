@@ -42,9 +42,9 @@ interface GreenObjectImagesRepository
     public function findByGreenObject(GreenObject $greenObject);
 
     /**
-     * @param GreenObject $greenObject
+     * @param GreenObject $dam
      *
      * @return void
      */
-    public function resetMain(GreenObject $greenObject);
+    public function resetMain(GreenObject $dam);
 }

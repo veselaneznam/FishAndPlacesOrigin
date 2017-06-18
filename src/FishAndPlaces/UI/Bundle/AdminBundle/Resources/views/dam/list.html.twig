@@ -4,6 +4,7 @@
     <div class="container">
         <h2>Dam List</h2>
         <a href="{{ path('create_dam') }}" class="btn btn-info" role="button">Add Dam</a>
+        <a href="{{ path('import_json') }}" class="btn btn-info" role="button">Import from Json</a>
         {% include '@Admin/dam/search.html.twig' %}
         <table class="table table-striped">
             <thead>

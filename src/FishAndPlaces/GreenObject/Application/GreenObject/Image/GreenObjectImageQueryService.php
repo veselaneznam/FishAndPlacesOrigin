@@ -11,46 +11,46 @@ class GreenObjectImageQueryService
     /** @var GreenObjectImagesRepository */
     private $greenObjectImagesRepository;
 
-    public function __construct(GreenObjectImagesRepository $greenObjectImagesRepository)
+    public function __construct(GreenObjectImagesRepository $ImagesRepository)
     {
-        $this->greenObjectImagesRepository = $greenObjectImagesRepository;
+        $this->greenObjectImagesRepository = $ImagesRepository;
     }
 
     /**
-     * @param  GreenObject $greenObjectId
+     * @param  GreenObject $Id
      *
      * @return GreenObjectImageRepresentation[]
      */
-    public function getImages($greenObjectId)
+    public function getDamImages($damId)
     {
-        $greenObject = $this->greenObjectImagesRepository->findByGreenObject($greenObjectId);
+        $damImages = $this->greenObjectImagesRepository->findByGreenObject($damId);
 
-        return $this->convertToRepresentation($greenObject);
+        return $this->convertToRepresentation($damImages);
     }
 
     /**
-     * @param int $greenObjectImageId
+     * @param int $damImageId
      *
      * @return GreenObjectImageRepresentation
      */
-    public function getImage($greenObjectImageId)
+    public function getDamImage($damImageId)
     {
-        return new GreenObjectImageRepresentation($this->greenObjectImagesRepository->find($greenObjectImageId));
+        return new GreenObjectImageRepresentation($this->greenObjectImagesRepository->find($damImageId));
     }
 
     /**
-     * @param GreenObjectImage[] $greenObjectImages
+     * @param GreenObjectImage[] $damImages
      *
      * @return GreenObjectImageRepresentation[]
      */
-    private function convertToRepresentation($greenObjectImages)
+    private function convertToRepresentation($damImages)
     {
-        if (null !== $greenObjectImages) {
+        if (null !== $damImages) {
             return array_map(
-                function (GreenObjectImage $greenObjectImage) {
-                    $greenObjectImageRepresentation = new GreenObjectImageRepresentation($greenObjectImage);
-                    return $greenObjectImageRepresentation;
-                }, $greenObjectImages
+                function (GreenObjectImage $damImage) {
+                    $damImageRepresentation = new GreenObjectImageRepresentation($damImage);
+                    return $damImageRepresentation;
+                }, $damImages
             );
         }
         return [];

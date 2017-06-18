@@ -3,7 +3,6 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageRepresentation;
-use FishAndPlaces\GreenObject\Application\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage;
 use FishAndPlaces\GreenObject\Domain\Value\Contact;
 use FishAndPlaces\GreenObject\Domain\Value\Location;
@@ -114,8 +113,8 @@ abstract class GreenObjectRepresentation
             $this->address = $greenObject->getLocation();
             $this->lat = $greenObject->getLatitude();
             $this->long = $greenObject->getLongitude();
-            foreach ($greenObject->getImageCollection() as $greenObjectImage) {
-                $this->imageCollection[] = new GreenObjectImageRepresentation($greenObjectImage);
+            foreach ($greenObject->getImageCollection() as $damImage) {
+                $this->imageCollection[] = new GreenObjectImageRepresentation($damImage);
 
             }
             $this->mainImage = new GreenObjectImageRepresentation($greenObject->getMainImage());
@@ -124,18 +123,6 @@ abstract class GreenObjectRepresentation
         }
     }
 
-    /**
-     * @return int
-     */
-    abstract public function getType();
-
-    /**
-     * @return string
-     */
-    public function getDetailRoutePrefix()
-    {
-        return GreenObjectType::TYPE_TO_ROUTE_PREFIX[$this->getType()];
-    }
     /**
      * @return int
      */
@@ -422,8 +409,8 @@ abstract class GreenObjectRepresentation
     public function setMainImage(File $mainImage = null)
     {
         if(null !==$mainImage) {
-            $greenObjectImage = new GreenObjectImage($this->greenObject, $mainImage->getPath(),1);
-            $this->mainImage = new GreenObjectImageRepresentation($greenObjectImage);
+            $damImage = new GreenObjectImage($this->greenObject, $mainImage->getPath(),1);
+            $this->mainImage = new GreenObjectImageRepresentation($damImage);
         }
 
         return $this;

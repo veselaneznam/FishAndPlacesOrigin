@@ -21,12 +21,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DamController extends Controller
-{/**
- * @param Request $request
- *
- * @Route("/dam", name="dam_list")
- * @return Response
- */
+{
+    /**
+     * @param Request $request
+     *
+     * @Route("/dam", name="dam_list")
+     * @return Response
+     */
     public function indexAction(Request $request)
     {
         /**
@@ -34,12 +35,12 @@ class DamController extends Controller
          */
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
-        $damCollection = $damQueryService->getCollection();
+        $damCollection = $damQueryService->getDamCollection();
         $searchForm = $this->createForm(SearchType::class);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $damCollection = $damQueryService->findByName($searchForm->get('search')->getData());
+            $damCollection = $damQueryService->getDamByName($searchForm->get('search')->getData());
         }
 
         return $this->render('@Admin/dam/list.html.twig', array(
@@ -98,7 +99,7 @@ class DamController extends Controller
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
-        $damRepresentation = $damQueryService->find($id);
+        $damRepresentation = $damQueryService->getDam($id);
 
         if(null !== $damRepresentation->getMainImage()->getImageSrc()) {
             $damRepresentation->setMainImage(
@@ -148,7 +149,7 @@ class DamController extends Controller
     public function deactivateAction(Request $request, $id)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->find($id);
+        $dam = $damQueryService->getDam($id);
 
         $form = $this->createDeactivateForm($dam->getId());
         if ($request->getMethod() == 'DELETE') {
@@ -186,7 +187,7 @@ class DamController extends Controller
     public function activateAction(Request $request, $id)
     {
         $productQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $productQueryService->find($id);
+        $dam = $productQueryService->getDam($id);
 
         $form = $this->createActivateForm($dam->getId());
         if ($request->getMethod() == 'POST') {
@@ -272,5 +273,4 @@ class DamController extends Controller
             ->setMethod('POST')
             ->getForm();
     }
-
 }

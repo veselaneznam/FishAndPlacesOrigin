@@ -76,11 +76,6 @@ abstract class GreenObject implements Entity
     protected $type;
 
     /**
-     * @return int
-     */
-    abstract public function getType();
-
-    /**
      * @return string
      */
     public function getName()
@@ -373,12 +368,21 @@ abstract class GreenObject implements Entity
     }
 
     /**
-     * @param $type
-     *
-     * @return bool
+     * @return int
      */
-    public function isTypeOf($type)
+    public function getType()
     {
-        return $this->type === $type;
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return GreenObject
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 }

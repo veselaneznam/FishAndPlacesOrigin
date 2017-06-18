@@ -2,7 +2,7 @@
 
     <div id="formdiv">
         <h2>Multiple Image Upload Form</h2>
-        <form enctype="multipart/form-data" action="{{ path('green_object_images_upload',  { 'id': greenObject.id }) }}" method="post">
+        <form enctype="multipart/form-data" action="{{ path('dam_images_upload',  { 'id': dam.id }) }}" method="post">
             First Field is Compulsory. Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 100KB.
             <hr/>
             <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>

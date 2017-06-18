@@ -4,7 +4,7 @@ namespace FishAndPlaces\GreenObject\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use FishAndPlaces\GreenObject\Domain\Value\GreenObjectType;
+use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 
 class Dam extends GreenObject implements Entity
 {
@@ -39,13 +39,4 @@ class Dam extends GreenObject implements Entity
 
         return $this;
     }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return GreenObjectType::DAM;
-    }
-
 }

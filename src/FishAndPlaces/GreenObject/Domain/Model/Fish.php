@@ -2,6 +2,9 @@
 
 namespace FishAndPlaces\GreenObject\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class Fish implements Entity
 {
     /** @var int */

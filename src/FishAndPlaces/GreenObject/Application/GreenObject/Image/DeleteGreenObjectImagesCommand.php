@@ -17,13 +17,13 @@ class DeleteGreenObjectImagesCommand
     public function __construct($greenObjectImageRepresentations, User $user)
     {
         foreach ($greenObjectImageRepresentations as $greenObjectImageRepresentation) {
-            $greenObjectImage = new GreenObjectImage(
+            $Image = new GreenObjectImage(
                 $greenObjectImageRepresentation->getGreenObject(),
                 $greenObjectImageRepresentation->getImageSrc(),
                 $greenObjectImageRepresentation->isMain()
             );
-            $greenObjectImage->setId($greenObjectImageRepresentation->getId());
-            $this->greenObjectImages[] = $greenObjectImage;
+            $Image->setId($greenObjectImageRepresentation->getId());
+            $this->greenObjectImages[] = $Image;
         }
     }
 
