@@ -1,0 +1,69 @@
+<div class="container">
+    <div id="main_area">
+        <!-- Slider -->
+        <div class="row">
+            <div class="col-xs-12" id="slider">
+                <!-- Top part of the slider -->
+                <div class="row">
+                    <div class="col-sm-12" id="carousel-bounding-box">
+                        <div class="carousel slide" id="myCarousel">
+                            <!-- Carousel items -->
+
+                            <div class="carousel-inner">
+                                {% set counter = 0 %}
+                                {% for damImage in dam.imageCollection %}
+                                    {% if counter == 0 %}
+                                <div class="active item" data-slide-number="{{ counter }}">
+                                    <img src="{{ damImage.webPath }}"></div>
+                                    {% else %}
+                                        <div class="item" data-slide-number="{{ counter }}">
+                                            <img src="{{ damImage.webPath }}"></div>
+                                {% endif %}
+                                    {% set counter = counter + 1 %}
+                                {% endfor %}
+                            </div>
+
+                            <!-- Carousel nav -->
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div><!--/Slider-->
+
+        <div class="row hidden-xs" id="slider-thumbs">
+            <!-- Bottom switcher of slider -->
+            <ul class="hide-bullets">
+                {% set counter = 0 %}
+                {% for damImage in dam.imageCollection %}
+                {% if counter == 0 %}
+                <li class="col-sm-2">
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                </li>
+                {% else %}
+                <li class="col-sm-2">
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                </li>
+                {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% block styles %}
+    <style>
+        .hide-bullets {
+            list-style: none;
+            margin-left: -40px;
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
