@@ -1,16 +1,16 @@
 <form name="search_locaitons" method="post" action="{{ path('post_map_view') }}" data-toggle="validator" role="form">
-<div class="row">
-    <div class="col-md-8">
+<div class="row" style="margin-right: 3%;margin-left: 0">
+    <div class="col-md-12">
         <div id="custom-search-input">
             <div class="input-group col-md-12">
-                <span class="col-md-4">
+                <span class="col-md-4 custom-border">
                     <input type="text" class="form-control input-group-lg" name="km" id="km" placeholder="{% trans %}Radios in km{% endtrans %}" />
                 </span>
-                <span class="col-md-4">
+                <span class="col-md-4 custom-border">
                 <input type="text" class="form-control input-group-lg" required name="search" id="search" placeholder="{% trans %}Search by Location{% endtrans %}" />
                 </span>
-                <span class="input-group-btn">
-                        <input type ="submit" class="btn btn-info btn-lg" id="search_button" type="button">
+                <span class="col-md-4">
+                        <input type ="submit" class="btn btn-success btn-lg" id="search_button" value="{% trans %} Start {% endtrans %}">
                         </input>
                     </span>
             </div>
@@ -18,4 +18,3 @@
     </div>
 </div>
 </form>
-

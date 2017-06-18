@@ -37,10 +37,11 @@ footer {
     padding: 25px;
 }
 #custom-search-input{
-    padding: 3px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border: solid 1px #E4E4E4;
-    border-radius: 6px;
     background-color: #fff;
+    font-size: 20px;
 }
 
 #custom-search-input input{
@@ -79,14 +80,15 @@ footer {
 }
 
 .container_custome {
-    background-color: #fffacd;
+    background-color: #fff;
     background-repeat:repeat;
     width: 100%;
     font: normal 14px verdana;
     line-height: 25px;
     padding: 2px 10px;
-    border: solid 1px #fffacd;
-    border-radius: 5px;margin-top:10px;
+    border: solid 1px #E4E4E4;
+    margin-top:20px;
+    opacity: 0.89;
 }
 
 .navbar-inverse {
@@ -101,4 +103,23 @@ footer {
 }
 .navbar-inverse .navbar-nav>li>a {
     color: white;
+}
+
+.btn-group-lg > .btn, .btn-lg {
+    font-size: 18px;
+    width: 100%;
+    line-height: 100%;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    border-radius: 0 !important;
+}
+.custom-border {
+    padding: 21px 23px 0 20px !important;
+}
+
+.thumbnail {
+    border-radius: 0px !important;
+}
+.form-control {
+    font-size: 18px!important;
 }
