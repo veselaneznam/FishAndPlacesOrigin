@@ -3,11 +3,19 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Application\Core\GeoLocatorService;
+use FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayRepresentation;
+use FishAndPlaces\GreenObject\Domain\Model\Cabin;
+use FishAndPlaces\GreenObject\Domain\Model\Camp;
+use FishAndPlaces\GreenObject\Domain\Model\Dam;
+use FishAndPlaces\GreenObject\Domain\Model\VillageHoliday;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
 use FishAndPlaces\GreenObject\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
 
-abstract class GreenObjectQueryService
+class GreenObjectQueryService
 {
     /** @var GreenObjectRepository */
     protected $greenObjectRepository;
@@ -16,13 +24,14 @@ abstract class GreenObjectQueryService
     protected $geoLocatorService;
 
     /**
-     * @param GreenObjectRepository     $objectRepository
+     * @param GreenObjectRepository $objectRepository
      * @param GeoLocatorService $geoLocatorService
      */
     public function __construct(
         GreenObjectRepository $objectRepository,
         GeoLocatorService $geoLocatorService
-    ) {
+    )
+    {
         $this->greenObjectRepository = $objectRepository;
         $this->geoLocatorService = $geoLocatorService;
     }
@@ -32,7 +41,32 @@ abstract class GreenObjectQueryService
      *
      * @return GreenObjectRepresentation[]
      */
-    abstract protected function convertToRepresentation(array $collection);
+    protected function convertToRepresentation(array $collection)
+    {
+        $collection =  array_map(function ($entity) {
+
+            if ($entity instanceof Dam) {
+                return new DamRepresentation($entity);
+            }
+
+            if ($entity instanceof Cabin) {
+                return new CabinRepresentation($entity);
+            }
+
+            if ($entity instanceof Camp) {
+                return new CampRepresentation($entity);
+            }
+
+            if ($entity instanceof VillageHoliday) {
+                return new VillageHolidayRepresentation($entity);
+            }
+            return null;
+        },
+            $collection
+        );
+
+        return array_filter($collection);
+    }
 
 
     /**
@@ -76,9 +110,10 @@ abstract class GreenObjectQueryService
     /**
      * @return GreenObjectRepresentation[]
      */
-    public function getFistPageList()
+    public function findByFirstPage()
     {
         $greenObjects = $this->greenObjectRepository->findByFirstPage();
+        var_dump($greenObjects);die;
 
         return $this->convertToRepresentation($greenObjects);
     }

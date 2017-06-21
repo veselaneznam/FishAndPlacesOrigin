@@ -4,6 +4,7 @@ namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 
 use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Form\DamRatingType;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MapHelper;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
@@ -34,7 +35,7 @@ class DamController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('@GoGreen/dam/index.html.twig', array(
-            'damCollection' => $this->getDamQueryService()->getFistPageList(),
+            'damCollection' => $this->getDamQueryService()->findByFirstPage(),
             'title' => $this->get('translator')->trans("Dam List"),
         ));
     }
@@ -157,12 +158,12 @@ class DamController extends Controller
     }
 
     /**
-     * @return DamQueryService|object
+     * @return GreenObjectQueryService|object
      */
     private function getDamQueryService()
     {
         if(null === $this->damQueryService) {
-            $this->damQueryService = $this->get('fish_and_places.dam_query_service');
+            $this->damQueryService = $this->get('fish_and_places.green_object_repository');
         }
         return $this->damQueryService;
     }
@@ -184,6 +185,7 @@ class DamController extends Controller
             return
                  $this->redirectToRoute('dam');
         }
+
         if (empty($damCollection)) {
             $this->addFlash('notice', $this->get('translator')->trans("No results found for") . ' ' . $location);
             return $this->redirectToRoute('dam');
