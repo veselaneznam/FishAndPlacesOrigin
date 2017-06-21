@@ -9,15 +9,30 @@ services:
         factory: ["@doctrine", getRepository]
         arguments: [ FishAndPlaces\GreenObject\Domain\Model\Fish ]
 
-    fish_and_places.dam_image_repository:
+    fish_and_places.green_object_image_repository:
         class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGreenObjectImageRepository
         factory: ["@doctrine", getRepository]
-        arguments: [ FishAndPlaces\GreenObject\Domain\Model\DamImage ]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\GreenObjectImage ]
 
     fish_and_places.local_geocoder_repository:
         class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineGeocoderLocalRepository
         factory: ["@doctrine", getRepository]
         arguments: [ FishAndPlaces\GreenObject\Domain\Model\Geocoder ]
+
+    fish_and_places.cabin_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCabinRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\Cabin ]
+
+    fish_and_places.camp_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCampRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\Camp ]
+
+    fish_and_places.village_holiday_repository:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineVillageHolidayRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\GreenObject\Domain\Model\VillageHoliday ]
 
     fish_and_places.geocoder_proxy:
         class:  FishAndPlaces\GreenObject\Infrastructure\Geocoder\GeocoderProxy
@@ -44,10 +59,49 @@ services:
         arguments:
             - "@fish_and_places.dam_repository"
             - "@fish_and_places.geolocator"
-            - "@fish_and_places.dam_image_repository"
+            - "@fish_and_places.green_object_image_repository"
             - "@fish_and_places.fish_repository"
 
     fish_and_places.fish_service:
         class: FishAndPlaces\GreenObject\Application\Fish\FishService
         arguments:
             - "@fish_and_places.fish_repository"
+
+    fish_and_places.cabin_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinService
+        arguments:
+            - "@fish_and_places.cabin_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.green_object_image_repository"
+
+    fish_and_places.cabin_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinQueryService
+        arguments:
+            - "@fish_and_places.cabin_repository"
+            - "@fish_and_places.geolocator"
+
+    fish_and_places.camp_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampService
+        arguments:
+            - "@fish_and_places.camp_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.green_object_image_repository"
+
+    fish_and_places.camp_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampQueryService
+        arguments:
+            - "@fish_and_places.camp_repository"
+            - "@fish_and_places.geolocator"
+
+    fish_and_places.village_holiday_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayService
+        arguments:
+            - "@fish_and_places.village_holiday_repository"
+            - "@fish_and_places.geolocator"
+            - "@fish_and_places.green_object_image_repository"
+
+    fish_and_places.village_holiday_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayQueryService
+        arguments:
+            - "@fish_and_places.village_holiday_repository"
+            - "@fish_and_places.geolocator"

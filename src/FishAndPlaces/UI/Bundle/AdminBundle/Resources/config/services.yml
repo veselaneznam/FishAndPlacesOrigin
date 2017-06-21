@@ -2,7 +2,7 @@ services:
     fish_and_places.dam_images_query_service:
         class: FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService
         arguments:
-            - "@fish_and_places.dam_image_repository"
+            - "@fish_and_places.green_object_image_repository"
 
     fish_and_places.cms_page_repository:
         class: FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository

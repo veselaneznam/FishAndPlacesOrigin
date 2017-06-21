@@ -59,11 +59,7 @@ class DamController extends Controller
      * @Route("/map/", name="post_map_view")
      * @Method({"GET", "POST"})
      * @param Request $request
-     *
-     * @param string  $location
-     *
-     * @param int|null  $radius
-     *
+
      * @return Response
      */
     public function postMapAction(Request $request)
@@ -183,14 +179,13 @@ class DamController extends Controller
         try {
             $damCollection = $this->getDamQueryService()->search($location, $radius);
         } catch (\Exception $exception) {
-            var_dump($exception->getMessage());die;
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
             $this->addFlash('error', $this->get('translator')->trans("Something went wrong. Please check your search criteria"));
             return
                  $this->redirectToRoute('dam');
         }
         if (empty($damCollection)) {
-            $this->addFlash('notice', $this->get('translator')->trans("No results found for") . $location);
+            $this->addFlash('notice', $this->get('translator')->trans("No results found for") . ' ' . $location);
             return $this->redirectToRoute('dam');
         }
         $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
