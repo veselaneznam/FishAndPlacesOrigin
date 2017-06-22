@@ -11,8 +11,4 @@
 /bin/
 /composer.phar
 .idea
-/src/FishAndPlaces/Dam/Domain/Model/Fish.php
-.idea/*
 var/*
-var/*
-.idea/*

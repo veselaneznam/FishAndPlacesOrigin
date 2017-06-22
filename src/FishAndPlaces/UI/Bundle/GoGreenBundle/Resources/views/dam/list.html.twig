@@ -8,7 +8,7 @@
     {% for dam in damCollection %}
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="{{ path('dam_view', {'id': dam.id}) }}">
-            {% if dam.mainImage.webPath != null %}
+            {% if dam.mainImage != null and dam.mainImage.webPath != null %}
                 <img class="img-responsive" src="{{  dam.mainImage.webPath }}" alt="{{ dam.name }}">
             {% else %}
                 <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" class="img-responsive">
