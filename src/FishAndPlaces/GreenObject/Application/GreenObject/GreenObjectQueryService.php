@@ -43,29 +43,25 @@ class GreenObjectQueryService
      */
     protected function convertToRepresentation(array $collection)
     {
-        $collection =  array_map(function ($entity) {
-
+        $result = [];
+        foreach ($collection as $entity) {
             if ($entity instanceof Dam) {
-                return new DamRepresentation($entity);
+                $result[] = new DamRepresentation($entity);
             }
 
             if ($entity instanceof Cabin) {
-                return new CabinRepresentation($entity);
+                $result[] = new CabinRepresentation($entity);
             }
 
             if ($entity instanceof Camp) {
-                return new CampRepresentation($entity);
+                $result[] = new CampRepresentation($entity);
             }
 
             if ($entity instanceof VillageHoliday) {
-                return new VillageHolidayRepresentation($entity);
+                $result[] = new VillageHolidayRepresentation($entity);
             }
-            return null;
-        },
-            $collection
-        );
-
-        return array_filter($collection);
+        }
+        return $result;
     }
 
 
@@ -76,7 +72,7 @@ class GreenObjectQueryService
      *
      * @return GreenObjectRepresentation[]
      */
-    public function search($data, $radius = null)
+    public function findByDataAndRadius($data, $radius = null)
     {
         $searchResultByLocation = [];
         if (null !== $data) {
@@ -94,7 +90,7 @@ class GreenObjectQueryService
      *
      * @return GreenObjectRepresentation[]
      */
-    public function searchNearBy(Location $location)
+    public function findNearBy(Location $location)
     {
         $searchResultByLocation = $this->greenObjectRepository->findByNearByLocation(
             new DomainLocation($location->getLat(), $location->getLon())
@@ -113,7 +109,6 @@ class GreenObjectQueryService
     public function findByFirstPage()
     {
         $greenObjects = $this->greenObjectRepository->findByFirstPage();
-        var_dump($greenObjects);die;
 
         return $this->convertToRepresentation($greenObjects);
     }

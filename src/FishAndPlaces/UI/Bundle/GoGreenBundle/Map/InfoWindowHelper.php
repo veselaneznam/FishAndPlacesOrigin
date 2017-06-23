@@ -2,7 +2,7 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Map;
 
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
+use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Ivory\GoogleMap\Overlay\InfoWindowType;
@@ -10,16 +10,16 @@ use Ivory\GoogleMap\Overlay\InfoWindowType;
 class InfoWindowHelper
 {
     /**
-     * @param DamRepresentation $damRepresentation
+     * @param GreenObjectRepresentation $greenObjectRepresentation
      * @param                   $twig
      *
      * @return InfoWindow
      */
-    public static function build(DamRepresentation $damRepresentation, $twig)
+    public static function build(GreenObjectRepresentation $greenObjectRepresentation, $twig)
     {
         $templatePath = '@GoGreen/dam/map_info_window.html.twig';
-        $html = $twig->render($templatePath, $damRepresentation->toArray());
-        $infoWindow = new InfoWindow($html, InfoWindowType::DEFAULT_, new Coordinate($damRepresentation->getLat(), $damRepresentation->getLong()));
+        $html = $twig->render($templatePath, $greenObjectRepresentation->toArray());
+        $infoWindow = new InfoWindow($html, InfoWindowType::DEFAULT_, new Coordinate($greenObjectRepresentation->getLat(), $greenObjectRepresentation->getLong()));
         return $infoWindow;
     }
 }

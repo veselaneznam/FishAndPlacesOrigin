@@ -1,223 +1,212 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Flickr Search</title>
-    <link rel="stylesheet" href="{{ asset('openLayers/css/ol.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('openLayers/css/samples.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('openLayers/css/ol3-loadingpanel.css') }}" type="text/css" />
+ <title>{% trans %}Go Green{% endtrans %}</title>
+   <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://openlayers.org/en/v3.11.2/css/ol.css" type="text/css">
+   <script src="https://openlayers.org/en/v3.11.2/build/ol.js"></script>
+   <link rel="stylesheet" href="https://openlayers.org/en/v3.11.2/examples/popup.css">
+   <style>
+      .ol-popup {
+         position: absolute;
+         background-color: white;
+         -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+         filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+         padding: 15px;
+         border-radius: 10px;
+         border: 1px solid #cccccc;
+         bottom: 12px;
+         left: -50px;
+         min-width: 280px;
+      }
+      .ol-popup:after, .ol-popup:before {
+         top: 100%;
+         border: solid transparent;
+         content: " ";
+         height: 0;
+         width: 0;
+         position: absolute;
+         pointer-events: none;
+      }
+      .ol-popup:after {
+         border-top-color: white;
+         border-width: 10px;
+         left: 48px;
+         margin-left: -10px;
+      }
+      .ol-popup:before {
+         border-top-color: #cccccc;
+         border-width: 11px;
+         left: 48px;
+         margin-left: -11px;
+      }
+      .ol-popup-closer {
+         text-decoration: none;
+         position: absolute;
+         top: 2px;
+         right: 8px;
+      }
+      .ol-popup-closer:after {
+         content: "✖";
+      }
+
+   </style>
 </head>
 <body>
+<div class="container-fluid">
 
-<form id="searchform" action="#" method="get" style="display:inline"
-      onsubmit="FindCity(); return false">
-    <input type="text" id="query_str" name="query_str" value="London, UK"
-           onfocus="this.value = (this.value=='London, UK')? '' : this.value;">
-    <input type="submit" value=" Find ">
-</form>
+   <div class="row-fluid">
+      <div class="span12">
+         <div id="map" class="map"></div>
+         <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+         </div>
+      </div>
+   </div>
 
-<div id="map" class="map"></div>
-<div id="photo-info"></div>
+</div>
 
-<script src="{{ asset('openLayers/js/jquery-1.11.0.min.js') }}"></script>
-<script src="{{ asset('openLayers/js/ol-debug.js') }}"></script>
-<script src="{{ asset('openLayers/js/ol3-loadingpanel.js') }}"></script>
 <script>
-//    var $loading = $('#loading').hide();
-//    document.ajaxStart(function () {
-//        $loading.show();
-//    })
-//        .ajaxStop(function () {
-//            $loading.hide();
-//        });
 
-    var flickrSource = new ol.source.Vector();
+    /**
+     * Elements that make up the popup.
+     */
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
 
-    function FindCity()
-    {
-        var param = document.getElementById('query_str').value;
-        var data = {location: param};
-
-
-        $.ajax({
-            type: "POST",
-            url: '{{ path('_searchNearBy') }}',
-            data: data,
-            dataType: 'jsonp',
-            beforeSend: function(){
-                $("#loading").show();
-            },
-            success: function () {
-                alert('sss');
-//                var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
-//                data.forEach(function(item) {
-//                    console.log(item);
-//                    var feature = new ol.Feature(item);
-//                    feature.set('url', item.media.m);
-//                    var coordinate = transform([parseFloat(item.longitude), parseFloat(item.latitude)]);
-//                    var geometry = new ol.geom.Point(coordinate);
-//                    feature.setGeometry(geometry);
-//                    flickrSource.addFeature(feature);
-            },
-            error: function (e) {
-                alert(e.getCoordinates());
-            }
-        });
-    }
-
-
-
-    var cache = {};
-
-    function photoStyle(feature, scale) {
-        var url = feature.get('url');
-        var key = scale + url;
-        if (!cache[key]) {
-            cache[key] = new ol.style.Style({
-                image: new ol.style.Icon({
-                    scale: scale,
-                    src: url
-                })
-            });
+    /**
+     * Create an overlay to anchor the popup to the map.
+     */
+    var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
         }
-        return cache[key];
-    }
+    }));
 
-    function flickrStyle(feature) {
-        return [photoStyle(feature, 0.10)];
-    }
+    /**
+     * Add a click handler to hide the popup.
+     * @return {boolean} Don't follow the href.
+     */
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
 
-    function selectedStyle(feature) {
-        return [photoStyle(feature, 0.50)];
-    }
+    var dots = [];
 
-    var flickrLayer = new ol.layer.Vector({
-        source: flickrSource,
-        style: flickrStyle
+
+
+    {%  for greenObject in greenObjects %}
+        var dot = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([{{ greenObject.long }}, {{ greenObject.lat }}]))
+        });
+
+    var iconStyle = new ol.style.Style({
+        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            opacity: 0.75,
+            src: 'https://openlayers.org/en/v4.2.0/examples/data/dot.png',
+            overlays: [overlay]
+        }))
     });
 
-    var layer = new ol.layer.Tile({
+//    dot.setStyle(new ol.style.Style({
+//        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//            color: '#8959A8',
+//            crossOrigin: 'anonymous',
+//            src: 'https://openlayers.org/en/v4.2.0/examples/data/dot.png'
+//        }))
+//    }));
+    dot.setStyle(iconStyle);
+    dot.on('onclick', function(evt) {
+        var coordinate = evt.coordinate;
+        var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+            coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+        content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
+            '</code>';
+        overlay.setPosition(coordinate);
+    });
+
+    dots.push(dot);
+
+    {% endfor %}
+
+
+//    var london = new ol.Feature({
+//        geometry: new ol.geom.Point(ol.proj.fromLonLat([-0.12755, 51.507222]))
+//    });
+//
+//    var madrid = new ol.Feature({
+//        geometry: new ol.geom.Point(ol.proj.fromLonLat([-3.683333, 40.4]))
+//    });
+
+//    rome.setStyle(new ol.style.Style({
+//        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//            color: '#8959A8',
+//            crossOrigin: 'anonymous',
+//            src: 'https://openlayers.org/en/v4.2.0/examples/data/dot.png'
+//        }))
+//    }));
+//
+//    london.setStyle(new ol.style.Style({
+//        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//            color: '#4271AE',
+//            crossOrigin: 'anonymous',
+//            src: 'https://openlayers.org/en/v4.2.0/examples/data/dot.png'
+//        }))
+//    }));
+//
+//    madrid.setStyle(new ol.style.Style({
+//        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//            color: [113, 140, 0],
+//            crossOrigin: 'anonymous',
+//            src: 'https://openlayers.org/en/v4.2.0/examples/data/dot.png'
+//        }))
+//    }));
+
+
+    var vectorSource = new ol.source.Vector({
+        features: dots
+    });
+
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+    });
+//
+//    var rasterLayer = new ol.layer.Tile({
+//        source: new ol.source.TileJSON({
+//            url: 'https://api.tiles.mapbox.com/v3/mapbox.geography-class.json?secure',
+//            crossOrigin: ''
+//        })
+//    });
+
+
+    var tileLayer =  new ol.layer.Tile({
         source: new ol.source.OSM()
     });
 
-
-    var center = ol.proj.transform([0,0], 'EPSG:4326', 'EPSG:3857');
-
-    var view = new ol.View({
-        center: center,
-        zoom: 15
-    });
-
-    var trackStyle = new ol.style.Style({
-        image: new ol.style.Icon({
-            anchor: [0.5, 0.5],
-            size: [52, 52],
-            offset: [52, 0],
-            opacity: 1,
-            scale: 0.25,
-            src: '{{ asset('images/Cuddly_Fisherman.png') }}'
-        })
-    });
-    // use a single feature with a linestring geometry to display our track
-    var trackFeature = new ol.Feature({
-        geometry: new ol.geom.LineString([])
-    });
-
-    var trackLayer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: [trackFeature]
-        }),
-        style: trackStyle
-    });
-
-    var geolocation = new ol.Geolocation({tracking: true});
-    geolocation.bindTo('projection', view);
-    geolocation.on('change:position', function() {
-        var coordinate = geolocation.getPosition();
-        view.setCenter(coordinate);
-        trackFeature.getGeometry().appendCoordinate(coordinate);
-    });
-
-    var marker = new ol.Overlay({
-        element: document.getElementById('location'),
-        positioning: 'center-center'
-    });
-
-    var positionFeature = new ol.Feature();
-    positionFeature.setStyle(new ol.style.Style({
-        image: new ol.style.Circle({
-            radius: 20,
-            fill: new ol.style.Fill({
-                color: '#3399CC'
-            }),
-            stroke: new ol.style.Stroke({
-                color: '#fff',
-                width: 20
-            })
-        })
-    }));
-
     var map = new ol.Map({
-        renderer: 'canvas',
-        target: 'map',
-        layers: [layer, flickrLayer, trackLayer],
-        view: view
-    });
-    map.addOverlay(marker);
-    marker.bindTo('position', geolocation);
-    map.addControl(new ol.control.LoadingPanel());
-
-    function photoContent(feature) {
-        var content = $('#photo-template').html();
-        var keys = ['author','author_id','date_taken','latitude','longitude','link','url','tags','title'];
-        for (var i=0; i<keys.length; i++) {
-            var key = keys[i];
-            var value = feature.get(key);
-            content = content.replace('{'+key+'}',value);
-        }
-        return content;
-    }
-
-    var select = new ol.interaction.Select({
-        layers: [flickrLayer],
-        style: selectedStyle
-    });
-    map.addInteraction(select);
-
-    var selectedFeatures = select.getFeatures();
-
-    selectedFeatures.on('add', function(event) {
-        var feature = event.target.item(0);
-        var content = photoContent(feature);
-        $('#photo-info').html(content);
+        layers: [tileLayer, vectorLayer],
+        target: document.getElementById('map'),
+        view: new ol.View({
+            center: ol.proj.fromLonLat([{{ userLocation.lon }}, {{ userLocation.lat }}]),
+            zoom: 8
+        }),
+        overlays: [overlay]
     });
 
-    selectedFeatures.on('remove', function(event) {
-        $('#photo-info').empty();
-    });
-
-
-    function successHandler(data) {
-
-        var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
-        data.forEach(function(item) {
-            console.log(item);
-            var feature = new ol.Feature(item);
-            feature.set('url', item.media.m);
-            var coordinate = transform([parseFloat(item.longitude), parseFloat(item.latitude)]);
-            var geometry = new ol.geom.Point(coordinate);
-            feature.setGeometry(geometry);
-            flickrSource.addFeature(feature);
-        });
-    }
-
+    map.addOverlay(popup);
 </script>
-
-<script type="text/html" id="photo-template">
-    <a href="{link}" target="_blank" title="Click to open photo in new tab"><img src="{url}" style="float: left"></a><br>
-    <p>Taken by <a href="http://www.flickr.com/people/{author_id}" target="_blank" title="Click to view author details in new tab">{author}</a> on {date_taken} at lat: {latitude} lon: {longitude}</p><br>
-    <p>Tagged in <b>{tags}</b></p>
-</script>
-<div id='loading'><img src=''{{ asset('images/loading.gif') }}></div>
 </body>
 </html>

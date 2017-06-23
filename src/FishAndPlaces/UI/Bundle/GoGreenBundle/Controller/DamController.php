@@ -86,7 +86,7 @@ class DamController extends Controller
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
         $data = $request->get('data');
-        $nearbyDamCollection = $damQueryService->search($data['location']);
+        $nearbyDamCollection = $damQueryService->findByDataAndRadius($data['location']);
 
         return new JsonResponse(['data' => $nearbyDamCollection]);
     }
@@ -151,7 +151,7 @@ class DamController extends Controller
     {
         $userLocation = $this->getUserLocatiоn($request);
         if (empty($damCollection)) {
-            $damCollection = $this->getDamQueryService()->searchNearBy($userLocation);
+            $damCollection = $this->getDamQueryService()->findNearBy($userLocation);
         }
 
         return MapHelper::build($userLocation, $damCollection, $twig);
@@ -163,22 +163,22 @@ class DamController extends Controller
     private function getDamQueryService()
     {
         if(null === $this->damQueryService) {
-            $this->damQueryService = $this->get('fish_and_places.green_object_repository');
+            $this->damQueryService = $this->get('fish_and_places.green_object_query_service');
         }
         return $this->damQueryService;
     }
 
     /**
      * @param Request $request
-     * @param         $location
-     * @param         $radius
+     * @param string $location
+     * @param int    $radius
      *
      * @return Response
      */
     public function handleMapSearch(Request $request, $location, $radius = null)
     {
         try {
-            $damCollection = $this->getDamQueryService()->search($location, $radius);
+            $damCollection = $this->getDamQueryService()->findByDataAndRadius($location, $radius);
         } catch (\Exception $exception) {
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
             $this->addFlash('error', $this->get('translator')->trans("Something went wrong. Please check your search criteria"));
@@ -190,11 +190,11 @@ class DamController extends Controller
             $this->addFlash('notice', $this->get('translator')->trans("No results found for") . ' ' . $location);
             return $this->redirectToRoute('dam');
         }
-        $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
+       // $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
 
         return $this->render('@GoGreen/dam/google_map.html.twig', array(
-            'map' => $map,
-            'damCollection' => $damCollection,
+            'userLocation' => $this->getUserLocatiоn($request),
+            'greenObjects' => $damCollection,
             'title' => $this->get('translator')->trans("Search Result"),
         ));
     }
