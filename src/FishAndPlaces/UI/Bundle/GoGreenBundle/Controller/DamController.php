@@ -5,8 +5,10 @@ namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
+use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Form\DamRatingType;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MapHelper;
+use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MarkerHelper;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
 use GuzzleHttp\Client;
 use Ivory\GoogleMap\Map;
@@ -35,7 +37,7 @@ class DamController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('@GoGreen/dam/index.html.twig', array(
-            'damCollection' => $this->getDamQueryService()->findByFirstPage(),
+            'greenObjects' => $this->getDamQueryService()->findByFirstPage(),
             'title' => $this->get('translator')->trans("Dam List"),
         ));
     }
@@ -45,9 +47,9 @@ class DamController extends Controller
      * @Method({"GET", "POST"})
      * @param Request $request
      *
-     * @param string  $location
+     * @param string $location
      *
-     * @param int| null  $radius
+     * @param int| null $radius
      *
      * @return Response
      */
@@ -60,18 +62,17 @@ class DamController extends Controller
      * @Route("/map/", name="post_map_view")
      * @Method({"GET", "POST"})
      * @param Request $request
-
      * @return Response
      */
     public function postMapAction(Request $request)
     {
-       if ($request->getMethod() == 'POST') {
-           $location = $request->get('search');
-           $radius = (int) $request->get('km');
-           return $this->handleMapSearch($request, $location, $radius);
-       } else {
-           return $this->redirectToRoute('dam');
-       }
+        if ($request->getMethod() == 'POST') {
+            $location = $request->get('search');
+            $radius = (int)$request->get('km');
+            return $this->handleMapSearch($request, $location, $radius);
+        } else {
+            return $this->redirectToRoute('dam');
+        }
     }
 
     /**
@@ -101,7 +102,7 @@ class DamController extends Controller
     public function damDetailView(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int) $request->get('id'));
+        $dam = $damQueryService->getDam((int)$request->get('id'));
         $rating = $this->createForm(DamRatingType::class, ['rating' => $dam->getRating()]);
         return $this->render('@GoGreen/dam/detail_view.html.twig', [
             'dam' => $dam,
@@ -119,7 +120,7 @@ class DamController extends Controller
     public function loadMapDirections(Request $request)
     {
         $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int) $request->get('id'));
+        $dam = $damQueryService->getDam((int)$request->get('id'));
         return $this->render('@GoGreen/dam/map_directions.html.twig', [
             'dam' => $dam,
             'userLocation' => $this->getUserLocatiоn($request)
@@ -140,7 +141,7 @@ class DamController extends Controller
     }
 
     /**
-     * @param Request             $request
+     * @param Request $request
      * @param DamRepresentation[] $damCollection
      *
      * @param                     $twig
@@ -162,7 +163,7 @@ class DamController extends Controller
      */
     private function getDamQueryService()
     {
-        if(null === $this->damQueryService) {
+        if (null === $this->damQueryService) {
             $this->damQueryService = $this->get('fish_and_places.green_object_query_service');
         }
         return $this->damQueryService;
@@ -171,7 +172,7 @@ class DamController extends Controller
     /**
      * @param Request $request
      * @param string $location
-     * @param int    $radius
+     * @param int $radius
      *
      * @return Response
      */
@@ -183,19 +184,31 @@ class DamController extends Controller
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
             $this->addFlash('error', $this->get('translator')->trans("Something went wrong. Please check your search criteria"));
             return
-                 $this->redirectToRoute('dam');
+                $this->redirectToRoute('dam');
         }
 
         if (empty($damCollection)) {
             $this->addFlash('notice', $this->get('translator')->trans("No results found for") . ' ' . $location);
             return $this->redirectToRoute('dam');
         }
-       // $map = $this->getMap($request, $damCollection, $this->container->get('twig'));
+
+        $twig = $this->container->get('twig');
+
+        $mapMarkers = array_map(
+            function (GreenObjectRepresentation $dam) use ($twig) {
+                return MarkerHelper::build($dam, $twig);
+            },
+            $damCollection
+        );
 
         return $this->render('@GoGreen/dam/google_map.html.twig', array(
             'userLocation' => $this->getUserLocatiоn($request),
             'greenObjects' => $damCollection,
+            'mapMarkers' => $mapMarkers,
+            'radius' => $radius,
             'title' => $this->get('translator')->trans("Search Result"),
+            'apiId' => $this->container->getParameter('nokia_maps_app_id'),
+            'apiCode' => $this->container->getParameter('nokia_maps_app_code'),
         ));
     }
 }

@@ -11,3 +11,6 @@ parameters:
     mailer_password: null
     secret: fb65f46debe44b34ac4f286bc5628b30bfbaf2dd
     google_maps_api_key: AIzaSyDeJNzS6zPTPsVhavVFUi7WYQ1s7fhk9hE
+    nokia_maps_app_id: enmeTgGvudCLoG1UOZgE
+    nokia_maps_app_code: 9IIkw3SzmGKnK8KIc6-6FQ
+

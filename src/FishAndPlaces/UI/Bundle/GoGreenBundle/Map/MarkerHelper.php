@@ -14,14 +14,17 @@ class MarkerHelper
      * @param GreenObjectRepresentation $greenObjectRepresentation
      * @param                   $twig
      *
-     * @return Marker
+     * @return MarkerDecorator
      */
     public static function build(GreenObjectRepresentation $greenObjectRepresentation, $twig)
     {
-        if(null !== $greenObjectRepresentation->getLat() && null !== $greenObjectRepresentation->getLong()) {
-            $marker = new Marker(
-                new Coordinate($greenObjectRepresentation->getLat(), $greenObjectRepresentation->getLong()));
-            $marker->setInfoWindow(InfoWindowHelper::build($greenObjectRepresentation, $twig));
+        if (null !== $greenObjectRepresentation->getLat() && null !== $greenObjectRepresentation->getLong()) {
+            $marker = new MarkerDecorator(
+                $greenObjectRepresentation->getLat(),
+                $greenObjectRepresentation->getLong(),
+                InfoWindowHelper::build($greenObjectRepresentation, $twig)
+            );
+
             return $marker;
         }
 

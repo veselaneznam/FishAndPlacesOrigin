@@ -18,3 +18,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     google_maps_api_key: ~
+    nokia_maps_app_id: ~
+    nokia_maps_app_code: ~
