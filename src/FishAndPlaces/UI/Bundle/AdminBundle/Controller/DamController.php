@@ -24,7 +24,6 @@ class DamController extends Controller
 {
     /**
      * @param Request $request
-     *
      * @Route("/dam", name="dam_list")
      * @return Response
      */

@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController extends Controller
 {
     /**
-     * @param Request $request
-     *
      * @Route("/", name="admin")
      * @return Response
      */

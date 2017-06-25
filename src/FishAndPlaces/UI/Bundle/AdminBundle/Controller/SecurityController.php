@@ -12,6 +12,7 @@ class SecurityController extends Controller
     /**
      * @Route("/login", name="login")
      * @param Request $request
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function loginAction(Request $request)
     {
@@ -38,11 +39,12 @@ class SecurityController extends Controller
     /**
      * @Route("/logout", name="logout")
      * @param Request $request
+     * @return RedirectResponse
      */
     public function logoutAction(Request $request)
     {
         $request->getSession()->invalidate(1);
         $router = $this->get('router');
-        return new RedirectResponse($router->generate('dam_list'), 307);
+        return new RedirectResponse($router->generate('admin'), 307);
     }
 }

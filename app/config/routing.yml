@@ -1,6 +1,7 @@
 go_green:
     resource: "@GoGreenBundle/Controller/"
     type:     annotation
+    prefix: /
 shop:
     resource: "@ShopBundle/Controller/"
     type:     annotation
@@ -13,6 +14,3 @@ admin:
     prefix:   /admin
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-logout:
-   path: /logout
