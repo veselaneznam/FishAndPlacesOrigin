@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DamController extends Controller
 {
     /**
-     * @var DamQueryService
+     * @var GreenObjectQueryService
      */
     private $damQueryService;
 
@@ -85,7 +85,7 @@ class DamController extends Controller
      */
     public function searchNearBy(Request $request)
     {
-        $damQueryService = $this->get('fish_and_places.dam_query_service');
+        $damQueryService = $this->get('fish_and_places.green_object_query_service');
         $data = $request->get('data');
         $nearbyDamCollection = $damQueryService->findByDataAndRadius($data['location']);
 
@@ -101,8 +101,9 @@ class DamController extends Controller
      */
     public function damDetailView(Request $request)
     {
-        $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int)$request->get('id'));
+        $damQueryService = $this->get('fish_and_places.green_object_query_service');
+        $dam = $damQueryService->getGreenObject((int)$request->get('id'));
+        //$dailyWeather = $this->get('fish_and_places.weather_service')->getDailyWeatherByLocation($dam->getLocation());
         $rating = $this->createForm(DamRatingType::class, ['rating' => $dam->getRating()]);
         return $this->render('@GoGreen/dam/detail_view.html.twig', [
             'dam' => $dam,
@@ -119,11 +120,13 @@ class DamController extends Controller
      */
     public function loadMapDirections(Request $request)
     {
-        $damQueryService = $this->get('fish_and_places.dam_query_service');
-        $dam = $damQueryService->getDam((int)$request->get('id'));
+        $damQueryService = $this->get('fish_and_places.green_object_query_service');
+        $dam = $damQueryService->getGreenObject((int)$request->get('id'));
         return $this->render('@GoGreen/dam/map_directions.html.twig', [
             'dam' => $dam,
-            'userLocation' => $this->getUserLocatiоn($request)
+//            'userLocation' => $this->getUserLocatiоn($request),
+            'apiId' => $this->container->getParameter('nokia_maps_app_id'),
+            'apiCode' => $this->container->getParameter('nokia_maps_app_code'),
         ]);
     }
 
@@ -179,7 +182,9 @@ class DamController extends Controller
     public function handleMapSearch(Request $request, $location, $radius = null)
     {
         try {
-            $damCollection = $this->getDamQueryService()->findByDataAndRadius($location, $radius);
+            $geocodedLocation = $this->getDamQueryService()->geocodeLocation($location);
+            $damCollection = $this->getDamQueryService()->findByDataAndRadius($geocodedLocation, $radius);
+
         } catch (\Exception $exception) {
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
             $this->addFlash('error', $this->get('translator')->trans("Something went wrong. Please check your search criteria"));
@@ -202,7 +207,7 @@ class DamController extends Controller
         );
 
         return $this->render('@GoGreen/dam/google_map.html.twig', array(
-            'userLocation' => $this->getUserLocatiоn($request),
+            'userLocation' => $geocodedLocation,
             'greenObjects' => $damCollection,
             'mapMarkers' => $mapMarkers,
             'radius' => $radius,
@@ -210,5 +215,14 @@ class DamController extends Controller
             'apiId' => $this->container->getParameter('nokia_maps_app_id'),
             'apiCode' => $this->container->getParameter('nokia_maps_app_code'),
         ));
+    }
+
+    private function getWeather()
+    {
+        $client = new Client(
+          [
+              'base_url' => $this->container->getParameter()
+          ]
+        );
     }
 }

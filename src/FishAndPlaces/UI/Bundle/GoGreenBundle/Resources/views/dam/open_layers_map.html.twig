@@ -39,7 +39,7 @@
                 'normal.day',
                 256,
                 'png8',
-                {lg: 'ENG'}
+                {lg: 'BG'}
             );
         map.setBaseLayer(chineseMapLayer);
 
@@ -47,7 +47,7 @@
         // language to simplified Chinese.
         // Besides supported language codes you can also specify your custom translation
         // using H.ui.i18n.Localization.
-        var ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
+        var ui = H.ui.UI.createDefault(map, defaultLayers, 'bg');
 
         // Remove not needed settings control
         ui.removeControl('mapsettings');
@@ -77,13 +77,13 @@
         {% for greenObject in greenObjects %}
         var ImgString ='';
         {% if greenObject.mainImage != null %}
-        ImgString = '<img src="{{ greenObject.mainImage.webPath }}" width="80px" title="{{ greenObject.name }}" class="img-responsive" >';
+        ImgString = '<img src="{{ asset(greenObject.mainImage.webPath )}}" width="110px" title="{{ greenObject.name }}" class="" >';
         {% else %}
-        ImgString = '<img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}"  width="80px"  class="img-responsive">';
+        ImgString = '<img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}"  width="110px"  class="">';
         {% endif %}
 
         addMarkerToGroup(group, {lat: Number('{{ greenObject.lat }}'), lng: Number('{{ greenObject.long }}')},
-            '<div id="content">' +
+            '<div id="content" style="font-size:0.5em">' +
             '<div id="siteNotice">' +
             '</div>' +
             '<h5 id="firstHeading" class="firstHeading">' + '{{ greenObject.name }}' + '</h5>'+
@@ -101,13 +101,13 @@
             '</thead>' +
             '<tbody>' +
             '<tr>' +
-            '<td style="color: green; font-weight: bold;">{% trans %}Rating{% endtrans %}</td> <td>{{ greenObject.rating }}</td>' +
+            '<td style="color: white; font-weight: bold; ">{% trans %}Rating{% endtrans %}</td> <td>{{ greenObject.rating }}</td>' +
             '</tr>' +
             '<tr>' +
-            '<td style="color: green; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ greenObject.priceProPerson }}</td>' +
+            '<td style="color: white; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ greenObject.priceProPerson }}</td>' +
             '</tr>' +
             '<tr>' +
-            '<td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>' +
+            '<td style="color: white; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>' +
             '</tr>' +
             '<td><a href="{{ path('dam_map_direction', {'id': greenObject.id}) }}">{% trans %}Directions{% endtrans %}</a></td>' +
             '<td><a href="{{ path('dam_view', {'id': greenObject.id}) }}">{% trans %}More details{% endtrans %}</a></td>' +

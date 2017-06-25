@@ -9,3 +9,13 @@ services:
     fish_and_places.images_uploader:
         class: FishAndPlaces\GreenObject\Application\Core\FileUploader
         arguments: ['%images_upload%']
+
+    fish_and_places.weather_proxy:
+        class: FishAndPlaces\GreenObject\Infrastructure\Weather\WeatherProxy
+        arguments:
+            - '@service_container'
+
+    fish_and_places.weather_service:
+        class: FishAndPlaces\GreenObject\Application\Weather\WeatherService
+        arguments:
+            - '@fish_and_places.weather_proxy'

@@ -66,23 +66,32 @@ class GreenObjectQueryService
 
 
     /**
-     * @param string $data
+     * @param DomainLocation $geocodedLocation
      *
      * @param null|int   $radius
      *
      * @return GreenObjectRepresentation[]
      */
-    public function findByDataAndRadius($data, $radius = null)
+    public function findByDataAndRadius($geocodedLocation, $radius = null)
     {
         $searchResultByLocation = [];
-        if (null !== $data) {
-            $address = $this->geoLocatorService->getLocation($data);
-            if (!empty($address)) {
-                $searchResultByLocation = $this->greenObjectRepository->findByLocation($address, $radius);
-            }
+        if (null !== $geocodedLocation) {
+                $searchResultByLocation = $this->greenObjectRepository->findByLocation($geocodedLocation, $radius);
         }
 
         return $this->convertToRepresentation($searchResultByLocation);
+    }
+
+    /**
+     * @param $data
+     * @return DomainLocation
+     */
+    public function geocodeLocation($data)
+    {
+        if (null !== $data) {
+            return $this->geoLocatorService->getLocation($data);
+        }
+        return null;
     }
 
     /**
@@ -111,5 +120,15 @@ class GreenObjectQueryService
         $greenObjects = $this->greenObjectRepository->findByFirstPage();
 
         return $this->convertToRepresentation($greenObjects);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return GreenObjectRepresentation
+     */
+    public function getGreenObject($id)
+    {
+        return current($this->convertToRepresentation([$this->greenObjectRepository->find($id)]));
     }
 }

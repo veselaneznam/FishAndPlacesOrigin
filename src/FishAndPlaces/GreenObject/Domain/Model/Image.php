@@ -6,6 +6,8 @@ class Image
 {
     protected $imageSrc;
 
+    const DEFAULT_IMAGE = 'uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg';
+
     public function getAbsolutePath()
     {
         return null === $this->imageSrc
@@ -16,7 +18,7 @@ class Image
     public function getWebPath()
     {
         return null === $this->imageSrc
-            ? null
+            ? static::DEFAULT_IMAGE
             : $this->getUploadDir() . $this->imageSrc;
     }
 
