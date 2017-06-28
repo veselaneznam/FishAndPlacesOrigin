@@ -42,29 +42,29 @@ class DoctrineDamRepository extends DoctrineGreenObjectRepository implements Dam
     }
 
     /**
-     * @param GreenObject $villageHoliday
+     * @param GreenObject $dam
      *
      * @throws \Exception
      */
-    public function remove(GreenObject $villageHoliday)
+    public function remove(GreenObject $dam)
     {
-        if(!$villageHoliday instanceof Dam) {
+        if(!$dam instanceof Dam) {
             throw new \Exception('Unexpected Entity');
         }
-        parent::remove($villageHoliday);
+        parent::remove($dam);
     }
 
     /**
-     * @param GreenObject $villageHoliday
+     * @param GreenObject $dam
      *
      * @throws \Exception
      */
-    public function add(GreenObject $villageHoliday)
+    public function add(GreenObject $dam)
     {
-        if(!$villageHoliday instanceof Dam) {
+        if(!$dam instanceof Dam) {
             throw new \Exception('Unexpected Entity');
         }
-        parent::add($villageHoliday);
+        parent::add($dam);
     }
 
     /**

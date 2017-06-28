@@ -2,7 +2,6 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
@@ -14,7 +13,6 @@ use GuzzleHttp\Client;
 use Ivory\GoogleMap\Map;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;

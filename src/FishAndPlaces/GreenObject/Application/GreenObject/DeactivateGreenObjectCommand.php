@@ -3,6 +3,7 @@
 namespace FishAndPlaces\GreenObject\Application\GreenObject;
 
 use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
+use FishAndPlaces\GreenObject\Domain\Value\GreenObjectType;
 use FishAndPlaces\User\Domain\Model\User;
 
 abstract class DeactivateGreenObjectCommand extends UpdateGreenObjectCommand

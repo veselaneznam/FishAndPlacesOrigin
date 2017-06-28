@@ -41,10 +41,13 @@ abstract class GreenObjectService
     public function create(CreateNewGreenObjectCommand $command)
     {
         $location = $this->geoLocatorService->getLocation($command->getGreenObject()->getLocation());
+
         $greenObject = $command->getGreenObject();
         $greenObject->setLongitude($location->getLon());
         $greenObject->setLatitude($location->getLat());
+
         $this->greenObjectRepository->add($greenObject);
+
         $greenObjectImage = $command->getGreenObjectImage();
         if(null !== $greenObjectImage) {
             $greenObjectImage->setGreenObject($greenObject);

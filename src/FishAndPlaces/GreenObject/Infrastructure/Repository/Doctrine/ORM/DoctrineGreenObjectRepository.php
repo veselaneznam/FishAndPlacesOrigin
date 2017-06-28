@@ -33,22 +33,22 @@ class DoctrineGreenObjectRepository extends DoctrineRepository implements GreenO
     }
 
     /**
-     * @param GreenObject $villageHoliday
+     * @param GreenObject $greenObject
      */
-    public function remove(GreenObject $villageHoliday)
+    public function remove(GreenObject $greenObject)
     {
-        $villageHoliday->setIsActive(0);
-        $this->getEntityManager()->persist($villageHoliday);
-        $this->getEntityManager()->flush($villageHoliday);
+        $greenObject->setIsActive(0);
+        $this->getEntityManager()->persist($greenObject);
+        $this->getEntityManager()->flush($greenObject);
     }
 
     /**
-     * @param GreenObject $villageHoliday
+     * @param GreenObject $greenObject
      */
-    public function add(GreenObject $villageHoliday)
+    public function add(GreenObject $greenObject)
     {
-        $this->getEntityManager()->persist($villageHoliday);
-        $this->getEntityManager()->flush($villageHoliday);
+        $this->getEntityManager()->persist($greenObject);
+        $this->getEntityManager()->flush($greenObject);
     }
 
     /**
