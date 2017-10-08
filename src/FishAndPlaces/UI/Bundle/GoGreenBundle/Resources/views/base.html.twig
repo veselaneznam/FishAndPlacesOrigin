@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/grid.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}"/>
+    <title>{% trans %}Go Green{% endtrans %}</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('dam') }}">{% trans %}Go Green{% endtrans %}</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('dam') }}">{% trans %}Home{% endtrans %}</a></li>
+                <li><a href="{{ path('page_view', {'slug': 'about-us'}) }}">{% trans %}About{% endtrans %}</a></li>
+                <li><a href="{{ path('page_view', {'slug': 'contact-us'}) }}">{% trans %}Contact{% endtrans %}</a></li>
+            </ul>
+            {#<ul class="nav navbar-nav navbar-right">#}
+                {#<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {% trans %}Login{% endtrans %}</a></li>#}
+            {#</ul>#}
+        </div>
+    </div>
+</nav>
+    {% block body %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    <div class="jumbotron">
+        <div class="container text-center center-block">
+        {% include '@GoGreen/dam/search.html.twig' %}
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    {% endblock %}
+        <footer class="container-fluid text-center">
+            <p>CopyRight &copy; {{ date() | date('Y') }} НаЗелено.com</p>
+        </footer>
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/user_location.js') }}"></script>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58ed0a8755491266"></script>
+    <script id="dsq-count-scr" src="//ribar-bg.disqus.com/count.js" async></script>
+{% endblock %}
+</body>
+</html>

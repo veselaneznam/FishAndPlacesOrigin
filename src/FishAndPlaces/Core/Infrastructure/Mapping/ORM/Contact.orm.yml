@@ -1,0 +1,19 @@
+FishAndPlaces\Core\Domain\Model\Contact:
+    repositoryClass: FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineContactRepository
+    type: entity
+    table: contact
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        email:
+            type: string
+            length: '255'
+        message:
+            type: text
+        type:
+            type: smallint
+        markAsRead:
+            type: boolean

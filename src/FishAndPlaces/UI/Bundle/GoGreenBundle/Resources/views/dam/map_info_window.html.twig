@@ -1,0 +1,38 @@
+<div id="content">
+    <div id="siteNotice">
+    </div>
+    <h5 id="firstHeading" class="firstHeading">{{ name }}</h5>
+    <div id="bodyContent">
+        <div class="col-lg-6 text-justify">
+            <table class="table table-condensed">
+                <thead>
+                <tr colspan="2">
+                    <th>
+
+                        {% if mainImage != null %}
+                            <img src="{{ mainImage }}" width="80px" title="{{ name }}" class="img-responsive" >
+                        {% else %}
+                            <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}"  width="80px"  class="img-responsive">
+                        {% endif %}
+                    </th>
+                    <th><h5>{% trans %}Info{% endtrans %}</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="color: green; font-weight: bold;">{% trans %}Rating{% endtrans %}</td> <td>{{ rating }}</td>
+                </tr>
+                <tr>
+                    <td style="color: green; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ priceProPerson }}</td>
+                </tr>
+                <tr>
+                    <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ address }}</td>
+                </tr>
+                    <td><a href="{{ path('dam_map_direction', {'id': id}) }}">{% trans %}Directions{% endtrans %}</a></td>
+                    <td><a href="{{ path('dam_view', {'id': id}) }}">{% trans %}More details{% endtrans %}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

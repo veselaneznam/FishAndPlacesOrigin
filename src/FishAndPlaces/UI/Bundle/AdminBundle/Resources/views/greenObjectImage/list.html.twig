@@ -1,0 +1,26 @@
+{% extends '@Admin/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        {% include '@Admin/add_images.html.twig' %}
+        {% if imageCollection is defined %}
+            <div class="row text-center">
+
+                {% for image in imageCollection %}
+                    {% if image.isMain == 0 %}
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        <a class="thumbnail" href="{{ path('dam_view', {'id': image.greenObject.id}) }}">
+                            <img class="img-responsive" src="{{  image.webPath }}" alt="{{ image.greenObject.name }}">
+                            <span>{{ image.greenObject.name }}</span>
+                        </a>
+                        <a href="{{ path('green_object_images_delete', { 'id': image.id }) }}"
+                           class="btn delete btn-danger" role="button">Delete
+                        </a>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </div>
+{% endblock %}

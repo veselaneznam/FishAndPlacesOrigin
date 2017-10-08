@@ -1,0 +1,20 @@
+services:
+    fish_and_places.images_query_service:
+        class: FishAndPlaces\GreenObject\Application\GreenObject\Image\GreenObjectImageQueryService
+        arguments:
+            - "@fish_and_places.green_object_image_repository"
+
+    fish_and_places.cms_page_repository:
+        class: FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\Core\Domain\Model\CmsPage ]
+
+    fish_and_places.cms_page_query_service:
+        class: FishAndPlaces\Core\Application\CmsPage\CmsPageQueryService
+        arguments:
+            - "@fish_and_places.cms_page_repository"
+
+    fish_and_places.cms_page_service:
+        class: FishAndPlaces\Core\Application\CmsPage\CmsPageService
+        arguments:
+            - "@fish_and_places.cms_page_repository"

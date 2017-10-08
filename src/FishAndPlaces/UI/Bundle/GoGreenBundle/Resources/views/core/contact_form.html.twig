@@ -1,0 +1,67 @@
+{% extends '@GoGreen/base.html.twig' %}
+{% block content %}
+    {{ parent() }}
+    <div class="row container_custome center-block">
+        <div class="col-lg-12 custom-header">
+            <div class="row">
+                <h1>{{ page.title }}</h1>
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+            <div class="row">
+            <form name="contact_form" class="form-horizontal" method="post"
+                  action="{{ path('page_view', {'slug': 'contact-us'}) }}" data-toggle="validator" role="form">
+
+                <div class="form-group">
+                    <label for="contactType" class="col-sm-2 control-label">{% trans %}Subject{% endtrans %}
+                    </label>
+                    <div class="col-sm-6">
+                        <select class="form-control" required id="contactType" name="type">
+                            <option value=''>{% trans %}Choose Subject{% endtrans %}</option>
+                            <option value='1'>{% trans %}You want to register an object{% endtrans %}</option>
+                            <option value="2">{% trans %}Issue with the website{% endtrans %}</option>
+                            <option value="3">{% trans %}Recommendations{% endtrans %}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail" class="col-sm-2 control-label">{% trans %}Email{% endtrans %}
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="email" required class="form-control" id="contactEmail" name="email"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactMessage" class="col-sm-2 control-label">{% trans %}Message{% endtrans %}</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" required id="contactMessage" name="message"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <input type="submit" class="btn btn-success btn-lg btn-block" id="contactButton"
+                           value=" {% trans %}Send{% endtrans %}  &#x2709;"/>
+
+                </div>
+            </form>
+        </div>
+        </div>
+
+    <div class="col-lg-4">
+        <div class="row">
+        <form>
+            <legend><span class="glyphicon glyphicon-globe"></span> {% trans %}Our office{% endtrans %}</legend>
+            <address>
+{% trans %} Currently the information is not available{% endtrans %}
+            </address>
+            <address>
+                <strong>{% trans %}Vesela Ferdinandova{% endtrans %}</strong><br>
+                <a href="mailto:#">vesela.ferdinandova@na-zeleno.com</a>
+            </address>
+        </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+FishAndPlaces\GreenObject\Domain\Model\Cabin:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCabinRepository
+    type: entity

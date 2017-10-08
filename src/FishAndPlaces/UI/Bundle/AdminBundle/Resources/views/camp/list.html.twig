@@ -1,0 +1,59 @@
+{% extends '@Admin/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>Camp List</h2>
+        <a href="{{ path('create_camp') }}" class="btn btn-info" role="button">Add Camp</a>
+        {% include '@Admin/camp/search.html.twig' %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Is Active</th>
+                <th>Show on first page</th>
+                <th>Price pro person</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if campCollection is not null %}
+                {% for camp in campCollection %}
+                    <tr>
+                        <td>
+                            {% if camp.mainImage.webPath != null %}
+                            <img src="{{ camp.mainImage.webPath }}" width="100px" class="thumbnail">
+                            {% else %}
+                                <img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}" width="100px" class="thumbnail">
+                            {% endif %}
+                        </td>
+                        <td>{{ camp.name }}</td>
+                        <td>{% if camp.isActive == 1 %}
+                            <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-remove red" style="color: red" aria-hidden="true"></span>
+                            {% endif %}
+                        </td>
+                        <td>{{ camp.showOnFirstPage }}</td>
+                        <td>{{ camp.priceProPerson }}</td>
+                        <td>
+                            <a href="{{ path('edit_camp', { 'id': camp.id }) }}" class="btn btn-success"
+                               role="button">Edit</a>
+                            <a href="{{ path('green_object_images_list', { 'id': camp.id }) }}" class="btn btn-success"
+                               role="button">Add Images</a>
+                            {% if camp.isActive == 1 %}
+                                <a href="{{ path('deactivate_camp', { 'id': camp.id }) }}"
+                                   class="btn delete btn-danger" role="button">Deactivate</a>
+                            {% else %}
+                                <a href="{{ path('activate_camp', { 'id': camp.id }) }}"
+                                   class="btn delete btn-danger" role="button">Activate</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

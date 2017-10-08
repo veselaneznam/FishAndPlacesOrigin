@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/grid.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
+
+
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        {% block body %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-info">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">Admin NaZeleno</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"> <a href="{{ path('page_list') }}">Pages List</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Green Objects
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('dam_list') }}" >Dam List</a></li>
+                                    <li><a href="{{ path('camp_list') }}" >Camp List</a></li>
+                                    <li><a href="{{ path('cabin_list') }}" >Cabin List</a></li>
+                                    <li><a href="{{ path('village_holiday_list') }}">Village Holiday List</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('fish_list') }}" >Fish List</a>/li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ path('logout') }}" ><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            {% endif %}
+            <br/>
+
+        {% endblock %}
+        {#{% block content %}#}
+        {#{% endblock %}#}
+    </div>
+
+</div>
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ivoryckeditor/adapters/jquery.js') }}"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,3 @@
+FishAndPlaces\GreenObject\Domain\Model\Camp:
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineCampRepository
+    type: entity

@@ -1,0 +1,85 @@
+
+<div class='stars s-{{ dam.avgRating }}' data-default='{{ dam.avgRating }}'>
+    {{ dam.avgRating }} Stars
+    <span id="error"></span>
+</div>
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+{% endblock %}
+<script>
+    $(document).ready(function(){
+        $('body').on({
+            mousemove: function(e){
+                var $this = $(this);
+                // Calculate number of stars
+                var currentMousePosition = e.pageX - $this.offset().left;
+                var width = $this.width();
+                var rounded = Math.round((currentMousePosition/width)*10);
+
+                var starNumber = rounded/2;
+
+                // Remove + add Classes + Store current rating
+                $this.removeClass().addClass('stars s-' + starNumber).attr('data-rating', starNumber);
+                $this.removeClass().addClass('stars s-' + starNumber).attr('data-default', starNumber);
+            },
+            mouseleave:function(){
+                var $this = $(this);
+                $this.removeClass().addClass('stars s-' + $this.attr('data-default'));
+            },
+            click: function(){
+                var $this = $(this);
+                //Hide the current rating selector
+                $this.replaceWith($('<div>', {
+                    'class': 'loading'
+                }));
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ path('update_rating', {'id': dam.id}) }}",
+                    data:  $this.attr('data-rating'),
+                    dataType: 'JSON',
+                    contentType : 'application/json; charset=utf-8',
+                    success: function(data, status, xhr) {
+                        $(".loading").replaceWith($this.addClass('stars s-' + data.rating).attr('data-default', data.rating));
+                    },
+                    error: function (data, status, xhr) {
+                        alert(data.responseJSON.msg);
+                        console.log(data.responseJSON.msg);
+                        $(".loading").replaceWith($this.addClass('stars s-' + data.responseJSON.oldRating).attr('data-default', data.responseJSON.oldRating));
+
+                    }
+                });
+                return false;
+
+                {#$.post("{{ path('update_rating', {'id': dam.id}) }}",   // url#}
+                    {#{#}
+                        {#rating: $this.attr('data-rating'),#}
+                        {#id: {{ dam.id }}#}
+                    {#}, // data to be submit#}
+                    {#function(data, status, jqXHR) {#}
+                    {#console.log('5');#}
+                    {#// success callback#}
+                        {#$this.removeClass().addClass('stars s-' + {{ dam.avgRating }}).attr('data-default', {{ dam.avgRating }});#}
+
+                    {#}, 'json').done(function () {#}
+                    {#alert("Tets");#}
+                {#});#}
+                {#return false;#}
+                // Send the request
+                {#$.post("{{ path('update_rating', {'id': dam.id}) }}",{#}
+                    {#rating: $this.attr('data-rating'),#}
+                    {#id: {{ dam.id }}#}
+                {#}, function(d){#}
+                        {#if(d.result == "error"){#}
+                            {#$('.loading').replaceWith('<span>'+ d.msg +'</span>');#}
+{#//                        $this.append('<span>'+ d.msg +'</span>');#}
+
+                    {#} else {#}
+                        {#$this.removeClass().addClass('stars s-' + {{ dam.avgRating }}).attr('data-default', {{ dam.avgRating }});#}
+                        {#$('.loading').replaceWith($this);#}
+                    {#}#}
+                {#}, 'json');#}
+            }
+        }, '.stars');
+    });
+</script>

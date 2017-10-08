@@ -1,0 +1,164 @@
+
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/grid.css') }}"/>
+<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}"/>
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/maps/v3/mapsjs-ui.css') }}" />
+<script type="text/javascript" src="{{ asset('js/maps/v3/mapsjs-core.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/maps/v3/mapsjs-service.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/maps/v3/mapsjs-ui.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/maps/v3/mapsjs-mapevents.js') }}"></script>
+<div id="map" style="width: 100%; height: 500px; background: grey" />
+<script  type="text/javascript" charset="UTF-8" >
+
+    /**
+     * Creates a new marker and adds it to a group
+     * @param {H.map.Group} group       The group holding the new marker
+     * @param {H.geo.Point} coordinate  The location of the marker
+     * @param {String} html             Data associated with the marker
+     */
+    function addMarkerToGroup(group, coordinate, html) {
+        var marker = new H.map.Marker(coordinate);
+        // add custom data to the marker
+        marker.setData(html);
+        group.addObject(marker);
+    }
+
+    /**
+     * Switches the map language to simplified Chinese
+     *
+     * @param  {H.Map} map      A HERE Map instance within the application
+     * @param platform
+     * @pama   {H.service.Platform} platform    A stub class to access HERE services
+     */
+    function switchMapLanguage(map, platform){
+        var mapTileService = platform.getMapTileService({
+                type: 'base'
+            }),
+            // Our layer will load tiles from the HERE Map Tile API
+            chineseMapLayer = mapTileService.createTileLayer(
+                'maptile',
+                'normal.day',
+                256,
+                'png8',
+                {lg: 'bg'}
+            );
+        map.setBaseLayer(chineseMapLayer);
+
+        // Display default UI components on the map and change default
+        // language to simplified Chinese.
+        // Besides supported language codes you can also specify your custom translation
+        // using H.ui.i18n.Localization.
+        var ui = H.ui.UI.createDefault(map, defaultLayers, 'bg');
+
+        // Remove not needed settings control
+        ui.removeControl('mapsettings');
+    }
+
+    /**
+     * Add two markers showing the position of Liverpool and Manchester City football clubs.
+     * Clicking on a marker opens an infobubble which holds HTML content related to the marker.
+     * @param  {H.Map} map      A HERE Map instance within the application
+     */
+    function addInfoBubble(map) {
+        var group = new H.map.Group();
+
+        map.addObject(group);
+
+        // add 'tap' event listener, that opens info bubble, to the group
+        group.addEventListener('tap', function (evt) {
+            // event target is the marker itself, group is a parent event target
+            // for all objects that it contains
+            var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
+                // read custom data
+                content: evt.target.getData()
+            });
+            // show info bubble
+            ui.addBubble(bubble);
+        }, false);
+        {% for greenObject in greenObjects %}
+        var ImgString ='';
+        {% if greenObject.mainImage != null %}
+        ImgString = '<img src="{{ asset(greenObject.mainImage.webPath )}}" width="110px" title="{{ greenObject.name }}" class="" >';
+        {% else %}
+        ImgString = '<img src="{{ asset('uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg') }}"  width="110px"  class="">';
+        {% endif %}
+
+        addMarkerToGroup(group, {lat: Number('{{ greenObject.lat }}'), lng: Number('{{ greenObject.long }}')},
+            '<div id="content" style="font-size:0.5em">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h5 id="firstHeading" class="firstHeading">' + '{{ greenObject.name }}' + '</h5>'+
+            '<div id="bodyContent">' +
+            '<div class="col-lg-6 text-justify">'+
+            '<table class="table table-condensed">' +
+            '<thead>'+
+            '<tr colspan="2">'+
+            '<th>'+
+            ImgString +
+
+            '</th>' +
+            '<th><h5>{% trans %}Info{% endtrans %}</h5></th>'+
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            '<tr>' +
+            '<td style="color: white; font-weight: bold; ">{% trans %}Rating{% endtrans %}</td> <td>{{ greenObject.rating }}</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td style="color: white; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ greenObject.priceProPerson }}</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td style="color: white; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>' +
+            '</tr>' +
+            '<td><a href="{{ path('dam_map_direction', {'id': greenObject.id}) }}" class="btn btn-success" role="button">{% trans %}Directions{% endtrans %} <span class="glyphicon glyphicon-share-alt"></span></a></td>' +
+            '<td><a href="{{ path('dam_view', {'id': greenObject.id}) }}" class="btn btn-info" role="button">{% trans %}More details{% endtrans %} <span class="glyphicon glyphicon-info-sign"></span></a></td>' +
+            '</tr>'+
+            '</tbody>' +
+            '</table>' +
+            '</div>' +
+            '</div>'
+       );
+        {% endfor %}
+
+    }
+
+
+    /**
+     * Boilerplate map initialization code starts below:
+     */
+
+// initialize communication with the platform
+    var platform = new H.service.Platform({
+        app_id: '{{ apiId }}',
+        app_code: '{{ apiCode }}',
+        useCIT: true,
+        useHTTPS: true
+    });
+    var defaultLayers = platform.createDefaultLayers();
+
+
+
+
+    // initialize a map - this map is centered over Europe
+    var map = new H.Map(document.getElementById('map'),
+        defaultLayers.normal.map,{
+            center: {lat: Number('{{ userLocation.lat }}'), lng: Number('{{ userLocation.lon }}')},
+            zoom: 8
+        });
+
+    // MapEvents enables the event system
+    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+    // create default UI with layers provided by the platform
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    // Now use the map as required...
+    addInfoBubble(map);
+    switchMapLanguage(map , platform);
+</script>

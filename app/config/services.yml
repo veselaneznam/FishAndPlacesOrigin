@@ -1,0 +1,24 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+services:
+    fish_and_places.user_repository:
+        class: FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ FishAndPlaces\User\Domain\Model\User ]
+
+    fish_and_places.images_uploader:
+        class: FishAndPlaces\GreenObject\Application\Core\FileUploader
+        arguments: ['%images_upload%']
+
+    fish_and_places.weather_proxy:
+        class: FishAndPlaces\GreenObject\Infrastructure\Weather\WeatherProxy
+        arguments:
+            - '@service_container'
+
+    fish_and_places.weather_service:
+        class: FishAndPlaces\GreenObject\Application\Weather\WeatherService
+        arguments:
+            - '@fish_and_places.weather_proxy'
+
+    fish_and_places.user_location_service:
+        class: FishAndPlaces\GreenObject\Application\Core\UserLocationService

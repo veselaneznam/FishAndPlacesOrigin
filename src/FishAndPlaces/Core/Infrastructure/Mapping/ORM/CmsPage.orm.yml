@@ -1,0 +1,25 @@
+FishAndPlaces\Core\Domain\Model\CmsPage:
+    repositoryClass: FishAndPlaces\Core\Infrastructure\Repository\Doctrine\ORM\DoctrineCmsPageRepository
+    type: entity
+    table: cms_page
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        title:
+            type: string
+            length: '255'
+        parent:
+            type: integer
+            nullable: true
+        isNavigation:
+            type: boolean
+        isActive:
+            type: boolean
+        description:
+            type: text
+        slug:
+            type: string
+            length: '255'

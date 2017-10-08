@@ -1,0 +1,15 @@
+
+{% if isDay == false %}
+
+<a class="thumbnail" href="#" style="border:none">
+    <img class="img-responsive" src="/images/weather-icons/{{ weatherImage }}.png" alt="{{ weather }}">
+    <span style="color: green;">{{ tempreture }} &#x2103; </span> <br />
+    <span  style="color: green;">{{ weather }} </span>
+</a>
+{% else %}
+<a class="thumbnail" href="#" style="border:none">
+    <img class="img-responsive" src="/images/weather-icons/{{ weatherImage }}.png" alt="{{ weather }}">
+    <span style="color: green;">{{ tempreture }} &#x2103; </span> <br />
+    <span  style="color: green;">{{ weather }} </span>
+</a>
+{% endif %}

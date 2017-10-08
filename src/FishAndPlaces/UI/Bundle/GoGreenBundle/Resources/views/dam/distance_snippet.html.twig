@@ -1,0 +1,23 @@
+
+<span class="distance" id="distance_{{ dam.id }}"></span>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/user_location.js') }}"></script>
+<script>
+
+    function distance(lat1, lon1, lat2, lon2) {
+        var p = 0.017453292519943295;    // Math.PI / 180
+        var c = Math.cos;
+        var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+            c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p)) / 2;
+
+        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+    }
+
+    $(document).ready(function(){
+
+        var calculatedDistance  = distance(localStorage.getItem('Userlatitude'), localStorage.getItem('Userlongitude'), '{{ dam.lat }}', '{{ dam.long }}');
+        $("#distance_" + '{{ dam.id }}').append(Math.round(calculatedDistance * 100) / 100 + ' km') ;
+    });
+
+</script>

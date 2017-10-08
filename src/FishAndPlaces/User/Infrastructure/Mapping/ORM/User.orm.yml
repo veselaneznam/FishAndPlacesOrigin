@@ -1,0 +1,7 @@
+FishAndPlaces\User\Domain\Model\User:
+    repositoryClass: FishAndPlaces\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }

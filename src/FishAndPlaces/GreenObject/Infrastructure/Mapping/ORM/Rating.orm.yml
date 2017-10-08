@@ -1,0 +1,35 @@
+FishAndPlaces\GreenObject\Domain\Model\Rating:
+    type: entity
+    table: rating
+    repositoryClass: FishAndPlaces\GreenObject\Infrastructure\Repository\Doctrine\ORM\DoctrineRatingRepository
+    id:
+        id:
+            id: true
+            type: integer
+            generator:
+                strategy: IDENTITY
+    fields:
+        rating:
+            type: float
+            nullable: false
+            column: rating
+        time:
+            type: datetime
+            nullable: false
+            column: time
+        ip:
+            type: string
+            length: '255'
+            column: ip
+    manyToOne:
+        greenObject:
+            targetEntity: FishAndPlaces\GreenObject\Domain\Model\GreenObject
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: ratingCollection
+            joinColumns:
+                green_object_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    lifecycleCallbacks: {  }
