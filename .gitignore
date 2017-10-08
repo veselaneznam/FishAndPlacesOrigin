@@ -1,0 +1,7 @@
+web
+var
+vendor
+.idea
+app/config/paramaters.yml
+.idea/*
+vendor/*
