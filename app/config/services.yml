@@ -6,9 +6,12 @@ services:
         factory: ["@doctrine", getRepository]
         arguments: [ FishAndPlaces\User\Domain\Model\User ]
 
+    fish_and_places.exif_remover:
+        class: FishAndPlaces\GreenObject\Infrastructure\Repository\Imagick\ImagickRemover
+
     fish_and_places.images_uploader:
         class: FishAndPlaces\GreenObject\Application\Core\FileUploader
-        arguments: ['%images_upload%']
+        arguments: ["@fish_and_places.exif_remover", '%images_upload%']
 
     fish_and_places.weather_proxy:
         class: FishAndPlaces\GreenObject\Infrastructure\Weather\WeatherProxy

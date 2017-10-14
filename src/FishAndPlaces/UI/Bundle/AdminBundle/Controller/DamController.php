@@ -102,8 +102,11 @@ class DamController extends Controller
         $damRepresentation = $damQueryService->getDam($id);
 
         if(null !== $damRepresentation->getMainImage()->getImageSrc()) {
-            $damRepresentation->setMainImage(
-                new File($this->getParameter('images_upload').'/'.$damRepresentation->getMainImage()->getImageSrc()));
+            $imagePath = $this->getParameter('images_upload').'/'.$damRepresentation->getMainImage()->getImageSrc();
+            if(file_exists($imagePath)) {
+                $damRepresentation->setMainImage(
+                    new File($imagePath));
+            }
         }
 
         $damForm = $this->createForm(DamType::class,

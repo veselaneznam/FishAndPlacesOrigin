@@ -46,7 +46,8 @@
         "willdurand/geocoder": "^3.3",
         "egeloen/ckeditor-bundle": "dev-master",
         "blackknight467/star-rating-bundle": "^2.0",
-        "cmfcmf/openweathermap-php-api": "^2.2"
+        "cmfcmf/openweathermap-php-api": "^2.2",
+        "gregwar/image": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

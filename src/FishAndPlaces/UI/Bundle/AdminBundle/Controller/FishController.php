@@ -9,12 +9,9 @@ use FishAndPlaces\GreenObject\Application\Fish\UpdateFishCommand;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\FishType;
 use FishAndPlaces\UI\Bundle\AdminBundle\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class FishController extends Controller
 {
@@ -95,9 +92,9 @@ class FishController extends Controller
         $fishQueryService = $this->get('fish_and_places.fish_query_service');
 
         $fishRepresentation = $fishQueryService->getFish($id);
-        $image = $fishRepresentation->getImage();
+        $image = $fishRepresentation->getImage()->getImageSrc();
         if(null !== $image) {
-            $fishRepresentation->setImage($image->getImageSrc());
+            $fishRepresentation->setImage($image);
         }
 
         $fishForm = $this->createForm(FishType::class,
@@ -156,8 +153,8 @@ class FishController extends Controller
      */
     private function deleteOldImage($image)
     {
-        if(null !== $image->getImageSrc()) {
-            $oldImage = $this->getParameter('images_upload') . $image->getImageSrc();
+        if(null !== $image) {
+            $oldImage = $this->getParameter('images_upload') . $image;
             if(file_exists($oldImage)) {
                 unlink($oldImage);
             }

@@ -8,6 +8,11 @@ use FishAndPlaces\User\Domain\Model\User;
 class CreateNewFishCommand
 {
     /**
+     * @var Fish
+     */
+    private $fish;
+
+    /**
      * @param FishRepresentation $fishRepresentation
      * @param User               $user
      * @param string | null               $filename
@@ -23,9 +28,6 @@ class CreateNewFishCommand
         $fish->setCreatedAt(new \DateTime('now'));
         $fish->setUpdatedAt(new \DateTime('now'));
         $fish->setIsActive($fishRepresentation->isActive());
-        foreach ($fishRepresentation->getDamCollection() as $damRepresentation) {
-            $fish->addDam($damRepresentation->getDam());
-        }
         $this->fish = $fish;
     }
 

@@ -7,6 +7,8 @@ use FishAndPlaces\User\Domain\Model\User;
 
 class UpdateFishCommand
 {
+    protected $fish;
+
     /**
      * @param FishRepresentation $fishRepresentation
      * @param User               $user

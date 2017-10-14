@@ -50,4 +50,9 @@ class Image
     {
         return $this->imageSrc;
     }
+
+    public function __toString()
+    {
+        return $this->imageSrc;
+    }
 }

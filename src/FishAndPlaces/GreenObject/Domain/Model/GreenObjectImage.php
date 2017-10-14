@@ -42,13 +42,8 @@ class GreenObjectImage extends Image implements Entity
     public function __construct(GreenObject $greenObject = null, $imageSrc, $isMain)
     {
         $this->greenObject = $greenObject;
-
-        $this->imageSrc = $imageSrc;
-
         $this->createdAt = new \DateTime();
-
         $this->updatedAt = new \DateTime();
-
         $this->isMain = $isMain;
     }
 
