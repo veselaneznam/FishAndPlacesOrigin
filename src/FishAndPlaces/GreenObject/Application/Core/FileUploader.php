@@ -36,7 +36,7 @@ class FileUploader
 
     public function upload(UploadedFile $file)
     {
-        $file = $this->exifRemover->processImage($file);
+        $this->exifRemover->processImage($file);
 
         $fileName = md5(uniqid()) . '.' . $file->getClientOriginalExtension();
 

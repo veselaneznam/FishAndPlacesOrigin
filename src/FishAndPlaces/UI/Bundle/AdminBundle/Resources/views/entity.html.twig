@@ -8,6 +8,9 @@
                 {{ form_start(form) }}
 
                 {{ form_widget(form) }}
+                {% if greenObjectImage is defined %}
+                    <img src="{{ greenObjectImage }}" width="400px" height="300px" />
+                {% endif %}
                 {% if currentFishCollection is defined %}
                     <table>
                         <th> Current Fish Collection</th>

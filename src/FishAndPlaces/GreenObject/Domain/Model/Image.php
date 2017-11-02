@@ -4,9 +4,12 @@ namespace FishAndPlaces\GreenObject\Domain\Model;
 
 class Image
 {
-    protected $imageSrc;
-
     const DEFAULT_IMAGE = 'uploads/images/4b009f43fe1cb51540022ad3fdcca0e7.jpeg';
+
+    /**
+     * @var string
+     */
+    protected $imageSrc;
 
     public function getAbsolutePath()
     {

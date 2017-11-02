@@ -87,7 +87,7 @@ class VillageHolidayController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $villageHolidayForm->createView(),
-            'title' => 'New GreenObject',
+            'title' => 'New Village Holiday',
             'backUrl' => '/admin/village_holiday'
         ));
     }
@@ -104,6 +104,7 @@ class VillageHolidayController extends Controller
         $villageHolidayQueryService = $this->get('fish_and_places.village_holiday_query_service');
 
         $villageHolidayRepresentation = $villageHolidayQueryService->getVillageHoliday($id);
+        $mainImage = $villageHolidayRepresentation->getMainImage()->getWebPath();
 
         if(null !== $villageHolidayRepresentation->getMainImage()->getImageSrc()) {
             $villageHolidayRepresentation->setMainImage(
@@ -137,7 +138,8 @@ class VillageHolidayController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $villageHolidayForm->createView(),
-            'title' => 'Edit GreenObject',
+            'title' => 'Edit Village Holiday',
+            'greenObjectImage' => $mainImage,
             'backUrl' => '/admin/village_holiday'
         ));
     }

@@ -16,24 +16,11 @@
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="header-left" style="float: left; width: 40%">&nbsp;</div>
+        <div class="navbar-header" style="width: 20%">
             <a class="navbar-brand" href="{{ path('dam') }}">{% trans %}Go Green{% endtrans %}</a>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('dam') }}">{% trans %}Home{% endtrans %}</a></li>
-                <li><a href="{{ path('page_view', {'slug': 'about-us'}) }}">{% trans %}About{% endtrans %}</a></li>
-                <li><a href="{{ path('page_view', {'slug': 'contact-us'}) }}">{% trans %}Contact{% endtrans %}</a></li>
-            </ul>
-            {#<ul class="nav navbar-nav navbar-right">#}
-                {#<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {% trans %}Login{% endtrans %}</a></li>#}
-            {#</ul>#}
-        </div>
+        <div class="header-right" style="float: right; width: 40%">&nbsp;</div>
     </div>
 </nav>
     {% block body %}
@@ -55,7 +42,13 @@
         </div>
     </div>
     {% endblock %}
-        <footer class="container-fluid text-center">
+        <footer class="container-fluid ">
+            <div class="col-lg-8">
+                <div class="row" style="font-family: Lemon; font-size: 20px">
+            {%trans %}Contact Us{% endtrans %}
+                </div>
+            </div>
+            {% include '@GoGreen/core/_contact_form.html.twig' %}
             <p>CopyRight &copy; {{ date() | date('Y') }} НаЗелено.com</p>
         </footer>
 {% block javascripts %}

@@ -15,11 +15,6 @@ class GreenObjectImage extends Image implements Entity
     private $greenObject;
 
     /**
-     * @var string
-     */
-    protected $imageSrc;
-
-    /**
      * @var \DateTime
      */
     private $createdAt;
@@ -44,6 +39,7 @@ class GreenObjectImage extends Image implements Entity
         $this->greenObject = $greenObject;
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->imageSrc = $imageSrc;
         $this->isMain = $isMain;
     }
 

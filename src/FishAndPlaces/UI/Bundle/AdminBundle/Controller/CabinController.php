@@ -87,7 +87,7 @@ class CabinController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $cabinForm->createView(),
-            'title' => 'New GreenObject',
+            'title' => 'New Cabin',
             'backUrl' => '/admin/cabin'
         ));
     }
@@ -104,6 +104,7 @@ class CabinController extends Controller
         $cabinQueryService = $this->get('fish_and_places.cabin_query_service');
 
         $cabinRepresentation = $cabinQueryService->getCabin($id);
+        $mainImage = $cabinRepresentation->getMainImage()->getWebPath();
 
         if(null !== $cabinRepresentation->getMainImage()->getImageSrc()) {
             $cabinRepresentation->setMainImage(
@@ -132,7 +133,8 @@ class CabinController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $cabinForm->createView(),
-            'title' => 'Edit GreenObject',
+            'title' => 'Edit Cabin',
+            'greenObjectImage' => $mainImage,
             'backUrl' => '/admin/cabin'
         ));
     }

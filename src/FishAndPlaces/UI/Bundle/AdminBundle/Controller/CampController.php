@@ -87,7 +87,7 @@ class CampController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $campForm->createView(),
-            'title' => 'New GreenObject',
+            'title' => 'New Camp',
             'backUrl' => '/admin/camp'
         ));
     }
@@ -104,6 +104,7 @@ class CampController extends Controller
         $campQueryService = $this->get('fish_and_places.camp_query_service');
 
         $campRepresentation = $campQueryService->getCamp($id);
+        $mainImage = $campRepresentation->getMainImage()->getWebPath();
 
         if(null !== $campRepresentation->getMainImage()->getImageSrc()) {
             $campRepresentation->setMainImage(
@@ -132,7 +133,8 @@ class CampController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $campForm->createView(),
-            'title' => 'Edit GreenObject',
+            'title' => 'Edit Camp',
+            'greenObjectImage' => $mainImage,
             'backUrl' => '/admin/camp'
         ));
     }

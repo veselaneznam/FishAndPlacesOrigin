@@ -45,7 +45,6 @@ class DamController extends Controller
         return $this->render('@Admin/dam/list.html.twig', array(
             'damCollection' => $damCollection,
             'title' => "GreenObject List",
-            'path' => $this->getParameter('images_upload'),
             'searchForm' => $searchForm->createView(),
         ));
     }
@@ -83,7 +82,7 @@ class DamController extends Controller
 
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
-            'title' => 'New GreenObject',
+            'title' => 'New Dam',
             'backUrl' => '/admin/dam'
         ));
     }
@@ -100,7 +99,7 @@ class DamController extends Controller
         $damQueryService = $this->get('fish_and_places.dam_query_service');
 
         $damRepresentation = $damQueryService->getDam($id);
-
+        $mainImage = $damRepresentation->getMainImage()->getWebPath();
         if(null !== $damRepresentation->getMainImage()->getImageSrc()) {
             $imagePath = $this->getParameter('images_upload').'/'.$damRepresentation->getMainImage()->getImageSrc();
             if(file_exists($imagePath)) {
@@ -135,7 +134,8 @@ class DamController extends Controller
         return $this->render('@Admin/entity.html.twig', array(
             'form' => $damForm->createView(),
             'currentFishCollection' => $damRepresentation->getFishCollection(),
-            'title' => 'Edit GreenObject',
+            'greenObjectImage' => $mainImage,
+            'title' => 'Edit Dam',
             'backUrl' => '/admin/dam'
         ));
     }

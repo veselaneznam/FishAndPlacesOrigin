@@ -1,0 +1,41 @@
+<div class="col-lg-8" style="font-family: Lemon; font-size: 20px">
+    <div class="row">
+        <form name="contact_form" class="form-horizontal" method="post"
+              action="{{ path('page_view', {'slug': 'contact-us'}) }}" data-toggle="validator" role="form">
+
+            <div class="form-group">
+                <label for="contactType" class="col-sm-2 control-label">{% trans %}Subject{% endtrans %}
+                </label>
+                <div class="col-sm-6">
+                    <select class="form-control" required id="contactType" name="type">
+                        <option value=''>{% trans %}Choose Subject{% endtrans %}</option>
+                        <option value='1'>{% trans %}You want to register an object{% endtrans %}</option>
+                        <option value="2">{% trans %}Issue with the website{% endtrans %}</option>
+                        <option value="3">{% trans %}Recommendations{% endtrans %}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail" class="col-sm-2 control-label">{% trans %}Email{% endtrans %}
+                </label>
+                <div class="col-sm-6">
+                    <input type="email" required class="form-control" id="contactEmail" name="email"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactMessage" class="col-sm-2 control-label">{% trans %}Message{% endtrans %}</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" required id="contactMessage" name="message"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-lg-5" style="float: inherit;">
+                <input type="submit" class="btn btn-success btn-lg btn-block" id="contactButton"
+                       value=" {% trans %}Send{% endtrans %}  &#x2709;"/>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
