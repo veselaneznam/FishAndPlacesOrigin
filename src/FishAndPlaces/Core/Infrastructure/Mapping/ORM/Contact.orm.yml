@@ -13,7 +13,10 @@ FishAndPlaces\Core\Domain\Model\Contact:
             length: '255'
         message:
             type: text
-        type:
-            type: smallint
+        phone:
+            type: string
+            nullable: true
+        name:
+            type: string
         markAsRead:
             type: boolean

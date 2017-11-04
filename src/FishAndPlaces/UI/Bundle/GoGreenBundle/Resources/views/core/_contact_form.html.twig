@@ -1,41 +1,129 @@
-<div class="col-lg-8" style="font-family: Lemon; font-size: 20px">
-    <div class="row">
-        <form name="contact_form" class="form-horizontal" method="post"
-              action="{{ path('page_view', {'slug': 'contact-us'}) }}" data-toggle="validator" role="form">
+<div class="container text-center card">
+    <div class="row header">
+        <div class="col-md-12">
 
-            <div class="form-group">
-                <label for="contactType" class="col-sm-2 control-label">{% trans %}Subject{% endtrans %}
-                </label>
-                <div class="col-sm-6">
-                    <select class="form-control" required id="contactType" name="type">
-                        <option value=''>{% trans %}Choose Subject{% endtrans %}</option>
-                        <option value='1'>{% trans %}You want to register an object{% endtrans %}</option>
-                        <option value="2">{% trans %}Issue with the website{% endtrans %}</option>
-                        <option value="3">{% trans %}Recommendations{% endtrans %}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="contactEmail" class="col-sm-2 control-label">{% trans %}Email{% endtrans %}
-                </label>
-                <div class="col-sm-6">
-                    <input type="email" required class="form-control" id="contactEmail" name="email"/>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <label for="contactMessage" class="col-sm-2 control-label">{% trans %}Message{% endtrans %}</label>
-                <div class="col-sm-6">
-                    <textarea class="form-control" required id="contactMessage" name="message"></textarea>
+    <div class="col-md-6">
+        <legend>{% trans %}Social Media{% endtrans %}</legend>
+
+        <div class="social-box">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p class="p-mini">
+                            <a href="https://facebook.com/na-zeleno">
+                                <i class='icon-facebook-sign'></i>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="panel-footer" style="background-color: rgb(59, 89, 152)">
+                        Facebook
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-            <div class="col-lg-5" style="float: inherit;">
-                <input type="submit" class="btn btn-success btn-lg btn-block" id="contactButton"
-                       value=" {% trans %}Send{% endtrans %}  &#x2709;"/>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p class="p-mini">
+                            <a href="https://twitter.com/niseorg">
+                                <i class='icon-twitter-sign'></i>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="panel-footer" style="background-color: rgb(29, 161, 242);">
+                        Twitter
+                    </div>
+                </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p class="p-mini">
+                            <a href="https://plus.google.com/niseorg">
+                                <i class='icon-google-plus-sign'></i>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="panel-footer" style="background-color: rgb(255, 101, 80);">
+                        Google+
+                    </div>
+                </div>
             </div>
+        </div>
+
+
+
+        <div style="margin-top: 50px;">
+            <legend>{% trans %}Need more info?{% endtrans %}</legend>
+            <p class="text-align: left;">
+            <address>
+                <strong>{% trans %}Organization Name{% endtrans %}</strong><br>
+                {% trans %}Email{% endtrans %}: vesela.ferdinandova@na-zeleno.com<br>
+                Twitter: @twitterAccount<br>
+                {% trans%}Telephone{% endtrans %}:
+            </address>
+            </p>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-6">
+        <div id="messages"></div>
+        <legend>{% trans %}Send us a message{% endtrans %}</legend>
+
+        <form>
+            <div id="group-name" class="form-group">
+            <label for="name">* {% trans %}Name{% endtrans %}</label>
+            <input type="text" id="name" name="name" value="" class="form-control" placeholder="{% trans %}Enter your name{% endtrans %}..." />
+                <span class="help-block"></span>
+            </div>
+            <div id="group-email" class="form-group">
+            <label for="email">* {% trans %}Email{% endtrans %}</label>
+            <input type="text" id="email" name="email" value="" class="form-control"  placeholder="{% trans %}Enter your email{% endtrans %}..." />
+            <span class="help-block"></span>
+            </div>
+            <div id="group-phone" class="form-group">
+            <label for="phone">{% trans %}Telephone{% endtrans %}</label>
+            <input type="text" id="phone" name="phone" value="" class="form-control"  placeholder="{% trans %}Enter your phone{% endtrans %}..." />
+            </div>
+            <div id="group-message" class="form-group">
+            <label for="msg">* {% trans %}Message{% endtrans %}</label>
+            <textarea name="msg" id="message" cols="40" rows="10" class="form-control" rows="3" placeholder="{% trans %}Enter your message{% endtrans %}..."></textarea>
+                <span class="help-block"></span>
+            </div>
+            <br />
+            <button class="btn btn-default contact" style="color: green">{% trans %}Send Message{% endtrans %}</button>
+
         </form>
     </div>
+
 </div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{% trans %}Success{% endtrans %}</h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-close"class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">

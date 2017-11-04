@@ -29,9 +29,14 @@ class ContactRepresentation
     private $message;
 
     /**
-     * @var int
+     * @var string
      */
-    private $type;
+    private $phone;
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var bool
@@ -52,7 +57,8 @@ class ContactRepresentation
             $this->id = $contact->getId();
             $this->email = $contact->getEmail();
             $this->message = $contact->getMessage();
-            $this->type = $contact->getType();
+            $this->phone = $contact->getPhone();
+            $this->name = $contact->getName();
             $this->markAsRead = $contact->isMarkAsRead();
             $this->contact = $contact;
         }
@@ -131,20 +137,20 @@ class ContactRepresentation
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getType(): int
+    public function getPhone(): string
     {
-        return $this->type;
+        return $this->phone;
     }
 
     /**
-     * @param int $type
+     * @param string $phone
      * @return ContactRepresentation
      */
-    public function setType(int $type): ContactRepresentation
+    public function setPhone(string $phone): ContactRepresentation
     {
-        $this->type = $type;
+        $this->phone = $phone;
         return $this;
     }
 
@@ -163,6 +169,24 @@ class ContactRepresentation
     public function setMarkAsRead(bool $markAsRead): ContactRepresentation
     {
         $this->markAsRead = $markAsRead;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return ContactRepresentation
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
         return $this;
     }
 }

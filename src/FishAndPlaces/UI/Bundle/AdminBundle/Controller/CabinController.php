@@ -8,7 +8,6 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
-
 use FishAndPlaces\GreenObject\Application\GreenObject\Cabin\ActivateCabinCommand;
 use FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinRepresentation;

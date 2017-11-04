@@ -22,10 +22,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new blackknight467\StarRatingBundle\StarRatingBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
             new FishAndPlaces\UI\Bundle\GoGreenBundle\GoGreenBundle(),
             new FishAndPlaces\UI\Bundle\ShopBundle\ShopBundle(),
             new FishAndPlaces\UI\Bundle\AdminBundle\AdminBundle(),
             new FishAndPlaces\UI\Bundle\UserBundle\UserBundle(),
+            new FishAndPlaces\UI\Bundle\APIBundle\APIBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

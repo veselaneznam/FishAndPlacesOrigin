@@ -8,7 +8,6 @@
 
 namespace FishAndPlaces\Core\Domain\Model;
 
-use FishAndPlaces\Core\Domain\Value\ContactType;
 use FishAndPlaces\Core\Domain\Value\Email;
 
 class Contact
@@ -29,9 +28,14 @@ class Contact
     private $message;
 
     /**
-     * @var int
+     * @var string
      */
-    private $type;
+    private $phone;
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var bool
@@ -63,24 +67,6 @@ class Contact
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param ContactType $type
-     * @return Contact
-     */
-    public function setType(ContactType $type)
-    {
-        $this->type = $type->getId();
-        return $this;
     }
 
     /**
@@ -126,6 +112,42 @@ class Contact
     public function setMessage($message)
     {
         $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return Contact
+     */
+    public function setPhone(string $phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Contact
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
         return $this;
     }
 }

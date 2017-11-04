@@ -8,7 +8,6 @@
 
 namespace FishAndPlaces\UI\Bundle\AdminBundle\Controller;
 
-
 use FishAndPlaces\GreenObject\Application\GreenObject\Camp\ActivateCampCommand;
 use FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampRepresentation;

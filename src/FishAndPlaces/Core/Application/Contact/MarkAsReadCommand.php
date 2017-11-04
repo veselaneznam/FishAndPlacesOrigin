@@ -8,7 +8,6 @@
 
 namespace FishAndPlaces\Core\Application\Contact;
 
-use FishAndPlaces\Core\Domain\Model\Contact;
 
 class MarkAsReadCommand extends ContactCommand
 {

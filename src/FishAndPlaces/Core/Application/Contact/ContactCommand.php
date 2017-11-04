@@ -29,8 +29,8 @@ abstract class ContactCommand
         $contact->setId($contactRepresentation->getId());
         $contact->setMessage($contactRepresentation->getMessage());
         $contact->setEmail(new Email($contactRepresentation->getEmail()));
-        $contact->setType(new ContactType($contactRepresentation->getType()));
-
+        $contact->setPhone($contactRepresentation->getPhone());
+        $contact->setName($contactRepresentation->getName());
         $this->contact = $contact;
     }
 

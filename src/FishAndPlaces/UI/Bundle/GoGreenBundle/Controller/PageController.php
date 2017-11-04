@@ -48,7 +48,7 @@ class PageController extends Controller
     private function handleContactPost(Request $request)
     {
         $contactRepresentation = new ContactRepresentation();
-        $contactRepresentation->setType($request->get('type'));
+        $contactRepresentation->setPhone($request->get('type'));
         $contactRepresentation->setEmail($request->get('email'));
         $contactRepresentation->setMessage($request->get('message'));
 

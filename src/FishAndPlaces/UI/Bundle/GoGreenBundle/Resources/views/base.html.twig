@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favico n.ico') }}"/>
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.css') }}"/>
@@ -42,23 +42,19 @@
         </div>
     </div>
     {% endblock %}
-        <footer class="container-fluid ">
-            <div class="col-lg-8">
-                <div class="row" style="font-family: Lemon; font-size: 20px">
-            {%trans %}Contact Us{% endtrans %}
-                </div>
-            </div>
+        <footer class="container-fluid">
             {% include '@GoGreen/core/_contact_form.html.twig' %}
             <p>CopyRight &copy; {{ date() | date('Y') }} НаЗелено.com</p>
         </footer>
 {% block javascripts %}
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/user_location.js') }}"></script>
-
+    <script src="{{ asset('js/contact-us.js') }}"></script>
     <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58ed0a8755491266"></script>
     <script id="dsq-count-scr" src="//ribar-bg.disqus.com/count.js" async></script>
 {% endblock %}
