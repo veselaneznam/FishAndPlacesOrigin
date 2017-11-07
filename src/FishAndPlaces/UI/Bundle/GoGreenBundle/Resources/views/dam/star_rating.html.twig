@@ -1,6 +1,6 @@
 
-<div class='stars s-{{ dam.avgRating }}' data-default='{{ dam.avgRating }}'>
-    {{ dam.avgRating }} Stars
+<div class='stars s-{{ greenObject.avgRating }}' data-default='{{ greenObject.avgRating }}'>
+    {{ greenObject.avgRating }} Stars
     <span id="error"></span>
 </div>
 {% block javascripts %}
@@ -35,7 +35,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "{{ path('update_rating', {'id': dam.id}) }}",
+                    url: "{{ path('update_rating', {'id': greenObject.id}) }}",
                     data:  $this.attr('data-rating'),
                     dataType: 'JSON',
                     contentType : 'application/json; charset=utf-8',
@@ -50,35 +50,6 @@
                     }
                 });
                 return false;
-
-                {#$.post("{{ path('update_rating', {'id': dam.id}) }}",   // url#}
-                    {#{#}
-                        {#rating: $this.attr('data-rating'),#}
-                        {#id: {{ dam.id }}#}
-                    {#}, // data to be submit#}
-                    {#function(data, status, jqXHR) {#}
-                    {#console.log('5');#}
-                    {#// success callback#}
-                        {#$this.removeClass().addClass('stars s-' + {{ dam.avgRating }}).attr('data-default', {{ dam.avgRating }});#}
-
-                    {#}, 'json').done(function () {#}
-                    {#alert("Tets");#}
-                {#});#}
-                {#return false;#}
-                // Send the request
-                {#$.post("{{ path('update_rating', {'id': dam.id}) }}",{#}
-                    {#rating: $this.attr('data-rating'),#}
-                    {#id: {{ dam.id }}#}
-                {#}, function(d){#}
-                        {#if(d.result == "error"){#}
-                            {#$('.loading').replaceWith('<span>'+ d.msg +'</span>');#}
-{#//                        $this.append('<span>'+ d.msg +'</span>');#}
-
-                    {#} else {#}
-                        {#$this.removeClass().addClass('stars s-' + {{ dam.avgRating }}).attr('data-default', {{ dam.avgRating }});#}
-                        {#$('.loading').replaceWith($this);#}
-                    {#}#}
-                {#}, 'json');#}
             }
         }, '.stars');
     });

@@ -107,13 +107,14 @@
             '</thead>' +
             '<tbody>' +
             '<tr>' +
-            '<td style="color: white; font-weight: bold; ">{% trans %}Rating{% endtrans %}</td> <td>{{ greenObject.rating }}</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td style="color: white; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>{{ greenObject.priceProPerson }}</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td style="color: white; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>' +
+            '<td style="color: green; font-weight: bold; ">{% trans %}Rating{% endtrans %}</td> <td><div class=\'stars s-' + {{ greenObject.avgRating }} +
+                '\' data-default=' + {{ greenObject.avgRating }} +'>'
+            + {{ greenObject.avgRating }}
+            + ' Stars'
+            + ' </div></td></tr><tr> <td style="color: green; font-weight: bold;">{% trans %}Price{% endtrans %}</td> <td>'
+            + '{{ greenObject.priceProPerson }}'
+            + '</td></tr><tr>' +
+            '<td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td> <td>{{ greenObject.address }}</td>' +
             '</tr>' +
             '<td><a href="{{ path('dam_map_direction', {'id': greenObject.id}) }}" class="btn btn-success" role="button">{% trans %}Directions{% endtrans %} <span class="glyphicon glyphicon-share-alt"></span></a></td>' +
             '<td><a href="{{ path('dam_view', {'id': greenObject.id}) }}" class="btn btn-info" role="button">{% trans %}More details{% endtrans %} <span class="glyphicon glyphicon-info-sign"></span></a></td>' +

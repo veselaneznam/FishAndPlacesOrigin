@@ -113,7 +113,7 @@ class DamController extends Controller
         $rating = $this->createForm(DamRatingType::class, ['rating' => $dam->getAvgRating()]);
 
         return $this->render('@GoGreen/dam/detail_view.html.twig', [
-            'dam' => $dam,
+            'greenObject' => $dam,
             'rating' => $rating->createView(),
             'weatherImage' => $dailyWeather->weather->icon,
             'weather' => $dailyWeather->weather->description,

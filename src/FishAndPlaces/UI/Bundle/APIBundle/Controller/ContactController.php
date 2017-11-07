@@ -22,7 +22,7 @@ class ContactController extends Controller
     /**
      * @param Request $request
      * @Route("/contact", name="contact-us")
-     * @Method({"GET", "POST"})
+     * @Method({"POST"})
      *
      * @return JsonResponse
      */
@@ -46,8 +46,6 @@ class ContactController extends Controller
             $errors['name'] = $translator->trans('Name can not ne empty');
         }
 
-        $phone = $request->get('phone');
-
         $message = $request->get('message');
         if (empty($message)) {
             $errors['message'] = $translator->trans('Message can not be empty');
@@ -55,7 +53,7 @@ class ContactController extends Controller
 
         $email = $request->get('email');
         if (empty($message)) {
-            $errors['message'] = $translator->trans('Email can not be empty');
+            $errors['email'] = $translator->trans('Email can not be empty');
         }
 
         if(!empty($errors)) {
@@ -67,20 +65,15 @@ class ContactController extends Controller
         }
         $contactRepresentation = new ContactRepresentation();
         $contactRepresentation->setEmail($email);
-
         $contactRepresentation->setName($name);
-
-        $contactRepresentation->setPhone($phone);
-
         $contactRepresentation->setMessage($request->get('message'));
-
         $addContactCommand = new AddContactCommand($contactRepresentation);
         $contactService = $this->get('fish_and_places.contact_service');
         try {
             $contactService->create($addContactCommand);
             return new JsonResponse([
                 'success' => true,
-                'message' => "Your inquire was send successfully, our team will answer you in the next working days"
+                'message' => $translator->trans("Your inquire was send successfully, our team will answer you in the next working days")
             ], Response::HTTP_OK);
 
         } catch (\Exception $e) {

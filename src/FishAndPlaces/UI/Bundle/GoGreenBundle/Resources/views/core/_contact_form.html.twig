@@ -76,7 +76,7 @@
         <div id="messages"></div>
         <legend>{% trans %}Send us a message{% endtrans %}</legend>
 
-        <form>
+        <form class="contact-form">
             <div id="group-name" class="form-group">
             <label for="name">* {% trans %}Name{% endtrans %}</label>
             <input type="text" id="name" name="name" value="" class="form-control" placeholder="{% trans %}Enter your name{% endtrans %}..." />
@@ -87,13 +87,9 @@
             <input type="text" id="email" name="email" value="" class="form-control"  placeholder="{% trans %}Enter your email{% endtrans %}..." />
             <span class="help-block"></span>
             </div>
-            <div id="group-phone" class="form-group">
-            <label for="phone">{% trans %}Telephone{% endtrans %}</label>
-            <input type="text" id="phone" name="phone" value="" class="form-control"  placeholder="{% trans %}Enter your phone{% endtrans %}..." />
-            </div>
             <div id="group-message" class="form-group">
             <label for="msg">* {% trans %}Message{% endtrans %}</label>
-            <textarea name="msg" id="message" cols="40" rows="10" class="form-control" rows="3" placeholder="{% trans %}Enter your message{% endtrans %}..."></textarea>
+            <textarea name="msg" id="message" cols="40" rows="5" class="form-control" rows="3" placeholder="{% trans %}Enter your message{% endtrans %}..."></textarea>
                 <span class="help-block"></span>
             </div>
             <br />
@@ -122,8 +118,3 @@
 
     </div>
 </div>
-
-</div>
-
-
-<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">

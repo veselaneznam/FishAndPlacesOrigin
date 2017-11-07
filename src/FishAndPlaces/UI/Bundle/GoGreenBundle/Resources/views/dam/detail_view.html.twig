@@ -5,13 +5,13 @@
 
         <div class="col-lg-12 custom-header">
             <div class="row">
-                <h1>{{ dam.name }}</h1>
+                <h1>{{ greenObject.name }}</h1>
             </div>
 
         </div>
         <br/>
         <div class="col-lg-12">
-            {% if dam.imageCollection is defined %}
+            {% if greenObject.imageCollection is defined %}
                 {% include '@GoGreen/dam/galery.html.twig' %}
             {% endif %}
             <div class="col-lg-5 text-justify">
@@ -28,11 +28,11 @@
                     </tr>
                     <tr>
                         <td style="color: green; font-weight: bold;">{% trans %}Price{% endtrans %}</td>
-                        <td>{{ dam.priceProPerson }}</td>
+                        <td>{{ greenObject.priceProPerson }}</td>
                     </tr>
                     <tr>
                         <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td>
-                        <td>{{ dam.address }}</td>
+                        <td>{{ greenObject.address }}</td>
                     </tr>
                     {#<tr>#}
                         {#<td style="color: green; font-weight: bold;">{% trans %}Distance{% endtrans %}</td>#}
@@ -40,14 +40,14 @@
                     {#</tr>#}
                     <tr>
                         <td style="color: green; font-weight: bold;">{% trans %}See on Map{% endtrans %}</td>
-                        <td><a href="{{ path('dam_map_direction', {'id': dam.id}) }}" class="btn btn-success"
+                        <td><a href="{{ path('dam_map_direction', {'id': greenObject.id}) }}" class="btn btn-success"
                                role="button">{% trans %}Directions{% endtrans %} <span
                                         class="glyphicon glyphicon-share-alt"></span></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            {% if dam.fishCollection is defined %}
+            {% if greenObject.fishCollection is defined %}
                 <div class="col-lg-4 text-justify">
 
                     {% include '@GoGreen/dam/dam_fish_collection.html.twig' %}
@@ -57,9 +57,8 @@
             <div class="col-lg-3 text-justify" >{% include '@GoGreen/dam/weather_snippet.html.twig' %}</div>
         </div>
 
-
         <div class="col-lg-12 text-justify">
-            <p>{{ dam.description | raw }}</p>
+            <p>{{ greenObject.description | raw }}</p>
             <div id="disqus_thread"></div>
         </div>
     </div>

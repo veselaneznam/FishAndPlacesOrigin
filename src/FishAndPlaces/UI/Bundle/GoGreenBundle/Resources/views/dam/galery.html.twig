@@ -11,7 +11,7 @@
 
                             <div class="carousel-inner">
                                 {% set counter = 0 %}
-                                {% for damImage in dam.imageCollection %}
+                                {% for damImage in greenObject.imageCollection %}
                                     {% if counter == 0 %}
                                 <div class="active item" data-slide-number="{{ counter }}">
                                     <img src="{{ damImage.webPath }}"></div>
@@ -41,7 +41,7 @@
             <!-- Bottom switcher of slider -->
             <ul class="hide-bullets">
                 {% set counter = 0 %}
-                {% for damImage in dam.imageCollection %}
+                {% for damImage in greenObject.imageCollection %}
                 {% if counter == 0 %}
                 <li class="col-sm-2">
                     <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
