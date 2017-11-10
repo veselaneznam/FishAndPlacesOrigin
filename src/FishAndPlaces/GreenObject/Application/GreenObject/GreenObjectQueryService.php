@@ -12,6 +12,7 @@ use FishAndPlaces\GreenObject\Domain\Model\Camp;
 use FishAndPlaces\GreenObject\Domain\Model\Dam;
 use FishAndPlaces\GreenObject\Domain\Model\VillageHoliday;
 use FishAndPlaces\GreenObject\Domain\Repository\GreenObjectRepository;
+use FishAndPlaces\GreenObject\Domain\Value\GreenObjectType;
 use FishAndPlaces\GreenObject\Domain\Value\Location as DomainLocation;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
 
@@ -63,7 +64,6 @@ class GreenObjectQueryService
         }
         return $result;
     }
-
 
     /**
      * @param DomainLocation $geocodedLocation

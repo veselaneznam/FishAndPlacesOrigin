@@ -39,6 +39,12 @@
             </div>
         {% endfor %}
     <div class="jumbotron">
+        <div id="mySidenav" class="sidenav">
+            <a href="{{ path('categories', {'type': 1}) }}" id="about">{% trans %}Dam{% endtrans %} <span style="float: right" class="glyphicon glyphicon-leaf" aria-hidden="true"></span></a>
+            <a href="{{ path('categories', {'type': 2}) }}" id="blog">{% trans %}Camp{% endtrans %} <span style="float: right"  class="glyphicon glyphicon-tent" aria-hidden="true"></span></a>
+            <a href="{{ path('categories', {'type': 4}) }}" id="projects">{% trans %}Cabin{% endtrans %} <span style="float: right" class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+            <a href="{{ path('categories', {'type': 3}) }}" id="contact">{% trans %}Village Holiday{% endtrans %} <span style="float: right" class="glyphicon glyphicon-bed" aria-hidden="true"></span></a>
+        </div>
         <div class="container text-center center-block">
         {% include '@GoGreen/dam/search.html.twig' %}
             {% block content %}

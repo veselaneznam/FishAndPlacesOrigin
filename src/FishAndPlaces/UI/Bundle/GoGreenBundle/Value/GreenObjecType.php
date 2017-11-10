@@ -22,4 +22,11 @@ class GreenObjecType
         self::VILLAGE_HOLIDAY,
         self::CABIN,
     ];
+
+    const TYPE_TO_STRING_MAPPING = [
+        self::DAM => 'Dam',
+        self::CABIN => 'Cabin',
+        self::CAMP => 'Camp',
+        self::VILLAGE_HOLIDAY => 'Village Holiday'
+    ];
 }

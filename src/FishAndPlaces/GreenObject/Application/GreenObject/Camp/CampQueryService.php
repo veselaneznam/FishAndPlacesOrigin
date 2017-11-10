@@ -16,7 +16,7 @@ class CampQueryService extends GreenObjectQueryService
     /**
      * @return array
      */
-    public function getCampCollection()
+    public function getCollection()
     {
         $campCollection = $this->greenObjectRepository->findAllActive();
 

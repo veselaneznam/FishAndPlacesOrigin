@@ -2,36 +2,28 @@
 
 namespace FishAndPlaces\UI\Bundle\GoGreenBundle\Controller;
 
-use Cmfcmf\OpenWeatherMap\Exception;
-use FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectQueryService;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\GreenObjectServiceFactory;
 use FishAndPlaces\GreenObject\Application\GreenObject\Rating\GreenObjectRatingRepresentation;
 use FishAndPlaces\GreenObject\Application\GreenObject\Rating\UpdateGreenObjectRatingCommand;
-use FishAndPlaces\GreenObject\Domain\Model\GreenObject;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Form\DamRatingType;
-use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MapHelper;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Map\MarkerHelper;
 use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\GreenObjecType;
-use FishAndPlaces\UI\Bundle\GoGreenBundle\Value\Location;
-use GuzzleHttp\Client;
-use Ivory\GoogleMap\Map;
-use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Zend\Code\Exception\RuntimeException;
 
-class DamController extends Controller
+class GreenObjectController extends Controller
 {
     /**
      * @var GreenObjectQueryService
      */
-    private $damQueryService;
+    private $greenObjectQueryService;
 
     /**
      * @param Request $request
@@ -43,9 +35,30 @@ class DamController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('@GoGreen/dam/index.html.twig', array(
-            'greenObjects' => $this->getDamQueryService()->findByFirstPage(),
+            'greenObjects' => $this->getGreenObjectQueryService()->findByFirstPage(),
             'title' => $this->get('translator')->trans("Dam List"),
         ));
+    }
+
+    /**
+     * @Route("/category/{type}", name="categories", requirements={"id": "\d+"})
+     * @Method({"GET"})
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function categoryAction(Request $request)
+    {
+        $type = (int)$request->get('type');
+        $queryService = $this->decideQueryService($type);
+        $greenObjectCollection = $queryService->getCollection();
+        $geocodedLocation = $this->getGreenObjectQueryService()->geocodeLocation('Bulgaria');
+
+        return $this->renderMap(
+            $greenObjectCollection,
+            $geocodedLocation,
+            $this->get('translator')->trans(sprintf('List with %ss', GreenObjecType::TYPE_TO_STRING_MAPPING[$type]))
+        );
     }
 
     /**
@@ -144,12 +157,12 @@ class DamController extends Controller
     /**
      * @return GreenObjectQueryService|object
      */
-    private function getDamQueryService()
+    private function getGreenObjectQueryService()
     {
-        if (null === $this->damQueryService) {
-            $this->damQueryService = $this->get('fish_and_places.green_object_query_service');
+        if (null === $this->greenObjectQueryService) {
+            $this->greenObjectQueryService = $this->get('fish_and_places.green_object_query_service');
         }
-        return $this->damQueryService;
+        return $this->greenObjectQueryService;
     }
 
     /**
@@ -179,8 +192,8 @@ class DamController extends Controller
     public function handleMapSearch(Request $request, $location, $radius = null)
     {
         try {
-            $geocodedLocation = $this->getDamQueryService()->geocodeLocation($location);
-            $damCollection = $this->getDamQueryService()->findByDataAndRadius($geocodedLocation, $radius);
+            $geocodedLocation = $this->getGreenObjectQueryService()->geocodeLocation($location);
+            $damCollection = $this->getGreenObjectQueryService()->findByDataAndRadius($geocodedLocation, $radius);
 
         } catch (\Exception $exception) {
             $this->get('logger')->log('error', $exception->getMessage(), [$location]);
@@ -194,24 +207,7 @@ class DamController extends Controller
             return $this->redirectToRoute('dam');
         }
 
-        $twig = $this->container->get('twig');
-
-        $mapMarkers = array_map(
-            function (GreenObjectRepresentation $dam) use ($twig) {
-                return MarkerHelper::build($dam, $twig);
-            },
-            $damCollection
-        );
-
-        return $this->render('@GoGreen/dam/google_map.html.twig', array(
-            'userLocation' => $geocodedLocation,
-            'greenObjects' => $damCollection,
-            'mapMarkers' => $mapMarkers,
-            'radius' => $radius,
-            'title' => $this->get('translator')->trans("Search Result"),
-            'apiId' => $this->container->getParameter('nokia_maps_app_id'),
-            'apiCode' => $this->container->getParameter('nokia_maps_app_code'),
-        ));
+        return $this->renderMap($damCollection, $geocodedLocation, $this->get('translator')->trans("Search Result"));
     }
 
     /**
@@ -290,16 +286,42 @@ class DamController extends Controller
     }
 
     /**
+     * @param $damCollection
+     * @param $geocodedLocation
+     * @return Response
+     */
+    public function renderMap($damCollection, $geocodedLocation, $title): Response
+    {
+        $twig = $this->container->get('twig');
+
+        $mapMarkers = array_map(
+            function (GreenObjectRepresentation $dam) use ($twig) {
+                return MarkerHelper::build($dam, $twig);
+            },
+            $damCollection
+        );
+
+        return $this->render('@GoGreen/dam/google_map.html.twig', array(
+            'userLocation' => $geocodedLocation,
+            'greenObjects' => $damCollection,
+            'mapMarkers' => $mapMarkers,
+            'title' => $title,
+            'apiId' => $this->container->getParameter('nokia_maps_app_id'),
+            'apiCode' => $this->container->getParameter('nokia_maps_app_code'),
+        ));
+    }
+
+    /**
      * @param $type
      * @return \FishAndPlaces\GreenObject\Application\GreenObject\Cabin\CabinService|\FishAndPlaces\GreenObject\Application\GreenObject\Camp\CampService|\FishAndPlaces\GreenObject\Application\GreenObject\Dam\DamService|\FishAndPlaces\GreenObject\Application\GreenObject\VillageHoliday\VillageHolidayService|object
      */
-    private function decideService($type)
+    private function decideQueryService($type)
     {
         switch ($type) {
-            case GreenObjecType::DAM : return $this->get('fish_and_places.dam_service');
-            case GreenObjecType::CABIN : return $this->get('fish_and_places.cabin_service');
-            case GreenObjecType::CAMP : return $this->get('fish_and_places.camp_service');
-            case GreenObjecType::VILLAGE_HOLIDAY : return $this->get('fish_and_places.village_holiday_service');
+            case GreenObjecType::DAM : return $this->get('fish_and_places.dam_query_service');
+            case GreenObjecType::CABIN : return $this->get('fish_and_places.cabin_query_service');
+            case GreenObjecType::CAMP : return $this->get('fish_and_places.cabin_query_service');
+            case GreenObjecType::VILLAGE_HOLIDAY : return $this->get('fish_and_places.village_holiday_query_service');
             default : throw new RuntimeException('Unexpected type');
         }
     }

@@ -17,7 +17,7 @@ class DamQueryService extends GreenObjectQueryService
     /**
      * @return array
      */
-    public function getDamCollection()
+    public function getCollection()
     {
         $damCollection = $this->greenObjectRepository->findAllActive();
 

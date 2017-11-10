@@ -2,9 +2,15 @@
 {% block content %}
     {{ parent() }}
 <br />
+{% if greenObjects is defined %}
+<div class="row text-center center-block">
+
+    <div class="col-lg-10">
+        <h3 class="page-header">{{ title }}</h3>
+    </div>
+</div>
+{% endif %}
 <div class="thumb">
-{#{{ ivory_google_map(map) }}#}
-{#{{ ivory_google_api([map]) }}#}
     {% include '@GoGreen/dam/open_layers_map.html.twig' %}
     </div>
      {% include '@GoGreen/dam/list.html.twig' %}

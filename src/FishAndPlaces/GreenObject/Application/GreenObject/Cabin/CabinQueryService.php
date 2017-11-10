@@ -17,7 +17,7 @@ class CabinQueryService extends GreenObjectQueryService
     /**
      * @return array
      */
-    public function getCabinCollection()
+    public function getCollection()
     {
         $cabinCollection = $this->greenObjectRepository->findAllActive();
 

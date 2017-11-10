@@ -173,4 +173,12 @@ class DoctrineGreenObjectRepository extends DoctrineRepository implements GreenO
         return parent::find($id);
     }
 
+    /**
+     * @param int $type
+     * @return GreenObject[]
+     */
+    public function findAllByType(int $type)
+    {
+        return parent::findBy(['isActive' => 1, 'type' => $type]);
+    }
 }

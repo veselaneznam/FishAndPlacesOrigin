@@ -34,10 +34,6 @@
                         <td style="color: green; font-weight: bold;">{% trans %}Address{% endtrans %}</td>
                         <td>{{ greenObject.address }}</td>
                     </tr>
-                    {#<tr>#}
-                        {#<td style="color: green; font-weight: bold;">{% trans %}Distance{% endtrans %}</td>#}
-                        {#<td>{% include '@GoGreen/dam/distance_snippet.html.twig' %}</td>#}
-                    {#</tr>#}
                     <tr>
                         <td style="color: green; font-weight: bold;">{% trans %}See on Map{% endtrans %}</td>
                         <td><a href="{{ path('dam_map_direction', {'id': greenObject.id}) }}" class="btn btn-success"

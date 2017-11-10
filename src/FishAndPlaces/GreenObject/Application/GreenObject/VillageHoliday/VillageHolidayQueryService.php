@@ -16,7 +16,7 @@ class VillageHolidayQueryService extends GreenObjectQueryService
     /**
      * @return array
      */
-    public function getVillageHolidayCollection()
+    public function getCollection()
     {
         $villageHolidayCollection = $this->greenObjectRepository->findAllActive();
 

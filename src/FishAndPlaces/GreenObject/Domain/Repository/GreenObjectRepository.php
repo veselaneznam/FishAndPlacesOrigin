@@ -72,4 +72,10 @@ interface GreenObjectRepository
      * @return GreenObject[]
      */
     public function findByName($name);
+
+    /**
+     * @param int $type
+     * @return GreenObject[]
+     */
+    public function findAllByType(int $type);
 }
