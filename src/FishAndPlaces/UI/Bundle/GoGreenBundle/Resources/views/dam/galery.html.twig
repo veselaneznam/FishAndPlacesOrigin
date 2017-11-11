@@ -44,11 +44,11 @@
                 {% for damImage in greenObject.imageCollection %}
                 {% if counter == 0 %}
                 <li class="col-sm-2">
-                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img  style="height: 6em" src="{{ damImage.webPath }}"></a>
                 </li>
                 {% else %}
                 <li class="col-sm-2">
-                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img src="{{ damImage.webPath }}"></a>
+                    <a class="thumbnail" id="carousel-selector-{{ counter }}"><img style="height: 6em" src="{{ damImage.webPath }}"></a>
                 </li>
                 {% endif %}
                     {% set counter = counter + 1 %}
