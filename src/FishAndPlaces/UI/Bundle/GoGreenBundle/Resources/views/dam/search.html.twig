@@ -4,10 +4,18 @@
         <div id="custom-search-input">
             <div class="input-group col-md-12">
                 <span class="col-md-4 custom-border">
+                    {% if app.request.cookies.has('radius') %}
+                    <input type="text" class="form-control input-group-lg" name="km"  value="{{ app.request.cookies.get('radius') }}" id="km" placeholder="{% trans %}Radios in km{% endtrans %}" value="" />
+                    {% else %}
                     <input type="text" class="form-control input-group-lg" name="km" id="km" placeholder="{% trans %}Radios in km{% endtrans %}" value="" />
+                    {% endif %}
                 </span>
                 <span class="col-md-4 custom-border">
-                <input class="form-control input-group-lg" required name="search" id="search" placeholder="{% trans %}Search by Location{% endtrans %}" />
+                    {% if app.request.cookies.has('searchLocation') %}
+                <input class="form-control input-group-lg" required name="search" value="{{ app.request.cookies.get('searchLocation') }}" id="search" placeholder="{% trans %}Search by Location{% endtrans %}" />
+                    {% else %}
+                    <input class="form-control input-group-lg" required name="search" id="search" placeholder="{% trans %}Search by Location{% endtrans %}" />
+                    {% endif %}
                 </span>
                 <span class="col-md-4">
                         <input type ="submit" class="btn btn-success btn-lg" id="search_button"  value="{% trans %} Start  {% endtrans %} ">

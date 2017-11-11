@@ -43,7 +43,6 @@ class GeoLocatorService
      */
     public function getLocation($data)
     {
-
         $data = mb_strtolower($data);
         if (!$this->symfonyCache->hasItem("$data")) {
             $address = $this->geocoderLocalRepository->findOneByAddress($data);

@@ -117,7 +117,6 @@ abstract class GreenObjectRepresentation
             $this->greenObject = $greenObject;
             $this->id = $greenObject->getId();
             $this->name = $greenObject->getName();
-            $this->location = $greenObject->getLocation();
             $this->priceProPerson = $greenObject->getPriceProPerson();
             $this->createdAt = $greenObject->getCreatedAt();
             $this->updatedAt = $greenObject->getUpdatedAt();

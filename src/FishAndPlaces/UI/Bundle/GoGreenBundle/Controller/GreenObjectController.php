@@ -207,7 +207,13 @@ class GreenObjectController extends Controller
             return $this->redirectToRoute('dam');
         }
 
-        return $this->renderMap($damCollection, $geocodedLocation, $this->get('translator')->trans("Search Result"));
+        return $this->renderMap(
+            $damCollection,
+            $geocodedLocation,
+            $this->get('translator')->trans("Search Result"),
+            $radius,
+            $location
+        );
     }
 
     /**
@@ -288,9 +294,12 @@ class GreenObjectController extends Controller
     /**
      * @param $damCollection
      * @param $geocodedLocation
+     * @param $title
+     * @param $radius
+     * @param $locationAsString
      * @return Response
      */
-    public function renderMap($damCollection, $geocodedLocation, $title): Response
+    public function renderMap($damCollection, $geocodedLocation, $title, $radius = null, $locationAsString = null): Response
     {
         $twig = $this->container->get('twig');
 
@@ -303,6 +312,8 @@ class GreenObjectController extends Controller
 
         return $this->render('@GoGreen/dam/google_map.html.twig', array(
             'userLocation' => $geocodedLocation,
+            'userLocationAsString' => $locationAsString,
+            'radius' => $radius,
             'greenObjects' => $damCollection,
             'mapMarkers' => $mapMarkers,
             'title' => $title,
